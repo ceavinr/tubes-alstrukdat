@@ -20,9 +20,9 @@ void IgnoreBlanks()
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-void STARTWORD()
+void STARTWORD(char * savefile)
 {
-    START();
+    START(savefile);
     IgnoreBlanks();
     if (currentChar == MARK)
     {
