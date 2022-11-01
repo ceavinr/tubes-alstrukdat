@@ -11,29 +11,31 @@ int main() {
 
     while (!quit) {
         char* command;
+        char file_name[100];
+        
         printf("ENTER COMMAND: ");
-
         gets(command);
-
+        
         if (stringEQ(command, "START")) {
             load("../data/default.txt", &arrGame, &arrHistory);
             printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
         } else if (stringEQ(command, "QUIT")) {
             printf("\nAnda keluar dari game BNMO.\nBye bye ...");
             quit = true;
-        } else if (stringEQ(command, "LOAD")) { 
+        } else if (stringEQ(command, "LOAD")) {
             load("../data/savefile.txt", &arrGame, &arrHistory);
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
         } else if (stringEQ(command, "LIST GAME")) {
             printf("Berikut adalah daftar game yang tersedia\n\n");
             PrintArrayDin(arrGame);
+            printf("\n");
         } else if (stringEQ(command, "DELETE GAME")) {
             printf("Berikut adalah daftar game yang tersedia\n\n");
             PrintArrayDin(arrGame);
-            printf("Masukan game yang akan dihapus: ");
+            printf("\nMasukan game yang akan dihapus: ");
             int numGame;
             scanf("%d", &numGame);
-            if (numGame > 5) {
+            if (numGame > 5 && arrGame.Neff>5) {
                 DeleteAt(&arrGame, numGame-1);
                 printf("\nGame berhasil dihapus\n\n");
             } else {
