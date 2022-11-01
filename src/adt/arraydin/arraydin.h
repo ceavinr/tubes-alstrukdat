@@ -1,6 +1,8 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
+#include "../mesinkata/mesinkata.h"
+
 // Boolean
 #define boolean unsigned char
 #define true 1
@@ -9,7 +11,7 @@
 #define InitialSize 10
 
 typedef int IdxType;
-typedef int ElType;
+typedef Word ElType;
 typedef struct
 {
     ElType *A;
@@ -93,7 +95,7 @@ void DeleteFirst(ArrayDin *array);
 
 /**
  * Fungsi untuk melakukan print suatu ArrayDin.
- * Print dilakukan dengan format: [elemen-1, elemen-2, ..., elemen-n]
+ * Print dilakukan dengan format: Daftar Game
  * dan diakhiri newline.
  * Prekondisi: array terdefinisi
  */
@@ -110,13 +112,5 @@ void ReverseArrayDin(ArrayDin *array);
  * Prekondisi: array terdefinisi
  */
 ArrayDin CopyArrayDin(ArrayDin array);
-
-/**
- * Fungsi untuk melakukan search suatu ArrayDin.
- * Index pertama yang ditemukan akan dikembalikan.
- * Jika tidak ditemukan, akan mengembalikan -1.
- * Prekondisi: array terdefinisi
- */
-IdxType SearchArrayDin(ArrayDin array, ElType el);
 
 #endif

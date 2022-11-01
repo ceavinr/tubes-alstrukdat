@@ -1,9 +1,8 @@
 #include "mesinkata.h"
 #include <stdio.h>
 
-// char currentChar;
-Word currentWord;
 boolean EndWord;
+Word currentWord;
 
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
@@ -62,7 +61,7 @@ void ADVWORD()
 void CopyWord()
 {
     int i = 0;
-    while ((currentChar != MARK) && (currentChar != BLANK) && i < NMax)
+    while ((currentChar != MARK) && (currentChar != BLANK) && i < NMax && !EOP)
     {
         currentWord.TabWord[i] = currentChar;
         ADV();
@@ -71,3 +70,5 @@ void CopyWord()
     }
     currentWord.Length = i;
 }
+
+

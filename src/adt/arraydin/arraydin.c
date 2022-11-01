@@ -77,16 +77,20 @@ int GetCapacity(ArrayDin array)
 void InsertAt(ArrayDin *array, ElType el, IdxType i)
 {
     IdxType j;
+    int k;
     if (Length(*array) == CAPACITY(*array))
     {
         ArrayDin temp;
-
+    
         BUFFER(temp) = (ElType *)malloc(sizeof(ElType) * CAPACITY(*array));
         for (j = 0; j < Length(*array); j++)
         {
-            BUFFER(temp)
-            [j] = BUFFER(*array)[j];
+            for (k=0; k<(*array).A[j].Length; k++) {
+                temp.A[j].TabWord[k] = (*array).A[j].TabWord[k];
+            }
+            temp.A[j].Length = (*array).A[j].Length;
         }
+        temp.Neff = (*array).Neff;
 
         DeallocateArrayDin(array);
 
@@ -95,19 +99,26 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
 
         for (j = 0; j < Length(*array); j++)
         {
-            BUFFER(*array)
-            [j] = BUFFER(temp)[j];
+            for (k=0; k<temp.A[j].Length; k++) {
+                (*array).A[j].TabWord[k] = temp.A[j].TabWord[k];
+            }
+            (*array).A[j].Length = temp.A[j].Length;
         }
+        (*array).Neff = temp.Neff;
         DeallocateArrayDin(&temp);
     }
 
     for (j = NEFF(*array); j > i; j--)
     {
-        BUFFER(*array)
-        [j] = BUFFER(*array)[j - 1];
+        for (k=0; k<(*array).A[j-1].Length; k++) {
+            (*array).A[j].TabWord[k] = (*array).A[j-1].TabWord[k];
+        }
+        (*array).A[j].Length = (*array).A[j-1].Length;
     }
-    BUFFER(*array)
-    [i] = el;
+    for (k=0; k<el.Length; k++) {
+        (*array).A[i].TabWord[k] = el.TabWord[k];
+    }
+    (*array).A[i].Length = el.Length;
     NEFF(*array) += 1;
 }
 
@@ -138,10 +149,13 @@ void DeleteAt(ArrayDin *array, IdxType i)
     IdxType idx;
     for (idx = i; idx < Length(*array); idx++)
     {
-        (*array).A[idx] = (*array).A[idx + 1];
+        int k;
+        for (k=0; k<(*array).A[idx+1].Length; k++) {
+            (*array).A[idx].TabWord[k] = (*array).A[idx+1].TabWord[k];
+        }
+        (*array).A[idx].Length = (*array).A[idx+1].Length;
     }
-    NEFF(*array)
-    --;
+    NEFF(*array)--;
 }
 
 /**
@@ -150,8 +164,7 @@ void DeleteAt(ArrayDin *array, IdxType i)
  */
 void DeleteLast(ArrayDin *array)
 {
-    NEFF(*array)
-    --;
+    NEFF(*array)--;
 }
 
 /**
@@ -165,20 +178,21 @@ void DeleteFirst(ArrayDin *array)
 
 /**
  * Fungsi untuk melakukan print suatu ArrayDin.
- * Print dilakukan dengan format: [elemen-1, elemen-2, ..., elemen-n]
+ * Print dilakukan dengan format: Daftar Game
  * dan diakhiri newline.
  * Prekondisi: array terdefinisi
  */
 void PrintArrayDin(ArrayDin array)
 {
-    printf("[");
-    for (int i = 0; i < NEFF(array); i++)
-    {
-        printf("%i", BUFFER(array)[i]);
-        if (i < Length(array) - 1)
-            printf(", ");
+    int i;
+    for(i=0; i<array.Neff; i++) {
+        printf("%d. ", i+1);
+        int j;
+        for (j=0; j<BUFFER(array)[i].Length; j++) {
+            printf("%c", BUFFER(array)[i].TabWord[j]);
+        }
+        printf("\n");
     }
-    printf("]\n");
 }
 
 /**
@@ -194,13 +208,21 @@ void ReverseArrayDin(ArrayDin *array)
 
     for (int i = 0; i < NEFF(*array); i++)
     {
-        BUFFER(temp)
-        [i] = BUFFER(*array)[NEFF(*array) - i - 1];
+        // BUFFER(temp)[i] = BUFFER(*array)[NEFF(*array) - i - 1];
+        int k;
+        for (k=0; k<(*array).A[NEFF(*array) - i - 1].Length; k++) {
+            temp.A[i].TabWord[k] = (*array).A[NEFF(*array) - i - 1].TabWord[k];
+        }
+        temp.A[i].Length = (*array).A[NEFF(*array) - i - 1].Length;
     }
     for (int i = 0; i < NEFF(*array); i++)
     {
-        BUFFER(*array)
-        [i] = BUFFER(temp)[i];
+        // BUFFER(*array)[i] = BUFFER(temp)[i];
+        int k;
+        for (k=0; k<temp.A[i].Length; k++) {
+            (*array).A[i].TabWord[k] = temp.A[i].TabWord[k];
+        }
+        (*array).A[i].Length = temp.A[i].Length;
     }
     DeallocateArrayDin(&temp);
 }
@@ -224,36 +246,4 @@ ArrayDin CopyArrayDin(ArrayDin array)
     CAPACITY(copiedArray) = CAPACITY(array);
 
     return copiedArray;
-}
-
-/**
- * Fungsi untuk melakukan search suatu ArrayDin.
- * Index pertama yang ditemukan akan dikembalikan.
- * Jika tidak ditemukan, akan mengembalikan -1.
- * Prekondisi: array terdefinisi
- */
-IdxType SearchArrayDin(ArrayDin array, ElType el)
-{
-    int i = 0;
-    boolean found = false;
-    while (!found && i < NEFF(array))
-    {
-        if (BUFFER(array)[i] == el)
-        {
-            found = true;
-        }
-        else
-        {
-            i++;
-        }
-    }
-
-    if (found)
-    {
-        return i;
-    }
-    else
-    {
-        return -1;
-    }
 }
