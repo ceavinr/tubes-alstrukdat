@@ -1,7 +1,7 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
-#include "../adt/mesinkata/mesinkata.h"
+#include "../mesinkata/mesinkata.h"
 
 // Boolean
 #define boolean unsigned char
