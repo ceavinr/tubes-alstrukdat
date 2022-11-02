@@ -9,6 +9,19 @@ void CreateOrder(Order *o)
     IDX_HEAD(*o) = IDX_UNDEF;
     IDX_TAIL(*o) = IDX_UNDEF;
 }
+void CreateMasakan(Masakan *m, int nomor)
+{
+    srand(time(NULL));
+
+    NOMOR(*m) = nomor;
+    DURASI(*m) = rand() % 5 + 1;
+    KETAHANAN(*m) = rand() % 5 + 1;
+    HARGA(*m) = rand() % 50001;
+    if (HARGA(*m) < 10000)
+    {
+        HARGA(*m) += 10000;
+    }
+}
 
 /* ********* Prototype ********* */
 boolean isEmpty(Order o)
@@ -18,54 +31,44 @@ boolean isEmpty(Order o)
 
 boolean isFull(Order o)
 {
-    return (((IDX_TAIL(o) + 1) % CAPACITY) == IDX_HEAD(o));
+    return (IDX_TAIL(o) == CAPACITY - 1);
 }
 
 int length(Order o)
 {
-    if (!isEmpty(o))
-    {
-        if (IDX_TAIL(o) > IDX_HEAD(o))
-        {
-            return (IDX_TAIL(o) - IDX_HEAD(o) + 1);
-        }
-        else
-        {
-            return (CAPACITY - (IDX_HEAD(o) - IDX_TAIL(o)) + 1);
-        }
-    }
-    else
-    {
-        return 0;
-    }
+    return IDX_TAIL(o) + 1;
 }
 
 /* *** Primitif Add/Delete *** */
 void addOrder(Order *o, Masakan val)
 {
+    int i = length(*o);
+    boolean stop = false;
+
     if (isEmpty(*o))
     {
         IDX_HEAD(*o) = 0;
     }
-    IDX_TAIL(*o) = (IDX_TAIL(*o) + 1) % CAPACITY;
-    copyMasakan(&TAIL(*o), val);
-
-    int i = IDX_TAIL(*o);
-    int j = (i + CAPACITY - 1) % CAPACITY;
-
-    Masakan temp;
-    while (i != IDX_HEAD(*o) && NOMOR(ELMT(*o, i)) < NOMOR(ELMT(*o, j)))
+    else
     {
-        copyMasakan(&temp, ELMT(*o, i));
-        copyMasakan(&ELMT(*o, i), ELMT(*o, j));
-        copyMasakan(&ELMT(*o, j), temp);
-
-        i = j;
-        j = (i + CAPACITY - 1) % CAPACITY;
+        while (i != IDX_HEAD(*o) && !stop)
+        {
+            if (NOMOR(val) > NOMOR(ELMT(*o, i - 1)))
+            {
+                stop = true;
+            }
+            else
+            {
+                copyMasakan(&ELMT(*o, i), ELMT(*o, i - 1));
+                i--;
+            }
+        }
     }
+    copyMasakan(&ELMT(*o, i), val);
+    IDX_TAIL(*o) += 1;
 }
 
-void deleteOrder(Order *o, Masakan *val)
+void deleteOrderAt(Order *o, Masakan *val, KeyType idx)
 {
     copyMasakan(val, HEAD(*o));
     if (length(*o) == 1)
@@ -75,7 +78,7 @@ void deleteOrder(Order *o, Masakan *val)
     }
     else
     {
-        for (int i = 0; i < IDX_TAIL(*o); i++)
+        for (int i = indexOf(*o, idx); i < IDX_TAIL(*o); i++)
         {
             copyMasakan(&ELMT(*o, i), ELMT(*o, i + 1));
         }
@@ -83,7 +86,7 @@ void deleteOrder(Order *o, Masakan *val)
     }
 }
 
-Masakan find(Order o, int val)
+int indexOf(Order o, int val)
 {
     int i = 0;
     boolean found = false;
@@ -100,26 +103,30 @@ Masakan find(Order o, int val)
     }
     if (found)
     {
-        return ELMT(o, i);
+        return i;
     }
+    else
+    {
+        return IDX_UNDEF;
+    }
+}
+
+Masakan find(Order o, int val)
+{
+    return ELMT(o, indexOf(o, val));
 }
 
 boolean isIn(Order o, int val)
 {
-    int i = 0;
-    boolean found = false;
-    while (i <= IDX_TAIL(o) && !found)
-    {
-        if (NOMOR(ELMT(o, i)) == val)
-        {
-            found = true;
-        }
-        else
-        {
-            i++;
-        }
-    }
-    return found;
+    return indexOf(o, val) != IDX_UNDEF;
+}
+
+void copyMasakan(Masakan *m, Masakan val)
+{
+    NOMOR(*m) = NOMOR(val);
+    DURASI(*m) = DURASI(val);
+    KETAHANAN(*m) = KETAHANAN(val);
+    HARGA(*m) = HARGA(val);
 }
 
 void displayOrder(Order o)
@@ -170,7 +177,7 @@ void displayReady(Order o)
 
     for (int i = 0; i <= IDX_TAIL(o); i++)
     {
-        if (DURASI(ELMT(o, i)) == 0)
+        if (DURASI(ELMT(o, i)) == 0 && KETAHANAN(ELMT(o, i)) > 0)
         {
             printf("M%d              | %d            \n", NOMOR(ELMT(o, i)), KETAHANAN(ELMT(o, i)));
             count++;

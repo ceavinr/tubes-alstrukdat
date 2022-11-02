@@ -4,12 +4,20 @@
 #define ORDER_H
 
 #include "../../boolean.h"
-#include "../masakan/masakan.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100
-
 /* Definisi elemen dan address */
+typedef int KeyType;
+
+typedef struct
+{
+    KeyType nomor;
+    int durasi;
+    int ketahanan;
+    int harga;
+} Masakan;
+
 typedef struct
 {
     Masakan buffer[CAPACITY];
@@ -23,6 +31,11 @@ typedef struct
 #define TAIL(q) (q).buffer[(q).idxTail]
 #define ELMT(q, i) (q).buffer[i]
 
+#define NOMOR(m) (m).nomor
+#define DURASI(m) (m).durasi
+#define KETAHANAN(m) (m).ketahanan
+#define HARGA(m) (m).harga
+
 /* *** Kreator *** */
 void CreateOrder(Order *o);
 /* I.S. sembarang */
@@ -30,6 +43,11 @@ void CreateOrder(Order *o);
 /* - Index head bernilai IDX_UNDEF */
 /* - Index tail bernilai IDX_UNDEF */
 /* Proses : Melakukan alokasi, membuat sebuah o kosong */
+
+void CreateMasakan(Masakan *m, KeyType nomor);
+/* I.S. sembarang */
+/* F.S. Sebuah m terbentuk dengan nilai durasi, ketahanan, dan harga random */
+/* Proses : Melakukan alokasi, membuat sebuah m */
 
 /* ********* Prototype ********* */
 boolean isEmpty(Order o);
@@ -47,16 +65,22 @@ void addOrder(Order *o, Masakan val);
 /* I.S. o mungkin kosong, tabel penampung elemen o TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
 
-void deleteOrder(Order *o, Masakan *val);
+void deleteOrderAt(Order *o, Masakan *val, KeyType idx);
 /* Proses: Menghapus val pada o dengan aturan FIFO */
 /* I.S. o tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
         o mungkin kosong */
 
 /* *** Find *** */
+int indexOf(Order o, int val);
 Masakan find(Order o, int val);
 /* Melakukan pencarian pada order berdasarkan nomor makanan, jika ditemukan akan mereturn index*/
 boolean isIn(Order o, int val);
+
+void copyMasakan(Masakan *m, Masakan val);
+/* Proses: Mengeset nilai m menjadi val */
+/* I.S. m sembarang */
+/* F.S. m = val */
 
 /* *** Display *** */
 void displayOrder(Order o);

@@ -7,14 +7,23 @@
 int kodeToInt(char *kode)
 {
     int num = 0;
+    int countNumber = 0;
     for (int i = 0; i < 3; i++)
     {
         if (kode[i] >= 48 && kode[i] <= 57)
         {
+            countNumber += 1;
             num = num * 10 + kode[i] - 48;
         }
     }
-    return num;
+    if (countNumber == 0)
+    {
+        return -1;
+    }
+    else
+    {
+        return num;
+    }
 }
 
 int main()
@@ -33,8 +42,8 @@ int main()
     for (int i = 0; i < 3; i++)
     {
         NOMOR(m) = i;
-        DURASI(m) = rand() % 5 + 1;
-        KETAHANAN(m) = rand() % 5 + 1;
+        DURASI(m) = 0 + 1;
+        KETAHANAN(m) = 0 + 1;
         HARGA(m) = rand() % 5001 + 10000;
 
         addOrder(&orderList, m);
@@ -63,16 +72,16 @@ int main()
 
             if (isSame(command, "COOK") || isSame(command, "SERVE"))
             {
-                if (masakan[0] == 'M')
+                if (masakan[0] == 'M' && kodeToInt(masakan) != -1)
                 {
                     inputValid = true;
                 }
             }
         }
 
-        if (isSame(command, "COOK")) // Jika command == "COOK"
+        if (isIn(orderList, kodeToInt(masakan)))
         {
-            if (isIn(orderList, kodeToInt(masakan)))
+            if (isSame(command, "COOK")) // Jika command == "COOK"
             {
                 if (!isIn(cooking, kodeToInt(masakan)))
                 {
@@ -84,61 +93,76 @@ int main()
                 else
                 {
                     printf("\nMasakan %s sudah diproses\n", masakan);
+                    inputValid = false;
                 }
             }
-            else
+
+            else // Jika command == "SERVE"
             {
-                printf("Masakan tidak ada di pesanan");
-            }
-        }
-        else // Jika command == "SERVE"
-        {
-            if (isIn(cooking, kodeToInt(masakan)))
-            {
-                if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
+                if (isIn(cooking, kodeToInt(masakan)))
                 {
-                    printf("%s belum dapat disajikan karena belum selesai dimasak, tinggal %d\n", masakan, DURASI(find(cooking, kodeToInt(masakan))));
-                }
-                else
-                {
-                    if (NOMOR(HEAD(orderList)) == kodeToInt(masakan))
+                    if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
                     {
-                        deleteOrder(&cooking, &m_del);
-                        deleteOrder(&orderList, &m_del);
-                        printf("\nBerhasil mengantar %s\n", masakan);
-                        saldo += HARGA(m_del);
-                        served++;
+                        printf("%s belum dapat disajikan karena belum selesai dimasak, tunggu %d putaran lagi\n", masakan, DURASI(find(cooking, kodeToInt(masakan))));
+                        inputValid = false;
                     }
                     else
                     {
-                        printf("%s belum dapat disajikan karena M%d belum selesai\n", masakan, NOMOR(HEAD(orderList)));
+                        if (NOMOR(HEAD(orderList)) == kodeToInt(masakan))
+                        {
+                            deleteOrderAt(&cooking, &m_del, kodeToInt(masakan));
+                            deleteOrderAt(&orderList, &m_del, kodeToInt(masakan));
+                            printf("\nBerhasil mengantar %s\n", masakan);
+                            saldo += HARGA(m_del);
+                            served++;
+                        }
+                        else
+                        {
+                            printf("%s belum dapat disajikan karena M%d belum selesai\n", masakan, NOMOR(HEAD(orderList)));
+                            inputValid = false;
+                        }
+                    }
+                }
+                else
+                {
+                    printf("%s belum dimasak\n", masakan);
+                    inputValid = false;
+                }
+            }
+        }
+        else
+        {
+            printf("Masakan tidak ada di pesanan\n");
+            inputValid = false;
+        }
+
+        printf("==========================================================\n");
+
+        if (inputValid)
+        {
+            for (int i = 0; i <= IDX_TAIL(cooking); i++)
+            {
+                if (DURASI(ELMT(cooking, i)) > 0)
+                {
+                    DURASI(ELMT(cooking, i)) -= 1;
+                    if (DURASI(ELMT(cooking, i)) == 0)
+                    {
+                        printf("Makanan M%d telah selesai dimasak\n", NOMOR(ELMT(cooking, i)));
+                    }
+                }
+                else
+                {
+                    KETAHANAN(ELMT(cooking, i)) -= 1;
+                    if (KETAHANAN(ELMT(cooking, i)) == 0)
+                    {
+                        deleteOrderAt(&cooking, &m_del, i);
                     }
                 }
             }
-        }
-        printf("==========================================================\n");
 
-        for (int i = 0; i <= IDX_TAIL(cooking); i++)
-        {
-            if (DURASI(ELMT(cooking, i)) > 0)
-            {
-                DURASI(ELMT(cooking, i)) -= 1;
-                if (DURASI(ELMT(cooking, i)) == 0)
-                {
-                    printf("Makanan M%d telah selesai dimasak\n", NOMOR(ELMT(cooking, i)));
-                }
-            }
-            else
-            {
-                KETAHANAN(ELMT(cooking, i)) -= 1;
-                // if (KETAHANAN(ELMT(cooking, i)) == 0)
-                // {
-                // }
-            }
+            CreateMasakan(&m, NOMOR(TAIL(orderList)) + 1);
+            addOrder(&orderList, m);
         }
-
-        CreateMasakan(&m, NOMOR(TAIL(orderList)) + 1);
-        addOrder(&orderList, m);
 
         if (IDX_TAIL(orderList) == 7)
         {
