@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../../boolean.h"
 
 #ifndef KATA_H
@@ -10,5 +11,12 @@
 int panjangString(char *);
 
 boolean isSame(char a[], char b[]);
+
+int strlength(char* string);
+/*Mengembalikan panjang string*/
+
+char* concat(char* s1, char* s2);
+/*Mengembalikan string berupa gabungan dari s1 dan s2*/
+
 
 #endif

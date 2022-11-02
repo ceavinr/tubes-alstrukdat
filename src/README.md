@@ -9,6 +9,6 @@ gcc ../../adt/order/order.c dinerdash.c ../../boolean.h ../../adt/kata/kata.c -o
 Kalo mau nyoba main :
 
 ```
-gcc ./adt/arraydin/arraydin.c ./adt/mesinkarakter/mesinkarakter.c ./adt/mesinkata/mesinkata.c ./procedure/load/load.c ./procedure/primitif/primitif.c main.c -o main_program
+gcc ./adt/arraydin/arraydin.c ./adt/mesinkarakter/mesinkarakter.c ./adt/mesinkata/mesinkata.c ./procedure/load/load.c ./adt/kata/kata.c main.c -o main_program
 ./main_program
 ```

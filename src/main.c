@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "boolean.h"
 #include "./procedure/load/load.h"
-#include "./procedure/primitif/primitif.h"
+#include "./adt/kata/kata.h"
 #include "./adt/arraydin/arraydin.h"
 
 void commandInput(Word command) {
@@ -30,7 +30,7 @@ int main() {
             if (stringEQWord(cek, "LOAD")) {
                 load(concat("../data/", file), &arrGame, &arrHistory);
                 printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-            } else if (stringEQWord(cek, "LOAD")) {
+            } else if (stringEQWord(cek, "SAVE")) {
                 /* BELUM ADA */
                 printf("Save file berhasil disimpan..\n\n");
             }
@@ -42,7 +42,12 @@ int main() {
                 printf("\nAnda keluar dari game BNMO.\nBye bye ...\n\n");
                 quit = true;
             } else if (stringEQWord(command, "CREATE GAME")) {
-                /* BELUM ADA */
+                printf("Masukkan nama game yang akan ditambahkan: ");;;
+                Word newGame;
+                startInputWord();
+                newGame = currentWord;
+                InsertLast(&arrGame, newGame);
+                printf("Game berhasil ditambahkan\n");
             } else if (stringEQWord(command, "QUEUE GAME")) {
                 /* BELUM ADA */
             } else if (stringEQWord(command, "PLAY GAME")) {
@@ -63,7 +68,7 @@ int main() {
                 } else {
                     printf("\nGame gagal dihapus\n");
                 }
-            } else if (stringEQWord(command, "PLAY GAME")) {
+            } else if (stringEQWord(command, "HELP")) {
                 /* BELUM ADA */
             } else {
                 printf("Command tidak dikenali, silahkan masukkan command yang valid.\n\n");

@@ -6,7 +6,7 @@
 
 #include "../../boolean.h"
 #include "../mesinkarakter/mesinkarakter.h"
-#include "../../procedure/primitif/primitif.h"
+#include "../../adt/kata/kata.h"
 
 #define NMax 50
 #define BLANK '\n'
