@@ -113,4 +113,10 @@ void ReverseArrayDin(ArrayDin *array);
  */
 ArrayDin CopyArrayDin(ArrayDin array);
 
+void PrintWord(Word w); 
+/*
+I.S word terdefinisi
+F.S menghasilkan ouput tabword 
+*/
+
 #endif

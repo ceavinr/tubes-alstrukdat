@@ -247,3 +247,14 @@ ArrayDin CopyArrayDin(ArrayDin array)
 
     return copiedArray;
 }
+
+void PrintWord(Word w) {
+/*
+I.S word terdefinisi
+F.S menghasilkan ouput tabword 
+*/
+    int i;
+    for (i=0; i<w.Length; i++) {
+        printf("%c", w.TabWord[i]);
+    }
+}

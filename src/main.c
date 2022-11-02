@@ -13,6 +13,7 @@ int main()
     boolean quit = false;
     ArrayDin arrGame = MakeArrayDin();
     ArrayDin arrHistory = MakeArrayDin();
+    ArrayDin arrQueue = MakeArrayDin();
 
     printf("\n======== SELAMAT DATANG DI BNMO ========\n");
     printf("\n=========== TUBES ALSTRUKDAT ===========\n");
@@ -56,8 +57,6 @@ int main()
             else if (stringEQWord(command, "CREATE GAME"))
             {
                 printf("Masukkan nama game yang akan ditambahkan: ");
-                ;
-                ;
                 Word newGame;
                 startInputWord();
                 newGame = currentWord;
@@ -70,7 +69,26 @@ int main()
             }
             else if (stringEQWord(command, "PLAY GAME"))
             {
-                /* BELUM ADA */
+                if (!IsEmpty(arrQueue)) {
+                    printf("Berikut adalah daftar Game-mu\n");
+                    PrintArrayDin(arrQueue);
+                    printf("\n\n");
+                    Word firstGame = arrQueue.A[0];
+                    printf("Loading ");
+                    PrintWord(firstGame);
+                    printf(" ...\n\n");
+                    if (stringEQWord(firstGame, "DINER DASH")) {
+                        /*Game dinner dash*/
+                    } if (stringEQWord(firstGame, "RNG")) {
+                        /*Game RNG*/
+                    } else {
+                        printf("Game ");
+                        PrintWord(firstGame);
+                        printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
+                    }
+                } else {
+                    printf("Antrian game kosong.\nSilakan masukan queue game terlebih dahulu!\n\n");
+                }
             }
             else if (stringEQWord(command, "LIST GAME"))
             {
