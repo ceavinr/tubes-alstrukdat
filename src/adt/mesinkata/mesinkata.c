@@ -152,3 +152,17 @@ char *akuisisiFile(Word command)
 
     return ret;
 }
+
+void wordToInt(Word w, int* integer) {
+/*
+ I.S word terdefinisi
+ F.S dirubah ke integer dan dimasukkan ke dalan integer
+*/
+    int val=0;
+    int i;
+    for (i=0; i<w.Length; i++) {
+        val = val*10 + (w.TabWord[i]-48);
+    }
+
+    *integer = val;
+}

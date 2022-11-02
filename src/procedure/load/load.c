@@ -5,7 +5,8 @@ void load(char* savefile, ArrayDin *arrGame, ArrayDin *arrHistory) {
     *arrHistory = MakeArrayDin();
     STARTWORD(savefile);
     if (!EOP) {
-        int count = currentWord.TabWord[0]-48;
+        int count;
+        wordToInt(currentWord, &count);
         int i;
         for (i=0; i<count; i++) {
             ADVWORD();
@@ -14,7 +15,8 @@ void load(char* savefile, ArrayDin *arrGame, ArrayDin *arrHistory) {
         ADVWORD();
     }
     if (!EOP) {
-        int count = currentWord.TabWord[0]-48;
+        int count;
+        wordToInt(currentWord, &count);
         int j;
         for (j=0; j<count; j++) {
             ADVWORD();

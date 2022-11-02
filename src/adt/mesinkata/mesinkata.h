@@ -65,4 +65,10 @@ void akuisisiCommandWord(Word* w, Word command);
 char* akuisisiFile(Word command);
 /*Mengakuisisi nama file yang dimasukkan dari command user*/
 
+void wordToInt(Word w, int* integer);
+/*
+ I.S word terdefinisi
+ F.S dirubah ke integer dan dimasukkan ke dalan integer
+*/
+
 #endif

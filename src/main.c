@@ -102,8 +102,9 @@ int main()
                 PrintArrayDin(arrGame);
                 printf("\nMasukan game yang akan dihapus: ");
                 int numGame;
-                scanf("%d", &numGame);
-                if (numGame > 5 && arrGame.Neff > 5)
+                startInputWord();
+                wordToInt(currentWord, &numGame);
+                if (numGame > 5 && numGame <= arrGame.Neff)
                 {
                     DeleteAt(&arrGame, numGame - 1);
                     printf("\nGame berhasil dihapus\n");
