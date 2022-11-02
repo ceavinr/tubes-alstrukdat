@@ -20,7 +20,7 @@ void IgnoreBlanks()
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-void STARTWORD(char * savefile)
+void STARTWORD(char *savefile)
 {
     START(savefile);
     IgnoreBlanks();
@@ -72,11 +72,12 @@ void CopyWord()
     currentWord.Length = i;
 }
 
-void startInputWord() {
-/*Melakukan pengisian pita oleh input user
-   I.S pita kosong
-   F.S pita diisi oleh user dan dilakukan pemrosesan oleh mesin kata
-*/
+void startInputWord()
+{
+    /*Melakukan pengisian pita oleh input user
+       I.S pita kosong
+       F.S pita diisi oleh user dan dilakukan pemrosesan oleh mesin kata
+    */
     startInput();
     IgnoreBlanks();
     if (currentChar == EOP)
@@ -90,31 +91,38 @@ void startInputWord() {
     }
 }
 
-boolean stringEQWord(Word w, char* c) {
-/*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
+boolean stringEQWord(Word w, char *c)
+{
+    /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
     boolean eq = false;
-    if (w.Length == strlength(c)) {
+    if (w.Length == panjangKata(c))
+    {
         eq = true;
         int i = 0;
-        while (i < w.Length && eq) {
-            if (w.TabWord[i] != c[i]) {
+        while (i < w.Length && eq)
+        {
+            if (w.TabWord[i] != c[i])
+            {
                 eq = false;
-            } else {
+            }
+            else
+            {
                 i++;
             }
         }
     }
-    
+
     return eq;
 }
 
-void akuisisiCommandWord(Word* w, Word command) {
-/*Mengakuisisi command terkhusus untuk LOAD and SAVE
-   I.S. pita kata terdefinisi
-   F.S. diakuisisi ke dalam w
-*/
+void akuisisiCommandWord(Word *w, Word command)
+{
+    /*Mengakuisisi command terkhusus untuk LOAD and SAVE
+       I.S. pita kata terdefinisi
+       F.S. diakuisisi ke dalam w
+    */
     int i = 0;
-    while (command.TabWord[i] != ' ' && i<command.Length)
+    while (command.TabWord[i] != ' ' && i < command.Length)
     {
         w->TabWord[i] = command.TabWord[i];
         i++;
@@ -122,18 +130,21 @@ void akuisisiCommandWord(Word* w, Word command) {
     w->Length = i;
 }
 
-char* akuisisiFile(Word command) {
-/*Mengakuisisi nama file yang dimasukkan dari command user*/
-    int i=0;
-    while (command.TabWord[i] != ' ') {
+char *akuisisiFile(Word command)
+{
+    /*Mengakuisisi nama file yang dimasukkan dari command user*/
+    int i = 0;
+    while (command.TabWord[i] != ' ')
+    {
         i++;
     }
     i++;
 
-    char* ret = malloc( (command.Length-i+2) * sizeof(char));
-    char* p = ret;
+    char *ret = malloc((command.Length - i + 2) * sizeof(char));
+    char *p = ret;
 
-    while (i < command.Length) {
+    while (i < command.Length)
+    {
         *p++ = command.TabWord[i];
         i++;
     }

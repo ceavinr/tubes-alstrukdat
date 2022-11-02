@@ -10,16 +10,6 @@ void CreateOrder(Order *o)
     IDX_TAIL(*o) = IDX_UNDEF;
 }
 
-void CreateMasakan(Masakan *m, int nomor)
-{
-    srand(time(NULL));
-
-    NOMOR(*m) = nomor;
-    DURASI(*m) = rand() % 5 + 1;
-    KETAHANAN(*m) = rand() % 5 + 1;
-    HARGA(*m) = rand() % 5001 + 10000;
-}
-
 /* ********* Prototype ********* */
 boolean isEmpty(Order o)
 {
@@ -58,7 +48,7 @@ void addOrder(Order *o, Masakan val)
         IDX_HEAD(*o) = 0;
     }
     IDX_TAIL(*o) = (IDX_TAIL(*o) + 1) % CAPACITY;
-    setMasakan(&TAIL(*o), val);
+    copyMasakan(&TAIL(*o), val);
 
     int i = IDX_TAIL(*o);
     int j = (i + CAPACITY - 1) % CAPACITY;
@@ -66,9 +56,9 @@ void addOrder(Order *o, Masakan val)
     Masakan temp;
     while (i != IDX_HEAD(*o) && NOMOR(ELMT(*o, i)) < NOMOR(ELMT(*o, j)))
     {
-        setMasakan(&temp, ELMT(*o, i));
-        setMasakan(&ELMT(*o, i), ELMT(*o, j));
-        setMasakan(&ELMT(*o, j), temp);
+        copyMasakan(&temp, ELMT(*o, i));
+        copyMasakan(&ELMT(*o, i), ELMT(*o, j));
+        copyMasakan(&ELMT(*o, j), temp);
 
         i = j;
         j = (i + CAPACITY - 1) % CAPACITY;
@@ -77,7 +67,7 @@ void addOrder(Order *o, Masakan val)
 
 void deleteOrder(Order *o, Masakan *val)
 {
-    setMasakan(val, HEAD(*o));
+    copyMasakan(val, HEAD(*o));
     if (length(*o) == 1)
     {
         IDX_HEAD(*o) = IDX_UNDEF;
@@ -87,21 +77,13 @@ void deleteOrder(Order *o, Masakan *val)
     {
         for (int i = 0; i < IDX_TAIL(*o); i++)
         {
-            setMasakan(&ELMT(*o, i), ELMT(*o, i + 1));
+            copyMasakan(&ELMT(*o, i), ELMT(*o, i + 1));
         }
         IDX_TAIL(*o) -= 1;
     }
 }
 
-void setMasakan(Masakan *m, Masakan val)
-{
-    NOMOR(*m) = NOMOR(val);
-    DURASI(*m) = DURASI(val);
-    KETAHANAN(*m) = KETAHANAN(val);
-    HARGA(*m) = HARGA(val);
-}
-
-int find(Order o, int val)
+Masakan find(Order o, int val)
 {
     int i = 0;
     boolean found = false;
@@ -118,17 +100,26 @@ int find(Order o, int val)
     }
     if (found)
     {
-        return i;
-    }
-    else
-    {
-        return IDX_UNDEF;
+        return ELMT(o, i);
     }
 }
 
-int isIn(Order o, int val)
+boolean isIn(Order o, int val)
 {
-    return find(o, val) != IDX_UNDEF;
+    int i = 0;
+    boolean found = false;
+    while (i <= IDX_TAIL(o) && !found)
+    {
+        if (NOMOR(ELMT(o, i)) == val)
+        {
+            found = true;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    return found;
 }
 
 void displayOrder(Order o)
