@@ -12,6 +12,8 @@ void CreateOrder(Order *o)
 
 void CreateMasakan(Masakan *m, int nomor)
 {
+    srand(time(NULL));
+
     NOMOR(*m) = nomor;
     DURASI(*m) = rand() % 5 + 1;
     KETAHANAN(*m) = rand() % 5 + 1;
@@ -156,7 +158,7 @@ void displayCooking(Order o)
 
     for (int i = 0; i <= IDX_TAIL(o); i++)
     {
-        if (o.buffer[i].durasi > 0)
+        if (DURASI(ELMT(o, i)) > 0)
         {
             printf("M%d              | %d           \n", NOMOR(ELMT(o, i)), DURASI(ELMT(o, i)));
             count++;

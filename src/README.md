@@ -1,7 +1,8 @@
 Kalo mau nyoba diner dash cara compilenya:
 
 ```
-gcc ../../adt/order/order.c dinerdash.c ../../boolean.h -o main
+cd './games/dinerdash/'
+gcc ../../adt/order/order.c dinerdash.c ../../boolean.h ../../adt/kata/kata.c -o main
 ./main
 ```
 

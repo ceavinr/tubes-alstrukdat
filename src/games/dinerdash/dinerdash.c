@@ -2,22 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "dinerdash.h"
-
-boolean isSame(char a[], char b[])
-{
-    boolean same = true;
-    int i = 0;
-    while (a[i] != '\0' && b[i] != '\0')
-    {
-        if (a[i] != b[i])
-        {
-            same = false;
-            break;
-        }
-        i++;
-    }
-    return same;
-}
+#include "../../adt/kata/kata.h"
 
 int kodeToInt(char *kode)
 {
@@ -37,7 +22,7 @@ int main()
     Order orderList, cooking;
     Masakan m, m_add, m_del;
 
-    char command[6];
+    char command[5];
     char *masakan = malloc(3 * sizeof(char));
     int saldo = 0, served = 0;
     boolean gameOn = true;
@@ -47,10 +32,13 @@ int main()
 
     for (int i = 0; i < 3; i++)
     {
-        CreateMasakan(&m, i);
+        NOMOR(m) = i;
+        DURASI(m) = rand() % 5 + 1;
+        KETAHANAN(m) = rand() % 5 + 1;
+        HARGA(m) = rand() % 5001 + 10000;
+
         addOrder(&orderList, m);
     }
-    srand(time(NULL));
 
     printf("Selamat Datang di Diner Dash!\n");
 
@@ -71,11 +59,13 @@ int main()
 
             if (isSame(command, "COOK") || isSame(command, "SERVE"))
             {
-                inputValid = true;
+                scanf("%s", masakan);
+                if (masakan[0] == 'M')
+                {
+                    inputValid = true;
+                }
             }
         }
-
-        scanf("%s", masakan);
 
         if (isSame(command, "COOK"))
         {
@@ -132,7 +122,7 @@ int main()
                 DURASI(ELMT(cooking, i)) -= 1;
                 if (DURASI(ELMT(cooking, i)) == 0)
                 {
-                    printf("Makanan M%d telah selesai dimasak\n", cooking.buffer[i].nomor);
+                    printf("Makanan M%d telah selesai dimasak\n", NOMOR(ELMT(cooking, i)));
                 }
             }
             else
