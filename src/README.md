@@ -1,14 +1,21 @@
-Kalo mau nyoba diner dash cara compilenya:
+# WELCOME TO BINOMCUK
 
-```
-cd './games/dinerdash/'
-gcc ../../adt/order/order.c dinerdash.c ../../boolean.h ../../adt/kata/kata.c -o main
-./main
-```
+### Pre-requisite
 
-Kalo mau nyoba main :
+- MinGW
 
-```
-gcc ./adt/arraydin/arraydin.c ./adt/mesinkarakter/mesinkarakter.c ./adt/mesinkata/mesinkata.c ./procedure/load/load.c ./adt/kata/kata.c main.c -o main_program
-./main_program
-```
+## How to Compile (Windows):
+
+1.  Main Program
+
+    ```
+    mingw32-make main
+    ./bin/main
+    ```
+
+2.  Diner Dash
+
+    ```
+    mingw32-make dinerdash
+    ./bin/dinerdash
+    ```
