@@ -48,18 +48,21 @@ int main()
         boolean inputValid = false;
 
         printf("\nSALDO: %d\n\n", saldo);
+
+        // Display Table
         displayOrder(orderList);
         displayCooking(cooking);
         displayReady(cooking);
 
+        // Validasi Input
         while (!inputValid)
         {
             printf("\nMASUKKAN COMMAND: ");
             scanf("%s", command);
+            scanf("%s", masakan);
 
             if (isSame(command, "COOK") || isSame(command, "SERVE"))
             {
-                scanf("%s", masakan);
                 if (masakan[0] == 'M')
                 {
                     inputValid = true;
@@ -67,13 +70,13 @@ int main()
             }
         }
 
-        if (isSame(command, "COOK"))
+        if (isSame(command, "COOK")) // Jika command == "COOK"
         {
             if (isIn(orderList, kodeToInt(masakan)))
             {
                 if (!isIn(cooking, kodeToInt(masakan)))
                 {
-                    m_add = ELMT(orderList, find(orderList, kodeToInt(masakan)));
+                    m_add = find(orderList, kodeToInt(masakan));
                     DURASI(m_add) += 1;
                     addOrder(&cooking, m_add);
                     printf("\nBerhasil memasak %s\n", masakan);
@@ -88,13 +91,13 @@ int main()
                 printf("Masakan tidak ada di pesanan");
             }
         }
-        else
+        else // Jika command == "SERVE"
         {
             if (isIn(cooking, kodeToInt(masakan)))
             {
-                if (DURASI(ELMT(cooking, find(cooking, kodeToInt(masakan)))) > 0)
+                if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
                 {
-                    printf("%s belum dapat disajikan karena belum selesai dimasak, tinggal %d\n", masakan, DURASI(ELMT(cooking, find(cooking, kodeToInt(masakan)))));
+                    printf("%s belum dapat disajikan karena belum selesai dimasak, tinggal %d\n", masakan, DURASI(find(cooking, kodeToInt(masakan))));
                 }
                 else
                 {

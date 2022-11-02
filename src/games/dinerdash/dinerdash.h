@@ -4,7 +4,10 @@
 #ifndef DINERDASH_H
 #define DINERDASH_H
 #include "../../boolean.h"
+#include "../../adt/masakan/masakan.h"
 #include "../../adt/order/order.h"
+
+int kodeToInt(char *kode);
 
 void dinerdash();
 
