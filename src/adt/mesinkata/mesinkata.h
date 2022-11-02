@@ -6,6 +6,7 @@
 
 #include "../../boolean.h"
 #include "../mesinkarakter/mesinkarakter.h"
+#include "../../procedure/primitif/primitif.h"
 
 #define NMax 50
 #define BLANK '\n'
@@ -45,6 +46,23 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-void DuplicateWord(Word w1, Word w2);
+
+void startInputWord();
+/*Melakukan pengisian pita oleh input user
+   I.S pita kosong
+   F.S pita diisi oleh user dan dilakukan pemrosesan oleh mesin kata
+*/
+
+boolean stringEQWord(Word w, char* c);
+/*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
+
+void akuisisiCommandWord(Word* w, Word command);
+/*Mengakuisisi commad terkhusus untuk LOAD and SAVE
+   I.S. pita kata terdefinisi
+   F.S. diakuisisi ke dalam w
+*/
+
+char* akuisisiFile(Word command);
+/*Mengakuisisi nama file yang dimasukkan dari command user*/
 
 #endif

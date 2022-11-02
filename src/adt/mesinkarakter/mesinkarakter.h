@@ -33,4 +33,6 @@ char GetCC();
 boolean IsEOP();
 /* Mengirimkan true jika currentChar = MARK */
 
+void startInput();
+
 #endif
