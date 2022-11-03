@@ -115,19 +115,43 @@ boolean stringEQWord(Word w, char *c)
     return eq;
 }
 
-void akuisisiCommandWord(Word *w, Word command)
+void akuisisiCommandWord(Word *w, Word command, int kataKe)
 {
     /*Mengakuisisi command terkhusus untuk LOAD and SAVE
        I.S. pita kata terdefinisi
        F.S. diakuisisi ke dalam w
     */
-    int i = 0;
-    while (command.TabWord[i] != ' ' && i < command.Length)
+    int i = 0, counter = 0, length = 0;
+    boolean stop = false;
+
+    while (counter != kataKe - 1 && i < command.Length)
     {
-        w->TabWord[i] = command.TabWord[i];
+        if (command.TabWord[i] == ' ')
+        {
+            counter++;
+        }
+
         i++;
+        if (i == command.Length)
+        {
+            counter++;
+        }
     }
-    w->Length = i;
+
+    while (!stop && i < command.Length)
+    {
+        if (command.TabWord[i] == ' ')
+        {
+            stop = true;
+        }
+        else
+        {
+            w->TabWord[length] = command.TabWord[i];
+            i++;
+            length++;
+        }
+    }
+    w->Length = length;
 }
 
 char *akuisisiFile(Word command)
@@ -153,16 +177,26 @@ char *akuisisiFile(Word command)
     return ret;
 }
 
-void wordToInt(Word w, int* integer) {
-/*
- I.S word terdefinisi
- F.S dirubah ke integer dan dimasukkan ke dalan integer
-*/
-    int val=0;
+void wordToInt(Word w, int *integer)
+{
+    /*
+     I.S word terdefinisi
+     F.S dirubah ke integer dan dimasukkan ke dalan integer
+    */
+    int val = 0;
     int i;
-    for (i=0; i<w.Length; i++) {
-        val = val*10 + (w.TabWord[i]-48);
+    for (i = 0; i < w.Length; i++)
+    {
+        val = val * 10 + (w.TabWord[i] - 48);
     }
 
     *integer = val;
+}
+
+void printWord(Word w)
+{
+    for (int i = 0; i < w.Length; i++)
+    {
+        printf("%c", w.TabWord[i]);
+    }
 }

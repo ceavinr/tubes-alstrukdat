@@ -1,4 +1,4 @@
-#include "kata.h"
+#include "string.h"
 
 int panjangKata(char *a)
 {

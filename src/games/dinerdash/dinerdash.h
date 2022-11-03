@@ -5,8 +5,9 @@
 #define DINERDASH_H
 #include "../../boolean.h"
 #include "../../adt/order/order.h"
+#include "../../adt/mesinkata/mesinkata.h"
 
-int kodeToInt(char *kode);
+int kodeToInt(Word kode);
 
 void dinerdash();
 
