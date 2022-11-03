@@ -4,10 +4,6 @@
 #include "./adt/kata/kata.h"
 #include "./adt/arraydin/arraydin.h"
 
-void commandInput(Word command)
-{
-}
-
 int main()
 {
     boolean quit = false;
