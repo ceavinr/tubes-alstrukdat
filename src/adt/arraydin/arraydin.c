@@ -81,11 +81,12 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
     if (Length(*array) == CAPACITY(*array))
     {
         ArrayDin temp;
-    
+
         BUFFER(temp) = (ElType *)malloc(sizeof(ElType) * CAPACITY(*array));
         for (j = 0; j < Length(*array); j++)
         {
-            for (k=0; k<(*array).A[j].Length; k++) {
+            for (k = 0; k < (*array).A[j].Length; k++)
+            {
                 temp.A[j].TabWord[k] = (*array).A[j].TabWord[k];
             }
             temp.A[j].Length = (*array).A[j].Length;
@@ -99,7 +100,8 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
 
         for (j = 0; j < Length(*array); j++)
         {
-            for (k=0; k<temp.A[j].Length; k++) {
+            for (k = 0; k < temp.A[j].Length; k++)
+            {
                 (*array).A[j].TabWord[k] = temp.A[j].TabWord[k];
             }
             (*array).A[j].Length = temp.A[j].Length;
@@ -110,12 +112,14 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
 
     for (j = NEFF(*array); j > i; j--)
     {
-        for (k=0; k<(*array).A[j-1].Length; k++) {
-            (*array).A[j].TabWord[k] = (*array).A[j-1].TabWord[k];
+        for (k = 0; k < (*array).A[j - 1].Length; k++)
+        {
+            (*array).A[j].TabWord[k] = (*array).A[j - 1].TabWord[k];
         }
-        (*array).A[j].Length = (*array).A[j-1].Length;
+        (*array).A[j].Length = (*array).A[j - 1].Length;
     }
-    for (k=0; k<el.Length; k++) {
+    for (k = 0; k < el.Length; k++)
+    {
         (*array).A[i].TabWord[k] = el.TabWord[k];
     }
     (*array).A[i].Length = el.Length;
@@ -150,12 +154,14 @@ void DeleteAt(ArrayDin *array, IdxType i)
     for (idx = i; idx < Length(*array); idx++)
     {
         int k;
-        for (k=0; k<(*array).A[idx+1].Length; k++) {
-            (*array).A[idx].TabWord[k] = (*array).A[idx+1].TabWord[k];
+        for (k = 0; k < (*array).A[idx + 1].Length; k++)
+        {
+            (*array).A[idx].TabWord[k] = (*array).A[idx + 1].TabWord[k];
         }
-        (*array).A[idx].Length = (*array).A[idx+1].Length;
+        (*array).A[idx].Length = (*array).A[idx + 1].Length;
     }
-    NEFF(*array)--;
+    NEFF(*array)
+    --;
 }
 
 /**
@@ -164,7 +170,8 @@ void DeleteAt(ArrayDin *array, IdxType i)
  */
 void DeleteLast(ArrayDin *array)
 {
-    NEFF(*array)--;
+    NEFF(*array)
+    --;
 }
 
 /**
@@ -185,10 +192,12 @@ void DeleteFirst(ArrayDin *array)
 void PrintArrayDin(ArrayDin array)
 {
     int i;
-    for(i=0; i<array.Neff; i++) {
-        printf("%d. ", i+1);
+    for (i = 0; i < array.Neff; i++)
+    {
+        printf("%d. ", i + 1);
         int j;
-        for (j=0; j<BUFFER(array)[i].Length; j++) {
+        for (j = 0; j < BUFFER(array)[i].Length; j++)
+        {
             printf("%c", BUFFER(array)[i].TabWord[j]);
         }
         printf("\n");
@@ -210,7 +219,8 @@ void ReverseArrayDin(ArrayDin *array)
     {
         // BUFFER(temp)[i] = BUFFER(*array)[NEFF(*array) - i - 1];
         int k;
-        for (k=0; k<(*array).A[NEFF(*array) - i - 1].Length; k++) {
+        for (k = 0; k < (*array).A[NEFF(*array) - i - 1].Length; k++)
+        {
             temp.A[i].TabWord[k] = (*array).A[NEFF(*array) - i - 1].TabWord[k];
         }
         temp.A[i].Length = (*array).A[NEFF(*array) - i - 1].Length;
@@ -219,7 +229,8 @@ void ReverseArrayDin(ArrayDin *array)
     {
         // BUFFER(*array)[i] = BUFFER(temp)[i];
         int k;
-        for (k=0; k<temp.A[i].Length; k++) {
+        for (k = 0; k < temp.A[i].Length; k++)
+        {
             (*array).A[i].TabWord[k] = temp.A[i].TabWord[k];
         }
         (*array).A[i].Length = temp.A[i].Length;
@@ -246,15 +257,4 @@ ArrayDin CopyArrayDin(ArrayDin array)
     CAPACITY(copiedArray) = CAPACITY(array);
 
     return copiedArray;
-}
-
-void PrintWord(Word w) {
-/*
-I.S word terdefinisi
-F.S menghasilkan ouput tabword 
-*/
-    int i;
-    for (i=0; i<w.Length; i++) {
-        printf("%c", w.TabWord[i]);
-    }
 }

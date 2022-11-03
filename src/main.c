@@ -29,7 +29,8 @@ int main()
             file = akuisisiFile(command);
             if (stringEQWord(cek, "LOAD"))
             {
-                load(concat("../data/", file), &arrGame, &arrHistory);
+                load(concat("../data/", file), &arrGame);
+                load(concat("../data/", file), &arrHistory);
                 printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
             }
             else if (stringEQWord(cek, "SAVE"))
@@ -42,7 +43,8 @@ int main()
         {
             if (stringEQWord(command, "START"))
             {
-                load("../data/default.txt", &arrGame, &arrHistory);
+                load("../data/default.txt", &arrGame);
+                load("../data/default.txt", &arrHistory);
                 printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
             }
             else if (stringEQWord(command, "QUIT"))
@@ -72,7 +74,7 @@ int main()
                     printf("\n\n");
                     Word firstGame = arrQueue.A[0];
                     printf("Loading ");
-                    PrintWord(firstGame);
+                    printWord(firstGame);
                     printf(" ...\n\n");
                     if (stringEQWord(firstGame, "DINER DASH"))
                     {
@@ -85,7 +87,7 @@ int main()
                     else
                     {
                         printf("Game ");
-                        PrintWord(firstGame);
+                        printWord(firstGame);
                         printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
                     }
                     InsertAt(&arrHistory, firstGame, Length(arrHistory));

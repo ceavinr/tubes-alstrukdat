@@ -1,27 +1,19 @@
 #include "load.h"
 
-void load(char* savefile, ArrayDin *arrGame, ArrayDin *arrHistory) {
-    *arrGame = MakeArrayDin();
-    *arrHistory = MakeArrayDin();
+void load(char *savefile, ArrayDin *arr)
+{
     STARTWORD(savefile);
-    if (!EOP) {
+    if (!EOP)
+    {
         int count;
         wordToInt(currentWord, &count);
         int i;
-        for (i=0; i<count; i++) {
+        for (i = 0; i < count; i++)
+        {
             ADVWORD();
-            InsertAt(arrGame, currentWord, i);
+            InsertAt(arr, currentWord, i);
         }
         ADVWORD();
-    }
-    if (!EOP) {
-        int count;
-        wordToInt(currentWord, &count);
-        int j;
-        for (j=0; j<count; j++) {
-            ADVWORD();
-            InsertAt(arrHistory, currentWord, j);
-        }
     }
 }
 
