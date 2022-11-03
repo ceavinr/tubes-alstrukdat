@@ -24,13 +24,10 @@ int main()
 
         if (stringEQWord(cek, "LOAD") || stringEQWord(cek, "SAVE"))
         {
-            /*Akuisisi File Berdasarkan Input*/
-            char *file;
-            file = akuisisiFile(command);
-
             if (stringEQWord(cek, "LOAD"))
             {
-                load(concat("../data/", file), &arrGame, &arrHistory);
+                load(command, &arrGame, &arrHistory);
+                printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
             }
             else if (stringEQWord(cek, "SAVE"))
             {
@@ -58,7 +55,7 @@ int main()
             }
             else if (stringEQWord(command, "QUEUE GAME"))
             {
-                /* BELUM ADA */
+                queueGame(&arrQueue, arrGame);
             }
             else if (stringEQWord(command, "PLAY GAME"))
             {

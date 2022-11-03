@@ -177,7 +177,7 @@ char *akuisisiFile(Word command)
     return ret;
 }
 
-void wordToInt(Word w, int *integer)
+int wordToInt(Word w)
 {
     /*
      I.S word terdefinisi
@@ -190,7 +190,7 @@ void wordToInt(Word w, int *integer)
         val = val * 10 + (w.TabWord[i] - 48);
     }
 
-    *integer = val;
+    return val;
 }
 
 void printWord(Word w)
@@ -199,8 +199,22 @@ void printWord(Word w)
  I.S word terdefinisi
  F.S menampilkan word
 */
-    for (int i = 0; i < w.Length; i++)
+    int i;
+    for (i = 0; i < w.Length; i++)
     {
         printf("%c", w.TabWord[i]);
     }
+}
+
+Word stringToWord(char string[100]) {
+    Word w;
+
+    int i;
+    for (i=0; i<panjangKata(string); i++)
+    {
+        w.TabWord[i] = string[i];
+    }
+    w.Length = panjangKata(string);
+
+    return w;
 }

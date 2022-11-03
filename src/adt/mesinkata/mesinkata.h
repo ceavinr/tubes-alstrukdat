@@ -65,7 +65,7 @@ void akuisisiCommandWord(Word *w, Word command, int kataKe);
 char *akuisisiFile(Word command);
 /*Mengakuisisi nama file yang dimasukkan dari command user*/
 
-void wordToInt(Word w, int *integer);
+int wordToInt(Word w);
 /*
  I.S word terdefinisi
  F.S dirubah ke integer dan dimasukkan ke dalan integer
@@ -76,5 +76,7 @@ void printWord(Word w);
  I.S word terdefinisi
  F.S menampilkan word
 */
+
+Word stringToWord(char* string);
 
 #endif

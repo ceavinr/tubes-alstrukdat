@@ -1,3 +1,6 @@
+#ifndef __CONSOLE__
+#define __CONSOLE__
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
@@ -18,7 +21,7 @@ void start(ArrayDin* arrGame, ArrayDin* arrHistory);
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(char* savefile, ArrayDin *arrGame, ArrayDin *arrHistory);
+void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
@@ -50,6 +53,13 @@ void skipGame(Word command, ArrayDin* arrQueue, ArrayDin* arrHistory);
 
 /**
  * Konstruktor
+ * I.S. Program berjalan, array Queue dan array game terdefinisi
+ * F.S. Game masuk ke dalam daftar antrian
+ */
+void queueGame(ArrayDin* arrQueue, ArrayDin arrGame);
+
+/**
+ * Konstruktor
  * I.S. Program berjalan
  * F.S. Menampilkan seluruh game yang tersedia
  */
@@ -61,3 +71,5 @@ void listGame(ArrayDin arrGame);
  * F.S. Keluar dari program
  */
 void quitProgram(boolean* flag);
+
+#endif
