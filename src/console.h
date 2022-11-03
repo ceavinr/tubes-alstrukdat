@@ -25,6 +25,13 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
+ * I.S. program berjalan
+ * F.S. menyimpan arraygame dan arrayhistory ke dalam file
+ */
+void save(Word command, ArrayDin arrGame, ArrayDin arrHistory);
+
+/**
+ * Konstruktor
  * I.S. Array game terdefinisi
  * F.S. Game berdasarkan input pengguna tersimpan ke dalam array game
  */

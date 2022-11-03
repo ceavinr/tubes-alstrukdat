@@ -46,6 +46,42 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
             InsertAt(arrHistory, currentWord, j);
         }
     }
+
+    Word cek;
+    akuisisiCommandWord(&cek, command, 1);
+    if (stringEQWord(cek, "LOAD")) {
+        printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+    }
+}
+
+/**
+ * Konstruktor
+ * I.S. program berjalan
+ * F.S. menyimpan arraygame dan arrayhistory ke dalam file
+ */
+void save(Word command, ArrayDin arrGame, ArrayDin arrHistory) {
+    char *file;
+    file = akuisisiFile(command);
+
+    FILE*pita;
+    pita=fopen(concat("../data/", file),"w");
+
+    fprintf(pita,"%c\n",(char)(arrGame.Neff+48));
+
+    for (int i=0;i<arrGame.Neff;i++) {
+        fprintf(pita,"%s\n",arrGame.A[i].TabWord);
+    }
+
+    fprintf(pita,"%c\n",(char)(arrHistory.Neff+48));
+
+    for (int j=0;j<arrHistory.Neff-1;j++) {
+        fprintf(pita,"%s\n",arrHistory.A[j].TabWord);
+    }
+
+    fprintf(pita,"%s",arrHistory.A[arrHistory.Neff-1].TabWord);
+
+    fclose(pita);
+    printf("Save file berhasil disimpan..\n\n");
 }
 
 /**

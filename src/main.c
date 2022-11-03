@@ -8,8 +8,9 @@ int main()
     ArrayDin arrHistory = MakeArrayDin();
     ArrayDin arrQueue = MakeArrayDin();
 
-    printf("\n======== SELAMAT DATANG DI BNMO ========\n");
-    printf("\n=========== TUBES ALSTRUKDAT ===========\n");
+    printf("\n================ SELAMAT DATANG ================\n");
+    printf("                      DI BNMO                     \n");
+    printf("\n=============== TUBES ALSTRUKDAT ===============\n");
 
     /*LOOPING PROGRAM*/
     while (!quit)
@@ -27,12 +28,10 @@ int main()
             if (stringEQWord(cek, "LOAD"))
             {
                 load(command, &arrGame, &arrHistory);
-                printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
             }
             else if (stringEQWord(cek, "SAVE"))
             {
-                /* BELUM ADA */
-                printf("Save file berhasil disimpan..\n\n");
+                save(command, arrGame, arrHistory);
             }
         }
         else if (stringEQWord(cek, "SKIPGAME"))
