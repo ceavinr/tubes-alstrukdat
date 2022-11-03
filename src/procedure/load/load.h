@@ -7,6 +7,6 @@
 #include "../../adt/mesinkarakter/mesinkarakter.h"
 #include "../../adt/arraydin/arraydin.h"
 
-void load(char *savefile, ArrayDin *arr);
+void load(char *savefile, ArrayDin *arrGame, ArrayDin *arrHistory);
 
 #endif

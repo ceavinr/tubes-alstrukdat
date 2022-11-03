@@ -29,8 +29,7 @@ int main()
             file = akuisisiFile(command);
             if (stringEQWord(cek, "LOAD"))
             {
-                load(concat("../data/", file), &arrGame);
-                load(concat("../data/", file), &arrHistory);
+                load(concat("../data/", file), &arrGame, &arrHistory);
                 printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
             }
             else if (stringEQWord(cek, "SAVE"))
@@ -43,8 +42,7 @@ int main()
         {
             if (stringEQWord(command, "START"))
             {
-                load("../data/default.txt", &arrGame);
-                load("../data/default.txt", &arrHistory);
+                load("../data/default.txt", &arrGame, &arrHistory);
                 printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
             }
             else if (stringEQWord(command, "QUIT"))
