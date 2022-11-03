@@ -195,6 +195,10 @@ void wordToInt(Word w, int *integer)
 
 void printWord(Word w)
 {
+/*
+ I.S word terdefinisi
+ F.S menampilkan word
+*/
     for (int i = 0; i < w.Length; i++)
     {
         printf("%c", w.TabWord[i]);

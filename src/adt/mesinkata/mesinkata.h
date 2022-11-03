@@ -70,5 +70,11 @@ void wordToInt(Word w, int *integer);
  I.S word terdefinisi
  F.S dirubah ke integer dan dimasukkan ke dalan integer
 */
+
 void printWord(Word w);
+/*
+ I.S word terdefinisi
+ F.S menampilkan word
+*/
+
 #endif

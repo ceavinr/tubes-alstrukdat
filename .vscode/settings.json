@@ -4,6 +4,8 @@
     "boolean.h": "c",
     "order.h": "c",
     "string.h": "c",
-    "mesinkata.h": "c"
+    "mesinkata.h": "c",
+    "mesinkarakter.h": "c",
+    "arraydin.h": "c"
   }
 }

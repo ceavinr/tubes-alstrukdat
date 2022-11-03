@@ -1,1 +1,0 @@
-gcc -o load ../../adt/mesinkata/mesinkata.c ../../adt/mesinkarakter/mesinkarakter.c ../../adt/arraydin/arraydin.c load.c
