@@ -88,6 +88,8 @@ int main()
                         PrintWord(firstGame);
                         printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
                     }
+                    InsertAt(&arrHistory, firstGame, Length(arrHistory));
+                    DeleteFirst(&arrQueue);
                 }
                 else
                 {
