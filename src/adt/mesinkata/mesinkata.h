@@ -6,7 +6,7 @@
 
 #include "../../boolean.h"
 #include "../mesinkarakter/mesinkarakter.h"
-#include "../../adt/kata/kata.h"
+#include "../../adt/string/string.h"
 
 #define NMax 50
 #define BLANK '\n'
@@ -26,7 +26,7 @@ void IgnoreBlanks();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD(char * savefile);
+void STARTWORD(char *savefile);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -53,22 +53,22 @@ void startInputWord();
    F.S pita diisi oleh user dan dilakukan pemrosesan oleh mesin kata
 */
 
-boolean stringEQWord(Word w, char* c);
+boolean stringEQWord(Word w, char *c);
 /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
 
-void akuisisiCommandWord(Word* w, Word command);
+void akuisisiCommandWord(Word *w, Word command, int kataKe);
 /*Mengakuisisi commad terkhusus untuk LOAD and SAVE
    I.S. pita kata terdefinisi
    F.S. diakuisisi ke dalam w
 */
 
-char* akuisisiFile(Word command);
+char *akuisisiFile(Word command);
 /*Mengakuisisi nama file yang dimasukkan dari command user*/
 
-void wordToInt(Word w, int* integer);
+void wordToInt(Word w, int *integer);
 /*
  I.S word terdefinisi
  F.S dirubah ke integer dan dimasukkan ke dalan integer
 */
-
+void printWord(Word w);
 #endif

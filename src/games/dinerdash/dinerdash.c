@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <time.h>
 #include "dinerdash.h"
-#include "../../adt/kata/kata.h"
+#include "../../adt/string/string.h"
 
-int kodeToInt(char *kode)
+int kodeToInt(Word kode)
 {
     int num = 0;
     int countNumber = 0;
     for (int i = 0; i < 3; i++)
     {
-        if (kode[i] >= 48 && kode[i] <= 57)
+        if (kode.TabWord[i] >= 48 && kode.TabWord[i] <= 57)
         {
             countNumber += 1;
-            num = num * 10 + kode[i] - 48;
+            num = num * 10 + kode.TabWord[i] - 48;
         }
     }
     if (countNumber == 0)
@@ -30,9 +30,10 @@ int main()
 {
     Order orderList, cooking;
     Masakan m, m_add, m_del;
+    Word command, masakan;
 
-    char command[5];
-    char *masakan = malloc(3 * sizeof(char));
+    // char command[5];
+    // char *masakan = malloc(3 * sizeof(char));
     int saldo = 0, served = 0;
     boolean gameOn = true;
 
@@ -42,8 +43,8 @@ int main()
     for (int i = 0; i < 3; i++)
     {
         NOMOR(m) = i;
-        DURASI(m) = 0 + 1;
-        KETAHANAN(m) = 0 + 1;
+        DURASI(m) = rand() % 5 + 1;
+        KETAHANAN(m) = rand() % 5 + 1;
         HARGA(m) = rand() % 5001 + 10000;
 
         addOrder(&orderList, m);
@@ -67,12 +68,13 @@ int main()
         while (!inputValid)
         {
             printf("\nMASUKKAN COMMAND: ");
-            scanf("%s", command);
-            scanf("%s", masakan);
+            startInputWord();
+            akuisisiCommandWord(&command, currentWord, 1);
+            akuisisiCommandWord(&masakan, currentWord, 2);
 
-            if (isSame(command, "COOK") || isSame(command, "SERVE"))
+            if (stringEQWord(command, "COOK") || stringEQWord(command, "SERVE"))
             {
-                if (masakan[0] == 'M' && kodeToInt(masakan) != -1)
+                if (masakan.TabWord[0] == 'M' && kodeToInt(masakan) != -1)
                 {
                     inputValid = true;
                 }
@@ -81,20 +83,12 @@ int main()
 
         if (isIn(orderList, kodeToInt(masakan)))
         {
-            if (isSame(command, "COOK")) // Jika command == "COOK"
+            if (stringEQWord(command, "COOK")) // Jika command == "COOK"
             {
-                if (!isIn(cooking, kodeToInt(masakan)))
-                {
-                    m_add = find(orderList, kodeToInt(masakan));
-                    DURASI(m_add) += 1;
-                    addOrder(&cooking, m_add);
-                    printf("\nBerhasil memasak %s\n", masakan);
-                }
-                else
-                {
-                    printf("\nMasakan %s sudah diproses\n", masakan);
-                    inputValid = false;
-                }
+                m_add = find(orderList, kodeToInt(masakan));
+                DURASI(m_add) += 1;
+                addOrder(&cooking, m_add);
+                printf("\nBerhasil memasak M%d\n", kodeToInt(masakan));
             }
 
             else // Jika command == "SERVE"
@@ -103,7 +97,7 @@ int main()
                 {
                     if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
                     {
-                        printf("%s belum dapat disajikan karena belum selesai dimasak, tunggu %d putaran lagi\n", masakan, DURASI(find(cooking, kodeToInt(masakan))));
+                        printf("M%d belum dapat disajikan karena belum selesai dimasak, tunggu %d putaran lagi\n", kodeToInt(masakan), DURASI(find(cooking, kodeToInt(masakan))));
                         inputValid = false;
                     }
                     else
@@ -112,27 +106,27 @@ int main()
                         {
                             deleteOrderAt(&cooking, &m_del, kodeToInt(masakan));
                             deleteOrderAt(&orderList, &m_del, kodeToInt(masakan));
-                            printf("\nBerhasil mengantar %s\n", masakan);
+                            printf("\nBerhasil mengantar M%d\n", kodeToInt(masakan));
                             saldo += HARGA(m_del);
                             served++;
                         }
                         else
                         {
-                            printf("%s belum dapat disajikan karena M%d belum selesai\n", masakan, NOMOR(HEAD(orderList)));
+                            printf("M%d belum dapat disajikan karena M%d belum selesai\n", kodeToInt(masakan), NOMOR(HEAD(orderList)));
                             inputValid = false;
                         }
                     }
                 }
                 else
                 {
-                    printf("%s belum dimasak\n", masakan);
+                    printf("M%d belum dimasak\n", kodeToInt(masakan));
                     inputValid = false;
                 }
             }
         }
         else
         {
-            printf("Masakan tidak ada di pesanan\n");
+            printf("M%d tidak ada di pesanan\n", kodeToInt(masakan));
             inputValid = false;
         }
 

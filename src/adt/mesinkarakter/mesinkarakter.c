@@ -7,7 +7,7 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
-void START(char* savefile)
+void START(char *savefile)
 {
     /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
        Karakter pertama yang ada pada pita posisinya adalah pada jendela.
@@ -51,6 +51,6 @@ boolean IsEOP()
 
 void startInput()
 {
-       pita = stdin;
-       ADV();
+    pita = stdin;
+    ADV();
 }

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "boolean.h"
 #include "./procedure/load/load.h"
-#include "./adt/kata/kata.h"
+#include "./adt/string/string.h"
 #include "./adt/arraydin/arraydin.h"
 
 void commandInput(Word command)
@@ -26,7 +26,7 @@ int main()
         command = currentWord;
 
         Word cek;
-        akuisisiCommandWord(&cek, command);
+        akuisisiCommandWord(&cek, command, 1);
         if (stringEQWord(cek, "LOAD") || stringEQWord(cek, "SAVE"))
         {
             char *file;
@@ -69,7 +69,8 @@ int main()
             }
             else if (stringEQWord(command, "PLAY GAME"))
             {
-                if (!IsEmpty(arrQueue)) {
+                if (!IsEmpty(arrQueue))
+                {
                     printf("Berikut adalah daftar Game-mu\n");
                     PrintArrayDin(arrQueue);
                     printf("\n\n");
@@ -77,16 +78,23 @@ int main()
                     printf("Loading ");
                     PrintWord(firstGame);
                     printf(" ...\n\n");
-                    if (stringEQWord(firstGame, "DINER DASH")) {
+                    if (stringEQWord(firstGame, "DINER DASH"))
+                    {
                         /*Game dinner dash*/
-                    } if (stringEQWord(firstGame, "RNG")) {
+                    }
+                    if (stringEQWord(firstGame, "RNG"))
+                    {
                         /*Game RNG*/
-                    } else {
+                    }
+                    else
+                    {
                         printf("Game ");
                         PrintWord(firstGame);
                         printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
                     }
-                } else {
+                }
+                else
+                {
                     printf("Antrian game kosong.\nSilakan masukan queue game terlebih dahulu!\n\n");
                 }
             }
