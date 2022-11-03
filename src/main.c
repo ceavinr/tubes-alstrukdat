@@ -62,40 +62,7 @@ int main()
             }
             else if (stringEQWord(command, "PLAY GAME"))
             {
-<<<<<<< HEAD
                 playGame(&arrQueue, &arrHistory);
-=======
-                if (!IsEmpty(arrQueue))
-                {
-                    printf("Berikut adalah daftar Game-mu\n");
-                    PrintArrayDin(arrQueue);
-                    printf("\n\n");
-                    Word firstGame = arrQueue.A[0];
-                    printf("Loading ");
-                    printWord(firstGame);
-                    printf(" ...\n\n");
-                    if (stringEQWord(firstGame, "DINER DASH"))
-                    {
-                        /*Game dinner dash*/
-                    }
-                    if (stringEQWord(firstGame, "RNG"))
-                    {
-                        /*Game RNG*/
-                    }
-                    else
-                    {
-                        printf("Game ");
-                        printWord(firstGame);
-                        printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
-                    }
-                    InsertAt(&arrHistory, firstGame, Length(arrHistory));
-                    DeleteFirst(&arrQueue);
-                }
-                else
-                {
-                    printf("Antrian game kosong.\nSilakan masukan queue game terlebih dahulu!\n\n");
-                }
->>>>>>> 68b30335ac8c814586ae34465e8374450a5e70ee
             }
             else if (stringEQWord(command, "LIST GAME"))
             {
