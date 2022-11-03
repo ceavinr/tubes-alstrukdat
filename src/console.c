@@ -5,11 +5,17 @@
  * I.S. sembarang
  * F.S. Membaca file default dan menyimpan ke dalam array, history bisa kosong namun terdefinisi
  */
+<<<<<<< HEAD
 void start(ArrayDin* arrGame, ArrayDin* arrHistory) {
     /*INISIASI FILE DEFAULT*/
     Word default_command = stringToWord("LOAD default.txt");
 
     load(default_command, arrGame, arrHistory);
+=======
+void start(ArrayDin *arrGame, ArrayDin *arrHistory)
+{
+    load("../data/default.txt", arrGame, arrHistory);
+>>>>>>> a8750d25c79e0662ee294769ad6bb8d3efdcc03d
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
 }
 
@@ -18,6 +24,7 @@ void start(ArrayDin* arrGame, ArrayDin* arrHistory) {
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
+<<<<<<< HEAD
 void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
     /*Akuisisi File Berdasarkan Input*/
     char *file;
@@ -29,17 +36,38 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
 
     if (!EOP) {
         int count = wordToInt(currentWord);
+=======
+void load(char *savefile, ArrayDin *arrGame, ArrayDin *arrHistory)
+{
+
+    *arrGame = MakeArrayDin();
+    *arrHistory = MakeArrayDin();
+    STARTWORD(savefile);
+    if (!EOP)
+    {
+        int count;
+        wordToInt(currentWord, &count);
+>>>>>>> a8750d25c79e0662ee294769ad6bb8d3efdcc03d
         int i;
-        for (i=0; i<count; i++) {
+        for (i = 0; i < count; i++)
+        {
             ADVWORD();
             InsertAt(arrGame, currentWord, i);
         }
         ADVWORD();
     }
+<<<<<<< HEAD
     if (!EOP) {
         int count = wordToInt(currentWord);
+=======
+    if (!EOP)
+    {
+        int count;
+        wordToInt(currentWord, &count);
+>>>>>>> a8750d25c79e0662ee294769ad6bb8d3efdcc03d
         int j;
-        for (j=0; j<count; j++) {
+        for (j = 0; j < count; j++)
+        {
             ADVWORD();
             InsertAt(arrHistory, currentWord, j);
         }
@@ -51,7 +79,8 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
  * I.S. Array game terdefinisi
  * F.S. Game berdasarkan input pengguna tersimpan ke dalam array game
  */
-void newGame(ArrayDin* arrGame) {
+void newGame(ArrayDin *arrGame)
+{
     Word newGame;
 
     printf("Masukkan nama game yang akan ditambahkan: ");
@@ -66,7 +95,8 @@ void newGame(ArrayDin* arrGame) {
  * I.S. Array game terdefinisi
  * F.S. Game yang dipilih terhapus dari program, default game tidak diizinkan dihapus
  */
-void deleteGame(ArrayDin* arrGame) {
+void deleteGame(ArrayDin *arrGame)
+{
     printf("Berikut adalah daftar game yang tersedia\n\n");
     PrintArrayDin(*arrGame);
     printf("\nMasukan game yang akan dihapus: ");
@@ -90,7 +120,8 @@ void deleteGame(ArrayDin* arrGame) {
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game antrian pertama dimainkan, setelah diamainkan dimasukan ke history
  */
-void playGame(ArrayDin* arrQueue, ArrayDin* arrHistory) {
+void playGame(ArrayDin *arrQueue, ArrayDin *arrHistory)
+{
     if (!IsEmpty(*arrQueue))
     {
         /*INISIALISASI GAME PERTAMA YANG SIAP DIMAINKAN*/
@@ -132,22 +163,30 @@ void playGame(ArrayDin* arrQueue, ArrayDin* arrHistory) {
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game dalam antrian diskip sebanyak input pengguna
  */
-void skipGame(Word command, ArrayDin* arrQueue, ArrayDin* arrHistory) {
+void skipGame(Word command, ArrayDin *arrQueue, ArrayDin *arrHistory)
+{
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
     akuisisiCommandWord(&numQueueString, command, 2);
     
     int numQueue = wordToInt(numQueueString);
 
+<<<<<<< HEAD
     if (numQueue >=0 && numQueue < (*arrQueue).Neff && !IsEmpty(*arrQueue)){
         printf("Berikut adalah daftar Game-mu\n");
         PrintArrayDin(*arrQueue);
 
         /*DELETE BERDASARKAN SKIP*/
+=======
+    if (numQueue < (*arrQueue).Neff && !IsEmpty(*arrQueue))
+    {
+>>>>>>> a8750d25c79e0662ee294769ad6bb8d3efdcc03d
         int i;
-        for(i=0; i<numQueue; i++){
+        for (i = 0; i < numQueue; i++)
+        {
             DeleteFirst(arrQueue);
         }
+<<<<<<< HEAD
 
         /*INISIALISASI GAME PERTAMA YANG SIAP DIMAINKAN*/
         Word firstGame = (*arrQueue).A[0];
@@ -175,6 +214,11 @@ void skipGame(Word command, ArrayDin* arrQueue, ArrayDin* arrHistory) {
         DeleteFirst(arrQueue);
     } 
     else if (numQueue >= (*arrQueue).Neff || IsEmpty(*arrQueue))
+=======
+        playGame(arrQueue, arrHistory);
+    }
+    else
+>>>>>>> a8750d25c79e0662ee294769ad6bb8d3efdcc03d
     {
         (*arrQueue) = MakeArrayDin();
         printf("Tidak ada permainan lagi dalam daftar game-mu.\n");
@@ -222,7 +266,8 @@ void queueGame(ArrayDin* arrQueue, ArrayDin arrGame) {
  * I.S. Program berjalan
  * F.S. Menampilkan seluruh game yang tersedia
  */
-void listGame(ArrayDin arrGame) {
+void listGame(ArrayDin arrGame)
+{
     printf("Berikut adalah daftar game yang tersedia\n\n");
     PrintArrayDin(arrGame);
     printf("\n");
@@ -233,7 +278,8 @@ void listGame(ArrayDin arrGame) {
  * I.S. Program berjalan
  * F.S. Keluar dari program
  */
-void quitProgram(boolean* flag) {
+void quitProgram(boolean *flag)
+{
     printf("\nAnda keluar dari game BNMO.\nBye bye ...\n\n");
     *flag = true;
 }
