@@ -46,7 +46,7 @@ char GetCC()
 boolean IsEOP()
 {
     /* Mengirimkan true jika currentChar = MARK */
-    return currentChar == EOP;
+    return EOP;
 }
 
 void startInput()
