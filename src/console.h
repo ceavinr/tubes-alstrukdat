@@ -79,4 +79,11 @@ void listGame(ArrayDin arrGame);
  */
 void quitProgram(boolean* flag);
 
+/**
+ * Konstruktor
+ * I.S. Program berjalan
+ * F.S. Menampilkan bantuan interaksi dengan program
+ */
+void help();
+
 #endif

@@ -10,7 +10,6 @@ void start(ArrayDin* arrGame, ArrayDin* arrHistory) {
     Word default_command = stringToWord("LOAD default.txt");
 
     load(default_command, arrGame, arrHistory);
-    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
 }
 
 /**
@@ -51,6 +50,8 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
     akuisisiCommandWord(&cek, command, 1);
     if (stringEQWord(cek, "LOAD")) {
         printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+    } else {
+        printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
     }
 }
 
@@ -237,11 +238,11 @@ void skipGame(Word command, ArrayDin *arrQueue, ArrayDin *arrHistory)
 void queueGame(ArrayDin* arrQueue, ArrayDin arrGame) {
     printf("Berikut adalah daftar antrian game-mu\n");
     if (IsEmpty(*arrQueue)) {
-        printf("==Daftar Kosong==");
+        printf("\n=========== Daftar Kosong ===========\n");
     } else {
         PrintArrayDin(*arrQueue);
     }
-    printf("\n\nBerikut adalah daftar game yang tersedia\n");
+    printf("\nBerikut adalah daftar game yang tersedia\n");
     PrintArrayDin(arrGame);
     printf("\nNomor Game yang mau ditambahkan ke antrian:  ");
     startInputWord();
@@ -281,4 +282,27 @@ void quitProgram(boolean *flag)
 {
     printf("\nAnda keluar dari game BNMO.\nBye bye ...\n\n");
     *flag = true;
+}
+
+/**
+ * Konstruktor
+ * I.S. Program berjalan
+ * F.S. Menampilkan bantuan interaksi dengan program
+ */
+void help() {
+    printf("\n================================ HALAMAN HELP ==============================\n");
+    printf("============================================================================\n");
+    printf("\nBNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh Indra dan Doni.\nDua bulan yang lalu, ia mengalami kerusakan dan telah berhasil diperbaiki.\nSayangnya, setelah diperbaiki ia justru mendapatkan lebih banyak bug dalam sistemnya.\nOleh karena itu, Indra dan Doni mencari programmer lain yang lebih handal\nuntuk ulang memprogram robot video game console kesayangannya.\n");
+    printf("\nGUNAKAN COMMAND BERIKUT UNTUK BERINTERAKSI DENGAN PROGRAM INI\n");
+    printf("1. START            : memulai program\n");
+    printf("2. LOAD <nama_file> : membuka savefile\n");
+    printf("3. SAVE <nama_file> : menyimpan\n");
+    printf("4. CREATE GAME      : menambahkan game\n");
+    printf("5. LIST GAME        : menampilkan daftar game\n");
+    printf("6. DELETE GAME      : menghapus daftar game\n");
+    printf("7. QUEUE GAME       : menambahkan game ke daftar antrian yang akan dimainkan\n");
+    printf("8. PLAY GAME        : memainkan game pada daftar antrian paling atas\n");
+    printf("9. SKIPGAME <n>     : memainkan game dengan mendahului beberapa game di atasnya\n");
+    printf("10. QUIT            : keluar dari program\n");
+    printf("11. HELP            : panduan penggunaan\n");
 }

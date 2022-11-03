@@ -8,9 +8,15 @@ int main()
     ArrayDin arrHistory = MakeArrayDin();
     ArrayDin arrQueue = MakeArrayDin();
 
-    printf("\n================ SELAMAT DATANG ================\n");
-    printf("                      DI BNMO                     \n");
-    printf("\n=============== TUBES ALSTRUKDAT ===============\n");
+    printf("\n============================ SELAMAT DATANG DI =============================\n");
+    printf("                  .______   .__   __. .___  ___.   ______      \n");
+    printf("                  |   _  \\  |  \\ |  | |   \\/   |  /  __  \\ \n");
+    printf("                  |  |_)  | |   \\|  | |  \\  /  | |  |  |  |  \n");
+    printf("                  |   _  <  |  . `  | |  |\\/|  | |  |  |  |   \n");
+    printf("                  |  |_)  | |  |\\   | |  |  |  | |  `--'  |   \n");
+    printf("                  |______/  |__| \\__| |__|  |__|  \\______/   \n");
+    printf("\n============================= TUBES ALSTRUKDAT =============================\n");
+    help();
 
     /*LOOPING PROGRAM*/
     while (!quit)
@@ -70,7 +76,7 @@ int main()
             }
             else if (stringEQWord(command, "HELP"))
             {
-                /* BELUM ADA */
+                help();
             }
             else
             {
