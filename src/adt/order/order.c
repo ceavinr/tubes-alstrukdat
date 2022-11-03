@@ -53,7 +53,7 @@ void addOrder(Order *o, Masakan val)
     {
         while (i != IDX_HEAD(*o) && !stop)
         {
-            if (NOMOR(val) > NOMOR(ELMT(*o, i - 1)))
+            if (NOMOR(val) >= NOMOR(ELMT(*o, i - 1)))
             {
                 stop = true;
             }
