@@ -3,9 +3,9 @@
 #include "../../boolean.h"
 #include "../../adt/array/array.h"
 
-int isWin();
+int isWin(Papan papan);
 
-void board();
+void board(Papan papan);
 
 void tictactoe();
 
