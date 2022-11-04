@@ -1,4 +1,5 @@
 #include "console.h"
+#include "gambar.h"
 
 int main()
 {
@@ -8,14 +9,8 @@ int main()
     ArrayDin arrHistory = MakeArrayDin();
     ArrayDin arrQueue = MakeArrayDin();
 
-    printf("\n============================ SELAMAT DATANG DI =============================\n");
-    printf("                  .______   .__   __. .___  ___.   ______      \n");
-    printf("                  |   _  \\  |  \\ |  | |   \\/   |  /  __  \\ \n");
-    printf("                  |  |_)  | |   \\|  | |  \\  /  | |  |  |  |  \n");
-    printf("                  |   _  <  |  . `  | |  |\\/|  | |  |  |  |   \n");
-    printf("                  |  |_)  | |  |\\   | |  |  |  | |  `--'  |   \n");
-    printf("                  |______/  |__| \\__| |__|  |__|  \\______/   \n");
-    printf("\n============================= TUBES ALSTRUKDAT =============================\n");
+    printf("\n================================== SELAMAT DATANG DI BNMO ===================================\n");
+    gambarBNMO();
     help();
 
     /*LOOPING PROGRAM*/

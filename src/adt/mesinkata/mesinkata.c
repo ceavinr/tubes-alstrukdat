@@ -195,10 +195,10 @@ int wordToInt(Word w)
 
 void printWord(Word w)
 {
-/*
- I.S word terdefinisi
- F.S menampilkan word
-*/
+    /*
+     I.S word terdefinisi
+     F.S menampilkan word
+    */
     int i;
     for (i = 0; i < w.Length; i++)
     {
@@ -206,11 +206,12 @@ void printWord(Word w)
     }
 }
 
-Word stringToWord(char string[100]) {
+Word stringToWord(char string[100])
+{
     Word w;
 
     int i;
-    for (i=0; i<panjangKata(string); i++)
+    for (i = 0; i < panjangKata(string); i++)
     {
         w.TabWord[i] = string[i];
     }

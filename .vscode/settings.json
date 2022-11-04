@@ -6,6 +6,7 @@
     "string.h": "c",
     "mesinkata.h": "c",
     "mesinkarakter.h": "c",
-    "arraydin.h": "c"
+    "arraydin.h": "c",
+    "gambar.h": "c"
   }
 }

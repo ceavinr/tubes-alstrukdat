@@ -1,11 +1,13 @@
 #include "console.h"
+#include "./games/dinerdash/dinerdash.h"
 
 /**
  * Konstruktor
  * I.S. sembarang
  * F.S. Membaca file default dan menyimpan ke dalam array, history bisa kosong namun terdefinisi
  */
-void start(ArrayDin* arrGame, ArrayDin* arrHistory) {
+void start(ArrayDin *arrGame, ArrayDin *arrHistory)
+{
     /*INISIASI FILE DEFAULT*/
     Word default_command = stringToWord("LOAD default.txt");
 
@@ -17,16 +19,18 @@ void start(ArrayDin* arrGame, ArrayDin* arrHistory) {
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
+void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
+{
     /*Akuisisi File Berdasarkan Input*/
     char *file;
     file = akuisisiFile(command);
-    
+
     *arrGame = MakeArrayDin();
     *arrHistory = MakeArrayDin();
     STARTWORD(concat("../data/", file));
 
-    if (!EOP) {
+    if (!EOP)
+    {
         int count = wordToInt(currentWord);
         int i;
         for (i = 0; i < count; i++)
@@ -36,7 +40,8 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
         }
         ADVWORD();
     }
-    if (!EOP) {
+    if (!EOP)
+    {
         int count = wordToInt(currentWord);
         int j;
         for (j = 0; j < count; j++)
@@ -48,9 +53,12 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
 
     Word cek;
     akuisisiCommandWord(&cek, command, 1);
-    if (stringEQWord(cek, "LOAD")) {
+    if (stringEQWord(cek, "LOAD"))
+    {
         printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-    } else {
+    }
+    else
+    {
         printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
     }
 }
@@ -60,26 +68,29 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory) {
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(Word command, ArrayDin arrGame, ArrayDin arrHistory) {
+void save(Word command, ArrayDin arrGame, ArrayDin arrHistory)
+{
     char *file;
     file = akuisisiFile(command);
 
-    FILE*pita;
-    pita=fopen(concat("../data/", file),"w");
+    FILE *pita;
+    pita = fopen(concat("../data/", file), "w");
 
-    fprintf(pita,"%c\n",(char)(arrGame.Neff+48));
+    fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
-    for (int i=0;i<arrGame.Neff;i++) {
-        fprintf(pita,"%s\n",arrGame.A[i].TabWord);
+    for (int i = 0; i < arrGame.Neff; i++)
+    {
+        fprintf(pita, "%s\n", arrGame.A[i].TabWord);
     }
 
-    fprintf(pita,"%c\n",(char)(arrHistory.Neff+48));
+    fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
 
-    for (int j=0;j<arrHistory.Neff-1;j++) {
-        fprintf(pita,"%s\n",arrHistory.A[j].TabWord);
+    for (int j = 0; j < arrHistory.Neff - 1; j++)
+    {
+        fprintf(pita, "%s\n", arrHistory.A[j].TabWord);
     }
 
-    fprintf(pita,"%s",arrHistory.A[arrHistory.Neff-1].TabWord);
+    fprintf(pita, "%s", arrHistory.A[arrHistory.Neff - 1].TabWord);
 
     fclose(pita);
     printf("Save file berhasil disimpan..\n\n");
@@ -179,10 +190,11 @@ void skipGame(Word command, ArrayDin *arrQueue, ArrayDin *arrHistory)
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
     akuisisiCommandWord(&numQueueString, command, 2);
-    
+
     int numQueue = wordToInt(numQueueString);
 
-    if (numQueue >=0 && numQueue < (*arrQueue).Neff && !IsEmpty(*arrQueue)){
+    if (numQueue >= 0 && numQueue < (*arrQueue).Neff && !IsEmpty(*arrQueue))
+    {
         printf("Berikut adalah daftar Game-mu\n");
         PrintArrayDin(*arrQueue);
 
@@ -217,7 +229,7 @@ void skipGame(Word command, ArrayDin *arrQueue, ArrayDin *arrHistory)
         }
         InsertAt(arrHistory, firstGame, Length(*arrHistory));
         DeleteFirst(arrQueue);
-    } 
+    }
     else if (numQueue >= (*arrQueue).Neff || IsEmpty(*arrQueue))
     {
         (*arrQueue) = MakeArrayDin();
@@ -227,7 +239,6 @@ void skipGame(Word command, ArrayDin *arrQueue, ArrayDin *arrHistory)
     {
         printf("\nNomor permainan tidak valid, silahkan masukan nomor game pada list.\n");
     }
-    
 }
 
 /**
@@ -235,11 +246,15 @@ void skipGame(Word command, ArrayDin *arrQueue, ArrayDin *arrHistory)
  * I.S. Program berjalan, array Queue dan array game terdefinisi
  * F.S. Game masuk ke dalam daftar antrian
  */
-void queueGame(ArrayDin* arrQueue, ArrayDin arrGame) {
+void queueGame(ArrayDin *arrQueue, ArrayDin arrGame)
+{
     printf("Berikut adalah daftar antrian game-mu\n");
-    if (IsEmpty(*arrQueue)) {
+    if (IsEmpty(*arrQueue))
+    {
         printf("\n=========== Daftar Kosong ===========\n");
-    } else {
+    }
+    else
+    {
         PrintArrayDin(*arrQueue);
     }
     printf("\nBerikut adalah daftar game yang tersedia\n");
@@ -249,9 +264,9 @@ void queueGame(ArrayDin* arrQueue, ArrayDin arrGame) {
 
     int numGame = wordToInt(currentWord);
 
-    if (numGame <= arrGame.Neff && numGame >=1)
+    if (numGame <= arrGame.Neff && numGame >= 1)
     {
-        Word newQueue = arrGame.A[numGame-1];
+        Word newQueue = arrGame.A[numGame - 1];
         InsertLast(arrQueue, newQueue);
         printf("\nGame berhasil ditambahkan kedalam daftar antrian.\n");
     }
@@ -261,7 +276,7 @@ void queueGame(ArrayDin* arrQueue, ArrayDin arrGame) {
     }
 }
 
- /**
+/**
  * Konstruktor
  * I.S. Program berjalan
  * F.S. Menampilkan seluruh game yang tersedia
@@ -289,20 +304,20 @@ void quitProgram(boolean *flag)
  * I.S. Program berjalan
  * F.S. Menampilkan bantuan interaksi dengan program
  */
-void help() {
-    printf("\n================================ HALAMAN HELP ==============================\n");
-    printf("============================================================================\n");
-    printf("\nBNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh Indra dan Doni.\nDua bulan yang lalu, ia mengalami kerusakan dan telah berhasil diperbaiki.\nSayangnya, setelah diperbaiki ia justru mendapatkan lebih banyak bug dalam sistemnya.\nOleh karena itu, Indra dan Doni mencari programmer lain yang lebih handal\nuntuk ulang memprogram robot video game console kesayangannya.\n");
+void help()
+{
+    printf("\n====================================== HALAMAN HELP ====================================\n");
+    printf("========================================================================================\n");
     printf("\nGUNAKAN COMMAND BERIKUT UNTUK BERINTERAKSI DENGAN PROGRAM INI\n");
-    printf("1. START            : memulai program\n");
-    printf("2. LOAD <nama_file> : membuka savefile\n");
-    printf("3. SAVE <nama_file> : menyimpan\n");
-    printf("4. CREATE GAME      : menambahkan game\n");
-    printf("5. LIST GAME        : menampilkan daftar game\n");
-    printf("6. DELETE GAME      : menghapus daftar game\n");
-    printf("7. QUEUE GAME       : menambahkan game ke daftar antrian yang akan dimainkan\n");
-    printf("8. PLAY GAME        : memainkan game pada daftar antrian paling atas\n");
-    printf("9. SKIPGAME <n>     : memainkan game dengan mendahului beberapa game di atasnya\n");
-    printf("10. QUIT            : keluar dari program\n");
-    printf("11. HELP            : panduan penggunaan\n");
+    printf("1. START            : Memulai program\n");
+    printf("2. LOAD <nama_file> : Membuka savefile\n");
+    printf("3. SAVE <nama_file> : Menyimpan\n");
+    printf("4. CREATE GAME      : Menambahkan game\n");
+    printf("5. LIST GAME        : Menampilkan daftar game\n");
+    printf("6. DELETE GAME      : Menghapus daftar game\n");
+    printf("7. QUEUE GAME       : Menambahkan game ke daftar antrian yang akan dimainkan\n");
+    printf("8. PLAY GAME        : Memainkan game pada daftar antrian paling atas\n");
+    printf("9. SKIPGAME <n>     : Memainkan game dengan mendahului beberapa game di atasnya\n");
+    printf("10. QUIT            : Keluar dari program\n");
+    printf("11. HELP            : Panduan penggunaan\n");
 }

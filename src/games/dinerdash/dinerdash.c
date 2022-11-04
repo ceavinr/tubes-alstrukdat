@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "dinerdash.h"
-#include "../../adt/string/string.h"
+#include "../../gambar.h"
 
 int kodeToInt(Word kode)
 {
@@ -26,7 +26,7 @@ int kodeToInt(Word kode)
     }
 }
 
-int main()
+void dinerdash()
 {
     Order orderList, cooking;
     Masakan m, m_add, m_del;
@@ -50,13 +50,26 @@ int main()
         addOrder(&orderList, m);
     }
 
-    printf("Selamat Datang di Diner Dash!\n");
+    gambarDinerDash();
+
+    printf("Press (y) to start...\n");
+    startInputWord();
+
+    if (stringEQWord(currentWord, "y"))
+    {
+        gameOn = true;
+    }
+    else
+    {
+        gameOn = false;
+    }
 
     while (gameOn)
     {
         int count = 0;
         boolean inputValid = false;
 
+        printf("=========================================================================================\n");
         printf("\nSALDO: %d\n\n", saldo);
 
         // Display Table
@@ -130,8 +143,6 @@ int main()
             inputValid = false;
         }
 
-        printf("==========================================================\n");
-
         if (inputValid)
         {
             for (int i = 0; i <= IDX_TAIL(cooking); i++)
@@ -160,14 +171,13 @@ int main()
 
         if (IDX_TAIL(orderList) == 7)
         {
-            printf("Kalah");
+            printf("Kamu kalah karena antrian telah melebihi 7 pelanggan\n");
             gameOn = false;
         }
         else if (served == 15)
         {
-            printf("Menang");
+            printf("Kamu berhasil menang karena sudah melayani 15 pelanggan\n");
             gameOn = false;
         }
     }
-    return 0;
 }
