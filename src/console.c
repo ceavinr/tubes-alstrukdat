@@ -21,45 +21,55 @@ void start(ArrayDin *arrGame, ArrayDin *arrHistory)
  */
 void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
 {
-    /*Akuisisi File Berdasarkan Input*/
-    char *file;
-    file = akuisisiFile(command);
-
-    *arrGame = MakeArrayDin();
-    *arrHistory = MakeArrayDin();
-    STARTWORD(concat("../data/", file));
-
-    if (!EOP)
+    Word handle;
+    akuisisiCommandWord(&handle, command, 2);
+    if (handle.Length == 0) {
+        printf("File tidak tersedia! Pastikan benar!\n");
+    } 
+    else 
     {
-        int count = wordToInt(currentWord);
-        int i;
-        for (i = 0; i < count; i++)
+        /*Akuisisi File Berdasarkan Input*/
+        char *file;
+        file = akuisisiFile(command);
+
+        *arrGame = MakeArrayDin();
+        *arrHistory = MakeArrayDin();
+        STARTWORD(concat("../data/", file));
+
+        if (!EOP)
         {
+            int count = wordToInt(currentWord);
+            int i;
+            for (i = 0; i < count; i++)
+            {
+                ADVWORD();
+                InsertAt(arrGame, currentWord, i);
+            }
             ADVWORD();
-            InsertAt(arrGame, currentWord, i);
         }
-        ADVWORD();
-    }
-    if (!EOP)
-    {
-        int count = wordToInt(currentWord);
-        int j;
-        for (j = 0; j < count; j++)
+        if (!EOP)
         {
-            ADVWORD();
-            InsertAt(arrHistory, currentWord, j);
+            int count = wordToInt(currentWord);
+            int j;
+            for (j = 0; j < count; j++)
+            {
+                ADVWORD();
+                InsertAt(arrHistory, currentWord, j);
+            }
         }
-    }
 
-    Word cek;
-    akuisisiCommandWord(&cek, command, 1);
-    if (stringEQWord(cek, "LOAD"))
-    {
-        printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-    }
-    else
-    {
-        printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+        Word cek;
+        akuisisiCommandWord(&cek, command, 1);
+        if (!IsEmpty(*arrGame)) {
+            if (stringEQWord(cek, "LOAD"))
+            {
+                printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+            }
+            else
+            {
+                printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+            }
+        }
     }
 }
 
@@ -70,30 +80,36 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
  */
 void save(Word command, ArrayDin arrGame, ArrayDin arrHistory)
 {
-    char *file;
-    file = akuisisiFile(command);
+    Word handle;
+    akuisisiCommandWord(&handle, command, 2);
+    if (handle.Length == 0) {
+        printf("Nama file tidak boleh kosong!\n");
+    } else {
+        char *file;
+        file = akuisisiFile(command);
 
-    FILE *pita;
-    pita = fopen(concat("../data/", file), "w");
+        FILE *pita;
+        pita = fopen(concat("../data/", file), "w");
 
-    fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
+        fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
-    for (int i = 0; i < arrGame.Neff; i++)
-    {
-        fprintf(pita, "%s\n", arrGame.A[i].TabWord);
+        for (int i = 0; i < arrGame.Neff; i++)
+        {
+            fprintf(pita, "%s\n", arrGame.A[i].TabWord);
+        }
+
+        fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
+
+        for (int j = 0; j < arrHistory.Neff - 1; j++)
+        {
+            fprintf(pita, "%s\n", arrHistory.A[j].TabWord);
+        }
+
+        fprintf(pita, "%s", arrHistory.A[arrHistory.Neff - 1].TabWord);
+
+        fclose(pita);
+        printf("Save file berhasil disimpan..\n\n");
     }
-
-    fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
-
-    for (int j = 0; j < arrHistory.Neff - 1; j++)
-    {
-        fprintf(pita, "%s\n", arrHistory.A[j].TabWord);
-    }
-
-    fprintf(pita, "%s", arrHistory.A[arrHistory.Neff - 1].TabWord);
-
-    fclose(pita);
-    printf("Save file berhasil disimpan..\n\n");
 }
 
 /**

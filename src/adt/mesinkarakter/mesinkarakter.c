@@ -16,7 +16,6 @@ void START(char *savefile)
        F.S. : currentChar adalah karakter pertama pada pita
               Jika currentChar != MARK maka EOP akan padam (false)
               Jika currentChar = MARK maka EOP akan menyala (true) */
-
     pita = fopen(savefile, "r");
     ADV();
 }
@@ -28,12 +27,18 @@ void ADV()
        F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
               currentChar mungkin = MARK
               Jika  currentChar = MARK maka EOP akan menyala (true) */
-    retval = fscanf(pita, "%c", &currentChar);
-
-    EOP = (feof(pita));
-    if (EOP)
+    if (pita == NULL) // jika file tidak tersedia
     {
-        fclose(pita);
+        EOP = true;
+        printf("File tidak tersedia! Pastikan benar!\n");
+    } else {
+        retval = fscanf(pita, "%c", &currentChar);
+
+        EOP = (feof(pita));
+        if (EOP)
+        {
+            fclose(pita);
+        }
     }
 }
 

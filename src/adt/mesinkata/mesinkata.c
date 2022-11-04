@@ -10,7 +10,7 @@ Word currentWord;
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 void IgnoreBlanks()
 {
-    while (currentChar == BLANK)
+    while (currentChar == BLANK  && !EOP)
     {
         ADV();
     }
@@ -24,7 +24,7 @@ void STARTWORD(char *savefile)
 {
     START(savefile);
     IgnoreBlanks();
-    if (currentChar == EOP)
+    if (EOP)
     {
         EndWord = true;
     }
@@ -42,7 +42,7 @@ void STARTWORD(char *savefile)
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 void ADVWORD()
 {
-    if (currentChar == EOP)
+    if (EOP)
     {
         EndWord = true;
     }
@@ -80,7 +80,7 @@ void startInputWord()
     */
     startInput();
     IgnoreBlanks();
-    if (currentChar == EOP)
+    if (EOP)
     {
         EndWord = true;
     }
