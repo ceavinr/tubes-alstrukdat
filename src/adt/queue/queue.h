@@ -5,15 +5,16 @@
 #define QUEUE_H
 
 #include "../../boolean.h"
+#include "../mesinkata/mesinkata.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define QUEUECAPACITY 100
 
 /* Definisi elemen dan address */
-typedef int ElType;
+typedef Word ElType;
 typedef struct
 {
-    ElType buffer[CAPACITY];
+    ElType buffer[QUEUECAPACITY];
     int idxHead;
     int idxTail;
 } Queue;
@@ -24,9 +25,10 @@ typedef struct
 #define IDX_TAIL(q) (q).idxTail
 #define HEAD(q) (q).buffer[(q).idxHead]
 #define TAIL(q) (q).buffer[(q).idxTail]
+#define QUEUEBUFFER(q, i) (q).buffer[(i)]
 
 /* *** Kreator *** */
-void CreateQueue(Queue *q);
+Queue MakeQueue();
 /* I.S. sembarang */
 /* F.S. Sebuah q kosong terbentuk dengan kondisi sbb: */
 /* - Index head bernilai IDX_UNDEF */
@@ -34,13 +36,13 @@ void CreateQueue(Queue *q);
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q);
+boolean isQueueEmpty(Queue q);
 /* Mengirim true jika q kosong: lihat definisi di atas */
-boolean isFull(Queue q);
+boolean isQueueFull(Queue q);
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
 
-int length(Queue q);
+int queueLength(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */

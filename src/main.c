@@ -7,7 +7,7 @@ int main()
     boolean quit = false;
     ArrayDin arrGame = MakeArrayDin();
     ArrayDin arrHistory = MakeArrayDin();
-    ArrayDin arrQueue = MakeArrayDin();
+    Queue arrQueue = MakeQueue();
 
     printf("\n================================== SELAMAT DATANG DI BNMO ===================================\n");
     gambarBNMO();

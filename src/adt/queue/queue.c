@@ -2,42 +2,33 @@
 #include "queue.h"
 
 /* *** Kreator *** */
-void CreateQueue(Queue *q)
+Queue MakeQueue()
 {
-    IDX_HEAD(*q) = IDX_UNDEF;
-    IDX_TAIL(*q) = IDX_UNDEF;
+    Queue q;
+    IDX_HEAD(q) = IDX_UNDEF;
+    IDX_TAIL(q) = IDX_UNDEF;
+
+    return q;
 }
-/* I.S. sembarang */
-/* F.S. Sebuah q kosong terbentuk dengan kondisi sbb: */
-/* - Index head bernilai IDX_UNDEF */
-/* - Index tail bernilai IDX_UNDEF */
-/* Proses : Melakukan alokasi, membuat sebuah q kosong */
+/* Mengirimkan Queue kosong */
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q)
+boolean isQueueEmpty(Queue q)
 {
     return (IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF);
 }
-/* Mengirim true jika q kosong: lihat definisi di atas */
-boolean isFull(Queue q)
+/* Mengirim true jika q kosong */
+boolean isQueueFull(Queue q)
 {
-    return (((IDX_TAIL(q) + 1) % CAPACITY) == IDX_HEAD(q));
+    return (IDX_TAIL(q) + 1 == QUEUECAPACITY);
 }
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
-/* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
 
-int length(Queue q)
+int queueLength(Queue q)
 {
-    if (!isEmpty(q))
+    if (!isQueueEmpty(q))
     {
-        if (IDX_TAIL(q) > IDX_HEAD(q))
-        {
-            return (IDX_TAIL(q) - IDX_HEAD(q) + 1);
-        }
-        else
-        {
-            return (CAPACITY - (IDX_HEAD(q) - IDX_TAIL(q)) + 1);
-        }
+        return (IDX_TAIL(q) - IDX_HEAD(q) + 1);
     }
     else
     {
@@ -49,16 +40,17 @@ int length(Queue q)
 /* *** Primitif Add/Delete *** */
 void enqueue(Queue *q, ElType val)
 {
-    if (!isEmpty(*q))
+    if (isQueueEmpty(*q))
     {
-        IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
-    }
-    else
-    {
-        IDX_TAIL(*q) = 0;
         IDX_HEAD(*q) = 0;
     }
-    TAIL(*q) = val;
+    IDX_TAIL(*q) = IDX_TAIL(*q) + 1;
+
+    for (int k = 0; k < val.Length; k++)
+    {
+        TAIL(*q).TabWord[k] = val.TabWord[k];
+    }
+    TAIL(*q).Length = val.Length;
 }
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
@@ -67,15 +59,15 @@ void enqueue(Queue *q, ElType val)
 void dequeue(Queue *q, ElType *val)
 {
     *val = HEAD(*q);
-    if (length(*q) == 1)
+    for (int i = 0; i < queueLength(*q); i++)
     {
-        IDX_HEAD(*q) = IDX_UNDEF;
-        IDX_TAIL(*q) = IDX_UNDEF;
+        for (int k = 0; k < QUEUEBUFFER(*q, i + 1).Length; k++)
+        {
+            QUEUEBUFFER(*q, i).TabWord[k] = QUEUEBUFFER(*q, i + 1).TabWord[k];
+        }
+        QUEUEBUFFER(*q, i).Length = QUEUEBUFFER(*q, i + 1).Length;
     }
-    else
-    {
-        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % CAPACITY;
-    }
+    IDX_TAIL(*q) -= 1;
 }
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
@@ -85,24 +77,21 @@ void dequeue(Queue *q, ElType *val)
 /* *** Display Queue *** */
 void displayQueue(Queue q)
 {
-    if (isEmpty(q))
+    int i;
+    for (i = 0; i < queueLength(q); i++)
     {
-        printf("[]\n");
-    }
-    else
-    {
-        printf("[%d,", HEAD(q));
-        for (int i = 1; i < length(q) - 1; ++i)
+        printf("%d. ", i + 1);
+        int j;
+        for (j = 0; j < QUEUEBUFFER(q, i).Length; j++)
         {
-            printf("%d,", q.buffer[(IDX_HEAD(q) + i) % CAPACITY]);
+            printf("%c", QUEUEBUFFER(q, i).TabWord[j]);
         }
-        printf("%d]\n", TAIL(q));
+        printf("\n");
     }
 }
-/* Proses : Menuliskan isi Queue dengan traversal, Queue ditulis di antara kurung
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. q boleh kosong */
-/* F.S. Jika q tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika Queue kosong : menulis [] */
+/**
+ * Fungsi untuk melakukan print suatu ArrayDin.
+ * Print dilakukan dengan format: Daftar Game
+ * dan diakhiri newline.
+ * Prekondisi: array terdefinisi
+ */

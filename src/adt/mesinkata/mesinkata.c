@@ -10,7 +10,7 @@ Word currentWord;
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 void IgnoreBlanks()
 {
-    while (currentChar == BLANK  && !EOP)
+    while (currentChar == BLANK && !EOP)
     {
         ADV();
     }
@@ -48,7 +48,7 @@ void ADVWORD()
     }
     else
     {
-        CopyWord();
+        UpdateCurrentWord();
         IgnoreBlanks();
     }
 }
@@ -59,7 +59,7 @@ void ADVWORD()
           currentChar = BLANK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-void CopyWord()
+void UpdateCurrentWord()
 {
     int i = 0;
     while ((currentChar != BLANK) && i < NMax && !EOP)
@@ -87,7 +87,7 @@ void startInputWord()
     else
     {
         EndWord = false;
-        CopyWord();
+        UpdateCurrentWord();
     }
 }
 

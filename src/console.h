@@ -6,6 +6,7 @@
 #include "boolean.h"
 #include "./adt/string/string.h"
 #include "./adt/arraydin/arraydin.h"
+#include "./adt/queue/queue.h"
 #include "./adt/mesinkata/mesinkata.h"
 #include "./adt/mesinkarakter/mesinkarakter.h"
 
@@ -14,7 +15,7 @@
  * I.S. sembarang
  * F.S. Membaca file default dan menyimpan ke dalam array, history bisa kosong namun terdefinisi
  */
-void start(ArrayDin* arrGame, ArrayDin* arrHistory);
+void start(ArrayDin *arrGame, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
@@ -35,35 +36,35 @@ void save(Word command, ArrayDin arrGame, ArrayDin arrHistory);
  * I.S. Array game terdefinisi
  * F.S. Game berdasarkan input pengguna tersimpan ke dalam array game
  */
-void newGame(ArrayDin* arrGame);
+void newGame(ArrayDin *arrGame);
 
 /**
  * Konstruktor
  * I.S. Array game terdefinisi
  * F.S. Game yang dipilih terhapus dari program, default game tidak diizinkan dihapus
  */
-void deleteGame(ArrayDin* arrGame);
+void deleteGame(ArrayDin *arrGame);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game antrian pertama dimainkan, setelah diamainkan dimasukan ke history
  */
-void playGame(ArrayDin* arrQueue, ArrayDin* arrHistory);
+void playGame(Queue *arrQueue, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game dalam antrian diskip sebanyak input pengguna
  */
-void skipGame(Word command, ArrayDin* arrQueue, ArrayDin* arrHistory);
+void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array game terdefinisi
  * F.S. Game masuk ke dalam daftar antrian
  */
-void queueGame(ArrayDin* arrQueue, ArrayDin arrGame);
+void queueGame(Queue *arrQueue, ArrayDin arrGame);
 
 /**
  * Konstruktor
@@ -77,7 +78,7 @@ void listGame(ArrayDin arrGame);
  * I.S. Program berjalan
  * F.S. Keluar dari program
  */
-void quitProgram(boolean* flag);
+void quitProgram(boolean *flag);
 
 /**
  * Konstruktor

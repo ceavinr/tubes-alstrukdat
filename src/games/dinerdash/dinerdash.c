@@ -32,8 +32,6 @@ void dinerdash()
     Masakan m, m_add, m_del;
     Word command, masakan;
 
-    // char command[5];
-    // char *masakan = malloc(3 * sizeof(char));
     int saldo = 0, served = 0;
     boolean gameOn = true;
 

@@ -31,7 +31,7 @@ boolean isEmpty(Order o)
 
 boolean isFull(Order o)
 {
-    return (IDX_TAIL(o) == CAPACITY - 1);
+    return (IDX_TAIL(o) == ORDERCAPACITY - 1);
 }
 
 int length(Order o)

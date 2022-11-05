@@ -6,7 +6,7 @@
 #include "../../boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define ORDERCAPACITY 30
 /* Definisi elemen dan address */
 typedef int KeyType;
 
@@ -20,7 +20,7 @@ typedef struct
 
 typedef struct
 {
-    Masakan buffer[CAPACITY];
+    Masakan buffer[ORDERCAPACITY];
     int idxHead;
     int idxTail;
 } Order;

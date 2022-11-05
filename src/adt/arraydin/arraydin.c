@@ -2,10 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFFER(arr) (arr).A
-#define CAPACITY(arr) (arr).Capacity
-#define NEFF(arr) (arr).Neff
-
 /**
  * Konstruktor
  * I.S. sembarang
@@ -160,8 +156,7 @@ void DeleteAt(ArrayDin *array, IdxType i)
         }
         (*array).A[idx].Length = (*array).A[idx + 1].Length;
     }
-    NEFF(*array)
-    --;
+    NEFF(*array) -= 1;
 }
 
 /**
@@ -170,8 +165,7 @@ void DeleteAt(ArrayDin *array, IdxType i)
  */
 void DeleteLast(ArrayDin *array)
 {
-    NEFF(*array)
-    --;
+    NEFF(*array) -= 1;
 }
 
 /**

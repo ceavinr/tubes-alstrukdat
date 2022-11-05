@@ -13,7 +13,7 @@ int main()
     }
     displayOrder(o);
 
-    printf("%d\n", DURASI(ELMT(o, find(o, 1))));
+    printf("%d\n", DURASI(find(o, 1)));
 
     return 0;
 }

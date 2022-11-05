@@ -19,6 +19,10 @@ typedef struct
     int Neff;
 } ArrayDin;
 
+#define BUFFER(arr) (arr).A
+#define CAPACITY(arr) (arr).Capacity
+#define NEFF(arr) (arr).Neff
+
 /**
  * Konstruktor
  * I.S. sembarang
