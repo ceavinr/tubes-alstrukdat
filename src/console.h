@@ -7,6 +7,7 @@
 #include "./adt/string/string.h"
 #include "./adt/arraydin/arraydin.h"
 #include "./adt/queue/queue.h"
+#include "./adt/word/word.h"
 #include "./adt/mesinkata/mesinkata.h"
 #include "./adt/mesinkarakter/mesinkarakter.h"
 
@@ -44,6 +45,8 @@ void newGame(ArrayDin *arrGame);
  * F.S. Game yang dipilih terhapus dari program, default game tidak diizinkan dihapus
  */
 void deleteGame(ArrayDin *arrGame);
+
+void launchGame(Word game);
 
 /**
  * Konstruktor

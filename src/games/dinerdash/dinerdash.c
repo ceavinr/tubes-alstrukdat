@@ -8,16 +8,19 @@
 int kodeToInt(Word kode)
 {
     int num = 0;
-    int countNumber = 0;
+    int countNonNumber = 0;
     for (int i = 0; i < kode.Length; i++)
     {
         if (kode.TabWord[i] >= 48 && kode.TabWord[i] <= 57)
         {
-            countNumber += 1;
             num = num * 10 + kode.TabWord[i] - 48;
         }
+        else
+        {
+            countNonNumber += 1;
+        }
     }
-    if (countNumber == 0)
+    if (countNonNumber > 1)
     {
         return -1;
     }
@@ -96,21 +99,28 @@ void dinerdash()
                 {
                     akuisisiCommandWord(&masakan, currentWord, 2);
 
-                    if (!isIn(cooking, kodeToInt(masakan)))
+                    if (masakan.TabWord[0] == 'M' && kodeToInt(masakan) != -1)
                     {
-                        printf("M%d belum dimasak\n", kodeToInt(masakan));
-                    }
-                    else if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
-                    {
-                        printf("M%d belum dapat disajikan karena belum selesai dimasak, tunggu %d putaran lagi\n", kodeToInt(masakan), DURASI(find(cooking, kodeToInt(masakan))));
-                    }
-                    else if (NOMOR(HEAD(orderList)) != kodeToInt(masakan))
-                    {
-                        printf("M%d belum dapat disajikan karena M%d belum selesai\n", kodeToInt(masakan), NOMOR(HEAD(orderList)));
-                    }
-                    else
-                    {
-                        inputValid = true;
+                        if (!isIn(orderList, kodeToInt(masakan)))
+                        {
+                            printf("M%d tidak ada di pesanan\n", kodeToInt(masakan));
+                        }
+                        else if (!isIn(cooking, kodeToInt(masakan)))
+                        {
+                            printf("M%d belum dimasak\n", kodeToInt(masakan));
+                        }
+                        else if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
+                        {
+                            printf("M%d belum dapat disajikan karena sedang dimasak\n", kodeToInt(masakan));
+                        }
+                        else if (NOMOR(HEAD(orderList)) != kodeToInt(masakan))
+                        {
+                            printf("M%d belum dapat disajikan karena M%d belum selesai\n", kodeToInt(masakan), NOMOR(HEAD(orderList)));
+                        }
+                        else
+                        {
+                            inputValid = true;
+                        }
                     }
                 }
             }
@@ -212,11 +222,13 @@ void dinerdash()
         if (IDX_TAIL(orderList) == 7)
         {
             printf("Kamu kalah karena antrian telah melebihi 7 pelanggan\n");
+            printf("Skor: %d\n", saldo);
             gameOn = false;
         }
         else if (served == 15)
         {
             printf("Kamu berhasil menang karena sudah melayani 15 pelanggan\n");
+            printf("Skor: %d\n", saldo);
             gameOn = false;
         }
     }

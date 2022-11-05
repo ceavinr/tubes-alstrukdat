@@ -1,22 +1,20 @@
-#include <stdio.h>  
-#include <stdlib.h> 
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
-#include "randomnumber.h"
+#include "rng.h"
 
 void rng()
 {
-    int x,tebakan;
+    int x, tebakan;
     boolean check;
 
     check = false;
 
     srand(time(NULL));
 
-    x = rand()%101;
-    printf("%d\n", x);
+    x = rand() % 101;
 
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
-    
 
     while (check == false)
     {
@@ -35,9 +33,7 @@ void rng()
         {
             printf("Lebih kecil\n");
         }
-        
     }
-    
-    printf("\nYa, X adalah %d.\n", x);
 
+    printf("\nYa, X adalah %d.\n", x);
 }

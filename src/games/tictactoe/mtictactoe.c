@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "tictactoe.c"
+#include "tictactoe.h"
 
 int main()
 {

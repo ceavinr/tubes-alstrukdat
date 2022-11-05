@@ -98,22 +98,35 @@ void akuisisiCommandWord(Word *w, Word command, int kataKe)
        F.S. diakuisisi ke dalam w
     */
     int i = 0, counter = 0, length = 0;
-    boolean stop = false;
+    boolean stop;
 
     while (counter != kataKe - 1 && i < command.Length)
     {
+        stop = false;
         if (command.TabWord[i] == ' ')
         {
             counter++;
+            while (i < command.Length && !stop)
+            {
+                i++;
+                if (command.TabWord[i] != ' ')
+                {
+                    stop = true;
+                }
+            }
+        }
+        else
+        {
+            i++;
         }
 
-        i++;
         if (i == command.Length)
         {
             counter++;
         }
     }
 
+    stop = false;
     while (!stop && i < command.Length)
     {
         if (command.TabWord[i] == ' ')
