@@ -129,26 +129,3 @@ void akuisisiCommandWord(Word *w, Word command, int kataKe)
     }
     w->Length = length;
 }
-
-char *akuisisiFile(Word command)
-{
-    /*Mengakuisisi nama file yang dimasukkan dari command user*/
-    int i = 0;
-    while (command.TabWord[i] != ' ')
-    {
-        i++;
-    }
-    i++;
-
-    char *ret = malloc((command.Length - i + 2) * sizeof(char));
-    char *p = ret;
-
-    while (i < command.Length)
-    {
-        *p++ = command.TabWord[i];
-        i++;
-    }
-    *p = '\0';
-
-    return ret;
-}

@@ -8,10 +8,7 @@
  */
 void start(ArrayDin *arrGame, ArrayDin *arrHistory)
 {
-    /*INISIASI FILE DEFAULT*/
-    Word default_command = stringToWord("LOAD default.txt");
-
-    load(default_command, arrGame, arrHistory);
+    load("default.txt", arrGame, arrHistory);
 }
 
 /**
@@ -19,23 +16,13 @@ void start(ArrayDin *arrGame, ArrayDin *arrHistory)
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
+void load(char *namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
 {
-    Word handle;
-    akuisisiCommandWord(&handle, command, 2);
-    if (handle.Length == 0)
+    if (stringLength(namaFile) > 0)
     {
-        printf("File tidak tersedia! Pastikan benar!\n");
-    }
-    else
-    {
-        /*Akuisisi File Berdasarkan Input*/
-        char *file;
-        file = akuisisiFile(command);
-
         *arrGame = MakeArrayDin();
         *arrHistory = MakeArrayDin();
-        STARTWORD(concat("../data/", file));
+        STARTWORD(concat("../data/", namaFile));
 
         if (!EOP)
         {
@@ -48,6 +35,7 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
             }
             ADVWORD();
         }
+
         if (!EOP)
         {
             int count = wordToInt(currentWord);
@@ -58,20 +46,10 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
                 InsertAt(arrHistory, currentWord, j);
             }
         }
-
-        Word cek;
-        akuisisiCommandWord(&cek, command, 1);
-        if (!IsEmpty(*arrGame))
-        {
-            if (stringEQWord(cek, "LOAD"))
-            {
-                printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-            }
-            else
-            {
-                printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-            }
-        }
+    }
+    else
+    {
+        printf("Gagal membaca file.\n\n");
     }
 }
 
@@ -80,21 +58,16 @@ void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory)
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(Word command, ArrayDin arrGame, ArrayDin arrHistory)
+void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
 {
-    Word handle;
-    akuisisiCommandWord(&handle, command, 2);
-    if (handle.Length == 0)
+    if (stringLength(namaFile) == 0)
     {
         printf("Nama file tidak boleh kosong!\n");
     }
     else
     {
-        char *file;
-        file = akuisisiFile(command);
-
         FILE *pita;
-        pita = fopen(concat("../data/", file), "w");
+        pita = fopen(concat("../data/", namaFile), "w");
 
         fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
@@ -158,6 +131,29 @@ void deleteGame(ArrayDin *arrGame)
     }
 }
 
+void launchGame(Word game)
+{
+    printf("\n\nLoading ");
+    printWord(game);
+    printf(" ...\n\n");
+    printf("==============================================\n\n");
+
+    if (stringEQWord(game, "Diner DASH"))
+    {
+        dinerdash();
+    }
+    else if (stringEQWord(game, "RNG"))
+    {
+        /*Game RNG*/
+    }
+    else
+    {
+        printf("Game ");
+        printWord(game);
+        printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
+    }
+}
+
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
@@ -169,30 +165,14 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory)
     {
         /*INISIALISASI GAME PERTAMA YANG SIAP DIMAINKAN*/
         Word firstGame;
-        dequeue(arrQueue, &firstGame);
 
         printf("Berikut adalah daftar Game-mu\n");
         displayQueue(*arrQueue);
 
-        printf("\n\nLoading ");
-        printWord(firstGame);
-        printf(" ...\n\n");
-        printf("==============================================\n\n");
+        dequeue(arrQueue, &firstGame);
 
-        if (stringEQWord(firstGame, "DINER DASH"))
-        {
-            /*Game dinner dash*/
-        }
-        if (stringEQWord(firstGame, "RNG"))
-        {
-            /*Game RNG*/
-        }
-        else
-        {
-            printf("Game ");
-            printWord(firstGame);
-            printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
-        }
+        launchGame(firstGame);
+
         InsertAt(arrHistory, firstGame, Length(*arrHistory));
     }
     else
@@ -227,25 +207,8 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory)
             dequeue(arrQueue, &firstGame);
         }
 
-        printf("\n\nLoading ");
-        printWord(firstGame);
-        printf(" ...\n\n");
-        printf("==============================================\n\n");
+        launchGame(firstGame);
 
-        if (stringEQWord(firstGame, "DINER DASH"))
-        {
-            /*Game dinner dash*/
-        }
-        if (stringEQWord(firstGame, "RNG"))
-        {
-            /*Game RNG*/
-        }
-        else
-        {
-            printf("Game ");
-            printWord(firstGame);
-            printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
-        }
         InsertAt(arrHistory, firstGame, Length(*arrHistory));
     }
     else if (numQueue >= queueLength(*arrQueue) || isQueueEmpty(*arrQueue))
@@ -267,14 +230,9 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory)
 void queueGame(Queue *arrQueue, ArrayDin arrGame)
 {
     printf("Berikut adalah daftar antrian game-mu\n");
-    if (isQueueEmpty(*arrQueue))
-    {
-        printf("\n=========== Daftar Kosong ===========\n");
-    }
-    else
-    {
-        displayQueue(*arrQueue);
-    }
+
+    displayQueue(*arrQueue);
+
     printf("\nBerikut adalah daftar game yang tersedia\n");
     PrintArrayDin(arrGame);
     printf("\nNomor Game yang mau ditambahkan ke antrian:  ");
@@ -301,9 +259,8 @@ void queueGame(Queue *arrQueue, ArrayDin arrGame)
  */
 void listGame(ArrayDin arrGame)
 {
-    printf("Berikut adalah daftar game yang tersedia\n\n");
+    printf("Berikut adalah daftar game yang tersedia\n");
     PrintArrayDin(arrGame);
-    printf("\n");
 }
 
 /**

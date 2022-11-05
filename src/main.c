@@ -4,79 +4,108 @@
 int main()
 {
     /*INISIALISASI*/
-    boolean quit = false;
+    Word command, namaFile;
+    char *namaFileStr;
+    boolean quit = false, inputValid = false;
     ArrayDin arrGame = MakeArrayDin();
     ArrayDin arrHistory = MakeArrayDin();
     Queue arrQueue = MakeQueue();
 
-    printf("\n================================== SELAMAT DATANG DI BNMO ===================================\n");
-    gambarBNMO();
-    help();
+    while (!inputValid)
+    {
+        gambarBNMO();
+
+        printf("\n================================ MAIN MENU ================================\n");
+        printf("1. START\n");
+        printf("2. LOAD <nama_file>\n");
+
+        printf("\nENTER COMMAND: ");
+        startInputWord();
+        akuisisiCommandWord(&command, currentWord, 1);
+
+        if (stringEQWord(command, "START"))
+        {
+            start(&arrGame, &arrHistory);
+            printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+            inputValid = true;
+        }
+        else if (stringEQWord(command, "LOAD"))
+        {
+            akuisisiCommandWord(&namaFile, currentWord, 2);
+            load(wordToString(namaFile), &arrGame, &arrHistory);
+            printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+            inputValid = true;
+        }
+        else
+        {
+            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n\n");
+        }
+    }
 
     /*LOOPING PROGRAM*/
     while (!quit)
     {
-        Word command;
         Word cek;
+
+        printf("\n================================== SELAMAT DATANG DI BNMO ===================================\n");
+        gambarKarakterBNMO();
+        printf("\n========================================= MAIN MENU =========================================\n");
+        printf("1. SAVE <nama_file>\n");
+        printf("2. CREATE GAME\n");
+        printf("3. LIST GAME\n");
+        printf("4. DELETE GAME\n");
+        printf("5. QUEUE GAME\n");
+        printf("6. PLAY GAME\n");
+        printf("7. SKIPGAME <n>\n");
+        printf("8. QUIT\n");
+        printf("9. HELP\n");
 
         printf("\nENTER COMMAND: ");
         startInputWord();
-        command = currentWord;
+        CopyWord(&command, currentWord);
         akuisisiCommandWord(&cek, command, 1);
 
-        if (stringEQWord(cek, "LOAD") || stringEQWord(cek, "SAVE"))
+        if (stringEQWord(cek, "SAVE"))
         {
-            if (stringEQWord(cek, "LOAD"))
-            {
-                load(command, &arrGame, &arrHistory);
-            }
-            else if (stringEQWord(cek, "SAVE"))
-            {
-                save(command, arrGame, arrHistory);
-            }
+            akuisisiCommandWord(&namaFile, currentWord, 2);
+
+            save(wordToString(namaFile), arrGame, arrHistory);
+        }
+        else if (stringEQWord(command, "CREATE GAME"))
+        {
+            newGame(&arrGame);
+        }
+        else if (stringEQWord(command, "LIST GAME"))
+        {
+            listGame(arrGame);
+        }
+        else if (stringEQWord(command, "DELETE GAME"))
+        {
+            deleteGame(&arrGame);
+        }
+        else if (stringEQWord(command, "QUEUE GAME"))
+        {
+            queueGame(&arrQueue, arrGame);
+        }
+        else if (stringEQWord(command, "PLAY GAME"))
+        {
+            playGame(&arrQueue, &arrHistory);
         }
         else if (stringEQWord(cek, "SKIPGAME"))
         {
             skipGame(command, &arrQueue, &arrHistory);
         }
+        else if (stringEQWord(command, "QUIT"))
+        {
+            quitProgram(&quit);
+        }
+        else if (stringEQWord(command, "HELP"))
+        {
+            help();
+        }
         else
         {
-            if (stringEQWord(command, "START"))
-            {
-                start(&arrGame, &arrHistory);
-            }
-            else if (stringEQWord(command, "QUIT"))
-            {
-                quitProgram(&quit);
-            }
-            else if (stringEQWord(command, "CREATE GAME"))
-            {
-                newGame(&arrGame);
-            }
-            else if (stringEQWord(command, "QUEUE GAME"))
-            {
-                queueGame(&arrQueue, arrGame);
-            }
-            else if (stringEQWord(command, "PLAY GAME"))
-            {
-                playGame(&arrQueue, &arrHistory);
-            }
-            else if (stringEQWord(command, "LIST GAME"))
-            {
-                listGame(arrGame);
-            }
-            else if (stringEQWord(command, "DELETE GAME"))
-            {
-                deleteGame(&arrGame);
-            }
-            else if (stringEQWord(command, "HELP"))
-            {
-                help();
-            }
-            else
-            {
-                printf("Command tidak dikenali, silahkan masukkan command yang valid.\n\n");
-            }
+            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n\n");
         }
     }
 

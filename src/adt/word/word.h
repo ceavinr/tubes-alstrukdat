@@ -30,4 +30,6 @@ void CopyWord();
 boolean stringEQWord(Word w, char *c);
 /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
 
+char *wordToString(Word w);
+
 #endif

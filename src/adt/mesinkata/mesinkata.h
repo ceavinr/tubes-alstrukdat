@@ -52,7 +52,4 @@ void akuisisiCommandWord(Word *w, Word command, int kataKe);
    F.S. diakuisisi ke dalam w
 */
 
-char *akuisisiFile(Word command);
-/*Mengakuisisi nama file yang dimasukkan dari command user*/
-
 #endif

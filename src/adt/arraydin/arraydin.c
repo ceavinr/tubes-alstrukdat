@@ -154,15 +154,22 @@ void DeleteFirst(ArrayDin *array)
  */
 void PrintArrayDin(ArrayDin array)
 {
-    int i;
-    for (i = 0; i < array.Neff; i++)
+    if (IsEmpty(array))
     {
-        printf("%d. ", i + 1);
-        int j;
-        for (j = 0; j < BUFFER(array)[i].Length; j++)
+        printf("\n=========== Daftar Kosong ===========\n");
+    }
+    else
+    {
+        int i;
+        for (i = 0; i < array.Neff; i++)
         {
-            printf("%c", BUFFER(array)[i].TabWord[j]);
+            printf("%d. ", i + 1);
+            int j;
+            for (j = 0; j < BUFFER(array)[i].Length; j++)
+            {
+                printf("%c", BUFFER(array)[i].TabWord[j]);
+            }
+            printf("\n");
         }
-        printf("\n");
     }
 }

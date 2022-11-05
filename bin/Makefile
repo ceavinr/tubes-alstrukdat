@@ -12,3 +12,6 @@ rng:
 
 mesinkata:
 	gcc ../src/adt/mesinkata/mmesinkata.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o mesinkata
+
+word:
+	gcc ../src/adt/word/mword.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o word

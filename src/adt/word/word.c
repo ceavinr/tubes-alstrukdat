@@ -75,3 +75,20 @@ boolean stringEQWord(Word w, char *c)
 
     return eq;
 }
+
+char *wordToString(Word w)
+{
+    int i = 0;
+
+    char *ret = malloc((w.Length - i + 2) * sizeof(char));
+    char *p = ret;
+
+    while (i < w.Length)
+    {
+        *p++ = w.TabWord[i];
+        i++;
+    }
+    *p = '\0';
+
+    return ret;
+}

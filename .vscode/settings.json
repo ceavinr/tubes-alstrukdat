@@ -8,6 +8,7 @@
     "mesinkarakter.h": "c",
     "arraydin.h": "c",
     "gambar.h": "c",
-    "word.h": "c"
+    "word.h": "c",
+    "queue.h": "c"
   }
 }

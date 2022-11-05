@@ -2,6 +2,7 @@
 #define __GAMBAR_H__
 
 void gambarBNMO();
+void gambarKarakterBNMO();
 void gambarDinerDash();
 
 #endif

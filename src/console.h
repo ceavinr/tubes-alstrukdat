@@ -22,14 +22,14 @@ void start(ArrayDin *arrGame, ArrayDin *arrHistory);
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(Word command, ArrayDin *arrGame, ArrayDin *arrHistory);
+void load(char *namaFile, ArrayDin *arrGame, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(Word command, ArrayDin arrGame, ArrayDin arrHistory);
+void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory);
 
 /**
  * Konstruktor

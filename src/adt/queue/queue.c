@@ -69,16 +69,23 @@ void dequeue(Queue *q, ElType *val)
 /* *** Display Queue *** */
 void displayQueue(Queue q)
 {
-    int i;
-    for (i = 0; i < queueLength(q); i++)
+    if (isQueueEmpty(q))
     {
-        printf("%d. ", i + 1);
-        int j;
-        for (j = 0; j < QUEUEELMT(q, i).Length; j++)
+        printf("\n=========== Daftar Kosong ===========\n");
+    }
+    else
+    {
+        int i;
+        for (i = 0; i < queueLength(q); i++)
         {
-            printf("%c", QUEUEELMT(q, i).TabWord[j]);
+            printf("%d. ", i + 1);
+            int j;
+            for (j = 0; j < QUEUEELMT(q, i).Length; j++)
+            {
+                printf("%c", QUEUEELMT(q, i).TabWord[j]);
+            }
+            printf("\n");
         }
-        printf("\n");
     }
 }
 /**
