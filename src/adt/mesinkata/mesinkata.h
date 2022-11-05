@@ -6,16 +6,9 @@
 
 #include "../../boolean.h"
 #include "../mesinkarakter/mesinkarakter.h"
-#include "../../adt/string/string.h"
+#include "../word/word.h"
 
-#define NMax 50
 #define BLANK '\n'
-
-typedef struct
-{
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
-   int Length;
-} Word;
 
 /* State Mesin Kata */
 extern boolean EndWord;
@@ -39,7 +32,7 @@ void ADVWORD();
           Jika currentChar = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
-void CopyWord();
+void UpdateCurrentWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : currentWord berisi kata yang sudah diakuisisi;
@@ -53,9 +46,6 @@ void startInputWord();
    F.S pita diisi oleh user dan dilakukan pemrosesan oleh mesin kata
 */
 
-boolean stringEQWord(Word w, char *c);
-/*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
-
 void akuisisiCommandWord(Word *w, Word command, int kataKe);
 /*Mengakuisisi commad terkhusus untuk LOAD and SAVE
    I.S. pita kata terdefinisi
@@ -64,19 +54,5 @@ void akuisisiCommandWord(Word *w, Word command, int kataKe);
 
 char *akuisisiFile(Word command);
 /*Mengakuisisi nama file yang dimasukkan dari command user*/
-
-int wordToInt(Word w);
-/*
- I.S word terdefinisi
- F.S dirubah ke integer dan dimasukkan ke dalan integer
-*/
-
-void printWord(Word w);
-/*
- I.S word terdefinisi
- F.S menampilkan word
-*/
-
-Word stringToWord(char* string);
 
 #endif

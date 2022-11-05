@@ -8,12 +8,10 @@
 // menerima argumen pointer kepada karakter pertama dari sebuah string yang panjangnya tidak diketahui
 // dan memberikan output berupa panjang string tersebut, dengan batasan string input memiliki karakter
 // '\0' pada akhir string
-int panjangKata(char *);
+int stringLength(char *);
 /*Mengembalikan panjang string*/
 
 char *sliceString(char *str, int start, int end);
-
-boolean isSame(char a[], char b[]);
 
 char *concat(char *s1, char *s2);
 /*Mengembalikan string berupa gabungan dari s1 dan s2*/

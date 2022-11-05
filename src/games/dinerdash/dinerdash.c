@@ -145,18 +145,18 @@ void dinerdash()
         {
             for (int i = 0; i <= IDX_TAIL(cooking); i++)
             {
-                if (DURASI(ELMT(cooking, i)) > 0)
+                if (DURASI(ORDERELMT(cooking, i)) > 0)
                 {
-                    DURASI(ELMT(cooking, i)) -= 1;
-                    if (DURASI(ELMT(cooking, i)) == 0)
+                    DURASI(ORDERELMT(cooking, i)) -= 1;
+                    if (DURASI(ORDERELMT(cooking, i)) == 0)
                     {
-                        printf("Makanan M%d telah selesai dimasak\n", NOMOR(ELMT(cooking, i)));
+                        printf("Makanan M%d telah selesai dimasak\n", NOMOR(ORDERELMT(cooking, i)));
                     }
                 }
                 else
                 {
-                    KETAHANAN(ELMT(cooking, i)) -= 1;
-                    if (KETAHANAN(ELMT(cooking, i)) == 0)
+                    KETAHANAN(ORDERELMT(cooking, i)) -= 1;
+                    if (KETAHANAN(ORDERELMT(cooking, i)) == 0)
                     {
                         deleteOrderAt(&cooking, &m_del, i);
                     }

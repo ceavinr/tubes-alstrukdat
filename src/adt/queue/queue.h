@@ -25,7 +25,7 @@ typedef struct
 #define IDX_TAIL(q) (q).idxTail
 #define HEAD(q) (q).buffer[(q).idxHead]
 #define TAIL(q) (q).buffer[(q).idxTail]
-#define QUEUEBUFFER(q, i) (q).buffer[(i)]
+#define QUEUEELMT(q, i) (q).buffer[(i)]
 
 /* *** Kreator *** */
 Queue MakeQueue();

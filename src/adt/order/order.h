@@ -29,7 +29,7 @@ typedef struct
 #define IDX_TAIL(q) (q).idxTail
 #define HEAD(q) (q).buffer[(q).idxHead]
 #define TAIL(q) (q).buffer[(q).idxTail]
-#define ELMT(q, i) (q).buffer[i]
+#define ORDERELMT(q, i) (q).buffer[i]
 
 #define NOMOR(m) (m).nomor
 #define DURASI(m) (m).durasi

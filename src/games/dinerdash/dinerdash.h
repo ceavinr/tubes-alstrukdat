@@ -6,6 +6,7 @@
 #include "../../boolean.h"
 #include "../../adt/order/order.h"
 #include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/word/word.h"
 
 int kodeToInt(Word kode);
 

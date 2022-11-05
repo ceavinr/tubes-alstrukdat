@@ -53,18 +53,18 @@ void addOrder(Order *o, Masakan val)
     {
         while (i != IDX_HEAD(*o) && !stop)
         {
-            if (NOMOR(val) >= NOMOR(ELMT(*o, i - 1)))
+            if (NOMOR(val) >= NOMOR(ORDERELMT(*o, i - 1)))
             {
                 stop = true;
             }
             else
             {
-                copyMasakan(&ELMT(*o, i), ELMT(*o, i - 1));
+                copyMasakan(&ORDERELMT(*o, i), ORDERELMT(*o, i - 1));
                 i--;
             }
         }
     }
-    copyMasakan(&ELMT(*o, i), val);
+    copyMasakan(&ORDERELMT(*o, i), val);
     IDX_TAIL(*o) += 1;
 }
 
@@ -80,7 +80,7 @@ void deleteOrderAt(Order *o, Masakan *val, KeyType idx)
     {
         for (int i = indexOf(*o, idx); i < IDX_TAIL(*o); i++)
         {
-            copyMasakan(&ELMT(*o, i), ELMT(*o, i + 1));
+            copyMasakan(&ORDERELMT(*o, i), ORDERELMT(*o, i + 1));
         }
         IDX_TAIL(*o) -= 1;
     }
@@ -92,7 +92,7 @@ int indexOf(Order o, int val)
     boolean found = false;
     while (i <= IDX_TAIL(o) && !found)
     {
-        if (NOMOR(ELMT(o, i)) == val)
+        if (NOMOR(ORDERELMT(o, i)) == val)
         {
             found = true;
         }
@@ -113,7 +113,7 @@ int indexOf(Order o, int val)
 
 Masakan find(Order o, int val)
 {
-    return ELMT(o, indexOf(o, val));
+    return ORDERELMT(o, indexOf(o, val));
 }
 
 boolean isIn(Order o, int val)
@@ -138,7 +138,7 @@ void displayOrder(Order o)
     {
         for (int i = 0; i <= IDX_TAIL(o); i++)
         {
-            printf("M%d              | %d                     | %d             | %d        \n", NOMOR(ELMT(o, i)), DURASI(ELMT(o, i)), KETAHANAN(ELMT(o, i)), HARGA(ELMT(o, i)));
+            printf("M%d              | %d                     | %d             | %d        \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)), HARGA(ORDERELMT(o, i)));
         }
     }
     else
@@ -156,9 +156,9 @@ void displayCooking(Order o)
 
     for (int i = 0; i <= IDX_TAIL(o); i++)
     {
-        if (DURASI(ELMT(o, i)) > 0)
+        if (DURASI(ORDERELMT(o, i)) > 0)
         {
-            printf("M%d              | %d           \n", NOMOR(ELMT(o, i)), DURASI(ELMT(o, i)));
+            printf("M%d              | %d           \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)));
             count++;
         }
     }
@@ -177,9 +177,9 @@ void displayReady(Order o)
 
     for (int i = 0; i <= IDX_TAIL(o); i++)
     {
-        if (DURASI(ELMT(o, i)) == 0 && KETAHANAN(ELMT(o, i)) > 0)
+        if (DURASI(ORDERELMT(o, i)) == 0 && KETAHANAN(ORDERELMT(o, i)) > 0)
         {
-            printf("M%d              | %d            \n", NOMOR(ELMT(o, i)), KETAHANAN(ELMT(o, i)));
+            printf("M%d              | %d            \n", NOMOR(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)));
             count++;
         }
     }

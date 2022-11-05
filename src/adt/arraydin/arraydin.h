@@ -2,6 +2,7 @@
 #define __ARRAY_DINAMIK__
 
 #include "../mesinkata/mesinkata.h"
+#include "../word/word.h"
 
 // Boolean
 #define boolean unsigned char
@@ -56,12 +57,6 @@ int Length(ArrayDin array);
 ElType Get(ArrayDin array, IdxType i);
 
 /**
- * Fungsi untuk mendapatkan kapasitas yang tersedia.
- * Prekondisi: array terdefinisi
- */
-int GetCapacity(ArrayDin array);
-
-/**
  * Fungsi untuk menambahkan elemen baru di index ke-i
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
@@ -104,17 +99,5 @@ void DeleteFirst(ArrayDin *array);
  * Prekondisi: array terdefinisi
  */
 void PrintArrayDin(ArrayDin array);
-
-/**
- * Fungsi untuk melakukan reverse suatu ArrayDin.
- * Prekondisi: array terdefinisi
- */
-void ReverseArrayDin(ArrayDin *array);
-
-/**
- * Fungsi untuk melakukan copy suatu ArrayDin.
- * Prekondisi: array terdefinisi
- */
-ArrayDin CopyArrayDin(ArrayDin array);
 
 #endif

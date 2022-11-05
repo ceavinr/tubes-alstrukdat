@@ -91,30 +91,6 @@ void startInputWord()
     }
 }
 
-boolean stringEQWord(Word w, char *c)
-{
-    /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
-    boolean eq = false;
-    if (w.Length == panjangKata(c))
-    {
-        eq = true;
-        int i = 0;
-        while (i < w.Length && eq)
-        {
-            if (w.TabWord[i] != c[i])
-            {
-                eq = false;
-            }
-            else
-            {
-                i++;
-            }
-        }
-    }
-
-    return eq;
-}
-
 void akuisisiCommandWord(Word *w, Word command, int kataKe)
 {
     /*Mengakuisisi command terkhusus untuk LOAD and SAVE
@@ -175,47 +151,4 @@ char *akuisisiFile(Word command)
     *p = '\0';
 
     return ret;
-}
-
-int wordToInt(Word w)
-{
-    /*
-     I.S word terdefinisi
-     F.S dirubah ke integer dan dimasukkan ke dalan integer
-    */
-    int val = 0;
-    int i;
-    for (i = 0; i < w.Length; i++)
-    {
-        val = val * 10 + (w.TabWord[i] - 48);
-    }
-
-    return val;
-}
-
-void printWord(Word w)
-{
-    /*
-     I.S word terdefinisi
-     F.S menampilkan word
-    */
-    int i;
-    for (i = 0; i < w.Length; i++)
-    {
-        printf("%c", w.TabWord[i]);
-    }
-}
-
-Word stringToWord(char string[100])
-{
-    Word w;
-
-    int i;
-    for (i = 0; i < panjangKata(string); i++)
-    {
-        w.TabWord[i] = string[i];
-    }
-    w.Length = panjangKata(string);
-
-    return w;
 }

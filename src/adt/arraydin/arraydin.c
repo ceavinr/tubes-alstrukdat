@@ -26,8 +26,6 @@ ArrayDin MakeArrayDin()
 void DeallocateArrayDin(ArrayDin *array)
 {
     free(BUFFER(*array));
-    // CAPACITY(*array) = 0;
-    // NEFF(*array) = 0;
 }
 
 /**
@@ -58,15 +56,6 @@ ElType Get(ArrayDin array, IdxType i)
 }
 
 /**
- * Fungsi untuk mendapatkan kapasitas yang tersedia.
- * Prekondisi: array terdefinisi
- */
-int GetCapacity(ArrayDin array)
-{
-    return array.Capacity;
-}
-
-/**
  * Fungsi untuk menambahkan elemen baru di index ke-i
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
@@ -81,11 +70,7 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
         BUFFER(temp) = (ElType *)malloc(sizeof(ElType) * CAPACITY(*array));
         for (j = 0; j < Length(*array); j++)
         {
-            for (k = 0; k < (*array).A[j].Length; k++)
-            {
-                temp.A[j].TabWord[k] = (*array).A[j].TabWord[k];
-            }
-            temp.A[j].Length = (*array).A[j].Length;
+            CopyWord(BUFFER(temp)[j], BUFFER(*array)[j]);
         }
         temp.Neff = (*array).Neff;
 
@@ -96,11 +81,7 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
 
         for (j = 0; j < Length(*array); j++)
         {
-            for (k = 0; k < temp.A[j].Length; k++)
-            {
-                (*array).A[j].TabWord[k] = temp.A[j].TabWord[k];
-            }
-            (*array).A[j].Length = temp.A[j].Length;
+            CopyWord(&BUFFER(*array)[j], (temp.A[j]));
         }
         (*array).Neff = temp.Neff;
         DeallocateArrayDin(&temp);
@@ -108,17 +89,10 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
 
     for (j = NEFF(*array); j > i; j--)
     {
-        for (k = 0; k < (*array).A[j - 1].Length; k++)
-        {
-            (*array).A[j].TabWord[k] = (*array).A[j - 1].TabWord[k];
-        }
-        (*array).A[j].Length = (*array).A[j - 1].Length;
+        CopyWord(&BUFFER(*array)[j], BUFFER(*array)[j - 1]);
     }
-    for (k = 0; k < el.Length; k++)
-    {
-        (*array).A[i].TabWord[k] = el.TabWord[k];
-    }
-    (*array).A[i].Length = el.Length;
+    CopyWord(&BUFFER(*array)[i], el);
+
     NEFF(*array) += 1;
 }
 
@@ -149,12 +123,7 @@ void DeleteAt(ArrayDin *array, IdxType i)
     IdxType idx;
     for (idx = i; idx < Length(*array); idx++)
     {
-        int k;
-        for (k = 0; k < (*array).A[idx + 1].Length; k++)
-        {
-            (*array).A[idx].TabWord[k] = (*array).A[idx + 1].TabWord[k];
-        }
-        (*array).A[idx].Length = (*array).A[idx + 1].Length;
+        CopyWord(&BUFFER(*array)[idx], BUFFER(*array)[idx + 1]);
     }
     NEFF(*array) -= 1;
 }
@@ -196,59 +165,4 @@ void PrintArrayDin(ArrayDin array)
         }
         printf("\n");
     }
-}
-
-/**
- * Fungsi untuk melakukan reverse suatu ArrayDin.
- * Prekondisi: array terdefinisi
- */
-void ReverseArrayDin(ArrayDin *array)
-{
-    ArrayDin temp;
-    temp = MakeArrayDin();
-
-    BUFFER(temp) = (ElType *)malloc(sizeof(ElType) * Length(*array));
-
-    for (int i = 0; i < NEFF(*array); i++)
-    {
-        // BUFFER(temp)[i] = BUFFER(*array)[NEFF(*array) - i - 1];
-        int k;
-        for (k = 0; k < (*array).A[NEFF(*array) - i - 1].Length; k++)
-        {
-            temp.A[i].TabWord[k] = (*array).A[NEFF(*array) - i - 1].TabWord[k];
-        }
-        temp.A[i].Length = (*array).A[NEFF(*array) - i - 1].Length;
-    }
-    for (int i = 0; i < NEFF(*array); i++)
-    {
-        // BUFFER(*array)[i] = BUFFER(temp)[i];
-        int k;
-        for (k = 0; k < temp.A[i].Length; k++)
-        {
-            (*array).A[i].TabWord[k] = temp.A[i].TabWord[k];
-        }
-        (*array).A[i].Length = temp.A[i].Length;
-    }
-    DeallocateArrayDin(&temp);
-}
-
-/**
- * Fungsi untuk melakukan copy suatu ArrayDin.
- * Prekondisi: array terdefinisi
- */
-ArrayDin CopyArrayDin(ArrayDin array)
-{
-    ArrayDin copiedArray;
-
-    BUFFER(copiedArray) = (ElType *)malloc(sizeof(ElType) * CAPACITY(array));
-
-    for (int i = 0; i < NEFF(array); i++)
-    {
-        BUFFER(copiedArray)
-        [i] = BUFFER(array)[i];
-    }
-    NEFF(copiedArray) = NEFF(array);
-    CAPACITY(copiedArray) = CAPACITY(array);
-
-    return copiedArray;
 }
