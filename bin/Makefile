@@ -1,5 +1,5 @@
 main: 
-	gcc ../src/adt/arraydin/arraydin.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/console.c ../src/main.c ../src/gambar.c -o main
+	gcc ../src/adt/queue/queue.c ../src/adt/arraydin/arraydin.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/console.c ../src/main.c ../src/gambar.c -o main
 
 dinerdash:
 	gcc ../src/games/dinerdash/mdinerdash.c ../src/games/dinerdash/dinerdash.c ../src/adt/order/order.c ../src/adt/string/string.c ../src/adt/mesinkata/mesinkata.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/gambar.c -o dinerdash
