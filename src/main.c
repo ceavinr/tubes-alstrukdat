@@ -13,7 +13,7 @@ int main()
 
     while (!inputValid)
     {
-        gambarBNMO();
+        gambarKarakterBNMO();
 
         printf("\n================================ MAIN MENU ================================\n");
         printf("1. START\n");
@@ -47,9 +47,9 @@ int main()
     {
         Word cek;
 
-        printf("\n================================== SELAMAT DATANG DI BNMO ===================================\n");
-        gambarKarakterBNMO();
-        printf("\n========================================= MAIN MENU =========================================\n");
+        printf("\n============================ SELAMAT DATANG DI ============================\n");
+        gambarBNMO();
+        printf("\n================================ MAIN MENU ================================\n");
         printf("1. SAVE <nama_file>\n");
         printf("2. CREATE GAME\n");
         printf("3. LIST GAME\n");

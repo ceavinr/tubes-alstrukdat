@@ -6,7 +6,7 @@
 #include "../../boolean.h"
 
 #define IDX_UNDEF -1
-#define ORDERCAPACITY 30
+#define ORDERCAPACITY 20
 /* Definisi elemen dan address */
 typedef int KeyType;
 

@@ -177,7 +177,7 @@ void displayReady(Order o)
 
     for (int i = 0; i <= IDX_TAIL(o); i++)
     {
-        if (DURASI(ORDERELMT(o, i)) == 0 && KETAHANAN(ORDERELMT(o, i)) > 0)
+        if (DURASI(ORDERELMT(o, i)) == 0)
         {
             printf("M%d              | %d            \n", NOMOR(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)));
             count++;
