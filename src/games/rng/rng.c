@@ -3,6 +3,7 @@
 #include <time.h>
 #include "rng.h"
 
+/*Fungsi untuk memulai game rng*/
 void rng()
 {
     int x, tebakan;

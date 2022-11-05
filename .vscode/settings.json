@@ -9,6 +9,7 @@
     "arraydin.h": "c",
     "gambar.h": "c",
     "word.h": "c",
-    "queue.h": "c"
+    "queue.h": "c",
+    "stdio.h": "c"
   }
 }

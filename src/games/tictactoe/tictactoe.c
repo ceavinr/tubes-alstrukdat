@@ -2,6 +2,7 @@
 #include "tictactoe.h"
 #include "../../adt/array/array.h"
 
+/*Fungsi untuk mengecek apakah game sudah ada pemenang atau belum*/
 int isWin(Papan papan)
 {
     if (papan.TI[1] == papan.TI[2] && papan.TI[2] == papan.TI[3])
@@ -34,6 +35,7 @@ int isWin(Papan papan)
         return -1;
 }
 
+/*Prosedur untuk melakukan print tampilan papan kepada user*/
 void board(Papan papan)
 {
     printf("\nTic Tac Toe\n");
@@ -51,6 +53,7 @@ void board(Papan papan)
     printf("     |     |     \n\n");
 }
 
+/*Prosedur untuk menjalankan game Tic Tac Toe*/
 void tictactoe()
 {
     int player, i, tebakan;
