@@ -53,8 +53,9 @@ void board(Papan papan)
 
 void tictactoe()
 {
-    int player, i, choice;
+    int player, i, tebakan;
     char mark;
+    Word input;
     Papan papan;
 
     MakeEmpty(&papan);
@@ -83,7 +84,10 @@ void tictactoe()
         }
 
         printf("Player %d, silakan memilih angka:  ", player);
-        scanf("%d", &choice);
+
+        startInputWord();
+        akuisisiCommandWord(&input, currentWord, 1);
+        tebakan = wordToInt(input);
 
         if (player == 1)
         {
@@ -94,31 +98,31 @@ void tictactoe()
             mark = 'O';
         }
 
-        if (choice == 1 && papan.TI[1] == '1')
+        if (tebakan == 1 && papan.TI[1] == '1')
             papan.TI[1] = mark;
 
-        else if (choice == 2 && papan.TI[2] == '2')
+        else if (tebakan == 2 && papan.TI[2] == '2')
             papan.TI[2] = mark;
 
-        else if (choice == 3 && papan.TI[3] == '3')
+        else if (tebakan == 3 && papan.TI[3] == '3')
             papan.TI[3] = mark;
 
-        else if (choice == 4 && papan.TI[4] == '4')
+        else if (tebakan == 4 && papan.TI[4] == '4')
             papan.TI[4] = mark;
 
-        else if (choice == 5 && papan.TI[5] == '5')
+        else if (tebakan == 5 && papan.TI[5] == '5')
             papan.TI[5] = mark;
 
-        else if (choice == 6 && papan.TI[6] == '6')
+        else if (tebakan == 6 && papan.TI[6] == '6')
             papan.TI[6] = mark;
 
-        else if (choice == 7 && papan.TI[7] == '7')
+        else if (tebakan == 7 && papan.TI[7] == '7')
             papan.TI[7] = mark;
 
-        else if (choice == 8 && papan.TI[8] == '8')
+        else if (tebakan == 8 && papan.TI[8] == '8')
             papan.TI[8] = mark;
 
-        else if (choice == 9 && papan.TI[9] == '9')
+        else if (tebakan == 9 && papan.TI[9] == '9')
             papan.TI[9] = mark;
 
         else
@@ -127,7 +131,10 @@ void tictactoe()
 
             player--;
             printf("Player %d, silakan memilih angka:  ", player);
-            scanf("%d", &choice);
+            
+            startInputWord();
+            akuisisiCommandWord(&input, currentWord, 1);
+            tebakan = wordToInt(input);
         }
 
         i = isWin(papan);

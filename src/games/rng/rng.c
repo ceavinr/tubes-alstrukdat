@@ -6,6 +6,7 @@
 void rng()
 {
     int x, tebakan;
+    Word input;
     boolean check;
 
     check = false;
@@ -19,7 +20,10 @@ void rng()
     while (check == false)
     {
         printf("Tebakan: ");
-        scanf("%d", &tebakan);
+
+        startInputWord();
+        akuisisiCommandWord(&input, currentWord, 1);
+        tebakan = wordToInt(input);
 
         if (tebakan == x)
         {
