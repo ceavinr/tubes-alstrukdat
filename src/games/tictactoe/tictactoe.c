@@ -61,16 +61,16 @@ void tictactoe()
     Word input;
     Papan papan;
 
-    MakeEmpty(&papan);
-    SetEl(&papan, 1, '1');
-    SetEl(&papan, 2, '2');
-    SetEl(&papan, 3, '3');
-    SetEl(&papan, 4, '4');
-    SetEl(&papan, 5, '5');
-    SetEl(&papan, 6, '6');
-    SetEl(&papan, 7, '7');
-    SetEl(&papan, 8, '8');
-    SetEl(&papan, 9, '9');
+    ArMakeEmpty(&papan);
+    ArSetEl(&papan, 1, '1');
+    ArSetEl(&papan, 2, '2');
+    ArSetEl(&papan, 3, '3');
+    ArSetEl(&papan, 4, '4');
+    ArSetEl(&papan, 5, '5');
+    ArSetEl(&papan, 6, '6');
+    ArSetEl(&papan, 7, '7');
+    ArSetEl(&papan, 8, '8');
+    ArSetEl(&papan, 9, '9');
 
     player = 1;
 

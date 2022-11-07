@@ -4,7 +4,7 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong */
-void MakeEmpty (Papan *T)
+void ArMakeEmpty (Papan *T)
 {
     (*T).Neff = 0;
 }
@@ -13,33 +13,33 @@ void MakeEmpty (Papan *T)
 
 /* ********** SELEKTOR ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt (Papan T)
+int ArNbElmt (Papan T)
 {
     return ((T).Neff);
 }
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
-int MaxNbEl (Papan T)
+int ArMaxNbEl (Papan T)
 {
     return (IdxMax);
 }
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
-IdxType GetFirstIdx (Papan T)
+IdxType ArGetFirstIdx (Papan T)
 {
     return (IdxMin);
 }
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen pertama */
-IdxType GetLastIdx (Papan T)
+IdxType ArGetLastIdx (Papan T)
 {
     return  NbElmt(T);
 }
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen terakhir */
 /* *** Menghasilkan sebuah elemen *** */
-ElType GetElmt (Papan T, IdxType i)
+ArElType ArGetElmt (Papan T, IdxType i)
 {
     return T.TI[i];
 }
@@ -48,7 +48,7 @@ ElType GetElmt (Papan T, IdxType i)
 
 /* *** Selektor SET : Mengubah nilai TABEL dan elemen tabel *** */
 /* Untuk type private/limited private pada bahasa tertentu */
-void SetTab (Papan Tin, Papan *Tout)
+void ArSetTab (Papan Tin, Papan *Tout)
 {
     int i;
     for (i = IdxMin; i <= IdxMax; i++)
@@ -60,7 +60,7 @@ void SetTab (Papan Tin, Papan *Tout)
 /* I.S. Tin terdefinisi, sembarang */
 /* F.S. Tout berisi salinan Tin */
 /* Assignment THsl -> Tin */
-void SetEl (Papan *T, IdxType i, ElType v)
+void ArSetEl (Papan *T, IdxType i, ArElType v)
 {
     (*T).TI[i] = v ;
     if (i == GetLastIdx(*T) + 1)
@@ -71,7 +71,7 @@ void SetEl (Papan *T, IdxType i, ElType v)
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 /* Mengeset nilai elemen tabel yang ke-i sehingga bernilai v */
-void SetNeff (Papan *T, IdxType N)
+void ArSetNeff (Papan *T, IdxType N)
 {
     (*T).Neff = N;
 }
@@ -80,14 +80,14 @@ void SetNeff (Papan *T, IdxType N)
 /* Mengeset nilai indeks elemen efektif sehingga bernilai N */
 
 /* ********** Test Indeks yang valid ********** */
-boolean IsIdxValid (Papan T, IdxType i)
+boolean ArIsIdxValid (Papan T, IdxType i)
 {
     return ((i >= IdxMin) && (i <= IdxMax));
 }
 /* Prekondisi : i sembarang */
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean IsIdxEff (Papan T, IdxType i)
+boolean ArIsIdxEff (Papan T, IdxType i)
 {
     return ((i >= GetFirstIdx(T)) && (i <= GetLastIdx(T)));
 }
@@ -97,20 +97,20 @@ boolean IsIdxEff (Papan T, IdxType i)
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmpty (Papan T)
+boolean ArIsEmpty (Papan T)
 {
     return (NbElmt(T) == 0);
 }
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
-boolean IsFull (Papan T)
+boolean ArIsFull (Papan T)
 {
     return (NbElmt(T) == MaxNbEl(T));
 } 
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-void TulisIsi (Papan T)
+void ArTulisIsi (Papan T)
 {
     if (IsEmpty(T))
     {
@@ -137,7 +137,7 @@ void TulisIsi (Papan T)
 
 /* ********** OPERATOR ARITMATIKA ********** */
 /* *** Aritmatika tabel : Penjumlahan, pengurangan, perkalian, ... *** */
-Papan PlusTab(Papan T1, Papan T2)
+Papan ArPlusTab(Papan T1, Papan T2)
 {
     Papan Tsum;
     MakeEmpty(&Tsum);
@@ -150,7 +150,7 @@ Papan PlusTab(Papan T1, Papan T2)
 }
 /* Prekondisi : T1 dan T2 berukuran sama dan tidak kosong */
 /* Mengirimkan T1 + T2 */
-Papan MinusTab (Papan T1, Papan T2)
+Papan ArMinusTab (Papan T1, Papan T2)
 {
     Papan Tmin;
     MakeEmpty(&Tmin);
@@ -165,9 +165,9 @@ Papan MinusTab (Papan T1, Papan T2)
 /* Mengirimkan T1 - T2 */
 
 /* ********** NILAI EKSTREM ********** */
-ElType ValMax (Papan T)
+ArElType ArValMax (Papan T)
 {
-    ElType max;
+    ArElType max;
     int i;
     max = T.TI[GetFirstIdx(T)];
     for (i = (GetFirstIdx(T)+1); i <= (GetLastIdx(T)); i++)
@@ -183,9 +183,9 @@ ElType ValMax (Papan T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan nilai maksimum tabel */
 
-ElType ValMin (Papan T)
+ArElType ArValMin (Papan T)
 {
-    ElType min;
+    ArElType min;
     int i;
     min = T.TI[GetFirstIdx(T)];
     for (i = (GetFirstIdx(T)+1); i <= (GetLastIdx(T)); i++)
@@ -202,7 +202,7 @@ ElType ValMin (Papan T)
 /* Mengirimkan nilai minimum tabel */
 
 /* *** Mengirimkan indeks elemen bernilai ekstrem *** */
-IdxType IdxMaxTab (Papan T)
+IdxType ArIdxMaxTab (Papan T)
 {
     int i;
     for (i = (GetFirstIdx(T)+1); i <= (GetLastIdx(T)); i++)
@@ -216,7 +216,7 @@ IdxType IdxMaxTab (Papan T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks i dengan elemen ke-i adalah nilai maksimum pada tabel */
 
-IdxType IdxMinTab (Papan T)
+IdxType ArIdxMinTab (Papan T)
 {
     int i;
     for (i = (GetFirstIdx(T)+1); i <= (GetLastIdx(T)); i++)
