@@ -3,7 +3,7 @@
 #include "../../adt/array/array.h"
 
 /*Fungsi untuk mengecek apakah game sudah ada pemenang atau belum*/
-int isWin(Papan papan)
+int isWin(Array papan)
 {
     if (papan.TI[1] == papan.TI[2] && papan.TI[2] == papan.TI[3])
         return 1;
@@ -36,7 +36,7 @@ int isWin(Papan papan)
 }
 
 /*Prosedur untuk melakukan print tampilan papan kepada user*/
-void board(Papan papan)
+void board(Array papan)
 {
     printf("\nTic Tac Toe\n");
 
@@ -59,7 +59,7 @@ void tictactoe()
     int player, i, j, tebakan;
     char mark;
     Word input;
-    Papan papan;
+    Array papan;
 
     ArMakeEmpty(&papan);
     ArSetEl(&papan, 1, '1');
