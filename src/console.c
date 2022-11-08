@@ -1,6 +1,7 @@
 #include "console.h"
 #include "./games/dinerdash/dinerdash.h"
 #include "./games/rng/rng.h"
+#include "./games/tictactoe/tictactoe.h"
 
 /**
  * Konstruktor
@@ -146,6 +147,10 @@ void launchGame(Word game)
     else if (stringEQWord(game, "RNG"))
     {
         rng();
+    }
+    else if (stringEQWord(game, "Tictactoe"))
+    {
+        tictactoe();
     }
     else
     {
