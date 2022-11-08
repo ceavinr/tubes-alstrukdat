@@ -97,10 +97,6 @@ void startInputWord()
 */
 void akuisisiCommandWord(Word *w, Word command, int kataKe)
 {
-    /*Mengakuisisi command terkhusus untuk LOAD and SAVE
-       I.S. pita kata terdefinisi
-       F.S. diakuisisi ke dalam w
-    */
     int i = 0, counter = 0, length = 0;
     boolean stop;
 
