@@ -131,13 +131,6 @@ void tictactoe()
         else
         {
             printf("Input tidak valid\n");
-    
-            player++;
-            printf("Player %d, silakan memilih angka:  ", player);
-            
-            startInputWord();
-            akuisisiCommandWord(&input, currentWord, 1);
-            tebakan = wordToInt(input);
         }
 
         i = isWin(papan);
