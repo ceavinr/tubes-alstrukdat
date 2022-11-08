@@ -77,7 +77,7 @@ void tictactoe()
     do
     {
         board(papan);
-        if (player % 2)
+        if (player % 2 == 1)
         {
             player = 1;
         }
@@ -131,8 +131,8 @@ void tictactoe()
         else
         {
             printf("Input tidak valid\n");
-
-            player--;
+    
+            player++;
             printf("Player %d, silakan memilih angka:  ", player);
             
             startInputWord();
