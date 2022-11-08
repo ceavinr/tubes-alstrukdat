@@ -56,7 +56,7 @@ void board(Papan papan)
 /*Prosedur untuk menjalankan game Tic Tac Toe*/
 void tictactoe()
 {
-    int player, i, tebakan;
+    int player, i, j, tebakan;
     char mark;
     Word input;
     Papan papan;
@@ -102,35 +102,130 @@ void tictactoe()
         }
 
         if (tebakan == 1 && papan.TI[1] == '1')
+        {
             papan.TI[1] = mark;
-
+        }          
         else if (tebakan == 2 && papan.TI[2] == '2')
+        {
             papan.TI[2] = mark;
-
+        }
+            
         else if (tebakan == 3 && papan.TI[3] == '3')
+        {
             papan.TI[3] = mark;
+        }
 
         else if (tebakan == 4 && papan.TI[4] == '4')
+        {
             papan.TI[4] = mark;
+        }
 
         else if (tebakan == 5 && papan.TI[5] == '5')
+        {
             papan.TI[5] = mark;
+        }
 
         else if (tebakan == 6 && papan.TI[6] == '6')
+        {
             papan.TI[6] = mark;
+        }
 
         else if (tebakan == 7 && papan.TI[7] == '7')
+        {
             papan.TI[7] = mark;
+        }
 
         else if (tebakan == 8 && papan.TI[8] == '8')
+        {
             papan.TI[8] = mark;
+        }
 
         else if (tebakan == 9 && papan.TI[9] == '9')
+        {
             papan.TI[9] = mark;
+        }
 
         else
         {
             printf("Input tidak valid\n");
+            j = 0;
+
+            while (j == 0)
+            {
+                printf("Player %d, silakan memilih ulang angka:  ", player);
+
+                startInputWord();
+                akuisisiCommandWord(&input, currentWord, 1);
+                tebakan = wordToInt(input);
+
+                if (player == 1)
+                {
+                    mark = 'X';
+                }
+                else
+                {
+                    mark = 'O';
+                }
+
+                if (tebakan == 1 && papan.TI[1] == '1')
+                {
+                    papan.TI[1] = mark;
+                    j = 1;
+                }          
+                else if (tebakan == 2 && papan.TI[2] == '2')
+                {
+                    papan.TI[2] = mark;
+                    j = 1;
+                }
+                    
+                else if (tebakan == 3 && papan.TI[3] == '3')
+                {
+                    papan.TI[3] = mark;
+                    j = 1;
+                }
+
+                else if (tebakan == 4 && papan.TI[4] == '4')
+                {
+                    papan.TI[4] = mark;
+                    j = 1;
+                }
+
+                else if (tebakan == 5 && papan.TI[5] == '5')
+                {
+                    papan.TI[5] = mark;
+                    j = 1;
+                }
+
+                else if (tebakan == 6 && papan.TI[6] == '6')
+                {
+                    papan.TI[6] = mark;
+                    j = 1;
+                }
+
+                else if (tebakan == 7 && papan.TI[7] == '7')
+                {
+                    papan.TI[7] = mark;
+                    j = 1;
+                }
+
+                else if (tebakan == 8 && papan.TI[8] == '8')
+                {
+                    papan.TI[8] = mark;
+                    j = 1;
+                }
+
+                else if (tebakan == 9 && papan.TI[9] == '9')
+                {
+                    papan.TI[9] = mark;
+                    j = 1;
+                }
+
+                else
+                {
+                    printf("Input tidak valid\n");
+                    j = 0;
+                }
+            }
         }
 
         i = isWin(papan);
