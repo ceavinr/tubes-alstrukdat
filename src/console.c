@@ -133,6 +133,11 @@ void deleteGame(ArrayDin *arrGame)
     }
 }
 
+/*
+ * Konstruktor
+ * I.S. program berjalan
+ * F.S. masuk ke dalam game dan menjalankan game yang terdapat dalam queue
+*/
 void launchGame(Word game)
 {
     printf("\n\nLoading ");
