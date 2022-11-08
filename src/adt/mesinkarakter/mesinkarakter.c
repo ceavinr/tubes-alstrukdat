@@ -7,26 +7,23 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
+/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+   Karakter pertama yang ada pada pita posisinya adalah pada jendela.
+   Pita baca diambil dari sebuah file.
+   I.S. : sembarang
+   F.S. : currentChar adalah karakter pertama pada pita */
 void START(char *savefile)
 {
-    /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
-       Karakter pertama yang ada pada pita posisinya adalah pada jendela.
-       Pita baca diambil dari stdin.
-       I.S. : sembarang
-       F.S. : currentChar adalah karakter pertama pada pita
-              Jika currentChar != MARK maka EOP akan padam (false)
-              Jika currentChar = MARK maka EOP akan menyala (true) */
     pita = fopen(savefile, "r");
     ADV();
 }
 
+/* Pita dimajukan satu karakter.
+       I.S. : Karakter pada jendela = currentChar, currentChar != feof
+       F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+              Jika  pita kosong EOP akan menyala (true) */
 void ADV()
 {
-    /* Pita dimajukan satu karakter.
-       I.S. : Karakter pada jendela = currentChar, currentChar != MARK
-       F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
-              currentChar mungkin = MARK
-              Jika  currentChar = MARK maka EOP akan menyala (true) */
     if (pita == NULL) // jika file tidak tersedia
     {
         EOP = true;
@@ -42,18 +39,27 @@ void ADV()
     }
 }
 
+/*
+    Mengirimkan currentChar
+*/
 char GetCC()
-{
-    /* Mengirimkan currentChar */
+{ 
     return currentChar;
 }
 
+/* 
+    Mengirimkan true jika currentChar = MARK
+*/
 boolean IsEOP()
 {
-    /* Mengirimkan true jika currentChar = MARK */
     return EOP;
 }
 
+/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+   Karakter pertama yang ada pada pita posisinya adalah pada jendela.
+   Pita baca diambil dari sebuah stdin.
+   I.S. : sembarang
+   F.S. : currentChar adalah karakter pertama pada pita */
 void startInput()
 {
     pita = stdin;
