@@ -35,7 +35,7 @@ void dinerdash()
     Order orderList, cooking;
     Masakan m, m_add, m_del;
     Word command, masakan;
-    int saldo = 0, served = 0;
+    int saldo = 0, served = 0, banyakMasak = 0;
     boolean gameOn = true;
 
     CreateOrder(&orderList);
@@ -131,6 +131,10 @@ void dinerdash()
                 {
                     printf("Hanya bisa memasak 1 masakan dalam satu waktu\n");
                 }
+                else if (banyakMasak == 5)
+                {
+                    printf("Dapur sudah penuh, tidak bisa memasak\n");
+                }
                 else
                 {
                     akuisisiCommandWord(&masakan, currentWord, 2);
@@ -147,6 +151,7 @@ void dinerdash()
                             DURASI(m_add) += 1;
                             addOrder(&cooking, m_add);
                             printf("Berhasil memasak M%d\n", kodeToInt(masakan));
+                            banyakMasak++;
                             inputValid = true;
                         }
                     }
@@ -172,6 +177,7 @@ void dinerdash()
                     if (DURASI(ORDERELMT(cooking, i)) == 0)
                     {
                         printf("Makanan M%d telah selesai dimasak\n", NOMOR(ORDERELMT(cooking, i)));
+                        banyakMasak--;
                     }
                 }
                 else

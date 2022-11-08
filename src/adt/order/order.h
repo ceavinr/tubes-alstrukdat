@@ -56,7 +56,7 @@ boolean isFull(Order o);
 /* Mengirim true jika tabel penampung elemen o sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar */
 
-int length(Order o);
+int orderLength(Order o);
 /* Mengirimkan banyaknya elemen Order. Mengirimkan 0 jika o kosong. */
 
 /* *** Primitif Add/Delete *** */

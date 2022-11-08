@@ -34,7 +34,7 @@ boolean isFull(Order o)
     return (IDX_TAIL(o) == ORDERCAPACITY - 1);
 }
 
-int length(Order o)
+int orderLength(Order o)
 {
     return IDX_TAIL(o) + 1;
 }
@@ -42,7 +42,7 @@ int length(Order o)
 /* *** Primitif Add/Delete *** */
 void addOrder(Order *o, Masakan val)
 {
-    int i = length(*o);
+    int i = orderLength(*o);
     boolean stop = false;
 
     if (isEmpty(*o))
@@ -71,7 +71,7 @@ void addOrder(Order *o, Masakan val)
 void deleteOrderAt(Order *o, Masakan *val, KeyType idx)
 {
     copyMasakan(val, HEAD(*o));
-    if (length(*o) == 1)
+    if (orderLength(*o) == 1)
     {
         IDX_HEAD(*o) = IDX_UNDEF;
         IDX_TAIL(*o) = IDX_UNDEF;
@@ -177,7 +177,7 @@ void displayReady(Order o)
 
     for (int i = 0; i <= IDX_TAIL(o); i++)
     {
-        if (DURASI(ORDERELMT(o, i)) == 0)
+        if (DURASI(ORDERELMT(o, i)) == 0 && KETAHANAN(ORDERELMT(o, i)) > 0)
         {
             printf("M%d              | %d            \n", NOMOR(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)));
             count++;
