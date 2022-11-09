@@ -78,7 +78,7 @@ void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
         {
             fprintf(pita, "%s\n", arrGame.A[i].TabWord);
         }
-        fprintf(pita, "%s", arrGame.A[i].TabWord);
+        fprintf(pita, "%s", arrGame.A[arrGame.Neff-1].TabWord);
         /*fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
 
         for (int j = 0; j < arrHistory.Neff - 1; j++)
