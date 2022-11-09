@@ -3,7 +3,6 @@
 #include <time.h>
 #include "dinerdash.h"
 #include "../../gambar.h"
-#include "../../adt/arraydin/arraydin.h"
 
 int kodeToInt(Word kode)
 {

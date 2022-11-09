@@ -2,6 +2,7 @@
 #include "./games/dinerdash/dinerdash.h"
 #include "./games/rng/rng.h"
 #include "./games/tictactoe/tictactoe.h"
+#include "./games/towerofhanoi/towerofhanoi.h"
 
 /**
  * Konstruktor
@@ -137,7 +138,7 @@ void deleteGame(ArrayDin *arrGame)
  * Konstruktor
  * I.S. program berjalan
  * F.S. masuk ke dalam game dan menjalankan game yang terdapat dalam queue
-*/
+ */
 void launchGame(Word game)
 {
     printf("\n\nLoading ");
@@ -156,6 +157,10 @@ void launchGame(Word game)
     else if (stringEQWord(game, "Tictactoe"))
     {
         tictactoe();
+    }
+    else if (stringEQWord(game, "TOWER OF HANOI"))
+    {
+        towerofhanoi();
     }
     else
     {

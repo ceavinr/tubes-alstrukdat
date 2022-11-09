@@ -5,7 +5,7 @@
 #define QUEUE_H
 
 #include "../../boolean.h"
-#include "../mesinkata/mesinkata.h"
+#include "../word/word.h"
 
 #define IDX_UNDEF -1
 #define QUEUECAPACITY 100
