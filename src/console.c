@@ -74,12 +74,12 @@ void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
 
         fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
-        for (int i = 0; i < arrGame.Neff; i++)
+        for (int i = 0; i < arrGame.Neff-1; i++)
         {
             fprintf(pita, "%s\n", arrGame.A[i].TabWord);
         }
-
-        fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
+        fprintf(pita, "%s", arrGame.A[i].TabWord);
+        /*fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
 
         for (int j = 0; j < arrHistory.Neff - 1; j++)
         {
@@ -87,7 +87,7 @@ void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
         }
 
         fprintf(pita, "%s", arrHistory.A[arrHistory.Neff - 1].TabWord);
-
+        */
         fclose(pita);
         printf("Save file berhasil disimpan..\n\n");
     }
