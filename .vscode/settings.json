@@ -12,6 +12,7 @@
     "queue.h": "c",
     "stdio.h": "c",
     "array.h": "c",
-    "matrix.h": "c"
+    "matrix.h": "c",
+    "tictactoe.h": "c"
   }
 }

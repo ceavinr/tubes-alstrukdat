@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "tictactoe.h"
 
-/* Fungsi untuk mengecek apakah game sudah ada pemenang atau belum */
 boolean isDiagonalWin(Matrix papan, char mark)
 {
     int i = 0;
@@ -74,11 +73,6 @@ boolean isHorizontalWin(Matrix papan, char mark)
     return win;
 }
 
-boolean isWin(Matrix papan, char mark)
-{
-    return isHorizontalWin(papan, mark) || isVerticalWin(papan, mark) || isDiagonalWin(papan, mark);
-}
-
 boolean isBoardFull(Matrix papan)
 {
     boolean full = true;
@@ -94,7 +88,6 @@ boolean isBoardFull(Matrix papan)
     return full;
 }
 
-/*Prosedur untuk melakukan print tampilan papan kepada user*/
 void board(Matrix papan)
 {
     printf("\nTic Tac Toe\n");
@@ -112,7 +105,6 @@ void board(Matrix papan)
     printf("     |     |     \n\n");
 }
 
-/*Prosedur untuk menjalankan game Tic Tac Toe*/
 void tictactoe()
 {
     int tebakan;
@@ -170,7 +162,7 @@ void tictactoe()
 
         board(papan);
 
-        if (isWin(papan, mark))
+        if (isHorizontalWin(papan, mark) || isVerticalWin(papan, mark) || isDiagonalWin(papan, mark))
         {
             printf("==> \aPlayer %d menang \n", player + 1);
             gameOn = false;
