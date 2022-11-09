@@ -60,6 +60,10 @@ void dequeue(Queue *q, ElType *val)
         CopyWord(&QUEUEELMT(*q, i), QUEUEELMT(*q, i + 1));
     }
     IDX_TAIL(*q) -= 1;
+
+    if (queueLength(*q) == 0) {
+        IDX_HEAD(*q) = IDX_UNDEF;
+    }
 }
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
