@@ -5,9 +5,6 @@
 boolean EndWord;
 Word currentWord;
 
-/* Mengabaikan satu atau beberapa BLANK
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK ('\n') dan currentChar != EOP */
 void IgnoreBlanks()
 {
     while (currentChar == BLANK && !EOP)
@@ -16,10 +13,6 @@ void IgnoreBlanks()
     }
 }
 
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, dan EOP;
-          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
 void STARTWORD(char *savefile)
 {
     START(savefile);
@@ -35,11 +28,6 @@ void STARTWORD(char *savefile)
     }
 }
 
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika EOP, EndWord = true.
-   Proses : Akuisisi kata menggunakan procedure UpdateCurrentWord */
 void ADVWORD()
 {
     if (EOP)
@@ -53,12 +41,6 @@ void ADVWORD()
     }
 }
 
-/* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK ('\n');
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 void UpdateCurrentWord()
 {
     int i = 0;
@@ -72,10 +54,6 @@ void UpdateCurrentWord()
     currentWord.Length = i;
 }
 
-/*Melakukan pengisian pita oleh input user
-    I.S pita kosong
-    F.S pita diisi oleh user dan dilakukan pemrosesan oleh mesin kata
-*/
 void startInputWord()
 {
     startInput();
@@ -91,10 +69,6 @@ void startInputWord()
     }
 }
 
-/* Mengakuisisi kata  ke- pada sebuah command
-    I.S pita tidak kosong
-    F.S kata ke- diakuisi dan disimpan ke dalam w
-*/
 void akuisisiCommandWord(Word *w, Word command, int kataKe)
 {
     int i = 0, counter = 0, length = 0;

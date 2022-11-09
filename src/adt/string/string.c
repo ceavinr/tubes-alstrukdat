@@ -13,7 +13,6 @@ int stringLength(char *a)
 
 char *concat(char *s1, char *s2)
 {
-    /*Mengembalikan string berupa gabungan dari s1 dan s2*/
     char *ret = malloc((stringLength(s1) + stringLength(s2) + 1) * sizeof(char));
     char *p = ret;
     while (*s1 != '\0')

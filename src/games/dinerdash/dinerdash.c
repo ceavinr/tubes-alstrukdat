@@ -4,6 +4,67 @@
 #include "dinerdash.h"
 #include "../../gambar.h"
 
+void displayOrder(Order o)
+{
+    printf("Daftar Pesanan\n");
+    printf("Makanan         | Durasi memasak        | Ketahanan     | Harga\n");
+    printf("-----------------------------------------------------------------------\n");
+    if (IDX_TAIL(o) != IDX_UNDEF)
+    {
+        for (int i = 0; i <= IDX_TAIL(o); i++)
+        {
+            printf("M%d              | %d                     | %d             | %d        \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)), HARGA(ORDERELMT(o, i)));
+        }
+    }
+    else
+    {
+        printf("                |                       |               |            ");
+    }
+}
+
+void displayCooking(Order o)
+{
+    int count = 0;
+    printf("\nDaftar Makanan yang sedang dimasak\n");
+    printf("Makanan         | Sisa durasi memasak\n");
+    printf("-------------------------------------\n");
+
+    for (int i = 0; i <= IDX_TAIL(o); i++)
+    {
+        if (DURASI(ORDERELMT(o, i)) > 0)
+        {
+            printf("M%d              | %d           \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)));
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        printf("                |              \n");
+    }
+}
+
+void displayReady(Order o)
+{
+    int count = 0;
+    printf("\nDaftar Makanan yang dapat disajikan\n");
+    printf("Makanan         | Sisa ketahanan makanan\n");
+    printf("----------------------------------------\n");
+
+    for (int i = 0; i <= IDX_TAIL(o); i++)
+    {
+        if (DURASI(ORDERELMT(o, i)) == 0 && KETAHANAN(ORDERELMT(o, i)) > 0)
+        {
+            printf("M%d              | %d            \n", NOMOR(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)));
+            count++;
+        }
+    }
+
+    if (count == 0)
+    {
+        printf("                |              \n");
+    }
+}
+
 int kodeToInt(Word kode)
 {
     int num = 0;

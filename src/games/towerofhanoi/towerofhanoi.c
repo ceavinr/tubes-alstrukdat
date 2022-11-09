@@ -41,7 +41,7 @@ void PrintDisk(Stack S, int i, int maxWidth)
     }
 }
 
-void PrintTower(Stack S1, Stack S2, Stack S3, int height)
+void DisplayState(Stack S1, Stack S2, Stack S3, int height)
 {
     int disk, pjgDisk;
 
@@ -96,7 +96,7 @@ void towerofhanoi()
         inputValid = false;
         printf("\nMoves: %d\n", moves);
         printf("Minimum moves to solve: %d\n", minimumMoves);
-        PrintTower(tower1, tower2, tower3, wordToInt(banyak));
+        DisplayState(tower1, tower2, tower3, wordToInt(banyak));
 
         if (Top(tower3) + 1 == wordToInt(banyak))
         {
