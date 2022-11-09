@@ -1,98 +1,140 @@
 #include <stdio.h>
 #include "tictactoe.h"
-#include "../../adt/array/array.h"
 
-/*Fungsi untuk mengecek apakah game sudah ada pemenang atau belum*/
-int isWin(Array papan)
+/* Fungsi untuk mengecek apakah game sudah ada pemenang atau belum */
+boolean isDiagonalWin(Matrix papan, char mark)
 {
-    if (papan.TI[1] == papan.TI[2] && papan.TI[2] == papan.TI[3])
-        return 1;
+    int i = 0;
+    boolean win = true;
+    do
+    {
+        if (MATRIXELMT(papan, i, i) != mark)
+        {
+            win = false;
+        }
 
-    else if (papan.TI[4] == papan.TI[5] && papan.TI[5] == papan.TI[6])
-        return 1;
+        i++;
+    } while (i < ROWS(papan) && win);
 
-    else if (papan.TI[7] == papan.TI[8] && papan.TI[8] == papan.TI[9])
-        return 1;
+    i = 0;
 
-    else if (papan.TI[1] == papan.TI[4] && papan.TI[4] == papan.TI[7])
-        return 1;
+    if (!win)
+    {
+        win = true;
+        do
+        {
+            if (MATRIXELMT(papan, i, COLS(papan) - i - 1) != mark)
+            {
+                win = false;
+            }
+            i++;
+        } while (i < ROWS(papan) && win);
+    }
 
-    else if (papan.TI[2] == papan.TI[5] && papan.TI[5] == papan.TI[8])
-        return 1;
+    return win;
+}
 
-    else if (papan.TI[3] == papan.TI[6] && papan.TI[6] == papan.TI[9])
-        return 1;
+boolean isVerticalWin(Matrix papan, char mark)
+{
+    int i = 0;
+    boolean win = false;
+    while (i < ROWS(papan) && !win)
+    {
+        win = true;
+        for (int j = 0; j < COLS(papan); j++)
+        {
+            if (MATRIXELMT(papan, j, i) != mark)
+            {
+                win = false;
+            }
+        }
+        i++;
+    }
 
-    else if (papan.TI[1] == papan.TI[5] && papan.TI[5] == papan.TI[9])
-        return 1;
+    return win;
+}
 
-    else if (papan.TI[3] == papan.TI[5] && papan.TI[5] == papan.TI[7])
-        return 1;
+boolean isHorizontalWin(Matrix papan, char mark)
+{
+    int i = 0;
+    boolean win = false;
+    while (i < ROWS(papan) && !win)
+    {
+        win = true;
+        for (int j = 0; j < COLS(papan); j++)
+        {
+            if (MATRIXELMT(papan, i, j) != mark)
+            {
+                win = false;
+            }
+        }
+        i++;
+    }
 
-    else if (papan.TI[1] != '1' && papan.TI[2] != '2' && papan.TI[3] != '3' && papan.TI[4] != '4' && papan.TI[5] != '5' && papan.TI[6] != '6' && papan.TI[7] != '7' && papan.TI[8] != '8' && papan.TI[9] != '9')
-        return 0;
-    else
-        return -1;
+    return win;
+}
+
+boolean isWin(Matrix papan, char mark)
+{
+    return isHorizontalWin(papan, mark) || isVerticalWin(papan, mark) || isDiagonalWin(papan, mark);
+}
+
+boolean isBoardFull(Matrix papan)
+{
+    boolean full = true;
+    int i = 0;
+    while (i < count(papan) && full)
+    {
+        if (MATRIXELMT(papan, i / 3, i % 3) != 'O' && MATRIXELMT(papan, i / 3, i % 3) != 'X')
+        {
+            full = false;
+        }
+        i++;
+    }
+    return full;
 }
 
 /*Prosedur untuk melakukan print tampilan papan kepada user*/
-void board(Array papan)
+void board(Matrix papan)
 {
     printf("\nTic Tac Toe\n");
 
     printf("Pemain 1 (X)  -  Pemain 2 (O)\n");
 
     printf("     |     |     \n");
-    printf("  %c  |  %c  |  %c \n", papan.TI[1], papan.TI[2], papan.TI[3]);
+    printf("  %c  |  %c  |  %c \n", MATRIXELMT(papan, 0, 0), MATRIXELMT(papan, 0, 1), MATRIXELMT(papan, 0, 2));
     printf("_____|_____|_____\n");
     printf("     |     |     \n");
-    printf("  %c  |  %c  |  %c \n", papan.TI[4], papan.TI[5], papan.TI[6]);
+    printf("  %c  |  %c  |  %c \n", MATRIXELMT(papan, 1, 0), MATRIXELMT(papan, 1, 1), MATRIXELMT(papan, 1, 2));
     printf("_____|_____|_____\n");
     printf("     |     |     \n");
-    printf("  %c  |  %c  |  %c \n", papan.TI[7], papan.TI[8], papan.TI[9]);
+    printf("  %c  |  %c  |  %c \n", MATRIXELMT(papan, 2, 0), MATRIXELMT(papan, 2, 1), MATRIXELMT(papan, 2, 2));
     printf("     |     |     \n\n");
 }
 
 /*Prosedur untuk menjalankan game Tic Tac Toe*/
 void tictactoe()
 {
-    int player, i, j, tebakan;
+    int tebakan;
     char mark;
+    boolean gameOn = true;
     Word input;
-    Array papan;
+    Matrix papan;
 
-    ArMakeEmpty(&papan);
-    ArSetEl(&papan, 1, '1');
-    ArSetEl(&papan, 2, '2');
-    ArSetEl(&papan, 3, '3');
-    ArSetEl(&papan, 4, '4');
-    ArSetEl(&papan, 5, '5');
-    ArSetEl(&papan, 6, '6');
-    ArSetEl(&papan, 7, '7');
-    ArSetEl(&papan, 8, '8');
-    ArSetEl(&papan, 9, '9');
+    CreateMatrix(&papan, 3, 3);
+    for (int i = 0; i < count(papan); i++)
+    {
+        MATRIXELMT(papan, i / 3, i % 3) = i + 1 + '0';
+    }
 
-    player = 1;
+    int player = 1;
+    board(papan);
 
     do
     {
-        board(papan);
-        if (player % 2 == 1)
-        {
-            player = 1;
-        }
-        else
-        {
-            player = 2;
-        }
+        player = !player;
 
-        printf("Player %d, silakan memilih angka:  ", player);
-
-        startInputWord();
-        akuisisiCommandWord(&input, currentWord, 1);
-        tebakan = wordToInt(input);
-
-        if (player == 1)
+        if (player == 0)
         {
             mark = 'X';
         }
@@ -101,143 +143,45 @@ void tictactoe()
             mark = 'O';
         }
 
-        if (tebakan == 1 && papan.TI[1] == '1')
+        boolean inputValid = false;
+        do
         {
-            papan.TI[1] = mark;
-        }          
-        else if (tebakan == 2 && papan.TI[2] == '2')
-        {
-            papan.TI[2] = mark;
-        }
-            
-        else if (tebakan == 3 && papan.TI[3] == '3')
-        {
-            papan.TI[3] = mark;
-        }
+            printf("Player %d, silakan memilih angka:  ", player + 1);
+            startInputWord();
+            akuisisiCommandWord(&input, currentWord, 1);
+            tebakan = wordToInt(input);
+            int baris = (tebakan - 1) / 3;
+            int kolom = (tebakan - 1) % 3;
 
-        else if (tebakan == 4 && papan.TI[4] == '4')
-        {
-            papan.TI[4] = mark;
-        }
-
-        else if (tebakan == 5 && papan.TI[5] == '5')
-        {
-            papan.TI[5] = mark;
-        }
-
-        else if (tebakan == 6 && papan.TI[6] == '6')
-        {
-            papan.TI[6] = mark;
-        }
-
-        else if (tebakan == 7 && papan.TI[7] == '7')
-        {
-            papan.TI[7] = mark;
-        }
-
-        else if (tebakan == 8 && papan.TI[8] == '8')
-        {
-            papan.TI[8] = mark;
-        }
-
-        else if (tebakan == 9 && papan.TI[9] == '9')
-        {
-            papan.TI[9] = mark;
-        }
-
-        else
-        {
-            printf("Input tidak valid\n");
-            j = 0;
-
-            while (j == 0)
+            if (tebakan >= 1 && tebakan <= 9)
             {
-                printf("Player %d, silakan memilih ulang angka:  ", player);
-
-                startInputWord();
-                akuisisiCommandWord(&input, currentWord, 1);
-                tebakan = wordToInt(input);
-
-                if (player == 1)
+                if (MATRIXELMT(papan, baris, kolom) != 'X' && MATRIXELMT(papan, baris, kolom) != 'O')
                 {
-                    mark = 'X';
-                }
-                else
-                {
-                    mark = 'O';
-                }
-
-                if (tebakan == 1 && papan.TI[1] == '1')
-                {
-                    papan.TI[1] = mark;
-                    j = 1;
-                }          
-                else if (tebakan == 2 && papan.TI[2] == '2')
-                {
-                    papan.TI[2] = mark;
-                    j = 1;
-                }
-                    
-                else if (tebakan == 3 && papan.TI[3] == '3')
-                {
-                    papan.TI[3] = mark;
-                    j = 1;
-                }
-
-                else if (tebakan == 4 && papan.TI[4] == '4')
-                {
-                    papan.TI[4] = mark;
-                    j = 1;
-                }
-
-                else if (tebakan == 5 && papan.TI[5] == '5')
-                {
-                    papan.TI[5] = mark;
-                    j = 1;
-                }
-
-                else if (tebakan == 6 && papan.TI[6] == '6')
-                {
-                    papan.TI[6] = mark;
-                    j = 1;
-                }
-
-                else if (tebakan == 7 && papan.TI[7] == '7')
-                {
-                    papan.TI[7] = mark;
-                    j = 1;
-                }
-
-                else if (tebakan == 8 && papan.TI[8] == '8')
-                {
-                    papan.TI[8] = mark;
-                    j = 1;
-                }
-
-                else if (tebakan == 9 && papan.TI[9] == '9')
-                {
-                    papan.TI[9] = mark;
-                    j = 1;
-                }
-
-                else
-                {
-                    printf("Input tidak valid\n");
-                    j = 0;
+                    MATRIXELMT(papan, baris, kolom) = mark;
+                    inputValid = true;
                 }
             }
+            if (!inputValid)
+            {
+                printf("Input tidak valid\n");
+            }
+
+        } while (!inputValid);
+
+        board(papan);
+
+        if (isWin(papan, mark))
+        {
+            printf("==> \aPlayer %d menang \n", player + 1);
+            gameOn = false;
         }
-
-        i = isWin(papan);
-
-        player++;
-
-    } while (i == -1);
-
-    board(papan);
-
-    if (i == 1)
-        printf("==> \aPlayer %d menang \n", --player);
-    else
-        printf("==> \aDraw");
+        else
+        {
+            if (isBoardFull(papan))
+            {
+                printf("==> \aDraw");
+                gameOn = false;
+            }
+        }
+    } while (gameOn);
 }
