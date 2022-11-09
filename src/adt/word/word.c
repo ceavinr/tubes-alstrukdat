@@ -2,10 +2,6 @@
 
 int wordToInt(Word w)
 {
-    /*
-     I.S word terdefinisi
-     F.S dirubah ke integer dan dimasukkan ke dalan integer
-    */
     int val = 0;
     int i;
     for (i = 0; i < w.Length; i++)
@@ -18,10 +14,6 @@ int wordToInt(Word w)
 
 void printWord(Word w)
 {
-    /*
-     I.S word terdefinisi
-     F.S menampilkan word
-    */
     int i;
     for (i = 0; i < w.Length; i++)
     {
@@ -29,7 +21,7 @@ void printWord(Word w)
     }
 }
 
-Word stringToWord(char string[100])
+Word stringToWord(char *string)
 {
     Word w;
 
@@ -54,7 +46,6 @@ void CopyWord(Word *w1, Word w2)
 
 boolean stringEQWord(Word w, char *c)
 {
-    /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
     boolean eq = false;
     if (w.Length == stringLength(c))
     {

@@ -3,7 +3,6 @@
 #include <time.h>
 #include "order.h"
 
-/* *** Kreator *** */
 void CreateOrder(Order *o)
 {
     IDX_HEAD(*o) = IDX_UNDEF;
@@ -23,7 +22,6 @@ void CreateMasakan(Masakan *m, int nomor)
     }
 }
 
-/* ********* Prototype ********* */
 boolean isEmpty(Order o)
 {
     return (IDX_HEAD(o) == IDX_UNDEF) && (IDX_TAIL(o) == IDX_UNDEF);
@@ -68,9 +66,9 @@ void addOrder(Order *o, Masakan val)
     IDX_TAIL(*o) += 1;
 }
 
-void deleteOrderAt(Order *o, Masakan *val, KeyType idx)
+void deleteOrderAt(Order *o, Masakan *val, KeyType key)
 {
-    copyMasakan(val, HEAD(*o));
+    copyMasakan(val, find(*o, key));
     if (orderLength(*o) == 1)
     {
         IDX_HEAD(*o) = IDX_UNDEF;
@@ -78,7 +76,7 @@ void deleteOrderAt(Order *o, Masakan *val, KeyType idx)
     }
     else
     {
-        for (int i = indexOf(*o, idx); i < IDX_TAIL(*o); i++)
+        for (int i = indexOf(*o, key); i < IDX_TAIL(*o); i++)
         {
             copyMasakan(&ORDERELMT(*o, i), ORDERELMT(*o, i + 1));
         }
@@ -86,13 +84,13 @@ void deleteOrderAt(Order *o, Masakan *val, KeyType idx)
     }
 }
 
-int indexOf(Order o, int val)
+int indexOf(Order o, KeyType key)
 {
     int i = 0;
     boolean found = false;
     while (i <= IDX_TAIL(o) && !found)
     {
-        if (NOMOR(ORDERELMT(o, i)) == val)
+        if (NOMOR(ORDERELMT(o, i)) == key)
         {
             found = true;
         }
@@ -111,14 +109,14 @@ int indexOf(Order o, int val)
     }
 }
 
-Masakan find(Order o, int val)
+Masakan find(Order o, KeyType key)
 {
-    return ORDERELMT(o, indexOf(o, val));
+    return ORDERELMT(o, indexOf(o, key));
 }
 
-boolean isIn(Order o, int val)
+boolean isIn(Order o, KeyType key)
 {
-    return indexOf(o, val) != IDX_UNDEF;
+    return indexOf(o, key) != IDX_UNDEF;
 }
 
 void copyMasakan(Masakan *m, Masakan val)
@@ -127,65 +125,4 @@ void copyMasakan(Masakan *m, Masakan val)
     DURASI(*m) = DURASI(val);
     KETAHANAN(*m) = KETAHANAN(val);
     HARGA(*m) = HARGA(val);
-}
-
-void displayOrder(Order o)
-{
-    printf("Daftar Pesanan\n");
-    printf("Makanan         | Durasi memasak        | Ketahanan     | Harga\n");
-    printf("-----------------------------------------------------------------------\n");
-    if (IDX_TAIL(o) != IDX_UNDEF)
-    {
-        for (int i = 0; i <= IDX_TAIL(o); i++)
-        {
-            printf("M%d              | %d                     | %d             | %d        \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)), HARGA(ORDERELMT(o, i)));
-        }
-    }
-    else
-    {
-        printf("                |                       |               |            ");
-    }
-}
-
-void displayCooking(Order o)
-{
-    int count = 0;
-    printf("\nDaftar Makanan yang sedang dimasak\n");
-    printf("Makanan         | Sisa durasi memasak\n");
-    printf("-------------------------------------\n");
-
-    for (int i = 0; i <= IDX_TAIL(o); i++)
-    {
-        if (DURASI(ORDERELMT(o, i)) > 0)
-        {
-            printf("M%d              | %d           \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)));
-            count++;
-        }
-    }
-    if (count == 0)
-    {
-        printf("                |              \n");
-    }
-}
-
-void displayReady(Order o)
-{
-    int count = 0;
-    printf("\nDaftar Makanan yang dapat disajikan\n");
-    printf("Makanan         | Sisa ketahanan makanan\n");
-    printf("----------------------------------------\n");
-
-    for (int i = 0; i <= IDX_TAIL(o); i++)
-    {
-        if (DURASI(ORDERELMT(o, i)) == 0 && KETAHANAN(ORDERELMT(o, i)) > 0)
-        {
-            printf("M%d              | %d            \n", NOMOR(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)));
-            count++;
-        }
-    }
-
-    if (count == 0)
-    {
-        printf("                |              \n");
-    }
 }
