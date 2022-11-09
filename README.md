@@ -16,7 +16,7 @@
 2.  Main Program (Alternatif 2)
 
     ```
-    gcc ../src/adt/queue/queue.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
+    gcc ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
     ```
 
     kemudian run main.exe dengan cara membuka file .exe (bukan menjalankan melalui terminal)
@@ -40,4 +40,11 @@
     ```
     mingw32-make -C bin towerofhanoi
     ./bin/towerofhanoi
+    ```
+
+6.  Tic Tac Toe
+
+    ```
+    mingw32-make -C bin tictactoe
+    ./bin/tictactoe
     ```
