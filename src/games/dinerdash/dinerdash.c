@@ -22,18 +22,18 @@ void displayOrder(Order o)
     }
 }
 
-void displayCooking(Order o)
+void displayCooking(Array arr)
 {
     int count = 0;
     printf("\nDaftar Makanan yang sedang dimasak\n");
     printf("Makanan         | Sisa durasi memasak\n");
     printf("-------------------------------------\n");
 
-    for (int i = 0; i <= IDX_TAIL(o); i++)
+    for (int i = 0; i <= COUNT(arr) - 1; i++)
     {
-        if (DURASI(ORDERELMT(o, i)) > 0)
+        if (DURASI(ARRELMT(arr, i)) > 0)
         {
-            printf("M%d              | %d           \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)));
+            printf("M%d              | %d           \n", NOMOR(ARRELMT(arr, i)), DURASI(ARRELMT(arr, i)));
             count++;
         }
     }
@@ -43,18 +43,18 @@ void displayCooking(Order o)
     }
 }
 
-void displayReady(Order o)
+void displayReady(Array arr)
 {
     int count = 0;
     printf("\nDaftar Makanan yang dapat disajikan\n");
     printf("Makanan         | Sisa ketahanan makanan\n");
     printf("----------------------------------------\n");
 
-    for (int i = 0; i <= IDX_TAIL(o); i++)
+    for (int i = 0; i <= COUNT(arr) - 1; i++)
     {
-        if (DURASI(ORDERELMT(o, i)) == 0 && KETAHANAN(ORDERELMT(o, i)) > 0)
+        if (DURASI(ARRELMT(arr, i)) == 0 && KETAHANAN(ARRELMT(arr, i)) > 0)
         {
-            printf("M%d              | %d            \n", NOMOR(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)));
+            printf("M%d              | %d            \n", NOMOR(ARRELMT(arr, i)), KETAHANAN(ARRELMT(arr, i)));
             count++;
         }
     }
@@ -92,14 +92,15 @@ int kodeToInt(Word kode)
 
 void dinerdash()
 {
-    Order orderList, cooking;
+    Order orderList;
+    Array orderTaken;
     Masakan m, m_add, m_del;
     Word command, masakan;
     int saldo = 0, served = 0, banyakMasak = 0;
     boolean gameOn = true;
 
     CreateOrder(&orderList);
-    CreateOrder(&cooking);
+    CreateArray(&orderTaken);
 
     for (int i = 0; i < 3; i++)
     {
@@ -134,8 +135,8 @@ void dinerdash()
 
         // Display Table
         displayOrder(orderList);
-        displayCooking(cooking);
-        displayReady(cooking);
+        displayCooking(orderTaken);
+        displayReady(orderTaken);
 
         // Validasi Input
         while (!inputValid)
@@ -161,11 +162,11 @@ void dinerdash()
                         {
                             printf("M%d tidak ada di pesanan\n", kodeToInt(masakan));
                         }
-                        else if (!isIn(cooking, kodeToInt(masakan)))
+                        else if (!isMember(orderTaken, kodeToInt(masakan)))
                         {
                             printf("M%d belum dimasak\n", kodeToInt(masakan));
                         }
-                        else if (DURASI(find(cooking, kodeToInt(masakan))) > 0)
+                        else if (DURASI(find(orderTaken, kodeToInt(masakan))) > 0)
                         {
                             printf("M%d belum dapat disajikan karena sedang dimasak\n", kodeToInt(masakan));
                         }
@@ -175,8 +176,8 @@ void dinerdash()
                         }
                         else
                         {
-                            deleteOrderAt(&cooking, &m_del, kodeToInt(masakan));
-                            deleteOrderAt(&orderList, &m_del, kodeToInt(masakan));
+                            DeleteArrayAt(&orderTaken, &m_del, 0);
+                            deleteOrder(&orderList, &m_del);
                             printf("\nBerhasil mengantar M%d\n", kodeToInt(masakan));
                             saldo += HARGA(m_del);
                             served++;
@@ -207,9 +208,9 @@ void dinerdash()
                         }
                         else
                         {
-                            m_add = find(orderList, kodeToInt(masakan));
+                            m_add = findOrder(orderList, kodeToInt(masakan));
                             DURASI(m_add) += 1;
-                            addOrder(&cooking, m_add);
+                            Insert(&orderTaken, m_add);
                             printf("Berhasil memasak M%d\n", kodeToInt(masakan));
                             banyakMasak++;
                             inputValid = true;
@@ -229,23 +230,29 @@ void dinerdash()
 
         if (inputValid)
         {
-            for (int i = 0; i <= IDX_TAIL(cooking); i++)
+            int i = 0;
+            while (i <= COUNT(orderTaken) - 1)
             {
-                if (DURASI(ORDERELMT(cooking, i)) > 0)
+                if (DURASI(ARRELMT(orderTaken, i)) > 0)
                 {
-                    DURASI(ORDERELMT(cooking, i)) -= 1;
-                    if (DURASI(ORDERELMT(cooking, i)) == 0)
+                    DURASI(ARRELMT(orderTaken, i)) -= 1;
+                    if (DURASI(ARRELMT(orderTaken, i)) == 0)
                     {
-                        printf("Makanan M%d telah selesai dimasak\n", NOMOR(ORDERELMT(cooking, i)));
+                        printf("Makanan M%d telah selesai dimasak\n", NOMOR(ARRELMT(orderTaken, i)));
                         banyakMasak--;
                     }
+                    i++;
                 }
                 else
                 {
-                    KETAHANAN(ORDERELMT(cooking, i)) -= 1;
-                    if (KETAHANAN(ORDERELMT(cooking, i)) == 0)
+                    KETAHANAN(ARRELMT(orderTaken, i)) -= 1;
+                    if (KETAHANAN(ARRELMT(orderTaken, i)) == 0)
                     {
-                        deleteOrderAt(&cooking, &m_del, NOMOR(ORDERELMT(cooking, i)));
+                        DeleteArrayAt(&orderTaken, &m_del, i);
+                    }
+                    else
+                    {
+                        i++;
                     }
                 }
             }

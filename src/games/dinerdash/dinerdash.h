@@ -14,9 +14,9 @@
 /* Menampilkan daftar masakan yang terdapat pada antrian pesanan */
 void displayOrder(Order o);
 /* Menampilkan daftar masakan yang sedang dimasak */
-void displayCooking(Order o);
+void displayCooking(Array arr);
 /* Menampilkan daftar masakan yang sudah siap untuk disajikan */
-void displayReady(Order o);
+void displayReady(Array arr);
 
 /* Konversi kode masakan (M<nomor>) menjadi nomor*/
 int kodeToInt(Word kode);

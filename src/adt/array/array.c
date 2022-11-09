@@ -2,172 +2,85 @@
 #include "array.h"
 #include <stdlib.h>
 
-void ArMakeEmpty(Array *T)
+void CreateArray(Array *arr)
 {
-    (*T).Neff = 0;
+    (*arr).Count = 0;
 }
 
-int ArNbElmt(Array T)
+boolean IsArrayEmpty(Array arr)
 {
-    return ((T).Neff);
+    return (arr).Count == 0;
 }
 
-int ArMaxNbEl(Array T)
+boolean IsArrayFull(Array arr)
 {
-    return (IdxMax);
+    return (arr).Count == MaxArrayEl;
 }
 
-IdxType ArGetFirstIdx(Array T)
+void Insert(Array *arr, Masakan val)
 {
-    return (IdxMin);
-}
+    int i = COUNT(*arr);
+    boolean stop = false;
 
-IdxType ArGetLastIdx(Array T)
-{
-    return ArNbElmt(T);
-}
-
-ArElType ArGetElmt(Array T, IdxType i)
-{
-    return T.TI[i];
-}
-
-void ArSetTab(Array Tin, Array *Tout)
-{
-    int i;
-    for (i = IdxMin; i <= IdxMax; i++)
+    while (i != 0 && !stop)
     {
-        (*Tout).TI[i] = Tin.TI[i];
+        if (NOMOR(val) >= NOMOR(ARRELMT(*arr, i - 1)))
+        {
+            stop = true;
+        }
+        else
+        {
+            copyMasakan(&ARRELMT(*arr, i), ARRELMT(*arr, i - 1));
+            i--;
+        }
     }
-    (*Tout).Neff = Tin.Neff;
+
+    copyMasakan(&ARRELMT(*arr, i), val);
+    COUNT(*arr) += 1;
 }
 
-void ArSetEl(Array *T, IdxType i, ArElType v)
+void DeleteArrayAt(Array *arr, Masakan *val, int idx)
 {
-    (*T).TI[i] = v;
-    if (i == ArGetLastIdx(*T) + 1)
+    copyMasakan(val, ARRELMT((*arr), idx));
+
+    for (int i = idx; i < COUNT(*arr) - 1; i++)
     {
-        (*T).Neff++;
+        copyMasakan(&ARRELMT(*arr, i), ARRELMT(*arr, i + 1));
     }
+    COUNT(*arr) -= 1;
 }
 
-void ArSetNeff(Array *T, IdxType N)
+int indexOf(Array arr, KeyType key)
 {
-    (*T).Neff = N;
-}
-
-boolean ArIsIdxValid(Array T, IdxType i)
-{
-    return ((i >= IdxMin) && (i <= IdxMax));
-}
-
-boolean ArIsIdxEff(Array T, IdxType i)
-{
-    return ((i >= ArGetFirstIdx(T)) && (i <= ArGetLastIdx(T)));
-}
-
-boolean ArIsEmpty(Array T)
-{
-    return (ArNbElmt(T) == 0);
-}
-
-boolean ArIsFull(Array T)
-{
-    return (ArNbElmt(T) == ArMaxNbEl(T));
-}
-
-void ArTulisIsi(Array T)
-{
-    if (ArIsEmpty(T))
+    int i = 0;
+    boolean found = false;
+    while (i <= COUNT(arr) - 1 && !found)
     {
-        printf("Tabel kosong\n");
+        if (NOMOR(ARRELMT(arr, i)) == key)
+        {
+            found = true;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    if (found)
+    {
+        return i;
     }
     else
     {
-        int i;
-        for (i = ArGetFirstIdx(T); i <= ArGetLastIdx(T); i++)
-        {
-            printf("%d:%d\n", i, T.TI[i]);
-        }
+        return IDX_UNDEF;
     }
 }
 
-Array ArPlusTab(Array T1, Array T2)
+Masakan find(Array arr, KeyType key)
 {
-    Array Tsum;
-    ArMakeEmpty(&Tsum);
-    Tsum.Neff = T1.Neff;
-    for (int i = ArGetFirstIdx(T1); i <= ArGetLastIdx(T1); i++)
-    {
-        ArSetEl(&Tsum, i, ArGetElmt(T1, i) + ArGetElmt(T2, i));
-    }
-    return Tsum;
+    return ARRELMT(arr, indexOf(arr, key));
 }
 
-Array ArMinusTab(Array T1, Array T2)
+boolean isMember(Array arr, KeyType key)
 {
-    Array Tmin;
-    ArMakeEmpty(&Tmin);
-    Tmin.Neff = T1.Neff;
-    for (int i = ArGetFirstIdx(T1); i <= ArGetLastIdx(T1); i++)
-    {
-        ArSetEl(&Tmin, i, ArGetElmt(T1, i) - ArGetElmt(T2, i));
-    }
-    return Tmin;
-}
-
-ArElType ArValMax(Array T)
-{
-    ArElType max;
-    int i;
-    max = T.TI[ArGetFirstIdx(T)];
-    for (i = (ArGetFirstIdx(T) + 1); i <= (ArGetLastIdx(T)); i++)
-    {
-        if (max < T.TI[i])
-        {
-            max = T.TI[i];
-        }
-    }
-
-    return max;
-}
-
-ArElType ArValMin(Array T)
-{
-    ArElType min;
-    int i;
-    min = T.TI[ArGetFirstIdx(T)];
-    for (i = (ArGetFirstIdx(T) + 1); i <= (ArGetLastIdx(T)); i++)
-    {
-        if (min > T.TI[i])
-        {
-            min = T.TI[i];
-        }
-    }
-
-    return min;
-}
-
-IdxType ArIdxMaxTab(Array T)
-{
-    int i;
-    for (i = (ArGetFirstIdx(T) + 1); i <= (ArGetLastIdx(T)); i++)
-    {
-        if (T.TI[i] == ArValMax(T))
-        {
-            return i;
-        }
-    }
-}
-
-IdxType ArIdxMinTab(Array T)
-{
-    int i;
-    for (i = (ArGetFirstIdx(T) + 1); i <= (ArGetLastIdx(T)); i++)
-    {
-        if (T.TI[i] == ArValMin(T))
-        {
-            return i;
-        }
-    }
+    return indexOf(arr, key) != IDX_UNDEF;
 }

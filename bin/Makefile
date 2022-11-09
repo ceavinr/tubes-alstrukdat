@@ -1,8 +1,8 @@
 main: 
-	gcc ../src/adt/queue/queue.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
+	gcc ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
 
 dinerdash:
-	gcc ../src/games/dinerdash/mdinerdash.c ../src/games/dinerdash/dinerdash.c ../src/adt/order/order.c ../src/adt/string/string.c ../src/adt/mesinkata/mesinkata.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c ../src/gambar.c -o dinerdash
+	gcc ../src/games/dinerdash/mdinerdash.c ../src/adt/array/array.c ../src/games/dinerdash/dinerdash.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c ../src/adt/string/string.c ../src/adt/mesinkata/mesinkata.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c ../src/gambar.c -o dinerdash
 
 rng:
 	gcc ../src/games/rng/mrng.c ../src/games/rng/rng.c -o rng

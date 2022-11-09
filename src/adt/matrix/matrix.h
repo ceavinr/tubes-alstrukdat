@@ -10,10 +10,10 @@
 #define COL_CAP 3
 
 typedef int Index; /* Index baris, kolom */
-typedef char ElType;
+
 typedef struct
 {
-    ElType contents[ROW_CAP][COL_CAP];
+    char contents[ROW_CAP][COL_CAP];
     int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
     int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -44,7 +44,7 @@ Index getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
 boolean isIdxEff(Matrix m, Index i, Index j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, Index i);
+char getElmtDiagonal(Matrix m, Index i);
 /* Mengirimkan elemen m(i,i) */
 
 /* ********** Operasi lain ********** */

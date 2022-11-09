@@ -1,25 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include "order.h"
 
 void CreateOrder(Order *o)
 {
     IDX_HEAD(*o) = IDX_UNDEF;
     IDX_TAIL(*o) = IDX_UNDEF;
-}
-void CreateMasakan(Masakan *m, int nomor)
-{
-    srand(time(NULL));
-
-    NOMOR(*m) = nomor;
-    DURASI(*m) = rand() % 5 + 1;
-    KETAHANAN(*m) = rand() % 5 + 1;
-    HARGA(*m) = rand() % 50001;
-    if (HARGA(*m) < 10000)
-    {
-        HARGA(*m) += 10000;
-    }
 }
 
 boolean isEmpty(Order o)
@@ -37,7 +23,6 @@ int orderLength(Order o)
     return IDX_TAIL(o) + 1;
 }
 
-/* *** Primitif Add/Delete *** */
 void addOrder(Order *o, Masakan val)
 {
     int i = orderLength(*o);
@@ -66,9 +51,9 @@ void addOrder(Order *o, Masakan val)
     IDX_TAIL(*o) += 1;
 }
 
-void deleteOrderAt(Order *o, Masakan *val, KeyType key)
+void deleteOrder(Order *o, Masakan *val)
 {
-    copyMasakan(val, find(*o, key));
+    copyMasakan(val, HEAD(*o));
     if (orderLength(*o) == 1)
     {
         IDX_HEAD(*o) = IDX_UNDEF;
@@ -76,7 +61,7 @@ void deleteOrderAt(Order *o, Masakan *val, KeyType key)
     }
     else
     {
-        for (int i = indexOf(*o, key); i < IDX_TAIL(*o); i++)
+        for (int i = IDX_HEAD(*o); i < IDX_TAIL(*o); i++)
         {
             copyMasakan(&ORDERELMT(*o, i), ORDERELMT(*o, i + 1));
         }
@@ -84,7 +69,7 @@ void deleteOrderAt(Order *o, Masakan *val, KeyType key)
     }
 }
 
-int indexOf(Order o, KeyType key)
+int indexOfOrder(Order o, KeyType key)
 {
     int i = 0;
     boolean found = false;
@@ -109,20 +94,12 @@ int indexOf(Order o, KeyType key)
     }
 }
 
-Masakan find(Order o, KeyType key)
+Masakan findOrder(Order o, KeyType key)
 {
-    return ORDERELMT(o, indexOf(o, key));
+    return ORDERELMT(o, indexOfOrder(o, key));
 }
 
 boolean isIn(Order o, KeyType key)
 {
-    return indexOf(o, key) != IDX_UNDEF;
-}
-
-void copyMasakan(Masakan *m, Masakan val)
-{
-    NOMOR(*m) = NOMOR(val);
-    DURASI(*m) = DURASI(val);
-    KETAHANAN(*m) = KETAHANAN(val);
-    HARGA(*m) = HARGA(val);
+    return indexOfOrder(o, key) != IDX_UNDEF;
 }

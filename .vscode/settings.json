@@ -13,6 +13,7 @@
     "stdio.h": "c",
     "array.h": "c",
     "matrix.h": "c",
-    "tictactoe.h": "c"
+    "tictactoe.h": "c",
+    "masakan.h": "c"
   }
 }
