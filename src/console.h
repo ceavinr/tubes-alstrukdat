@@ -23,14 +23,14 @@ void start(ArrayDin *arrGame, ArrayDin *arrHistory);
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(char *namaFile, ArrayDin *arrGame, ArrayDin *arrHistory);
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory);
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory);
 
 /**
  * Konstruktor
@@ -50,7 +50,7 @@ void deleteGame(ArrayDin *arrGame);
  * Konstruktor
  * I.S. program berjalan
  * F.S. masuk ke dalam game dan menjalankan game yang terdapat dalam queue
-*/
+ */
 void launchGame(Word game);
 
 /**

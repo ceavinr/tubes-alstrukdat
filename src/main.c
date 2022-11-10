@@ -5,7 +5,7 @@ int main()
 {
     /*INISIALISASI*/
     Word command, namaFile;
-    char *namaFileStr;
+    string namaFileStr;
     boolean quit = false, inputValid = false;
     ArrayDin arrGame = MakeArrayDin();
     ArrayDin arrHistory = MakeArrayDin();

@@ -4,22 +4,12 @@
 #include "./games/tictactoe/tictactoe.h"
 #include "./games/towerofhanoi/towerofhanoi.h"
 
-/**
- * Konstruktor
- * I.S. sembarang
- * F.S. Membaca file default dan menyimpan ke dalam array, history bisa kosong namun terdefinisi
- */
 void start(ArrayDin *arrGame, ArrayDin *arrHistory)
 {
     load("default.txt", arrGame, arrHistory);
 }
 
-/**
- * Konstruktor
- * I.S. program berjalan
- * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
- */
-void load(char *namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
 {
     if (stringLength(namaFile) > 0)
     {
@@ -56,12 +46,7 @@ void load(char *namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
     }
 }
 
-/**
- * Konstruktor
- * I.S. program berjalan
- * F.S. menyimpan arraygame dan arrayhistory ke dalam file
- */
-void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
 {
     if (stringLength(namaFile) == 0)
     {
@@ -74,11 +59,11 @@ void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
 
         fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
-        for (int i = 0; i < arrGame.Neff-1; i++)
+        for (int i = 0; i < arrGame.Neff - 1; i++)
         {
             fprintf(pita, "%s\n", arrGame.A[i].TabWord);
         }
-        fprintf(pita, "%s", arrGame.A[arrGame.Neff-1].TabWord);
+        fprintf(pita, "%s", arrGame.A[arrGame.Neff - 1].TabWord);
         /*fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
 
         for (int j = 0; j < arrHistory.Neff - 1; j++)
@@ -93,11 +78,6 @@ void save(char *namaFile, ArrayDin arrGame, ArrayDin arrHistory)
     }
 }
 
-/**
- * Konstruktor
- * I.S. Array game terdefinisi
- * F.S. Game berdasarkan input pengguna tersimpan ke dalam array game
- */
 void newGame(ArrayDin *arrGame)
 {
     Word newGame;
@@ -109,11 +89,6 @@ void newGame(ArrayDin *arrGame)
     printf("Game berhasil ditambahkan\n");
 }
 
-/**
- * Konstruktor
- * I.S. Array game terdefinisi
- * F.S. Game yang dipilih terhapus dari program, default game tidak diizinkan dihapus
- */
 void deleteGame(ArrayDin *arrGame)
 {
     printf("Berikut adalah daftar game yang tersedia\n\n");
@@ -134,11 +109,6 @@ void deleteGame(ArrayDin *arrGame)
     }
 }
 
-/*
- * Konstruktor
- * I.S. program berjalan
- * F.S. masuk ke dalam game dan menjalankan game yang terdapat dalam queue
- */
 void launchGame(Word game)
 {
     printf("\n\nLoading ");
@@ -170,11 +140,6 @@ void launchGame(Word game)
     }
 }
 
-/**
- * Konstruktor
- * I.S. Program berjalan, array Queue dan array history terdefinisi
- * F.S. Game antrian pertama dimainkan, setelah diamainkan dimasukan ke history
- */
 void playGame(Queue *arrQueue, ArrayDin *arrHistory)
 {
     if (!isQueueEmpty(*arrQueue))
@@ -197,11 +162,6 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory)
     }
 }
 
-/**
- * Konstruktor
- * I.S. Program berjalan, array Queue dan array history terdefinisi
- * F.S. Game dalam antrian diskip sebanyak input pengguna
- */
 void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory)
 {
     /*AKUISISI JUMLAH SKIP*/
@@ -238,11 +198,6 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory)
     }
 }
 
-/**
- * Konstruktor
- * I.S. Program berjalan, array Queue dan array game terdefinisi
- * F.S. Game masuk ke dalam daftar antrian
- */
 void queueGame(Queue *arrQueue, ArrayDin arrGame)
 {
     printf("Berikut adalah daftar antrian game-mu\n");
@@ -268,33 +223,18 @@ void queueGame(Queue *arrQueue, ArrayDin arrGame)
     }
 }
 
-/**
- * Konstruktor
- * I.S. Program berjalan
- * F.S. Menampilkan seluruh game yang tersedia
- */
 void listGame(ArrayDin arrGame)
 {
     printf("Berikut adalah daftar game yang tersedia\n");
     PrintArrayDin(arrGame);
 }
 
-/**
- * Konstruktor
- * I.S. Program berjalan
- * F.S. Keluar dari program
- */
 void quitProgram(boolean *flag)
 {
     printf("\nAnda keluar dari game BNMO.\nBye bye ...\n\n");
     *flag = true;
 }
 
-/**
- * Konstruktor
- * I.S. Program berjalan
- * F.S. Menampilkan bantuan interaksi dengan program
- */
 void help()
 {
     printf("\n====================================== HALAMAN HELP ====================================\n");
