@@ -53,11 +53,14 @@ void deleteOrder(Order *o, Masakan *val)
 
 int indexOfOrder(Order o, KeyType key)
 {
+    Masakan m_del;
     int i = 0;
     boolean found = false;
-    while (i <= IDX_TAIL(o) && !found)
+
+    while (!isEmpty(o) && !found)
     {
-        if (NOMOR(ORDERELMT(o, i)) == key)
+        deleteOrder(&o, &m_del);
+        if (NOMOR(m_del) == key)
         {
             found = true;
         }

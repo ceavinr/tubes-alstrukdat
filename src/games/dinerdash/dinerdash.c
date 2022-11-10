@@ -6,15 +6,17 @@
 
 void displayOrder(Order o)
 {
+    Masakan m_del;
     printf("Daftar Pesanan\n");
     printf("Makanan         | Durasi memasak        | Ketahanan     | Harga\n");
     printf("-----------------------------------------------------------------------\n");
-    if (IDX_TAIL(o) != IDX_UNDEF)
+    if (!isEmpty(o))
     {
-        for (int i = 0; i <= IDX_TAIL(o); i++)
+        do
         {
-            printf("M%d              | %d                     | %d             | %d        \n", NOMOR(ORDERELMT(o, i)), DURASI(ORDERELMT(o, i)), KETAHANAN(ORDERELMT(o, i)), HARGA(ORDERELMT(o, i)));
-        }
+            deleteOrder(&o, &m_del);
+            printf("M%d              | %d                     | %d             | %d        \n", NOMOR(m_del), DURASI(m_del), KETAHANAN(m_del), HARGA(m_del));
+        } while (!isEmpty(o));
     }
     else
     {
