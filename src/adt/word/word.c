@@ -21,16 +21,16 @@ void printWord(Word w)
     }
 }
 
-Word stringToWord(char *string)
+Word stringToWord(string s)
 {
     Word w;
 
     int i;
-    for (i = 0; i < stringLength(string); i++)
+    for (i = 0; i < stringLength(s); i++)
     {
-        w.TabWord[i] = string[i];
+        w.TabWord[i] = s[i];
     }
-    w.Length = stringLength(string);
+    w.Length = stringLength(s);
 
     return w;
 }
@@ -44,7 +44,7 @@ void CopyWord(Word *w1, Word w2)
     (*w1).Length = w2.Length;
 }
 
-boolean stringEQWord(Word w, char *c)
+boolean stringEQWord(Word w, string c)
 {
     boolean eq = false;
     if (w.Length == stringLength(c))
@@ -67,12 +67,12 @@ boolean stringEQWord(Word w, char *c)
     return eq;
 }
 
-char *wordToString(Word w)
+string wordToString(Word w)
 {
     int i = 0;
 
-    char *ret = malloc((w.Length - i + 2) * sizeof(char));
-    char *p = ret;
+    string ret = malloc((w.Length - i + 2) * sizeof(char));
+    string p = ret;
 
     while (i < w.Length)
     {

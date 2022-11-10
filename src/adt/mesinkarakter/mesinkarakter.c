@@ -7,9 +7,9 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
-void START(char *savefile)
+void START(string file)
 {
-    pita = fopen(savefile, "r");
+    pita = fopen(file, "r");
     ADV();
 }
 
@@ -24,7 +24,7 @@ void ADV()
         retval = fscanf(pita, "%c", &currentChar);
 
         EOP = (feof(pita));
-        if (EOP)
+        if (IsEOP())
         {
             fclose(pita);
         }

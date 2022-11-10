@@ -1,9 +1,9 @@
 #include "string.h"
 
-int stringLength(char *a)
+int stringLength(string s)
 {
     int i = 0;
-    while (a[i] != '\0')
+    while (s[i] != '\0')
     {
         i++;
     };
@@ -11,10 +11,10 @@ int stringLength(char *a)
     return i;
 };
 
-char *concat(char *s1, char *s2)
+string concat(string s1, string s2)
 {
-    char *ret = malloc((stringLength(s1) + stringLength(s2) + 1) * sizeof(char));
-    char *p = ret;
+    string ret = malloc((stringLength(s1) + stringLength(s2) + 1) * sizeof(char));
+    string p = ret;
     while (*s1 != '\0')
     {
         *p++ = *s1++;

@@ -23,7 +23,7 @@ void IgnoreBlanks();
    F.S. : EndWord = true, dan EOP;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-void STARTWORD(char *savefile);
+void STARTWORD(string file);
 
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,

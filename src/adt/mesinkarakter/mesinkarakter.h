@@ -5,6 +5,7 @@
 #define __MESIN_KAR_H_
 
 #include "../../boolean.h"
+#include "../../adt/string/string.h"
 
 #define MARK '.'
 /* State Mesin */
@@ -15,7 +16,7 @@ extern boolean EOP;
        I.S. : Karakter pada jendela = currentChar, currentChar != feof
        F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
               Jika  pita kosong EOP akan menyala (true) */
-void START(char* savefile);
+void START(string file);
 
 /* Pita dimajukan satu karakter.
        I.S. : Karakter pada jendela = currentChar, currentChar != feof
@@ -28,7 +29,7 @@ void ADV();
 */
 char GetCC();
 
-/* 
+/*
     Mengirimkan true jika currentChar = MARK
 */
 boolean IsEOP();

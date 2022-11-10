@@ -7,17 +7,17 @@ Word currentWord;
 
 void IgnoreBlanks()
 {
-    while (currentChar == BLANK && !EOP)
+    while (currentChar == BLANK && !IsEOP())
     {
         ADV();
     }
 }
 
-void STARTWORD(char *savefile)
+void STARTWORD(string file)
 {
-    START(savefile);
+    START(file);
     IgnoreBlanks();
-    if (EOP)
+    if (IsEOP())
     {
         EndWord = true;
     }
@@ -30,7 +30,7 @@ void STARTWORD(char *savefile)
 
 void ADVWORD()
 {
-    if (EOP)
+    if (IsEOP())
     {
         EndWord = true;
     }
@@ -44,7 +44,7 @@ void ADVWORD()
 void UpdateCurrentWord()
 {
     int i = 0;
-    while ((currentChar != BLANK) && i < NMax && !EOP)
+    while ((currentChar != BLANK) && i < NMax && !IsEOP())
     {
         currentWord.TabWord[i] = currentChar;
         ADV();
@@ -58,7 +58,7 @@ void startInputWord()
 {
     startInput();
     IgnoreBlanks();
-    if (EOP)
+    if (IsEOP())
     {
         EndWord = true;
     }

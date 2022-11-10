@@ -24,7 +24,7 @@ int wordToInt(Word w);
 void printWord(Word w);
 
 /* Mengkonversi string menjadi word */
-Word stringToWord(char *string);
+Word stringToWord(string string);
 
 /*
  Proses: Menyalin isi w2 ke w1
@@ -34,9 +34,9 @@ Word stringToWord(char *string);
 void CopyWord(Word *w1, Word w2);
 
 /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
-boolean stringEQWord(Word w, char *c);
+boolean stringEQWord(Word w, string c);
 
-/* Mengkonversi tipe Word menjadi tipe pointer to char */
-char *wordToString(Word w);
+/* Mengkonversi tipe Word menjadi tipe string */
+string wordToString(Word w);
 
 #endif

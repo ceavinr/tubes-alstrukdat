@@ -5,12 +5,14 @@
 #ifndef KATA_H
 #define KATA_H
 
+typedef char *string; /* Index baris, kolom */
+
 // menerima argumen pointer kepada karakter pertama dari sebuah string yang panjangnya tidak diketahui
 // dan memberikan output berupa panjang string tersebut, dengan batasan string input memiliki karakter
 // '\0' pada akhir string
-int stringLength(char *);
+int stringLength(string s);
 
 /*Mengembalikan string berupa gabungan dari s1 dan s2*/
-char *concat(char *s1, char *s2);
+string concat(string s1, string s2);
 
 #endif

@@ -110,7 +110,10 @@ void towerofhanoi()
             while (!inputValid)
             {
                 Word cek;
-                printf("Masukan input: ");
+
+                printf("Masukan input!\n");
+                printf("Contoh input: 1 3 (Memindahkan disk teratas tower 1 ke tower 3)\n");
+                printf(">> ");
                 startInputWord();
                 akuisisiCommandWord(&from, currentWord, 1);
                 akuisisiCommandWord(&to, currentWord, 2);
@@ -127,7 +130,7 @@ void towerofhanoi()
                 }
                 if (!inputValid)
                 {
-                    printf("Input tidak valid!\n");
+                    printf("Input tidak valid!\n\n");
                 }
             }
 
