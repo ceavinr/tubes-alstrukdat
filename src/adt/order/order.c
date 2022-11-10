@@ -25,30 +25,13 @@ int orderLength(Order o)
 
 void addOrder(Order *o, Masakan val)
 {
-    int i = orderLength(*o);
-    boolean stop = false;
-
     if (isEmpty(*o))
     {
         IDX_HEAD(*o) = 0;
     }
-    else
-    {
-        while (i != IDX_HEAD(*o) && !stop)
-        {
-            if (NOMOR(val) >= NOMOR(ORDERELMT(*o, i - 1)))
-            {
-                stop = true;
-            }
-            else
-            {
-                copyMasakan(&ORDERELMT(*o, i), ORDERELMT(*o, i - 1));
-                i--;
-            }
-        }
-    }
-    copyMasakan(&ORDERELMT(*o, i), val);
+
     IDX_TAIL(*o) += 1;
+    copyMasakan(&TAIL(*o), val);
 }
 
 void deleteOrder(Order *o, Masakan *val)
@@ -57,7 +40,6 @@ void deleteOrder(Order *o, Masakan *val)
     if (orderLength(*o) == 1)
     {
         IDX_HEAD(*o) = IDX_UNDEF;
-        IDX_TAIL(*o) = IDX_UNDEF;
     }
     else
     {
@@ -65,8 +47,8 @@ void deleteOrder(Order *o, Masakan *val)
         {
             copyMasakan(&ORDERELMT(*o, i), ORDERELMT(*o, i + 1));
         }
-        IDX_TAIL(*o) -= 1;
     }
+    IDX_TAIL(*o) -= 1;
 }
 
 int indexOfOrder(Order o, KeyType key)

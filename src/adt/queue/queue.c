@@ -45,16 +45,19 @@ void enqueue(Queue *q, ElType val)
 
 void dequeue(Queue *q, ElType *val)
 {
-    *val = HEAD(*q);
-    for (int i = 0; i < queueLength(*q); i++)
+    CopyWord(val, HEAD(*q));
+    if (queueLength(*q) == 1)
     {
-        CopyWord(&QUEUEELMT(*q, i), QUEUEELMT(*q, i + 1));
-    }
-    IDX_TAIL(*q) -= 1;
-
-    if (queueLength(*q) == 0) {
         IDX_HEAD(*q) = IDX_UNDEF;
     }
+    else
+    {
+        for (int i = IDX_HEAD(*q); i < IDX_TAIL(*q); i++)
+        {
+            CopyWord(&QUEUEELMT(*q, i), QUEUEELMT(*q, i + 1));
+        }
+    }
+    IDX_TAIL(*q) -= 1;
 }
 
 void displayQueue(Queue q)
