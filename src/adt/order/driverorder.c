@@ -44,7 +44,5 @@ int main()
         }
     }
 
-    printf("Harusnya ini order terakhir (indeks 24)\n");
-
     return 0;
 }

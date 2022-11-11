@@ -16,6 +16,12 @@ word:
 order:
 	gcc ../src/adt/order/driverorder.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c -o order
 
+array:
+	gcc ../src/adt/array/driverarray.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c -o array
+
+matrix:
+	gcc ../src/adt/matrix/drivermatrix.c ../src/adt/matrix/matrix.c -o matrix
+
 masakan:
 	gcc ../src/adt/masakan/drivermasakan.c ../src/adt/masakan/masakan.c -o masakan
 
