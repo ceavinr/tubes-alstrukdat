@@ -59,15 +59,15 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
 
         fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
-        for (int i = 0; i < arrGame.Neff; i++)
+       for (int i = 0; i < arrGame.Neff; i++)
         {
-            for (int j=0;j<arrGame.A[i].length-1;j++){
+            for (int j=0;j<arrGame.A[i].Length-1;j++){
                 fprintf(pita, "%c", arrGame.A[i].TabWord[j]);
             }
             if (i<arrGame.Neff-1){
-                fprintf(pita, "%c\n", arrGame.A[i].TabWord[arrGame.A[i].length-1]);
+                fprintf(pita, "%c\n", arrGame.A[i].TabWord[arrGame.A[i].Length-1]);
             }else{
-                fprintf(pita, "%c", arrGame.A[i].TabWord[arrGame.A[i].length-1]);
+                fprintf(pita, "%c", arrGame.A[i].TabWord[arrGame.A[i].Length-1]);
             }
         }
         
