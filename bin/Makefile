@@ -11,7 +11,7 @@ mesin:
 	gcc ../src/adt/mesin/drivermesin.c ../src/adt/mesin/mesinkata.c ../src/adt/string/string.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c -o mesin
 
 word:
-	gcc ../src/adt/word/mword.c ../src/adt/mesin/mesinkata.c ../src/adt/string/string.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c -o word
+	gcc ../src/adt/word/driverword.c ../src/adt/mesin/mesinkata.c ../src/adt/string/string.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c -o word
 
 order:
 	gcc ../src/adt/order/driverorder.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c -o order

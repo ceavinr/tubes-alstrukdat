@@ -14,5 +14,15 @@ int main()
     printWord(dua);
     printf("\nPanjang kata kedua: %d\n", dua.Length);
 
+    printf("\nCEK BERDASARKAN FILE\n");
+    STARTWORD("../data/default.txt");
+    printWord(currentWord);
+    while (!EOP)
+    {
+        ADVWORD();
+        printf("\nCetak Current Word\n");
+        printWord(currentWord);
+    }
+
     return 0;
 }
