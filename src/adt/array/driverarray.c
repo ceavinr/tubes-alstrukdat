@@ -3,21 +3,47 @@
 
 int main()
 {
-    Masakan m, m1;
+    Array arr;
+    Masakan m;
 
-    CreateMasakan(&m, 0);
-    printf("Harusnya sih nomor 0\n");
-    printf("%d\n", NOMOR(m));
+    CreateArray(&arr);
 
-    CreateMasakan(&m1, 2);
-    printf("Harusnya sih nomor 2\n");
-    printf("%d\n", NOMOR(m1));
-
-    copyMasakan(&m1, m);
-    printf("Habis dicopy m ke m1 harusnya mereka jadi sama\n");
-    if (NOMOR(m1) == NOMOR(m))
+    if (IsArrayEmpty(arr))
     {
-        printf("Tuh kan sama\n");
+        printf("arr kosong!\n");
+    }
+
+    for (int i = 0; i < MaxArrayEl; i++)
+    {
+        CreateMasakan(&m, i);
+        Insert(&arr, m);
+    }
+
+    if (IsArrayFull(arr))
+    {
+        printf("arr nya full gan\n");
+    }
+    else
+    {
+        printf("arr nya blom full gan\n");
+    }
+
+    DeleteArrayAt(&arr, &m, 0);
+    if (!IsArrayFull(arr))
+    {
+        printf("arr nya blom full gan, soalnya dah didelete\n");
+    }
+
+    Insert(&arr, m);
+
+    if (isMember(arr, NOMOR(m)))
+    {
+        printf("Indeks dari M%d adalah %d\n", NOMOR(m), indexOf(arr, NOMOR(m)));
+    }
+    if (isMember(arr, 2))
+    {
+        Masakan m_cari = find(arr, 2);
+        printf("Indeks dari masakan yang dicari (M2) adalah %d\n", indexOf(arr, NOMOR(m_cari)));
     }
 
     return 0;
