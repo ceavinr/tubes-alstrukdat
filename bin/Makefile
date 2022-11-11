@@ -13,6 +13,12 @@ mesinkata:
 word:
 	gcc ../src/adt/word/mword.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o word
 
+order:
+	gcc ../src/adt/order/driverorder.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c -o order
+
+masakan:
+	gcc ../src/adt/masakan/drivermasakan.c ../src/adt/masakan/masakan.c -o masakan
+
 tictactoe:
 	gcc ../src/adt/matrix/matrix.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/string/string.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/games/tictactoe/mtictactoe.c ../src/games/tictactoe/tictactoe.c -o tictactoe
 
