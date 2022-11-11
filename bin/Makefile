@@ -22,6 +22,9 @@ masakan:
 arraydin:
 	gcc ../src/adt/arraydin/driverarraydin.c ../src/adt/arraydin/arraydin.c ../src/adt/mesinkata/mesinkata.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/string/string.c ../src/adt/word/word.c -o arraydin
 
+queue:
+	gcc ../src/adt/queue/driverqueue.c ../src/adt/queue/queue.c ../src/adt/mesinkata/mesinkata.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/string/string.c ../src/adt/word/word.c -o queue
+
 tictactoe:
 	gcc ../src/adt/matrix/matrix.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/string/string.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/games/tictactoe/mtictactoe.c ../src/games/tictactoe/tictactoe.c -o tictactoe
 
