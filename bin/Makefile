@@ -19,6 +19,9 @@ order:
 masakan:
 	gcc ../src/adt/masakan/drivermasakan.c ../src/adt/masakan/masakan.c -o masakan
 
+arraydin:
+	gcc ../src/adt/arraydin/driverarraydin.c ../src/adt/arraydin/arraydin.c ../src/adt/mesinkata/mesinkata.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/string/string.c ../src/adt/word/word.c -o arraydin
+
 tictactoe:
 	gcc ../src/adt/matrix/matrix.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/string/string.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/games/tictactoe/mtictactoe.c ../src/games/tictactoe/tictactoe.c -o tictactoe
 

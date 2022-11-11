@@ -48,11 +48,6 @@ int Length(ArrayDin array)
     return NEFF(array);
 }
 
-ElType Get(ArrayDin array, IdxType i)
-{
-    return array.A[i];
-}
-
 void InsertAt(ArrayDin *array, ElType el, IdxType i)
 {
     IdxType j;
