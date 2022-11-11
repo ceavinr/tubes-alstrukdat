@@ -1,5 +1,5 @@
 #include "word.h"
-#include "../mesinkata/mesinkata.h"
+#include "../mesin/mesinkata.h"
 
 int main()
 {

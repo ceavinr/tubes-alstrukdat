@@ -5,7 +5,7 @@
 #define __MESINKATA_H__
 
 #include "../../boolean.h"
-#include "../mesinkarakter/mesinkarakter.h"
+#include "mesinkarakter.h"
 #include "../word/word.h"
 
 #define BLANK '\n'

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "towerofhanoi.h"
-#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesin/mesinkata.h"
 #include "../../adt/word/word.h"
 
 void PrintDisk(Stack S, int i, int maxWidth)

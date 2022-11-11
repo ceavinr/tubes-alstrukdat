@@ -1,7 +1,7 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
-#include "../mesinkata/mesinkata.h"
+#include "../mesin/mesinkata.h"
 #include "../word/word.h"
 
 // Boolean
