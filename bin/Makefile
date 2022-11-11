@@ -1,3 +1,4 @@
+# Kalau mau ngerun main perlu cd ke bin dulu, jangan langsung make -C bin main
 main: 
 	gcc ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
 
@@ -7,6 +8,7 @@ dinerdash:
 rng:
 	gcc ../src/games/rng/mrng.c ../src/games/rng/rng.c -o rng
 
+# Kalau mau ngerun mesin perlu cd ke bin dulu, jangan langsung make -C bin mesin
 mesin:
 	gcc ../src/adt/mesin/drivermesin.c ../src/adt/mesin/mesinkata.c ../src/adt/string/string.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c -o mesin
 
