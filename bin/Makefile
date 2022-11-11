@@ -13,6 +13,9 @@ mesinkata:
 word:
 	gcc ../src/adt/word/driverword.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o word
 
+string:
+	gcc ../src/adt/string/driverstring.c ../src/adt/string/string.c -o string
+
 order:
 	gcc ../src/adt/order/driverorder.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c -o order
 
