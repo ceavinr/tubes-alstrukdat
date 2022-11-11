@@ -59,12 +59,6 @@ boolean IsMember(ArrayDin array, ElType el);
 int Length(ArrayDin array);
 
 /**
- * Mengembalikan elemen array L yang ke-I (indeks lojik).
- * Prekondisi: array tidak kosong, i di antara 0..Length(array).
- */
-ElType Get(ArrayDin array, IdxType i);
-
-/**
  * menambahkan elemen baru di index ke-i
  * I.S. array terdefinisi, i di antara 0..Length(array).
  * F.S. array telah ditambahkan pada elemen ke-i
