@@ -8,10 +8,10 @@ rng:
 	gcc ../src/games/rng/mrng.c ../src/games/rng/rng.c -o rng
 
 mesinkata:
-	gcc ../src/adt/mesinkata/mmesinkata.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o mesinkata
+	gcc ../src/adt/mesinkata/drivermesinkata.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o mesinkata
 
 word:
-	gcc ../src/adt/word/mword.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o word
+	gcc ../src/adt/word/driverword.c ../src/adt/mesinkata/mesinkata.c ../src/adt/string/string.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/word/word.c -o word
 
 order:
 	gcc ../src/adt/order/driverorder.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c -o order
