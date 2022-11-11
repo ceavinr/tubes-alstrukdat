@@ -6,7 +6,7 @@ dinerdash:
 	gcc ../src/games/dinerdash/mdinerdash.c ../src/adt/array/array.c ../src/games/dinerdash/dinerdash.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c ../src/adt/string/string.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/gambar.c -o dinerdash
 
 rng:
-	gcc ../src/games/rng/mrng.c ../src/games/rng/rng.c -o rng
+	gcc ../src/games/rng/mrng.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/games/rng/rng.c -o rng
 
 # Kalau mau ngerun mesin perlu cd ke bin dulu, jangan langsung make -C bin mesin
 mesin:
