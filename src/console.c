@@ -83,15 +83,23 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
     }
 }
 
-void newGame(ArrayDin *arrGame)
+void createGame(ArrayDin *arrGame)
 {
     Word newGame;
 
     printf("Masukkan nama game yang akan ditambahkan: ");
     startInputWord();
     newGame = currentWord;
-    InsertLast(arrGame, newGame);
-    printf("Game berhasil ditambahkan\n");
+    if (!IsMember(*arrGame, newGame))
+    {    
+        InsertLast(arrGame, newGame);
+        printf("Game berhasil ditambahkan\n");
+    }
+    else
+    {
+        printf("Game sudah tersedia.\n");
+    }
+    
 }
 
 void deleteGame(ArrayDin *arrGame)
@@ -171,35 +179,41 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory)
 {
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
-    akuisisiCommandWord(&numQueueString, command, 2);
+    akuisisiCommandWord(&numQueueString, command, 3);
 
-    int numQueue = wordToInt(numQueueString);
-
-    if (numQueue >= 0 && numQueue < queueLength(*arrQueue) && !isQueueEmpty(*arrQueue))
-    {
-        Word firstGame;
-        printf("Berikut adalah daftar Game-mu\n");
-        displayQueue(*arrQueue);
-
-        /*DELETE BERDASARKAN SKIP SEKALIGUS INISIALISASI GAME PERTAMA YANG SIAP DIMAINKAN*/
-        int i;
-        for (i = 0; i <= numQueue; i++)
-        {
-            dequeue(arrQueue, &firstGame);
-        }
-
-        launchGame(firstGame);
-
-        InsertAt(arrHistory, firstGame, Length(*arrHistory));
-    }
-    else if (numQueue >= queueLength(*arrQueue) || isQueueEmpty(*arrQueue))
-    {
-        *arrQueue = MakeQueue();
-        printf("Tidak ada permainan lagi dalam daftar game-mu.\n");
+    if (numQueueString.Length == 0) { /*jika masukan kosong*/
+        printf("Masukan banyak skip tidak valid\n");
     }
     else
     {
-        printf("\nNomor permainan tidak valid, silahkan masukan nomor game pada list.\n");
+        int numQueue = wordToInt(numQueueString);
+
+        if (numQueue >= 0 && numQueue < queueLength(*arrQueue) && !isQueueEmpty(*arrQueue))
+        {
+            Word firstGame;
+            printf("Berikut adalah daftar Game-mu\n");
+            displayQueue(*arrQueue);
+
+            /*DELETE BERDASARKAN SKIP SEKALIGUS INISIALISASI GAME PERTAMA YANG SIAP DIMAINKAN*/
+            int i;
+            for (i = 0; i <= numQueue; i++)
+            {
+                dequeue(arrQueue, &firstGame);
+            }
+
+            launchGame(firstGame);
+
+            InsertAt(arrHistory, firstGame, Length(*arrHistory));
+        }
+        else if (numQueue >= queueLength(*arrQueue) || isQueueEmpty(*arrQueue))
+        {
+            *arrQueue = MakeQueue();
+            printf("Tidak ada permainan lagi dalam daftar game-mu.\n");
+        }
+        else /*jika masukan negatif*/
+        {
+            printf("Masukan banyak skip tidak valid\n");
+        }
     }
 }
 
@@ -253,7 +267,7 @@ void help()
     printf("6. DELETE GAME      : Menghapus daftar game\n");
     printf("7. QUEUE GAME       : Menambahkan game ke daftar antrian yang akan dimainkan\n");
     printf("8. PLAY GAME        : Memainkan game pada daftar antrian paling atas\n");
-    printf("9. SKIPGAME <n>     : Memainkan game dengan mendahului beberapa game di atasnya\n");
+    printf("9. SKIP GAME <n>     : Memainkan game dengan mendahului beberapa game di atasnya\n");
     printf("10. QUIT            : Keluar dari program\n");
     printf("11. HELP            : Panduan penggunaan\n");
 }

@@ -36,6 +36,9 @@ void CopyWord(Word *w1, Word w2);
 /*Mengembalikan Nilai true jika string dengan tabword bernilai sama*/
 boolean stringEQWord(Word w, string c);
 
+/*Mengembalikan Nilai true jika w1 dengan w2 bernilai sama*/
+boolean IsEQWord(Word w1, Word w2);
+
 /* Mengkonversi tipe Word menjadi tipe string */
 string wordToString(Word w);
 

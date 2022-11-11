@@ -68,6 +68,7 @@ int main()
     while (!quit)
     {
         Word cek;
+        Word cek2;
 
         printf("\n============================ SELAMAT DATANG DI ============================\n");
         gambarBNMO();
@@ -78,7 +79,7 @@ int main()
         printf("4. DELETE GAME\n");
         printf("5. QUEUE GAME\n");
         printf("6. PLAY GAME\n");
-        printf("7. SKIPGAME <n>\n");
+        printf("7. SKIP GAME <n>\n");
         printf("8. QUIT\n");
         printf("9. HELP\n");
 
@@ -86,6 +87,9 @@ int main()
         startInputWord();
         CopyWord(&command, currentWord);
         akuisisiCommandWord(&cek, command, 1);
+
+        /*Handle "SKIP GAME"*/
+        akuisisiCommandWord(&cek2, command, 2);
 
         if (stringEQWord(cek, "SAVE"))
         {
@@ -95,7 +99,7 @@ int main()
         }
         else if (stringEQWord(command, "CREATE GAME"))
         {
-            newGame(&arrGame);
+            createGame(&arrGame);
         }
         else if (stringEQWord(command, "LIST GAME"))
         {
@@ -113,7 +117,7 @@ int main()
         {
             playGame(&arrQueue, &arrHistory);
         }
-        else if (stringEQWord(cek, "SKIPGAME"))
+        else if (stringEQWord(cek, "SKIP") && stringEQWord(cek2, "GAME"))
         {
             skipGame(command, &arrQueue, &arrHistory);
         }

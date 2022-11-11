@@ -23,6 +23,26 @@ boolean IsEmpty(ArrayDin array)
     return NEFF(array) == 0;
 }
 
+boolean IsMember(ArrayDin array, ElType el)
+{
+    boolean member = false;
+    int i = 0;
+    while (!member && i<Length(array))
+    {
+        if (IsEQWord(array.A[i], el))
+        {
+            member = true;
+        }
+        else
+        {
+            i++;
+        }
+        
+    }
+    
+    return member;
+}
+
 int Length(ArrayDin array)
 {
     return NEFF(array);

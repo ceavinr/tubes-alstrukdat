@@ -37,7 +37,7 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory);
  * I.S. Array game terdefinisi
  * F.S. Game berdasarkan input pengguna tersimpan ke dalam array game
  */
-void newGame(ArrayDin *arrGame);
+void createGame(ArrayDin *arrGame);
 
 /**
  * Konstruktor

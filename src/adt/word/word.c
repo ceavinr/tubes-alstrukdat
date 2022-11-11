@@ -3,12 +3,22 @@
 int wordToInt(Word w)
 {
     int val = 0;
+    boolean negatif = false;
     int i;
     for (i = 0; i < w.Length; i++)
     {
-        val = val * 10 + (w.TabWord[i] - 48);
+        if (i==0 && w.TabWord[0] == '-') {
+            negatif = true;
+        } else {
+            val = val * 10 + (w.TabWord[i] - 48);
+        }
     }
 
+    if (negatif)
+    {
+        val = val*-1;
+    }
+    
     return val;
 }
 
@@ -54,6 +64,29 @@ boolean stringEQWord(Word w, string c)
         while (i < w.Length && eq)
         {
             if (w.TabWord[i] != c[i])
+            {
+                eq = false;
+            }
+            else
+            {
+                i++;
+            }
+        }
+    }
+
+    return eq;
+}
+
+boolean IsEQWord(Word w1, Word w2)
+{
+    boolean eq = false;
+    if (w1.Length == w2.Length)
+    {
+        eq = true;
+        int i = 0;
+        while (i < w1.Length && eq)
+        {
+            if (w1.TabWord[i] != w2.TabWord[i])
             {
                 eq = false;
             }

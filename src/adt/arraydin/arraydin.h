@@ -41,8 +41,16 @@ void DeallocateArrayDin(ArrayDin *array);
 /**
  * Fungsi untuk mengetahui apakah suatu array kosong.
  * Prekondisi: array terdefinisi
+ * mengembalikan true jika array kosong
  */
 boolean IsEmpty(ArrayDin array);
+
+/**
+ * Fungsi untuk mengetahui apakah suatu elemen terdapat pada array.
+ * Prekondisi: array terdefinisi
+ * mengembalikan true jika elemen ada di dalam array
+ */
+boolean IsMember(ArrayDin array, ElType el);
 
 /**
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.
@@ -57,46 +65,52 @@ int Length(ArrayDin array);
 ElType Get(ArrayDin array, IdxType i);
 
 /**
- * Fungsi untuk menambahkan elemen baru di index ke-i
- * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ * menambahkan elemen baru di index ke-i
+ * I.S. array terdefinisi, i di antara 0..Length(array).
+ * F.S. array telah ditambahkan pada elemen ke-i
  */
 void InsertAt(ArrayDin *array, ElType el, IdxType i);
 
 /**
- * Fungsi untuk menambahkan elemen baru di akhir array.
- * Prekondisi: array terdefinisi
+ * menambahkan elemen baru di akhir array.
+ * I.S. array terdefinisi
+ * F.S. array telah ditambahkan pada elemen terakhir
  */
 void InsertLast(ArrayDin *array, ElType el);
 
 /**
- * Fungsi untuk menambahkan elemen baru di awal array.
- * Prekondisi: array terdefinisi
+ * menambahkan elemen baru di awal array.
+ * I.S. array terdefinisi
+ * F.S. array telah ditambahkan pada elemen pertama
  */
 void InsertFirst(ArrayDin *array, ElType el);
 
 /**
- * Fungsi untuk menghapus elemen di index ke-i ArrayDin
- * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ * menghapus elemen di index ke-i ArrayDin
+ * I.S. array terdefinisi, i di antara 0..Length(array).
+ * F.S. array telah dihapus pada elemen ke-i
  */
 void DeleteAt(ArrayDin *array, IdxType i);
 
 /**
- * Fungsi untuk menghapus elemen terakhir ArrayDin
- * Prekondisi: array tidak kosong
+ * menghapus elemen terakhir ArrayDin
+ * I.S. array terdefinisi
+ * F.S. array telah dihapus pada elemen terakhir
  */
 void DeleteLast(ArrayDin *array);
 
 /**
- * Fungsi untuk menghapus elemen pertama ArrayDin
- * Prekondisi: array tidak kosong
+ * menghapus elemen pertama ArrayDin
+ * I.S. array terdefinisi
+ * F.S. array telah dihapus pada elemen pertama
  */
 void DeleteFirst(ArrayDin *array);
 
 /**
- * Fungsi untuk melakukan print suatu ArrayDin.
- * Print dilakukan dengan format: Daftar Game
+ * melakukan print suatu ArrayDin.
+ * I.S. array terdefinisi
+ * F.S. Print dilakukan dengan format: Daftar Game
  * dan diakhiri newline.
- * Prekondisi: array terdefinisi
  */
 void PrintArrayDin(ArrayDin array);
 
