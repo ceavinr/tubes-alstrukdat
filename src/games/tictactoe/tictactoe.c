@@ -79,7 +79,7 @@ boolean isBoardFull(Matrix papan)
     int i = 0;
     while (i < count(papan) && full)
     {
-        if (MATRIXELMT(papan, i / 3, i % 3) != 'O' && MATRIXELMT(papan, i / 3, i % 3) != 'X')
+        if (MATRIXELMT(papan, i / ROWS(papan), i % COLS(papan)) != 'O' && MATRIXELMT(papan, i / ROWS(papan), i % COLS(papan)) != 'X')
         {
             full = false;
         }
@@ -116,7 +116,7 @@ void tictactoe()
     CreateMatrix(&papan, 3, 3);
     for (int i = 0; i < count(papan); i++)
     {
-        MATRIXELMT(papan, i / 3, i % 3) = i + 1 + '0';
+        MATRIXELMT(papan, i / ROWS(papan), i % COLS(papan)) = i + 1 + '0';
     }
 
     int player = 1;

@@ -1,6 +1,40 @@
-# KELOMPOK 13INOMCUK
+# PROGRAM BNMO
 
-### Pre-requisite
+```
+                              @
+                      @@******************@@@@.                         KELOMPOK 13INOMCUK
+             @#*************************************@@@
+      @*********************************@&//////////////                18221162 Ceavin Rufus De Prayer Purba
+     @*************************@%%////////////@@.     @//               18221118 Ardhan Nur Urfan
+     #((((((((((((((((((@//////////&@*.             .//@                18221084 Rei Arriel Clyfton
+     (.................(////@               @@@     .@//                18221046 Vincent Winarta
+    @.....@@@@@@@@@@...(////@.     @@@      @@@     .@//                18221128 Fadhlan Nazhif Azizy
+     (....@@..@@..@@...(////@.     @@@             .@//%%               18219048 Dwiky Hared Darmawan
+     @.....@@@@@@@@....(@////.         *****       ..//@
+     @.....@@@@@@@@@...(&////@                  @//////@
+     @........@@@......((/////.        @///////////////@
+     @.....@@@@@@@@@...((@//////////////@@@@@@///@@////@@      $$
+     #.....@@@@@@@@@....((/////@@@@@@@/////////////////@/@    @//@
+      &.........@@@@.....(//////////////////@/////@@///@//@   @//@
+      @.........@@@@.....(@////////////////@@@///@@@@//@@///////@
+      @....@@@@@@@@@.....(//////@@////////////@@//@@///@  @///@
+      *......@@@@@.......(@/////@@//////////@@@@@@/////@   @@@
+       (...@@/////@@.....(@/////////////////@@@@@@////@
+       @...@@/////@@.....(//////////@@@@//////@@////@
+       @...(@((//@.......((//@@@@///////////////@@
+        @...(@///@........(@//////////////&@
+          @.(@///@........(@////////////@(((
+             @///@@@@@((((((((@//       @(((
+             @///    @(((               @(((@@(
+              @@&    @(((
+                     @(((@@@
+```
+
+## Deskripsi Program
+
+BNMO merupakan sebuah permainan berbasis CLI yang dibuat menggunakan bahasa pemrograman C. Beberapa kegunaan dari BNMO antara lain memainkan game, menambahkan game, menghapus game, dan mengurutkan game yang akan dimainkan.
+
+## Pre-requisite
 
 - MinGW
 
@@ -9,42 +43,37 @@
 1.  Main Program (Alternatif 1)
 
     ```
-    mingw32-make -C bin main
-    ./bin/main
+    mingw32-make -C bin
+    cd bin
+    ./main
     ```
 
-2.  Main Program (Alternatif 2)
-
-    ```
-    gcc ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesinkarakter/mesinkarakter.c ../src/adt/mesinkata/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
-    ```
-
-    kemudian run main.exe dengan cara membuka file .exe (bukan menjalankan melalui terminal)
-
-3.  RNG
+2.  RNG
 
     ```
     mingw32-make -C bin rng
     ./bin/rng
     ```
 
-4.  Diner Dash
+3.  Diner Dash
 
     ```
     mingw32-make -C bin dinerdash
     ./bin/dinerdash
     ```
 
-5.  Tower of Hanoi
+4.  Tower of Hanoi
 
     ```
     mingw32-make -C bin towerofhanoi
     ./bin/towerofhanoi
     ```
 
-6.  Tic Tac Toe
+5.  Tic Tac Toe
 
     ```
     mingw32-make -C bin tictactoe
     ./bin/tictactoe
     ```
+
+Untuk Linux seharusnya hanya mengubah `mingw32-make` menjadi `make`

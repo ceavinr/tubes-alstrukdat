@@ -26,15 +26,37 @@ int main()
         if (stringEQWord(command, "START"))
         {
             start(&arrGame, &arrHistory);
-            printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+            if (!IsEmpty(arrGame))
+            {
+                printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+                inputValid = true;
+            }
+            else
+            {
+                printf("Gagal membaca file.\n");
+            }
             inputValid = true;
         }
         else if (stringEQWord(command, "LOAD"))
         {
             akuisisiCommandWord(&namaFile, currentWord, 2);
-            load(wordToString(namaFile), &arrGame, &arrHistory);
-            printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
-            inputValid = true;
+            if (namaFile.Length > 0)
+            {
+                load(wordToString(namaFile), &arrGame, &arrHistory);
+                if (!IsEmpty(arrGame))
+                {
+                    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+                    inputValid = true;
+                }
+                else
+                {
+                    printf("Gagal membaca file.\n");
+                }
+            }
+            else
+            {
+                printf("Gagal membaca file.\n\n");
+            }
         }
         else
         {

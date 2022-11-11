@@ -11,38 +11,31 @@ void start(ArrayDin *arrGame, ArrayDin *arrHistory)
 
 void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
 {
-    if (stringLength(namaFile) > 0)
-    {
-        *arrGame = MakeArrayDin();
-        *arrHistory = MakeArrayDin();
-        STARTWORD(concat("../data/", namaFile));
+    *arrGame = MakeArrayDin();
+    *arrHistory = MakeArrayDin();
+    STARTWORD(concat("../data/", namaFile));
 
-        if (!EOP)
+    if (!EOP)
+    {
+        int count = wordToInt(currentWord);
+        int i;
+        for (i = 0; i < count; i++)
         {
-            int count = wordToInt(currentWord);
-            int i;
-            for (i = 0; i < count; i++)
-            {
-                ADVWORD();
-                InsertAt(arrGame, currentWord, i);
-            }
             ADVWORD();
+            InsertAt(arrGame, currentWord, i);
         }
-
-        if (!EOP)
-        {
-            int count = wordToInt(currentWord);
-            int j;
-            for (j = 0; j < count; j++)
-            {
-                ADVWORD();
-                InsertAt(arrHistory, currentWord, j);
-            }
-        }
+        ADVWORD();
     }
-    else
+
+    if (!EOP)
     {
-        printf("Gagal membaca file.\n\n");
+        int count = wordToInt(currentWord);
+        int j;
+        for (j = 0; j < count; j++)
+        {
+            ADVWORD();
+            InsertAt(arrHistory, currentWord, j);
+        }
     }
 }
 
@@ -59,18 +52,23 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
 
         fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
-       for (int i = 0; i < arrGame.Neff; i++)
+        for (int i = 0; i < arrGame.Neff; i++)
         {
-            for (int j=0;j<arrGame.A[i].Length-1;j++){
+            for (int j = 0; j < arrGame.A[i].Length - 1; j++)
+            {
                 fprintf(pita, "%c", arrGame.A[i].TabWord[j]);
             }
-            if (i<arrGame.Neff-1){
-                fprintf(pita, "%c\n", arrGame.A[i].TabWord[arrGame.A[i].Length-1]);
-            }else{
-                fprintf(pita, "%c", arrGame.A[i].TabWord[arrGame.A[i].Length-1]);
+            if (i < arrGame.Neff - 1)
+            {
+                fprintf(pita, "%c\n", arrGame.A[i].TabWord[arrGame.A[i].Length - 1]);
+            }
+            else
+            {
+                fprintf(pita, "%c", arrGame.A[i].TabWord[arrGame.A[i].Length - 1]);
             }
         }
-        
+
+        // Tadinya buat nampilin history
         /*fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
 
         for (int j = 0; j < arrHistory.Neff - 1; j++)
