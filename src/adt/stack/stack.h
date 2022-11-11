@@ -1,7 +1,3 @@
-/* File : stack.h */
-/* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
-/* TOP adalah alamat elemen puncak */
-/* Implementasi dalam bahasa C dengan alokasi statik */
 #ifndef STACK_H
 #define STACK_H
 
@@ -18,8 +14,8 @@ typedef int address; /* indeks tabel */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct
 {
-    infotype T[MaxEl]; /* tabel penyimpan elemen */
-    address TOP;       /* alamat TOP: elemen puncak */
+        infotype T[MaxEl]; /* tabel penyimpan elemen */
+        address TOP;       /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
@@ -43,19 +39,21 @@ void CreateStack(Stack *S);
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 boolean IsStackEmpty(Stack S);
-boolean IsStackFull(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
+boolean IsStackFull(Stack S);
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack *S, infotype X, boolean *succeed);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh. Succeed bernilai false */
-/* F.S. Bila nilai elemen TOP lebih besar dari X, X menjadi TOP yang baru, TOP bertambah 1, succeed diubah menjadi true. */
+/* F.S. Bila nilai elemen TOP lebih besar dari X, X menjadi TOP yang baru, TOP bertambah 1, succeed diubah menjadi true;
+        Bila nilai elemen TOP lebih kecil dari X, succeed diubah menjadi false */
+void Push(Stack *S, infotype X, boolean *succeed);
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack *S, infotype *X, boolean *succeed);
 /* Menghapus X dari Stack S. */
 /* I.S. S mungkin kosong. Succeed bernilai false */
-/* F.S. Bila tabel penampung elemen tidak kosong, X adalah nilai elemen TOP yang lama, TOP berkurang 1, succeed diubah menjadi true */
+/* F.S. Bila tabel penampung elemen tidak kosong, X adalah nilai elemen TOP yang lama, TOP berkurang 1, succeed diubah menjadi true;
+        Bila tabel penampung elemen kosong, succeed diubah menjadi false */
+void Pop(Stack *S, infotype *X, boolean *succeed);
 
 #endif

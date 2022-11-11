@@ -21,6 +21,9 @@ string:
 order:
 	gcc ../src/adt/order/driverorder.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c -o order
 
+stack:
+	gcc ../src/adt/stack/driverstack.c ../src/adt/stack/stack.c -o stack
+
 array:
 	gcc ../src/adt/array/driverarray.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c -o array
 

@@ -31,6 +31,10 @@ void Push(Stack *S, infotype X, boolean *succeed)
             InfoTop(*S) = X;
             (*succeed) = true;
         }
+        else
+        {
+            (*succeed) = false;
+        }
     }
 }
 
@@ -41,5 +45,9 @@ void Pop(Stack *S, infotype *X, boolean *succeed)
         (*X) = InfoTop(*S);
         Top(*S) -= 1;
         (*succeed) = true;
+    }
+    else
+    {
+        (*succeed) = false;
     }
 }
