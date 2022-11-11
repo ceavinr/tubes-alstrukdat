@@ -6,7 +6,7 @@
 #include "../../boolean.h"
 #include "../../adt/array/array.h"
 #include "../../adt/order/order.h"
-#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesin/mesinkata.h"
 #include "../../adt/word/word.h"
 
 /* *** Display *** */

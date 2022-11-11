@@ -8,8 +8,8 @@
 #include "./adt/arraydin/arraydin.h"
 #include "./adt/queue/queue.h"
 #include "./adt/word/word.h"
-#include "./adt/mesinkata/mesinkata.h"
-#include "./adt/mesinkarakter/mesinkarakter.h"
+#include "./adt/mesin/mesinkata.h"
+#include "./adt/mesin/mesinkarakter.h"
 
 /**
  * Konstruktor

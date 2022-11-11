@@ -1,7 +1,7 @@
 #ifndef TICTACTOE_H
 #define TICTACTOE_H
 #include "../../boolean.h"
-#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesin/mesinkata.h"
 #include "../../adt/matrix/matrix.h"
 #include "../../adt/word/word.h"
 

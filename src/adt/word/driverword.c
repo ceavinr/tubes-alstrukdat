@@ -1,5 +1,5 @@
 #include "word.h"
-#include "../mesinkata/mesinkata.h"
+#include "../mesin/mesinkata.h"
 
 int main()
 {
@@ -40,9 +40,12 @@ int main()
     printf("\n");
 
     printf("\nCEK IsEQWord\n");
-    if (IsEQWord(iniW, iniW2)) {
+    if (IsEQWord(iniW, iniW2))
+    {
         printf("IniW dan IniW2 samaa\n");
-    } else {
+    }
+    else
+    {
         printf("Yahh kita berbeda...\n");
     }
 

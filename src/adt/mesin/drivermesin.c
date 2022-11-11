@@ -3,16 +3,16 @@
 
 int main()
 {
-    Word satu;
-    printf("CEK BERDASARKAN INPUT: \n");
+    Word satu, dua;
+    printf("Tulis 2 kata kak: ");
     startInputWord();
-    printf("\nTes cek panjang WORD\n");
-    printf("%d\n", currentWord.Length);
-    printf("\nAkuisisi kata ke-1\n");
+    printf("Panjang kata total: %d\n", currentWord.Length);
     akuisisiCommandWord(&satu, currentWord, 1);
-    printf("Tes printWord\n");
+    akuisisiCommandWord(&dua, currentWord, 2);
     printWord(satu);
-    printf("\n");
+    printf("\nPanjang kata pertama: %d\n", satu.Length);
+    printWord(dua);
+    printf("\nPanjang kata kedua: %d\n", dua.Length);
 
     printf("\nCEK BERDASARKAN FILE\n");
     STARTWORD("../data/default.txt");
@@ -23,5 +23,6 @@ int main()
         printf("\nCetak Current Word\n");
         printWord(currentWord);
     }
-    
+
+    return 0;
 }
