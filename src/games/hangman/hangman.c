@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <time.h>
-#include "../../adt/mesin/mesinkarakter.h"
-#include "../../adt/mesin/mesinkata.h"
-#include "../../adt/arraydin/arraydin.h"
-#include "../../adt/word/word.h"
-#include "../../adt/string/string.h"
+#include "../../adt/mesin/mesinkarakter.c"
+#include "../../adt/mesin/mesinkata.c"
+#include "../../adt/arraydin/arraydin.c"
+#include "../../adt/word/word.c"
+#include "../../adt/string/string.c"
 
 char* kata_random()
 {
@@ -32,11 +32,12 @@ char* kata_random()
 
     printf("%d\n", x);
     int j;
-    char* kata = malloc (sizeof (char) * BUFFER(arrKata)[x].Length);
+    char* kata = malloc (sizeof (char) * BUFFER(arrKata)[x].Length+1);
     for (j = 0; j < BUFFER(arrKata)[x].Length; j++)
     {
         kata[j] = BUFFER(arrKata)[x].TabWord[j];
     }
+    kata[BUFFER(arrKata)[x].Length] = '\0';
     
     return kata;
 }
