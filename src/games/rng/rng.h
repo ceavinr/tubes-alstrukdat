@@ -5,6 +5,6 @@
 #include "../../adt/word/word.h"
 
 /*Fungsi untuk memulai game rng*/
-void rng();
+int rng();
 
 #endif

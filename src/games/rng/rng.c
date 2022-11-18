@@ -4,12 +4,13 @@
 #include "rng.h"
 
 /*Fungsi untuk memulai game rng*/
-void rng()
+int rng()
 {
-    int x, tebakan;
+    int x, tebakan, count;
     Word input;
     boolean check;
 
+    count = 0;
     check = false;
 
     srand(time(NULL));
@@ -38,7 +39,11 @@ void rng()
         {
             printf("Lebih kecil\n");
         }
+        count++;
     }
 
+    int score = 20 - count;
+
     printf("\nYa, X adalah %d.\n", x);
+    return score;
 }
