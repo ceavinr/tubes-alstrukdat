@@ -14,6 +14,7 @@
     "array.h": "c",
     "matrix.h": "c",
     "tictactoe.h": "c",
-    "masakan.h": "c"
+    "masakan.h": "c",
+    "towerofhanoi.h": "c"
   }
 }
