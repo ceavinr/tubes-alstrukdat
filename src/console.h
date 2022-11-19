@@ -10,6 +10,8 @@
 #include "./adt/word/word.h"
 #include "./adt/mesin/mesinkata.h"
 #include "./adt/mesin/mesinkarakter.h"
+#include "./adt/set/set.h"
+#include "./adt/map/map.h"
 
 /**
  * Konstruktor
@@ -94,5 +96,12 @@ void quitProgram(boolean *flag);
  * F.S. Menampilkan bantuan interaksi dengan program
  */
 void help();
+
+/**
+ * Konstruktor
+ * I.S. setGame dan mapGame terdefinisi
+ * F.S. Menampilkan leaderboard sesuai format dalam spesifikasi
+ */
+void printLeaderboard(Set setGame, Map mapGame);
 
 #endif

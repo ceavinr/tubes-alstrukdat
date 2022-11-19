@@ -1,21 +1,21 @@
 #include "set.h"
 
-void CreateEmpty(Set *S)
+void CreateEmptySet(Set *S)
 {
     (*S).Count = Nil;
 }
 
-boolean IsEmpty(Set S)
+boolean IsEmptySet(Set S)
 {
     return S.Count == Nil;
 }
 
-boolean IsFull(Set S)
+boolean IsFullSet(Set S)
 {
     return S.Count == MaxEl;
 }
 
-void Insert(Set *S, infotype Elmt)
+void InsertInSet(Set *S, infotype Elmt)
 {
     if (IsMember(*S, Elmt))
     {
@@ -25,7 +25,7 @@ void Insert(Set *S, infotype Elmt)
     (*S).Count++;
 }
 
-void Delete(Set *S, infotype Elmt)
+void DeleteInSet(Set *S, infotype Elmt)
 {
     boolean found = false;
     address idx = 0, iterator;
@@ -51,7 +51,7 @@ void Delete(Set *S, infotype Elmt)
     (*S).Count--;
 }
 
-boolean IsMember(Set S, infotype Elmt)
+boolean IsMemberInSet(Set S, infotype Elmt)
 {
     boolean found = false;
     address idx = 0, iterator;

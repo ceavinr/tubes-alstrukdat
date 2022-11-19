@@ -35,18 +35,18 @@ typedef struct
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
-void CreateEmpty(Map *M);
+void CreateEmptyMap(Map *M);
 
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
-boolean IsEmpty(Map M);
+boolean IsEmptyMap(Map M);
 
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
-boolean IsFull(Map M);
+boolean IsFullMap(Map M);
 
 /* Mengembalikan nilai value dengan key k dari M */
-valuetype Value(Map M, keytype k);
+valuetype ValueInMap(Map M, keytype k);
 
 /* Menambahkan Elmt sebagai elemen HashMap M. */
 /* I.S. M mungkin kosong, M tidak penuh
@@ -54,16 +54,16 @@ valuetype Value(Map M, keytype k);
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, value akan direplace 
         index yang digunakan untuk menyimpan v adalah hash dari k
         gunakan open addressing linear probing dengan interval 1 jika index sudah terisi*/
-void Insert(Map *M, keytype k, valuetype v);
+void InsertInMap(Map *M, keytype k, valuetype v);
 
 /* Menghapus Elmt dari Map M. */
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
-void Delete(Map *M, keytype k);
+void DeleteInMap(Map *M, keytype k);
 
 /* Mengembalikan true jika k adalah member dari M */
-boolean IsMember(Map M, keytype k);
+boolean IsMemberInMap(Map M, keytype k);
 
 /* *** Index Penyimpanan dengan modulo *** */
 /* Menghasilkan indeks penyimpanan dengan operasi modulo ke MaxEl */
@@ -74,6 +74,6 @@ keytype ToKey(Word w);
 
 /*Mengembalikan index pada M dengan key bernilai k, 
 apabila tidak ditemukan akan mengembalikan index yang memungkinkan untuk diisi (key dan value undefined)*/
-address Index(Map M, keytype k);
+address IndexInMap(Map M, keytype k);
 
 #endif

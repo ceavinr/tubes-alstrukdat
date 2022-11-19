@@ -1,6 +1,6 @@
 #include "map.h"
 
-void CreateEmpty(Map *M)
+void CreateEmptyMap(Map *M)
 {
     (*M).Count = Nil;
     int i;
@@ -10,28 +10,28 @@ void CreateEmpty(Map *M)
     }
 }
 
-boolean IsEmpty(Map M)
+boolean IsEmptyMap(Map M)
 {
     return M.Count == Nil;
 }
 
-boolean IsFull(Map M)
+boolean IsFullMap(Map M)
 {
     return M.Count == MaxEl;
 }
 
-valuetype Value(Map M, keytype k)
+valuetype ValueInMap(Map M, keytype k)
 {
-    address idx = Index(M, k);
+    address idx = IndexInMap(M, k);
     return M.Elements[idx].Value;
 }
 
-void Insert(Map *M, keytype k, valuetype v)
+void InsertInMap(Map *M, keytype k, valuetype v)
 {
     if (!IsFull(*M))
     {
-        address idx = Index(*M, k);
-        if (IsMember(*M, k))
+        address idx = IndexInMap(*M, k);
+        if (IsMemberInMap(*M, k))
         {
             (*M).Elements[idx].Value = v;
         } else {
@@ -42,11 +42,11 @@ void Insert(Map *M, keytype k, valuetype v)
     }
 }
 
-void Delete(Map *M, keytype k)
+void DeleteInMap(Map *M, keytype k)
 {
-    if (IsMember(*M, k))
+    if (IsMemberInMap(*M, k))
     {
-        address idx = Index(*M, k);
+        address idx = IndexInMap(*M, k);
         (*M).Elements[idx].Key = Undefined;
         (*M).Elements[idx].Value = Undefined;
         (*M).Count--;
@@ -54,9 +54,9 @@ void Delete(Map *M, keytype k)
     
 }
 
-boolean IsMember(Map M, keytype k)
+boolean IsMemberInMap(Map M, keytype k)
 {
-    address idx = Index(M, k);
+    address idx = IndexInMap(M, k);
     return M.Elements[idx].Key != Undefined;
 }
 
@@ -76,7 +76,7 @@ keytype ToKey(Word w)
     return key;
 }
 
-address Index(Map M, keytype k)
+address IndexInMap(Map M, keytype k)
 {
     boolean found = false;
     address hashed = Hash(k);
