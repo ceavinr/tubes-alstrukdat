@@ -20,16 +20,10 @@ typedef struct
 /* S.Count = jumlah element Set */
 /* S.Elements = tempat penyimpanan element Set */
 
-/* ********* Prototype ********* */
-
-/* *** Konstruktor/Kreator *** */
-
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
 /* Ciri Set kosong : count bernilai Nil */
 void CreateEmpty(Set *S);
-
-/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
 
 /* Mengirim true jika Set S kosong*/
 /* Ciri Set kosong : count bernilai Nil */
@@ -38,8 +32,6 @@ boolean IsEmpty(Set S);
 /* Mengirim true jika Set S penuh */
 /* Ciri Set penuh : count bernilai MaxEl */
 boolean IsFull(Set S);
-
-/* ********** Operator Dasar Set ********* */
 
 /* Menambahkan Elmt sebagai elemen Set S. */
 /* I.S. S mungkin kosong, S tidak penuh
