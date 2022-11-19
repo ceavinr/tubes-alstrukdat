@@ -5,11 +5,11 @@ int main()
 {
     Masakan m, m1;
 
-    CreateMasakan(&m, 0);
+    CreateMasakanRandom(&m, 0);
     printf("Harusnya sih nomor 0\n");
     printf("%d\n", NOMOR(m));
 
-    CreateMasakan(&m1, 2);
+    CreateMasakanRandom(&m1, 2);
     printf("Harusnya sih nomor 2\n");
     printf("%d\n", NOMOR(m1));
 

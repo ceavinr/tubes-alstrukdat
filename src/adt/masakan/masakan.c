@@ -3,7 +3,7 @@
 #include <time.h>
 #include "masakan.h"
 
-void CreateMasakan(Masakan *m, int nomor)
+void CreateMasakanRandom(Masakan *m, int nomor)
 {
     srand(time(NULL));
 
