@@ -3,6 +3,11 @@
 void CreateEmpty(Map *M)
 {
     (*M).Count = Nil;
+    int i;
+    for (i=0; i<MaxEl; i++) {
+        (*M).Elements[i].Key = Undefined;
+        (*M).Elements[i].Value = Undefined;
+    }
 }
 
 boolean IsEmpty(Map M)
@@ -17,64 +22,67 @@ boolean IsFull(Map M)
 
 valuetype Value(Map M, keytype k)
 {
-    boolean found = false;
-    address idx = 0, iterator;
-
-    while (!found && idx < M.Count) {
-        if (M.Elements[idx].Key == k) {
-            found = true;
-        }
-        else {
-            idx++;
-        }
-    }
-
+    address idx = Index(M, k);
     return M.Elements[idx].Value;
 }
 
 void Insert(Map *M, keytype k, valuetype v)
 {
-    if (IsMember(*M, k)) {
-        return;
+    if (!IsFull(*M))
+    {
+        address idx = Index(*M, k);
+        if (IsMember(*M, k))
+        {
+            (*M).Elements[idx].Value = v;
+        } else {
+            (*M).Elements[idx].Value = v;
+            (*M).Elements[idx].Key = k;
+            (*M).Count++;
+        }
     }
-
-    (*M).Elements[(*M).Count].Key = k;
-    (*M).Elements[(*M).Count].Value = v;
-    (*M).Count++;
 }
 
 void Delete(Map *M, keytype k)
 {
-    boolean found = false;
-    address idx = 0, iterator;
-
-    if (!IsMember(*M, k)) {
-        return;
+    if (IsMember(*M, k))
+    {
+        address idx = Index(*M, k);
+        (*M).Elements[idx].Key = Undefined;
+        (*M).Elements[idx].Value = Undefined;
+        (*M).Count--;
     }
-
-    while (!found && (idx < (*M).Count)) {
-        if ((*M).Elements[idx].Key == k) {
-            found = true;
-        }
-        else {
-            idx++;
-        }
-    }
-
-    for (iterator = (idx + 1); iterator < (*M).Count; iterator++) {
-        (*M).Elements[iterator - 1].Key = (*M).Elements[iterator].Key;
-        (*M).Elements[iterator - 1].Value = (*M).Elements[iterator].Value;
-    }
-
-    (*M).Count--;
+    
 }
 
 boolean IsMember(Map M, keytype k)
 {
-    boolean found = false;
-    address idx = 0, iterator;
+    address idx = Index(M, k);
+    return M.Elements[idx].Key != Undefined;
+}
 
-    while (!found && idx < M.Count) {
+address Hash(keytype k)
+{
+    return k%MaxEl;
+}
+
+keytype ToKey(Word w)
+{
+    int key = 0;
+    int i;
+    for (i=0;  i<w.Length; i++)
+    {
+        key += w.TabWord[i]-48;
+    }
+    return key;
+}
+
+address Index(Map M, keytype k)
+{
+    boolean found = false;
+    address hashed = Hash(k);
+    address idx = 0;
+
+    while (!found && M.Elements[Hash(hashed+idx)].Key != Undefined) {
         if (M.Elements[idx].Key == k) {
             found = true;
         }
@@ -83,5 +91,8 @@ boolean IsMember(Map M, keytype k)
         }
     }
 
-    return found;
+    if (found)
+    {
+        return Hash(hashed+idx);
+    }
 }
