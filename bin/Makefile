@@ -1,6 +1,6 @@
 # Kalau mau ngerun main perlu cd ke bin dulu, jangan langsung make -C bin main
 main: 
-	gcc ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
+	gcc ../src/adt/map/map.c ../src/adt/set/set.c ../src/adt/scoreboard/scoreboard.c ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/console.c ../src/main.c ../src/gambar.c -o main
 
 dinerdash:
 	gcc ../src/games/dinerdash/mdinerdash.c ../src/adt/array/array.c ../src/games/dinerdash/dinerdash.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c ../src/adt/string/string.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/gambar.c -o dinerdash

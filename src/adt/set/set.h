@@ -4,15 +4,15 @@
 #include "../../boolean.h"
 #include "../word/word.h"
 
-#define Nil 0
-#define MaxEl 100
+#define NilSet 0
+#define MaxElSet 100
 
 typedef Word infotypeSet;
 typedef int address;
 
 typedef struct
 {
-    infotypeSet Elements[MaxEl];
+    infotypeSet Elements[MaxElSet];
     address Count;
 } Set;
 

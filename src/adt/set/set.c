@@ -2,17 +2,17 @@
 
 void CreateEmptySet(Set *S)
 {
-    (*S).Count = Nil;
+    (*S).Count = NilSet;
 }
 
 boolean IsEmptySet(Set S)
 {
-    return S.Count == Nil;
+    return S.Count == NilSet;
 }
 
 boolean IsFullSet(Set S)
 {
-    return S.Count == MaxEl;
+    return S.Count == MaxElSet;
 }
 
 void InsertInSet(Set *S, infotypeSet Elmt)

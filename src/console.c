@@ -285,7 +285,7 @@ void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard r
     printf("\nDAFTAR SCOREBOARD:\n");
     printf("0. ALL\n");
     printf("1. RNG\n");
-    printf("2. Diner DASH\n");
+    printf("2. Diner Dash\n");
     printf("3. HANGMAN\n");
     printf("4. TOWER OF HANOI\n");
     printf("5. SNAKE ON METEOR\n");
@@ -295,46 +295,65 @@ void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard r
     num_reset = wordToInt(currentWord);
 
     if (num_reset >= 0 && num_reset<=5)
-    {
-        switch (num_reset)
+    {       
+        boolean valid = false;
+        while (!valid)
         {
-        case 0:
-            CreateEmptyMap(&(towerofhanoi).mapGame);
-            CreateEmptySet(&(towerofhanoi).setGame);
+            printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD %s (YA/TIDAK)? ", num_reset==1?"RNG": num_reset==2?"DINER DASH": num_reset==3?"HANGMAN": num_reset==4?"TOWER OF HANOI": num_reset==5?"SNAKE": "ALL");
+            startInputWord();
+            if (stringEQWord(currentWord, "YA") || stringEQWord(currentWord, "TIDAK"))
+            {
+                valid = true;
+            } else {
+                printf("\nMasukan tidak valid coba lagi.\n");
+            }
+        }
+        
 
-            CreateEmptyMap(&(dinerdash).mapGame);
-            CreateEmptySet(&(dinerdash).setGame);
+        if (stringEQWord(currentWord, "YA")) 
+        {
+            switch (num_reset)
+            {
+            case 0:
+                CreateEmptyMap(&(towerofhanoi).mapGame);
+                CreateEmptySet(&(towerofhanoi).setGame);
 
-            CreateEmptyMap(&(rng).mapGame);
-            CreateEmptySet(&(rng).setGame);
-            break;
-        case 1:
-            CreateEmptyMap(&(rng).mapGame);
-            CreateEmptySet(&(rng).setGame);
-            break;
-        case 2:
-            CreateEmptyMap(&(dinerdash).mapGame);
-            CreateEmptySet(&(dinerdash).setGame);
-            break;
-        case 3:
-            //hangman
-            break;
-        case 4:
-            CreateEmptyMap(&(towerofhanoi).mapGame);
-            CreateEmptySet(&(towerofhanoi).setGame);
-            break;
-        case 5:
-            //snake
-            break;
-        default:
-            break;
+                CreateEmptyMap(&(dinerdash).mapGame);
+                CreateEmptySet(&(dinerdash).setGame);
+
+                CreateEmptyMap(&(rng).mapGame);
+                CreateEmptySet(&(rng).setGame);
+                break;
+            case 1:
+
+                CreateEmptyMap(&(rng).mapGame);
+                CreateEmptySet(&(rng).setGame);
+                break;
+            case 2:
+                CreateEmptyMap(&(dinerdash).mapGame);
+                CreateEmptySet(&(dinerdash).setGame);
+                break;
+            case 3:
+                //hangman
+                break;
+            case 4:
+                CreateEmptyMap(&(towerofhanoi).mapGame);
+                CreateEmptySet(&(towerofhanoi).setGame);
+                break;
+            case 5:
+                //snake
+                break;
+            default:
+                break;
+            }
+            printf("\nScoreboard berhasil di-reset.\n");
+        } else
+        {
+            printf("\nScoreboard tidak jadi di-reset.\n");
         }
     }
     else
     {
-        printf("Scoreboard tidak tersedia.\n");
+        printf("\nScoreboard tidak tersedia.\n");
     }
-    
-    
-
 }

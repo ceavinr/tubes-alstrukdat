@@ -6,8 +6,8 @@
 
 // #define false 0
 // #define true 1
-#define Nil 0
-#define MaxEl 100
+#define NilMap 0
+#define MaxElMap 100
 #define Undefined -9999
 
 // typedef int bool;
@@ -23,7 +23,7 @@ typedef struct
 
 typedef struct
 {
-	infotypeMap Elements[MaxEl];
+	infotypeMap Elements[MaxElMap];
 	address Count;
 } Map;
 

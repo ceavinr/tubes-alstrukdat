@@ -2,9 +2,9 @@
 
 void CreateEmptyMap(Map *M)
 {
-    (*M).Count = Nil;
+    (*M).Count = NilMap;
     int i;
-    for (i=0; i<MaxEl; i++) {
+    for (i=0; i<MaxElMap; i++) {
         (*M).Elements[i].Key = Undefined;
         (*M).Elements[i].Value = Undefined;
     }
@@ -12,12 +12,12 @@ void CreateEmptyMap(Map *M)
 
 boolean IsEmptyMap(Map M)
 {
-    return M.Count == Nil;
+    return M.Count == NilMap;
 }
 
 boolean IsFullMap(Map M)
 {
-    return M.Count == MaxEl;
+    return M.Count == MaxElMap;
 }
 
 valuetype ValueInMap(Map M, keytype k)
@@ -62,7 +62,7 @@ boolean IsMemberInMap(Map M, keytype k)
 
 address Hash(keytype k)
 {
-    return k%MaxEl;
+    return k%MaxElMap;
 }
 
 keytype ToKey(Word w)
