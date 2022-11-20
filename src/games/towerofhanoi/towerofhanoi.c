@@ -8,7 +8,7 @@ void PrintDisk(Stack S, int i, int maxWidth)
 {
     if (i <= Top(S))
     {
-        int pjgDisk = 4 * S.T[i] + 3;
+        int pjgDisk = 2 * S.T[i] + 1;
 
         for (int k = 0; k < (maxWidth - pjgDisk) / 2; k++)
         {
@@ -29,7 +29,7 @@ void PrintDisk(Stack S, int i, int maxWidth)
         {
             printf(" ");
         }
-        printf("*");
+        printf("|");
         for (int k = 0; k < maxWidth / 2; k++)
         {
             printf(" ");
@@ -43,20 +43,39 @@ void PrintDisk(Stack S, int i, int maxWidth)
 
 void DisplayState(Stack S1, Stack S2, Stack S3, int height)
 {
-    int disk, pjgDisk;
+    int disk, pjgDisk, tebal = 1;
 
     for (int i = height; i >= 0; i--)
     {
-        for (int j = 0; j < 2; j++)
+        for (int j = 0; j < tebal; j++)
         {
-            PrintDisk(S1, i, height * 4 + 3);
-            PrintDisk(S2, i, height * 4 + 3);
-            PrintDisk(S3, i, height * 4 + 3);
+            PrintDisk(S1, i, height * 2 + 1);
+            PrintDisk(S2, i, height * 2 + 1);
+            PrintDisk(S3, i, height * 2 + 1);
 
             printf("\n");
         }
     }
-    printf("\n");
+    for (int i = 0; i < height * 6 + 9; i++)
+    {
+        if (i == height)
+        {
+            printf("A");
+        }
+        else if (i == height * 3 + 4)
+        {
+            printf("B");
+        }
+        else if (i == height * 5 + 8)
+        {
+            printf("C");
+        }
+        else
+        {
+            printf(" ");
+        }
+    }
+    printf("\n\n");
 }
 
 void towerofhanoi()
@@ -74,7 +93,7 @@ void towerofhanoi()
 
     while (!inputValid)
     {
-        printf("Banyak disk (3-8): ");
+        printf("Banyak disk (3-9): ");
         startInputWord();
         akuisisiCommandWord(&banyak, currentWord, 1);
         if (wordToInt(banyak) >= 3 && wordToInt(banyak) <= 9)
@@ -102,7 +121,7 @@ void towerofhanoi()
         {
             gameOn = false;
             printf("Berhasil! Kamu menyelesaikan dalam %d langkah.\n", moves);
-            printf("Skor: %d\n", (int)minimumMoves * 100 / moves);
+            printf("Skor: %.1f\n", (float)minimumMoves * 10 / moves - 0.5 * (9 - wordToInt(banyak)));
         }
 
         if (gameOn)
@@ -111,18 +130,23 @@ void towerofhanoi()
             {
                 Word cek;
 
-                printf("Masukan input!\n");
-                printf("Contoh input: 1 3 (Memindahkan disk teratas tower 1 ke tower 3)\n");
-                printf(">> ");
+                printf("Tiang asal: ");
                 startInputWord();
                 akuisisiCommandWord(&from, currentWord, 1);
-                akuisisiCommandWord(&to, currentWord, 2);
-                akuisisiCommandWord(&cek, currentWord, 3);
-                if (cek.Length == 0 && from.Length > 0 && to.Length > 0)
+                akuisisiCommandWord(&cek, currentWord, 2);
+                printf("Tiang tujuan: ");
+                startInputWord();
+                akuisisiCommandWord(&to, currentWord, 1);
+                if (cek.Length < currentWord.Length)
                 {
-                    if (wordToInt(from) >= 1 && wordToInt(from) <= 3 && wordToInt(to) >= 1 && wordToInt(to) <= 3)
+                    akuisisiCommandWord(&cek, currentWord, 2);
+                }
+
+                if (cek.Length == 0 && from.Length == 1 && to.Length == 1)
+                {
+                    if (from.TabWord[0] >= 'A' && from.TabWord[0] <= 'C' && to.TabWord[0] >= 'A' && to.TabWord[0] <= 'C')
                     {
-                        if (wordToInt(from) != wordToInt(to))
+                        if (!IsEQWord(from, to))
                         {
                             inputValid = true;
                         }
@@ -135,18 +159,18 @@ void towerofhanoi()
             }
 
             succeed = false;
-            if (stringEQWord(from, "1"))
+            if (stringEQWord(from, "A"))
             {
                 Pop(&tower1, &diskDel, &succeed);
 
                 if (succeed)
                 {
                     succeed = false;
-                    if (stringEQWord(to, "2"))
+                    if (stringEQWord(to, "B"))
                     {
                         Push(&tower2, diskDel, &succeed);
                     }
-                    else if (stringEQWord(to, "3"))
+                    else if (stringEQWord(to, "C"))
                     {
                         Push(&tower3, diskDel, &succeed);
                     }
@@ -163,21 +187,21 @@ void towerofhanoi()
                 }
                 else
                 {
-                    printf("Tower 1 kosong!\n");
+                    printf("Tower A kosong!\n");
                 }
             }
-            else if (stringEQWord(from, "2"))
+            else if (stringEQWord(from, "B"))
             {
                 Pop(&tower2, &diskDel, &succeed);
 
                 if (succeed)
                 {
                     succeed = false;
-                    if (stringEQWord(to, "1"))
+                    if (stringEQWord(to, "A"))
                     {
                         Push(&tower1, diskDel, &succeed);
                     }
-                    else if (stringEQWord(to, "3"))
+                    else if (stringEQWord(to, "C"))
                     {
                         Push(&tower3, diskDel, &succeed);
                     }
@@ -194,21 +218,21 @@ void towerofhanoi()
                 }
                 else
                 {
-                    printf("Tower 2 kosong!\n");
+                    printf("Tower B kosong!\n");
                 }
             }
-            else if (stringEQWord(from, "3"))
+            else if (stringEQWord(from, "C"))
             {
                 Pop(&tower3, &diskDel, &succeed);
 
                 if (succeed)
                 {
                     succeed = false;
-                    if (stringEQWord(to, "1"))
+                    if (stringEQWord(to, "A"))
                     {
                         Push(&tower1, diskDel, &succeed);
                     }
-                    else if (stringEQWord(to, "2"))
+                    else if (stringEQWord(to, "B"))
                     {
                         Push(&tower2, diskDel, &succeed);
                     }
@@ -225,7 +249,7 @@ void towerofhanoi()
                 }
                 else
                 {
-                    printf("Tower 3 kosong!\n");
+                    printf("Tower C kosong!\n");
                 }
             }
         }

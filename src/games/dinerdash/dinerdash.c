@@ -259,7 +259,7 @@ void dinerdash()
                 }
             }
 
-            CreateMasakan(&m, NOMOR(TAIL(orderList)) + 1);
+            CreateMasakanRandom(&m, NOMOR(TAIL(orderList)) + 1);
             addOrder(&orderList, m);
         }
 

@@ -23,7 +23,7 @@ typedef struct
 /* I.S. sembarang */
 /* F.S. Sebuah m terbentuk dengan nilai durasi, ketahanan, dan harga random */
 /* Proses : Melakukan alokasi, membuat sebuah m */
-void CreateMasakan(Masakan *m, KeyType nomor);
+void CreateMasakanRandom(Masakan *m, KeyType nomor);
 
 /* *** Selektor SET : Mengubah nilai masakan *** */
 
