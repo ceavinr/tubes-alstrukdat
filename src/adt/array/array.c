@@ -50,13 +50,13 @@ void DeleteArrayAt(Array *arr, Masakan *val, int idx)
     COUNT(*arr) -= 1;
 }
 
-int indexOf(Array arr, KeyType key)
+int indexOf(Array arr, int nomor)
 {
     int i = 0;
     boolean found = false;
     while (i <= COUNT(arr) - 1 && !found)
     {
-        if (NOMOR(ARRELMT(arr, i)) == key)
+        if (NOMOR(ARRELMT(arr, i)) == nomor)
         {
             found = true;
         }
@@ -75,12 +75,12 @@ int indexOf(Array arr, KeyType key)
     }
 }
 
-Masakan find(Array arr, KeyType key)
+Masakan find(Array arr, int nomor)
 {
-    return ARRELMT(arr, indexOf(arr, key));
+    return ARRELMT(arr, indexOf(arr, nomor));
 }
 
-boolean isMember(Array arr, KeyType key)
+boolean isMember(Array arr, int nomor)
 {
-    return indexOf(arr, key) != IDX_UNDEF;
+    return indexOf(arr, nomor) != IDX_UNDEF;
 }

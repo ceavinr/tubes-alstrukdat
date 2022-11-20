@@ -5,7 +5,7 @@
 BinTree Tree(nodeinfotype Akar, BinTree L, BinTree R)
 {
     BinTree result = AlokNode(Akar);
-    if (result != Nil)
+    if (result != NULL)
     {
         Left(result) = L;
         Right(result) = R;
@@ -24,7 +24,7 @@ BinTree BuildBalanceTree(int n)
     BinTree L, R;
     if (n == 0)
     {
-        return Nil;
+        return NULL;
     }
     else
     {
@@ -39,11 +39,11 @@ addrNode AlokNode(nodeinfotype X)
 {
     addrNode result;
     result = (addrNode)malloc(sizeof(TreeNode));
-    if (result != Nil)
+    if (result != NULL)
     {
         Akar(result) = X;
-        Left(result) = Nil;
-        Right(result) = Nil;
+        Left(result) = NULL;
+        Right(result) = NULL;
     }
     return result;
 }
@@ -55,14 +55,14 @@ void DealokNode(addrNode P)
 
 boolean IsTreeEmpty(BinTree P)
 {
-    return P == Nil;
+    return P == NULL;
 }
 
 boolean IsTreeOneElmt(BinTree P)
 {
     if (!IsTreeEmpty(P))
     {
-        return ((Left(P) == Nil) && (Right(P) == Nil));
+        return ((Left(P) == NULL) && (Right(P) == NULL));
     }
     else
     {
@@ -74,7 +74,7 @@ boolean IsUnerLeft(BinTree P)
 {
     if (!IsTreeEmpty(P))
     {
-        return ((Left(P) != Nil) && (Right(P) == Nil));
+        return ((Left(P) != NULL) && (Right(P) == NULL));
     }
     else
     {
@@ -86,7 +86,7 @@ boolean IsUnerRight(BinTree P)
 {
     if (!IsTreeEmpty(P))
     {
-        return ((Left(P) == Nil) && (Right(P) != Nil));
+        return ((Left(P) == NULL) && (Right(P) != NULL));
     }
     else
     {
@@ -98,7 +98,7 @@ boolean IsBiner(BinTree P)
 {
     if (!IsTreeEmpty(P))
     {
-        return ((Left(P) != Nil) && (Right(P) != Nil));
+        return ((Left(P) != NULL) && (Right(P) != NULL));
     }
     else
     {
@@ -182,7 +182,7 @@ addrNode SearchDaun(BinTree P, nodeinfotype X)
 {
     if (IsTreeEmpty(P))
     {
-        return Nil;
+        return NULL;
     }
     else if (IsTreeOneElmt(P))
     {
@@ -192,13 +192,13 @@ addrNode SearchDaun(BinTree P, nodeinfotype X)
         }
         else
         {
-            return Nil;
+            return NULL;
         }
     }
     else
     {
         addrNode ret = SearchDaun(Left(P), X);
-        if (ret != Nil)
+        if (ret != NULL)
         {
             return ret;
         }
@@ -349,7 +349,7 @@ void DelDaunTerkiri(BinTree *P, nodeinfotype *X)
     {
         *X = Akar(*P);
         BinTree N = *P;
-        *P = Nil;
+        *P = NULL;
         DealokNode(N);
     }
     else if (IsUnerRight(*P))
@@ -371,7 +371,7 @@ void DelDaun(BinTree *P, nodeinfotype X)
             if (Akar(*P) == X)
             {
                 addrNode Q = *P;
-                *P = Nil;
+                *P = NULL;
                 DealokNode(Q);
             }
         }
@@ -410,7 +410,7 @@ void InsSearch(BinTree *P, nodeinfotype X)
 {
     if (IsTreeEmpty(*P))
     {
-        MakeTree(X, Nil, Nil, P);
+        MakeTree(X, NULL, NULL, P);
     }
     else if (X == Akar(*P))
     {
@@ -431,7 +431,7 @@ void DelBtree(BinTree *P, nodeinfotype X)
     if (Akar(*P) == X)
     {
         addrNode Q = *P;
-        *P = Nil;
+        *P = NULL;
         DealokNode(Q);
     }
     else if (X < Akar(*P))
