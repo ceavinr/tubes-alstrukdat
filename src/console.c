@@ -101,7 +101,7 @@ void createGame(ArrayDin *arrGame)
 void deleteGame(ArrayDin *arrGame)
 {
     printf("Berikut adalah daftar game yang tersedia\n\n");
-    PrintArrayDin(*arrGame);
+    PrintArrayDin(*arrGame, (*arrGame).Neff);
     printf("\nMasukan game yang akan dihapus: ");
     startInputWord();
 
@@ -220,7 +220,7 @@ void queueGame(Queue *arrQueue, ArrayDin arrGame)
     displayQueue(*arrQueue);
 
     printf("\nBerikut adalah daftar game yang tersedia\n");
-    PrintArrayDin(arrGame);
+    PrintArrayDin(arrGame, arrGame.Neff);
     printf("\nNomor Game yang mau ditambahkan ke antrian:  ");
     startInputWord();
 
@@ -241,7 +241,7 @@ void queueGame(Queue *arrQueue, ArrayDin arrGame)
 void listGame(ArrayDin arrGame)
 {
     printf("Berikut adalah daftar game yang tersedia\n");
-    PrintArrayDin(arrGame);
+    PrintArrayDin(arrGame, arrGame.Neff);
 }
 
 void quitProgram(boolean *flag)
@@ -356,4 +356,55 @@ void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard r
     {
         printf("\nScoreboard tidak tersedia.\n");
     }
+}
+
+void showHistory(Word command, ArrayDin arrHistory)
+{
+    Word banyakHistory;
+    akuisisiCommandWord(&banyakHistory, command, 2);
+    if (banyakHistory.Length > 0)
+    {
+        int banyakHistory_int = wordToInt(banyakHistory);
+        if (banyakHistory_int >= 0)
+        {
+            printf("Berikut adalah daftar Game yang telah dimainkan\n");
+            PrintArrayDin(arrHistory, banyakHistory_int);
+        }
+        else
+        {
+            printf("History gagal ditampilkan.\n");
+        }
+    }
+    else
+    {
+        printf("History gagal ditampilkan.\n");
+    }
+}
+
+void resetHistory(ArrayDin *arrHistory)
+{
+    boolean valid = false;
+    while (!valid)
+    {
+        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? ");
+        startInputWord();
+        if (stringEQWord(currentWord, "YA") || stringEQWord(currentWord, "TIDAK"))
+        {
+            valid = true;
+        } else {
+            printf("\nMasukan tidak valid coba lagi.\n");
+        }
+    }
+
+    if (stringEQWord(currentWord, "YA"))
+    {
+        *arrHistory = MakeArrayDin();
+        printf("\nHistory berhasil di-reset.\n");
+    } else
+    {
+        printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan\n");
+        PrintArrayDin(*arrHistory, (*arrHistory).Neff);
+    }
+    
+    
 }

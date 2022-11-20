@@ -115,4 +115,18 @@ void scoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng);
  */
 void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng);
 
+/**
+ * Konstruktor
+ * I.S. Program berjalan arrHistory terdefinisi
+ * F.S. history game ditampilkan berdasarkan parameter banyak dari input pengguna
+ */
+void showHistory(Word command, ArrayDin arrHistory);
+
+/**
+ * Konstruktor
+ * I.S. Program berjalan arrHistory terdefinisi
+ * F.S. history game diriset (jika Ya) atau tidak jadi direset dan ditampilkan history game (jika Tidak)
+ */
+void resetHistory(ArrayDin *arrHistory);
+
 #endif

@@ -101,11 +101,12 @@ void DeleteLast(ArrayDin *array);
 void DeleteFirst(ArrayDin *array);
 
 /**
- * melakukan print suatu ArrayDin.
+ * melakukan print suatu ArrayDin. 
+ * Banyak merupakan banyak data yang akan ditampilkan
  * I.S. array terdefinisi
  * F.S. Print dilakukan dengan format: Daftar Game
  * dan diakhiri newline.
  */
-void PrintArrayDin(ArrayDin array);
+void PrintArrayDin(ArrayDin array, int banyak);
 
 #endif

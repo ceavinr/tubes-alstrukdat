@@ -104,7 +104,6 @@ int main()
         if (stringEQWord(cek, "SAVE"))
         {
             akuisisiCommandWord(&namaFile, currentWord, 2);
-
             save(wordToString(namaFile), arrGame, arrHistory);
         }
         else if (stringEQWord(command, "CREATE GAME"))
@@ -146,6 +145,14 @@ int main()
         else if (stringEQWord(command, "RESET SCOREBOARD"))
         {
             resetScoreBoard(scoreTowerOfHanoi, scoreDinerDash, scoreRNG);
+        }
+        else if (stringEQWord(cek, "HISTORY"))
+        {
+            showHistory(command, arrHistory);
+        }
+        else if (stringEQWord(cek, "RESET HISTORY"))
+        {
+            resetHistory(&arrHistory);
         }
         else
         {
