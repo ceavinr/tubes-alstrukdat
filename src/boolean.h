@@ -1,5 +1,5 @@
-#ifndef BOOLEAN_H
-#define BOOLEAN_H
+#ifndef __BOOLEAN_H__
+#define __BOOLEAN_H__
 
 #define boolean unsigned char
 #define true 1

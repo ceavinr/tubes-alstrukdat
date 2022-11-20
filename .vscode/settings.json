@@ -15,6 +15,9 @@
     "matrix.h": "c",
     "tictactoe.h": "c",
     "masakan.h": "c",
-    "towerofhanoi.h": "c"
+    "towerofhanoi.h": "c",
+    "conio.h": "c",
+    "potionwar.h": "c",
+    "amogusfight.h": "c"
   }
 }

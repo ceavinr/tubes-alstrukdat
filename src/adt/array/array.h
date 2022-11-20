@@ -42,19 +42,19 @@ boolean IsArrayFull(Array arr);
 /* F.S. v menjadi anggota dari arr. */
 void Insert(Array *arr, Masakan val);
 
-/* Menghapus Elmt dari Array arr berdasarkan key. */
+/* Menghapus Elmt dari Array arr berdasarkan nomor. */
 /* I.S. arr tidak kosong
-		element dengan key key mungkin anggota / bukan anggota dari arr */
-/* F.S. element dengan key key yang pertama kali ditemukan dihapus dari arr */
+		element dengan nomor nomor mungkin anggota / bukan anggota dari arr */
+/* F.S. element dengan nomor nomor yang pertama kali ditemukan dihapus dari arr */
 void DeleteArrayAt(Array *arr, Masakan *val, int idx);
 
 /* *** Find *** */
 
-/* Melakukan pencarian pada array berdasarkan key (nomor masakan), jika ditemukan akan mereturn index dari masakan yang ditemukan pertama kali. Jika tidak mereturn IDX_UNDEF */
-int indexOf(Array arr, KeyType key);
-/* Melakukan pencarian pada array berdasarkan key (nomor masakan), jika ditemukan akan mereturn Masakan yang ditemukan pertama kali . Masakan dipastikan terdapat pada array */
-Masakan find(Array arr, KeyType key);
-/* Melakukan pengecekan berdasarkan key apakah sebuah masakan terdapat masakan dalam sebuah array */
-boolean isMember(Array arr, KeyType key);
+/* Melakukan pencarian pada array berdasarkan nomor (nomor masakan), jika ditemukan akan mereturn index dari masakan yang ditemukan pertama kali. Jika tidak mereturn IDX_UNDEF */
+int indexOf(Array arr, int nomor);
+/* Melakukan pencarian pada array berdasarkan nomor (nomor masakan), jika ditemukan akan mereturn Masakan yang ditemukan pertama kali . Masakan dipastikan terdapat pada array */
+Masakan find(Array arr, int nomor);
+/* Melakukan pengecekan berdasarkan nomor apakah sebuah masakan terdapat masakan dalam sebuah array */
+boolean isMember(Array arr, int nomor);
 
 #endif

@@ -1,0 +1,25 @@
+8
+1
+Circulation
+Recover 5 health every second
+2
+Refreshing
+Recover 3 energy every second
+3
+Pain Relief
+Reduces damage intake by 10%
+4
+Focus
+Increases memory shards drop amount by 10%
+5
+Four Thieves Vinegar
+Increases maximum health by 100
+6
+Warming Up
+Increases damage by 10%
+7
+Sweating
+Gain a stack of "Defensive" buff
+8
+Courage
+Gain a stack of "Offensive" buff

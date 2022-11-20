@@ -51,7 +51,7 @@ void deleteOrder(Order *o, Masakan *val)
     IDX_TAIL(*o) -= 1;
 }
 
-int indexOfOrder(Order o, KeyType key)
+int indexOfOrder(Order o, int nomor)
 {
     Masakan m_del;
     int i = 0;
@@ -60,7 +60,7 @@ int indexOfOrder(Order o, KeyType key)
     while (!isEmpty(o) && !found)
     {
         deleteOrder(&o, &m_del);
-        if (NOMOR(m_del) == key)
+        if (NOMOR(m_del) == nomor)
         {
             found = true;
         }
@@ -79,12 +79,12 @@ int indexOfOrder(Order o, KeyType key)
     }
 }
 
-Masakan findOrder(Order o, KeyType key)
+Masakan findOrder(Order o, int nomor)
 {
-    return ORDERELMT(o, indexOfOrder(o, key));
+    return ORDERELMT(o, indexOfOrder(o, nomor));
 }
 
-boolean isIn(Order o, KeyType key)
+boolean isIn(Order o, int nomor)
 {
-    return indexOfOrder(o, key) != IDX_UNDEF;
+    return indexOfOrder(o, nomor) != IDX_UNDEF;
 }

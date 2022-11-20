@@ -7,9 +7,7 @@
 #define _BINTREE_H_
 
 /* Modul lain yang digunakan : */
-#include "boolean.h"
-
-#define Nil NULL
+#include "../../boolean.h"
 
 /* *** Definisi Type Pohon Biner *** */
 typedef int nodeinfotype;
@@ -32,20 +30,20 @@ typedef addrNode BinTree;
 /* *** Konstruktor *** */
 BinTree Tree(nodeinfotype Akar, BinTree L, BinTree R);
 /* Menghasilkan sebuah pohon biner dari A, L, dan R, jika alokasi berhasil */
-/* Menghasilkan pohon kosong (Nil) jika alokasi gagal */
+/* Menghasilkan pohon kosong (NULL) jika alokasi gagal */
 void MakeTree(nodeinfotype Akar, BinTree L, BinTree R, BinTree *P);
 /* I.S. Akar, L, R terdefinisi. P Sembarang */
 /* F.S. Membentuk pohon P dengan Akar(P)=Akar, Left(P)=L, dan Right(P)=R
-        jika alokasi berhasil. P = Nil jika alokasi gagal. */
+        jika alokasi berhasil. P = NULL jika alokasi gagal. */
 BinTree BuildBalanceTree(int n);
 /* Menghasilkan sebuah balanced tree dengan n node, nilai setiap node dibaca */
 
 /* Manajemen Memory */
 addrNode AlokNode(nodeinfotype X);
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P,
-  maka Akar(P) = X, Left(P) = Nil, Right(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
+/* Jika alokasi berhasil, maka addrNode tidak NULL, dan misalnya menghasilkan P,
+  maka Akar(P) = X, Left(P) = NULL, Right(P)=NULL */
+/* Jika alokasi gagal, mengirimkan NULL */
 void DealokNode(addrNode P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */

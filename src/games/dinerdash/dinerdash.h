@@ -21,6 +21,6 @@ int kodeToInt(Word kode);
 /* Menjalankan game */
 /* I.S. Sembarang */
 /* F.S. Antrian melebihi 7 (kalah) atau sudah melayani 15 pelanggan (menang) */
-void dinerdash();
+int dinerdash();
 
 #endif

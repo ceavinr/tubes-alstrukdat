@@ -6,8 +6,6 @@
 
 #define IDX_UNDEF -1
 #define ORDERCAPACITY 25
-typedef int KeyType;
-
 typedef struct
 {
     Masakan buffer[ORDERCAPACITY];
@@ -46,7 +44,7 @@ int orderLength(Order o);
 
 /* Proses: Menambahkan val pada o dengan aturan FIFO */
 /* I.S. o mungkin kosong, tabel penampung elemen o TIDAK penuh */
-/* F.S. val dimasukan ke dalam o sedemikian sehingga key terurut membesar, IDX_TAIL bertambah. */
+/* F.S. val dimasukan ke dalam o sedemikian sehingga nomor terurut membesar, IDX_TAIL bertambah. */
 void addOrder(Order *o, Masakan val);
 /* Proses: Menghapus val pada o dengan aturan FIFO */
 /* I.S. o tidak mungkin kosong */
@@ -56,11 +54,11 @@ void deleteOrder(Order *o, Masakan *val);
 
 /* *** Find *** */
 
-/* Melakukan pencarian pada order berdasarkan key (nomor masakan), jika ditemukan akan mereturn index dari masakan yang ditemukan pertama kali. Jika tidak mereturn IDX_UNDEF */
-int indexOfOrder(Order o, KeyType key);
-/* Melakukan pencarian pada order berdasarkan key (nomor masakan), jika ditemukan akan mereturn Masakan yang ditemukan. key dipastikan terdapat pada order */
-Masakan findOrder(Order o, KeyType key);
-/* Melakukan pengecekan berdasarkan key apakah sebuah masakan terdapat masakan dalam sebuah order */
-boolean isIn(Order o, KeyType key);
+/* Melakukan pencarian pada order berdasarkan nomor (nomor masakan), jika ditemukan akan mereturn index dari masakan yang ditemukan pertama kali. Jika tidak mereturn IDX_UNDEF */
+int indexOfOrder(Order o, int nomor);
+/* Melakukan pencarian pada order berdasarkan nomor (nomor masakan), jika ditemukan akan mereturn Masakan yang ditemukan. nomor dipastikan terdapat pada order */
+Masakan findOrder(Order o, int nomor);
+/* Melakukan pengecekan berdasarkan nomor apakah sebuah masakan terdapat masakan dalam sebuah order */
+boolean isIn(Order o, int nomor);
 
 #endif

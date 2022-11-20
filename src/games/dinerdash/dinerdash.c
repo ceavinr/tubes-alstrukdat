@@ -92,7 +92,7 @@ int kodeToInt(Word kode)
     }
 }
 
-void dinerdash()
+int dinerdash()
 {
     Order orderList;
     Array orderTaken;
@@ -276,4 +276,6 @@ void dinerdash()
             gameOn = false;
         }
     }
+
+    return saldo;
 }
