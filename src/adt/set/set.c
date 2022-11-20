@@ -15,9 +15,9 @@ boolean IsFullSet(Set S)
     return S.Count == MaxEl;
 }
 
-void InsertInSet(Set *S, infotype Elmt)
+void InsertInSet(Set *S, infotypeSet Elmt)
 {
-    if (IsMember(*S, Elmt))
+    if (IsMemberInSet(*S, Elmt))
     {
         return;
     }
@@ -25,11 +25,11 @@ void InsertInSet(Set *S, infotype Elmt)
     (*S).Count++;
 }
 
-void DeleteInSet(Set *S, infotype Elmt)
+void DeleteInSet(Set *S, infotypeSet Elmt)
 {
     boolean found = false;
     address idx = 0, iterator;
-    if (!IsMember(*S, Elmt))
+    if (!IsMemberInSet(*S, Elmt))
     {
         return;
     }
@@ -51,7 +51,7 @@ void DeleteInSet(Set *S, infotype Elmt)
     (*S).Count--;
 }
 
-boolean IsMemberInSet(Set S, infotype Elmt)
+boolean IsMemberInSet(Set S, infotypeSet Elmt)
 {
     boolean found = false;
     address idx = 0, iterator;

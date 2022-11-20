@@ -1,8 +1,4 @@
 #include "console.h"
-#include "./games/dinerdash/dinerdash.h"
-#include "./games/rng/rng.h"
-#include "./games/tictactoe/tictactoe.h"
-#include "./games/towerofhanoi/towerofhanoi.h"
 
 void start(ArrayDin *arrGame, ArrayDin *arrHistory)
 {
@@ -271,47 +267,3 @@ void help()
     printf("10. QUIT            : Keluar dari program\n");
     printf("11. HELP            : Panduan penggunaan\n");
 }
-
-void printLeaderboard(Set setGame, Map mapGame, Word game)
-{
-    int i, j, skor;
-    address key;
-    int spacing;
-
-    printf("**** SCOREBOARD GAME ");
-    printWord(game);
-    printf(" ****\n");
-
-    printf("| NAMA          | SKOR          |\n");
-    printf("|-------------------------------|\n");
-
-    for (i=0; i<setGame.Count; i++)
-    {
-        printf("| ");
-        printWord(setGame.Elements[i]);
-
-        spacing = 14 - setGame.Elements[i].Length;
-        for (j=0; j<spacing; j++)
-        {
-            printf(" ");
-        }
-
-        key = ToKey(setGame.Elements[i]);
-        skor = ValueInMap(mapGame, key);
-        printf("| %d", skor);
-
-        spacing = 14;
-        while (skor == 0)
-        {
-            skor = skor/10;
-            spacing--;
-        }
-        for (j=0; j<spacing; j++)
-        {
-            printf(" ");
-        }
-        printf("|\n");
-    }
-    printf("\n");
-}
-

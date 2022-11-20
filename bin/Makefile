@@ -47,3 +47,6 @@ tictactoe:
 
 towerofhanoi:
 	gcc ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/stack/stack.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/towerofhanoi/mtowerofhanoi.c -o towerofhanoi
+
+scoreboard:
+	gcc ../src/adt/scoreboard/driverscoreboard.c ../src/adt/scoreboard/scoreboard.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/map/map.c ../src/adt/set/set.c -o scoreboard

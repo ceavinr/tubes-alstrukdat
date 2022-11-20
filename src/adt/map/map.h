@@ -19,11 +19,11 @@ typedef struct
 {
 	keytype Key;
 	valuetype Value;
-} infotype;
+} infotypeMap;
 
 typedef struct
 {
-	infotype Elements[MaxEl];
+	infotypeMap Elements[MaxEl];
 	address Count;
 } Map;
 

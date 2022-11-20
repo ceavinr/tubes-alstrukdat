@@ -28,7 +28,7 @@ valuetype ValueInMap(Map M, keytype k)
 
 void InsertInMap(Map *M, keytype k, valuetype v)
 {
-    if (!IsFull(*M))
+    if (!IsFullMap(*M))
     {
         address idx = IndexInMap(*M, k);
         if (IsMemberInMap(*M, k))
@@ -83,7 +83,7 @@ address IndexInMap(Map M, keytype k)
     address idx = 0;
 
     while (!found && M.Elements[Hash(hashed+idx)].Key != Undefined) {
-        if (M.Elements[idx].Key == k) {
+        if (M.Elements[Hash(hashed+idx)].Key == k) {
             found = true;
         }
         else {
@@ -91,8 +91,5 @@ address IndexInMap(Map M, keytype k)
         }
     }
 
-    if (found)
-    {
-        return Hash(hashed+idx);
-    }
+    return Hash(hashed+idx);
 }

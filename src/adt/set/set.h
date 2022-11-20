@@ -7,12 +7,12 @@
 #define Nil 0
 #define MaxEl 100
 
-typedef Word infotype;
+typedef Word infotypeSet;
 typedef int address;
 
 typedef struct
 {
-    infotype Elements[MaxEl];
+    infotypeSet Elements[MaxEl];
     address Count;
 } Set;
 
@@ -37,15 +37,15 @@ boolean IsFullSet(Set S);
 /* I.S. S mungkin kosong, S tidak penuh
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
-void InsertInSet(Set *S, infotype Elmt);
+void InsertInSet(Set *S, infotypeSet Elmt);
 
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
-void DeleteInSet(Set *S, infotype Elmt);
+void DeleteInSet(Set *S, infotypeSet Elmt);
 
 /* Mengembalikan true jika Elmt adalah member dari S */
-boolean IsMemberInSet(Set S, infotype Elmt);
+boolean IsMemberInSet(Set S, infotypeSet Elmt);
 
 #endif
