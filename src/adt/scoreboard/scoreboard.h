@@ -4,19 +4,31 @@
 #include "../set/set.h"
 #include "../map/map.h"
 
+typedef struct {
+    Set setGame;
+    Map mapGame;
+} scoreboard;
+
+/**
+ * Konstruktor
+ * I.S. sembarang
+ * F.S. scoreboard suatu game terdefinisi
+ */
+void CreateScoreboard(scoreboard *game);
+
 /**
  * Konstruktor
  * I.S. setGame, mapGame, playernam, score, terdefinisi sehabis memainkan suatu game
  * F.S. Memasukan ke dalam leaderboard dan melakukan sorting
  */
-void InsertScoreboard(Set *setGame, Map *mapGame, Word playerName, valuetype score);
+void InsertScoreboard(scoreboard *game, Word playerName, valuetype score);
 
 /**
  * Konstruktor
  * I.S. setGame dan mapGame terdefinisi
  * F.S. Menampilkan leaderboard sesuai format dalam spesifikasi
  */
-void PrintScoreboard(Set setGame, Map mapGame, Word game);
+void PrintScoreboard(scoreboard game);
 
 /**
  * Konstruktor

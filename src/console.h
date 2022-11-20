@@ -10,6 +10,8 @@
 #include "./adt/word/word.h"
 #include "./adt/mesin/mesinkata.h"
 #include "./adt/mesin/mesinkarakter.h"
+#include "./adt/scoreboard/scoreboard.h"
+
 #include "./games/dinerdash/dinerdash.h"
 #include "./games/rng/rng.h"
 #include "./games/tictactoe/tictactoe.h"
@@ -98,5 +100,19 @@ void quitProgram(boolean *flag);
  * F.S. Menampilkan bantuan interaksi dengan program
  */
 void help();
+
+/**
+ * Konstruktor
+ * I.S. Program berjalan scoreboard terdefinisi masing-masing game
+ * F.S. Menampilkan scoreboard dari beberapa game yang bisa dimainkan
+ */
+void scoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng);
+
+/**
+ * Konstruktor
+ * I.S. Program berjalan scoreboard terdefinisi masing-masing game
+ * F.S. scoreboard berhasil direset sesuai keiinginan user
+ */
+void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng);
 
 #endif

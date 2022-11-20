@@ -267,3 +267,74 @@ void help()
     printf("10. QUIT            : Keluar dari program\n");
     printf("11. HELP            : Panduan penggunaan\n");
 }
+
+void scoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng)
+{
+    printf("**** SCOREBOARD GAME TOWER OF HANOI ****\n");
+    PrintScoreboard(towerofhanoi);
+    printf("**** SCOREBOARD GAME TOWER OF HANOI ****\n");
+    PrintScoreboard(dinerdash);
+    printf("**** SCOREBOARD GAME TOWER OF HANOI ****\n");
+    PrintScoreboard(rng);
+}
+
+void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng)
+{
+    int num_reset;
+
+    printf("\nDAFTAR SCOREBOARD:\n");
+    printf("0. ALL\n");
+    printf("1. RNG\n");
+    printf("2. Diner DASH\n");
+    printf("3. HANGMAN\n");
+    printf("4. TOWER OF HANOI\n");
+    printf("5. SNAKE ON METEOR\n");
+
+    printf("\nSCOREBOARD YANG INGIN DIHAPUS: ");
+    startInputWord();
+    num_reset = wordToInt(currentWord);
+
+    if (num_reset >= 0 && num_reset<=5)
+    {
+        switch (num_reset)
+        {
+        case 0:
+            CreateEmptyMap(&(towerofhanoi).mapGame);
+            CreateEmptySet(&(towerofhanoi).setGame);
+
+            CreateEmptyMap(&(dinerdash).mapGame);
+            CreateEmptySet(&(dinerdash).setGame);
+
+            CreateEmptyMap(&(rng).mapGame);
+            CreateEmptySet(&(rng).setGame);
+            break;
+        case 1:
+            CreateEmptyMap(&(rng).mapGame);
+            CreateEmptySet(&(rng).setGame);
+            break;
+        case 2:
+            CreateEmptyMap(&(dinerdash).mapGame);
+            CreateEmptySet(&(dinerdash).setGame);
+            break;
+        case 3:
+            //hangman
+            break;
+        case 4:
+            CreateEmptyMap(&(towerofhanoi).mapGame);
+            CreateEmptySet(&(towerofhanoi).setGame);
+            break;
+        case 5:
+            //snake
+            break;
+        default:
+            break;
+        }
+    }
+    else
+    {
+        printf("Scoreboard tidak tersedia.\n");
+    }
+    
+    
+
+}

@@ -11,6 +11,16 @@ int main()
     ArrayDin arrHistory = MakeArrayDin();
     Queue arrQueue = MakeQueue();
 
+    /* SCOREBOARD */
+    scoreboard scoreDinerDash;
+    CreateScoreboard(&scoreDinerDash);
+
+    scoreboard scoreRNG;
+    CreateScoreboard(&scoreRNG);
+
+    scoreboard scoreTowerOfHanoi;
+    CreateScoreboard(&scoreTowerOfHanoi);
+
     while (!inputValid)
     {
         gambarKarakterBNMO();
@@ -128,6 +138,14 @@ int main()
         else if (stringEQWord(command, "HELP"))
         {
             help();
+        }
+        else if (stringEQWord(command, "SCOREBOARD"))
+        {
+            scoreBoard(scoreTowerOfHanoi, scoreDinerDash, scoreRNG);
+        }
+        else if (stringEQWord(command, "RESET SCOREBOARD"))
+        {
+            resetScoreBoard(scoreTowerOfHanoi, scoreDinerDash, scoreRNG);
         }
         else
         {

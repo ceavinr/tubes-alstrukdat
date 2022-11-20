@@ -6,11 +6,8 @@ int main() {
     char playername[100];
     Word nameWord;
 
-    Set setGame;
-    Map mapGame;
-
-    CreateEmptySet(&setGame);
-    CreateEmptyMap(&mapGame);
+    scoreboard game;
+    CreateScoreboard(&game);
 
     printf("Masukan jumlah data: ");
     scanf("%d", &jumlah);
@@ -24,12 +21,12 @@ int main() {
         printf("Masukan skor: ");
         scanf("%d", &skor);
 
-        InsertScoreboard(&setGame, &mapGame, nameWord, skor);
+        InsertScoreboard(&game, nameWord, skor);
 
     }
     
-    Word game = stringToWord("GALAXY");
-    PrintScoreboard(setGame, mapGame, game);
+    printf("**** SCOREBOARD GAME GALAXY ****\n");
+    PrintScoreboard(game);
 
     return 0;
 }
