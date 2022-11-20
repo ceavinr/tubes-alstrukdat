@@ -24,8 +24,8 @@ order:
 stack:
 	gcc ../src/adt/stack/driverstack.c ../src/adt/stack/stack.c -o stack
 
-tree:
-	gcc ../src/adt/tree/drivertree.c ../src/adt/tree/tree.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c -o tree
+bintree:
+	gcc ../src/modules/bintree/driverbintree.c ../src/modules/bintree/bintree.c ../src/modules/mesin/mesinkata.c ../src/modules/mesin/mesinkarakter.c ../src/modules/word/word.c ../src/modules/string/string.c -o bintree
 
 array:
 	gcc ../src/adt/array/driverarray.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c -o array

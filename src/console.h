@@ -1,5 +1,5 @@
-#ifndef __CONSOLE__
-#define __CONSOLE__
+#ifndef __CONSOLE_H__
+#define __CONSOLE_H__
 
 #include <stdio.h>
 #include <stdlib.h>
