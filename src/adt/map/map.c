@@ -71,7 +71,7 @@ keytype ToKey(Word w)
     int i;
     for (i=0;  i<w.Length; i++)
     {
-        key += w.TabWord[i]-48;
+        key += w.TabWord[i];
     }
     return key;
 }

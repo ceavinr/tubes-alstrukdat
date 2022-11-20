@@ -50,3 +50,6 @@ towerofhanoi:
 
 scoreboard:
 	gcc ../src/adt/scoreboard/driverscoreboard.c ../src/adt/scoreboard/scoreboard.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/map/map.c ../src/adt/set/set.c -o scoreboard
+
+map:
+	gcc ../src/adt/map/drivermap.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/map/map.c -o map
