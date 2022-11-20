@@ -58,7 +58,9 @@ int main() {
     printf("\nHarusnya valuenya -9999 (undefined)\n");
     printf("Ini valuenya: %d\n", ValueInMap(map, ToKey(nameWord)));
 
-    printf("\nCek value IsMemberInmap dari yang didelete: \n");
+    printf("\nCek value IsMemberInmap masukan playername: ");
+    scanf("%s", playername);
+    nameWord = stringToWord(playername);
     if (IsMemberInMap(map, ToKey(nameWord)))
     {
         printf("Ada kok\n");

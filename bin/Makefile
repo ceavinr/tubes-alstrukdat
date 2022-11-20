@@ -53,3 +53,7 @@ scoreboard:
 
 map:
 	gcc ../src/adt/map/drivermap.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/map/map.c -o map
+
+# dikasih "_" soalnya di cmd command set udah ada
+set_:
+	gcc ../src/adt/set/driverset.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/set/set.c -o set_
