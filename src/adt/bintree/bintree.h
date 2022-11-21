@@ -124,16 +124,10 @@ boolean SearchTree(BinTree P, nodeinfotype X);
 /* *** Fungsi-Fungsi Lain *** */
 
 /* Mengirimkan banyaknya elemen (node) pohon biner P */
-int NbElmt(BinTree P);
+int NbNode(BinTree P);
 /* Mengirimkan banyaknya daun (node) pohon biner P */
 /* Prekondisi: P tidak kosong */
 int NbDaun(BinTree P);
-/* Mengirimkan true jika P adalah pohon condong kiri */
-/* Pohon kosong adalah pohon condong kiri */
-boolean IsSkewLeft(BinTree P);
-/* Mengirimkan true jika P adalah pohon condong kanan */
-/* Pohon kosong adalah pohon condong kanan */
-boolean IsSkewRight(BinTree P);
 /* Mengirimkan level dari node X yang merupakan salah satu simpul dari pohon biner P.
    Akar(P) level-nya adalah 1. Pohon P tidak kosong. */
 int Level(BinTree P, nodeinfotype X);
@@ -161,6 +155,10 @@ void DelDaun(BinTree *P, nodeinfotype X);
 /* *** Binary  Search  Tree  *** */
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 boolean BSearch(BinTree P, nodeinfotype X);
+/* Mengirimkan alamat node dari P yang bernilai X */
+addrNode SearchDaun(BinTree P, nodeinfotype X);
+/* Mengirimkan alamat node dari P yang memiliki child kiri left dan child kanan right */
+addrNode SearchByChild(BinTree T, nodeinfotype left, nodeinfotype right);
 
 /* Menghasilkan sebuah pohon Binary Search Tree P dengan tambahan simpul X. Belum ada simpul P yang bernilai X. */
 void InsSearch(BinTree *P, nodeinfotype X);

@@ -219,7 +219,31 @@ addrNode SearchDaun(BinTree P, nodeinfotype X)
     }
 }
 
-int NbElmt(BinTree P)
+addrNode SearchByChild(BinTree T, nodeinfotype left, nodeinfotype right)
+{
+    if (IsTreeOneElmt(T))
+    {
+        return NULL;
+    }
+    else if ((Akar(Left(T)) == left && Akar(Right(T)) == right) || (Akar(Left(T)) == left && Akar(Right(T)) == right))
+    {
+        return T;
+    }
+    else
+    {
+        addrNode ret = SearchByChild(Left(T), left, right);
+        if (ret != NULL)
+        {
+            return ret;
+        }
+        else
+        {
+            return SearchByChild(Right(T), left, right);
+        }
+    }
+}
+
+int NbNode(BinTree P)
 {
     if (IsTreeEmpty(P))
     {
@@ -227,7 +251,7 @@ int NbElmt(BinTree P)
     }
     else
     {
-        return 1 + NbElmt(Left(P)) + NbElmt(Right(P));
+        return 1 + NbNode(Left(P)) + NbNode(Right(P));
     }
 }
 
@@ -248,38 +272,6 @@ int NbDaun(BinTree P)
     else
     { // IsBiner
         return NbDaun(Left(P)) + NbDaun(Right(P));
-    }
-}
-
-boolean IsSkewLeft(BinTree P)
-{
-    if (IsTreeEmpty(P))
-    {
-        return true;
-    }
-    else if (IsTreeOneElmt(P))
-    {
-        return true;
-    }
-    else
-    {
-        return IsUnerLeft(P) && IsSkewLeft(Left(P));
-    }
-}
-
-boolean IsSkewRight(BinTree P)
-{
-    if (IsTreeEmpty(P))
-    {
-        return true;
-    }
-    else if (IsTreeOneElmt(P))
-    {
-        return true;
-    }
-    else
-    {
-        return IsUnerRight(P) && IsSkewRight(Right(P));
     }
 }
 

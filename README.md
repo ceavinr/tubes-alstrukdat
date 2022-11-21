@@ -37,43 +37,41 @@ BNMO merupakan sebuah permainan berbasis CLI yang dibuat menggunakan bahasa pemr
 ## Pre-requisite
 
 - MinGW
+- Rename `mingw32-make` menjadi `make`
 
 ## How to Use (Windows):
 
 1.  Main Program (Alternatif 1)
 
     ```
-    mingw32-make -C bin
-    cd bin
-    ./main
+    make -C bin
+    bin/main
     ```
 
 2.  RNG
 
     ```
-    mingw32-make -C bin rng
-    ./bin/rng
+    make -C bin rng
+    bin/rng
     ```
 
 3.  Diner Dash
 
     ```
-    mingw32-make -C bin dinerdash
-    ./bin/dinerdash
+    make -C bin dinerdash
+    bin/dinerdash
     ```
 
 4.  Tower of Hanoi
 
     ```
-    mingw32-make -C bin towerofhanoi
-    ./bin/towerofhanoi
+    make -C bin towerofhanoi
+    bin/towerofhanoi
     ```
 
 5.  Tic Tac Toe
 
     ```
-    mingw32-make -C bin tictactoe
-    ./bin/tictactoe
+    make -C bin tictactoe
+    bin/tictactoe
     ```
-
-Untuk Linux seharusnya hanya mengubah `mingw32-make` menjadi `make`

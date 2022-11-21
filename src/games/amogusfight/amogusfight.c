@@ -2,23 +2,16 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <time.h>
-#include "../../boolean.h"
 #include "amogusfight.h"
-#include "../../adt/mesin/mesinkata.h"
-#include "../../adt/word/word.h"
-#include "../../adt/array/array.h"
 
-void sleep(int number_of_seconds)
+void sleep(int detik)
 {
-    // Converting time into milli_seconds
-    int milli_seconds = 1000 * number_of_seconds;
-
-    // Storing start time
+    // Waktu start
     clock_t start_time = clock();
 
-    // looping till required time is not achieved
-    while (clock() < start_time + milli_seconds)
-        ;
+    while (clock() < start_time + 1000 * detik)
+    {
+    }
 }
 
 void PrintHPBar(int HP)
@@ -45,8 +38,11 @@ void PrintHPBar(int HP)
     printf("]");
 }
 
-void PrintPlayer()
+void PrintState(int MaxHP1, int HP1, int MaxHP2, int HP2)
 {
+    PrintHPBar((HP1 * 100) / MaxHP1);
+    printf("\t\t\t\t");
+    PrintHPBar((HP2 * 100) / MaxHP2);
     printf("\n\n");
     printf("\t           .@@@@@@@.             \t\t\t          (\\ .@@@@@@@.   /)      \n");
     printf("\t         @@........@@            \t\t\t           \\@@........@@/)       \n");
@@ -62,57 +58,86 @@ void PrintPlayer()
     printf("\t       @@@@@@@  @@@@@@           \t\t\t           @@@@@@  @@@@@@@       \n");
 }
 
-void DisplayInventory()
-{
-}
-
-void DisplayIngredients()
-{
-}
-
-int ConvertTo100Scale(int oldScale, int oldNumber)
-{
-    return (oldNumber * 100) / oldScale;
-}
-
-void PrintState(int MaxHP1, int HP1, int MaxHP2, int HP2)
-{
-    PrintHPBar(ConvertTo100Scale(MaxHP1, HP1));
-    printf("\t\t\t\t");
-    PrintHPBar(ConvertTo100Scale(MaxHP2, HP2));
-    PrintPlayer();
-}
-
 int max2num(int num1, int num2)
 {
     return (num1 > num2) ? num1 : num2;
 }
 
-void displayPotions(Array potions)
+void DisplayPotions(Array potions)
 {
-    printf("\nDaftar ramuan:\n");
-    printf("Nama\t\t\t| Durasi\t| Ketahanan\t| Harga\t\n");
-    printf("---------------------------------------------------------------------\n");
+    printf("\n============================== DAFTAR RAMUAN ==============================\n");
+    printf("ID\t| Nama\t\t\t| Durasi\t| Ketahanan\t| Harga\t\n");
+    printf("---------------------------------------------------------------------------\n");
     for (int i = 0; i <= COUNT(potions) - 1; i++)
     {
-        if (stringLength(NAMA(ARRELMT(potions, i))) <= 15)
+        printf("%d\t", NOMOR(ARRELMT(potions, i)));
+        if (stringLength(NAMA(ARRELMT(potions, i))) < 14)
         {
-            printf("%s\t\t", NAMA(ARRELMT(potions, i)));
+            printf("| %s\t\t", NAMA(ARRELMT(potions, i)));
         }
         else
         {
-            printf("%s\t", NAMA(ARRELMT(potions, i)));
+            printf("| %s\t", NAMA(ARRELMT(potions, i)));
         }
 
         printf("| %d\t\t| %d\t\t| %d\t\n", DURASI(ARRELMT(potions, i)), KETAHANAN(ARRELMT(potions, i)), HARGA(ARRELMT(potions, i)));
     }
 }
 
-void readPotions(Array *potions)
+void DisplayInventory(Array potions)
+{
+    printf("\n========================= INVENTORY =========================\n");
+    printf("ID\t| Nama\t\t\t| Durasi\t| Ketahanan\t\n");
+    printf("-------------------------------------------------------------\n");
+    if (IsArrayEmpty(potions))
+    {
+        printf("\t| \t\t\t| \t\t| \t\t\n");
+    }
+    else
+    {
+        for (int i = 0; i <= COUNT(potions) - 1; i++)
+        {
+            printf("%d\t", NOMOR(ARRELMT(potions, i)));
+            if (stringLength(NAMA(ARRELMT(potions, i))) < 14)
+            {
+                printf("| %s\t\t", NAMA(ARRELMT(potions, i)));
+            }
+            else
+            {
+                printf("| %s\t", NAMA(ARRELMT(potions, i)));
+            }
+
+            printf("| %d\t\t| %d\t\t\n", DURASI(ARRELMT(potions, i)), KETAHANAN(ARRELMT(potions, i)));
+        }
+    }
+}
+
+void DisplayRecipes(List recipes, Array potions)
+{
+    printf("\n=========================== DAFTAR RESEP ===========================\n");
+    for (size_t i = 0; i < NbElmt(recipes); i++)
+    {
+        BinTree recipe = getElmt(recipes, i);
+        Masakan akar = find(potions, Akar(recipe));
+        Masakan left = find(potions, Akar(Left(recipe)));
+        Masakan right = find(potions, Akar(Right(recipe)));
+
+        if (stringLength(NAMA(akar)) <= 15)
+        {
+            printf("%s\t\t: %s + %s\n", NAMA(akar), NAMA(left), NAMA(right));
+        }
+        else
+        {
+            printf("%s\t: %s + %s\n", NAMA(akar), NAMA(left), NAMA(right));
+        }
+    }
+}
+
+void ReadPotions(Array *potions)
 {
     STARTWORD("data/potion.txt");
     int countPotion = wordToInt(currentWord);
-    for (int i = 0; i <= countPotion; i++)
+    for (int i = 0; i < countPotion; i++)
     {
         Masakan potion = CreateMasakan();
         ADVWORD();
@@ -129,31 +154,106 @@ void readPotions(Array *potions)
     }
 }
 
-int potionwar()
+void ReadRecipes(List *recipes)
+{
+    STARTWORD("data/recipe.txt");
+    int countRecipe = wordToInt(currentWord);
+    for (int i = 0; i < countRecipe; i++)
+    {
+        BinTree recipe = NULL;
+        int idx = 0;
+        ADVWORD();
+        BuildTreeFromWord(&recipe, currentWord, &idx);
+        InsVLast(recipes, recipe);
+    }
+}
+
+addrNode Brew(List recipes, int potion1, int potion2)
+{
+    address P = First(recipes);
+    addrNode result = NULL;
+    while (Next(P) != NULL && result == NULL)
+    {
+        result = SearchByChild(Info(P), potion1, potion2);
+        if (result == NULL)
+        {
+            P = Next(P);
+        }
+    }
+
+    return result;
+}
+
+int amogusfight()
 {
     int MaxHP1 = 100, HP1 = 100, MaxHP2 = 100, HP2 = 100;
     int damage1 = 20, damage2 = 4;
     int maxEnergy = 100, energy = 0;
     int score = 0;
     boolean gameOn = true;
-    Array potions;
+    Array potions, inventory;
+    List recipes;
 
     CreateArray(&potions);
-    readPotions(&potions);
+    CreateArray(&inventory);
+    CreateEmpty(&recipes);
+    ReadPotions(&potions);
+    ReadRecipes(&recipes);
 
-    displayPotions(potions);
-    sleep(100);
-
+    Insert(&inventory, find(potions, 1));
+    Insert(&inventory, find(potions, 2));
+    // sleep(100);
     while (gameOn)
     {
         boolean finished = false;
-        system("cls");
-        printf("Score: %d\n", score);
-        PrintState(MaxHP1, HP1, MaxHP2, HP2);
 
         // Action pemain
+        while (!finished)
+        {
+            system("cls");
+            printf("Score: %d\n", score);
+            PrintState(MaxHP1, HP1, MaxHP2, HP2);
+            DisplayInventory(inventory);
 
-        getch(); // Sementara pake getch, ini nanti diganti jadi action pemain
+            startInputWord();
+
+            system("cls");
+            printf("Score: %d\n", score);
+            PrintState(MaxHP1, HP1, MaxHP2, HP2);
+
+            if (stringEQWord(currentWord, "RESEP"))
+            {
+                DisplayRecipes(recipes, potions);
+                sleep(5);
+            }
+            else if (stringEQWord(currentWord, "BUY"))
+            {
+                DisplayPotions(potions);
+                sleep(5);
+            }
+            else if (stringEQWord(currentWord, "BREW"))
+            {
+                DisplayInventory(inventory);
+                printf("Potion 1: ");
+                startInputWord();
+                int potion1 = wordToInt(currentWord);
+                if (isMember(inventory, potion1))
+                {
+                    printf("Potion 2: ");
+                    startInputWord();
+                    int potion2 = wordToInt(currentWord);
+                    if (isMember(inventory, potion2))
+                    {
+                        if (Brew(recipes, potion1, potion2))
+                        {
+                            int potion3 = Akar(Brew(recipes, potion1, potion2));
+                            Insert(&inventory, find(potions, potion3));
+                            finished = true;
+                        }
+                    }
+                }
+            }
+        }
 
         int i = 0;
 
