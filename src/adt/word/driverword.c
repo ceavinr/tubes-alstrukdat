@@ -3,7 +3,7 @@
 
 int main()
 {
-    Word w;
+    Word w = CreateWord();
     char *string;
     int integer;
 

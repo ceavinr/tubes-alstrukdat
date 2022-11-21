@@ -1,25 +1,49 @@
-8
+15
 1
-Circulation
-Recover 5 health every second
+Water bottle
+10 0 100
 2
-Refreshing
-Recover 3 energy every second
+Nether wart
+10 0 50
 3
-Pain Relief
-Reduces damage intake by 10%
+Fermented spider eye
+10 0 50
 4
-Focus
-Increases memory shards drop amount by 10%
+Awkward potion
+10 0 100
 5
-Four Thieves Vinegar
-Increases maximum health by 100
+Potion of weakness
+3 5 100
 6
-Warming Up
-Increases damage by 10%
+Blaze powder
+10 0 50
 7
-Sweating
-Gain a stack of "Defensive" buff
+Magma cream
+10 0 50
 8
-Courage
-Gain a stack of "Offensive" buff
+Spider eye
+10 0 50
+9
+Glistering melon
+10 0 50
+10
+Ghost tear
+10 0 50
+11
+Potion of strength
+3 3 200
+12
+Potion of defense
+3 3 200
+13
+Potion of poison
+3 3 100
+14
+Potion of harming
+3 0 150
+15
+Potion of regeneration
+3 5 200
+16
+Potion of healing
+2 0 300

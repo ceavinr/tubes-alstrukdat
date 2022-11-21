@@ -5,7 +5,7 @@
 #ifndef KATA_H
 #define KATA_H
 
-typedef char* string; 
+typedef char *string;
 
 // menerima argumen pointer kepada karakter pertama dari sebuah string yang panjangnya tidak diketahui
 // dan memberikan output berupa panjang string tersebut, dengan batasan string input memiliki karakter

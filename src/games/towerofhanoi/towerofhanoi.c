@@ -4,6 +4,8 @@
 #include "../../adt/mesin/mesinkata.h"
 #include "../../adt/word/word.h"
 
+/* I.S. S, i, dan maxWidth terdefinisi */
+/* F.S. Menampilkan gambar disk ke i dari tower S */
 void PrintDisk(Stack S, int i, int maxWidth)
 {
     if (i <= Top(S))
@@ -41,6 +43,8 @@ void PrintDisk(Stack S, int i, int maxWidth)
     }
 }
 
+/* I.S. S1, S2, S3, dan height terdefinisi */
+/* F.S. Menampilkan state dari ketiga tower */
 void DisplayState(Stack S1, Stack S2, Stack S3, int height)
 {
     int disk, pjgDisk, tebal = 1;

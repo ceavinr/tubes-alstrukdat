@@ -1,5 +1,12 @@
 #include "word.h"
 
+Word CreateWord()
+{
+    Word w;
+
+    w.Length = 0;
+}
+
 int wordToInt(Word w)
 {
     int val = 0;
@@ -7,18 +14,21 @@ int wordToInt(Word w)
     int i;
     for (i = 0; i < w.Length; i++)
     {
-        if (i==0 && w.TabWord[0] == '-') {
+        if (i == 0 && w.TabWord[0] == '-')
+        {
             negatif = true;
-        } else {
+        }
+        else
+        {
             val = val * 10 + (w.TabWord[i] - 48);
         }
     }
 
     if (negatif)
     {
-        val = val*-1;
+        val = val * -1;
     }
-    
+
     return val;
 }
 
@@ -115,4 +125,55 @@ string wordToString(Word w)
     *p = '\0';
 
     return ret;
+}
+
+Word ambilKataKe(Word w, int kataKe)
+{
+    Word w2;
+    int i = 0, counter = 0, length = 0;
+    boolean stop;
+
+    while (counter != kataKe - 1 && i < w.Length)
+    {
+        stop = false;
+        if (w.TabWord[i] == ' ')
+        {
+            counter++;
+            while (i < w.Length && !stop)
+            {
+                i++;
+                if (w.TabWord[i] != ' ')
+                {
+                    stop = true;
+                }
+            }
+        }
+        else
+        {
+            i++;
+        }
+
+        if (i == w.Length)
+        {
+            counter++;
+        }
+    }
+
+    stop = false;
+    while (!stop && i < w.Length)
+    {
+        if (w.TabWord[i] == ' ')
+        {
+            stop = true;
+        }
+        else
+        {
+            w2.TabWord[length] = w.TabWord[i];
+            i++;
+            length++;
+        }
+    }
+    w2.Length = length;
+
+    return w2;
 }

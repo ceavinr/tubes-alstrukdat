@@ -18,20 +18,30 @@ void MakeTree(nodeinfotype Akar, BinTree L, BinTree R, BinTree *P)
     *P = Tree(Akar, L, R);
 }
 
-BinTree BuildBalanceTree(int n)
+BinTree BetterBuildBST(int n, int diff)
 {
-    int akar;
     BinTree L, R;
+    if (n % 2 == 1)
+    {
+        return Tree(n, NULL, NULL);
+    }
+    else
+    {
+        L = BetterBuildBST(n - diff, diff / 2);
+        R = BetterBuildBST(n + diff, diff / 2);
+        return Tree(n, L, R);
+    }
+}
+BinTree BuildBST(int n)
+{
     if (n == 0)
     {
         return NULL;
     }
     else
     {
-        scanf("%d", &akar);
-        L = BuildBalanceTree(n / 2);
-        R = BuildBalanceTree(n - (n / 2) - 1);
-        return Tree(akar, L, R);
+        n = pow(2, n) / 2;
+        BetterBuildBST(n, n / 2);
     }
 }
 
@@ -442,4 +452,29 @@ void DelBtree(BinTree *P, nodeinfotype X)
     {
         DelBtree(&Right(*P), X);
     }
+}
+
+void BuildTreeFromWord(BinTree *T, Word w, int *idx)
+{
+    (*idx)++;
+    if (w.TabWord[*idx] == ')')
+    {
+        *T = NULL;
+    }
+    else
+    {
+        int simpul = (int)w.TabWord[(*idx)] - 48;
+
+        while (48 <= (int)w.TabWord[(*idx) + 1] && (int)w.TabWord[(*idx) + 1] <= 57)
+        {
+            (*idx)++;
+            simpul = 10 * simpul + (int)w.TabWord[*idx] - 48;
+        }
+
+        *T = AlokNode(simpul);
+        (*idx)++;
+        BuildTreeFromWord(&(Left(*T)), w, idx);
+        BuildTreeFromWord(&(Right(*T)), w, idx);
+    }
+    (*idx)++;
 }

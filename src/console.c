@@ -9,7 +9,7 @@ void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
 {
     *arrGame = MakeArrayDin();
     *arrHistory = MakeArrayDin();
-    STARTWORD(concat("../data/", namaFile));
+    STARTWORD(concat("data/", namaFile));
 
     if (!EOP)
     {
@@ -44,7 +44,7 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
     else
     {
         FILE *pita;
-        pita = fopen(concat("../data/", namaFile), "w");
+        pita = fopen(concat("", namaFile), "w");
 
         fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
 
@@ -87,7 +87,7 @@ void createGame(ArrayDin *arrGame)
     startInputWord();
     newGame = currentWord;
     if (!IsMember(*arrGame, newGame))
-    {    
+    {
         InsertLast(arrGame, newGame);
         printf("Game berhasil ditambahkan\n");
     }
@@ -95,7 +95,6 @@ void createGame(ArrayDin *arrGame)
     {
         printf("Game sudah tersedia.\n");
     }
-    
 }
 
 void deleteGame(ArrayDin *arrGame)
@@ -177,7 +176,8 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory)
     Word numQueueString;
     akuisisiCommandWord(&numQueueString, command, 3);
 
-    if (numQueueString.Length == 0) { /*jika masukan kosong*/
+    if (numQueueString.Length == 0)
+    { /*jika masukan kosong*/
         printf("Masukan banyak skip tidak valid\n");
     }
     else
@@ -294,23 +294,28 @@ void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard r
     startInputWord();
     num_reset = wordToInt(currentWord);
 
-    if (num_reset >= 0 && num_reset<=5)
-    {       
+    if (num_reset >= 0 && num_reset <= 5)
+    {
         boolean valid = false;
         while (!valid)
         {
-            printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD %s (YA/TIDAK)? ", num_reset==1?"RNG": num_reset==2?"DINER DASH": num_reset==3?"HANGMAN": num_reset==4?"TOWER OF HANOI": num_reset==5?"SNAKE": "ALL");
+            printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD %s (YA/TIDAK)? ", num_reset == 1 ? "RNG" : num_reset == 2 ? "DINER DASH"
+                                                                                                                : num_reset == 3   ? "HANGMAN"
+                                                                                                                : num_reset == 4   ? "TOWER OF HANOI"
+                                                                                                                : num_reset == 5   ? "SNAKE"
+                                                                                                                                   : "ALL");
             startInputWord();
             if (stringEQWord(currentWord, "YA") || stringEQWord(currentWord, "TIDAK"))
             {
                 valid = true;
-            } else {
+            }
+            else
+            {
                 printf("\nMasukan tidak valid coba lagi.\n");
             }
         }
-        
 
-        if (stringEQWord(currentWord, "YA")) 
+        if (stringEQWord(currentWord, "YA"))
         {
             switch (num_reset)
             {
@@ -334,20 +339,21 @@ void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard r
                 CreateEmptySet(&(dinerdash).setGame);
                 break;
             case 3:
-                //hangman
+                // hangman
                 break;
             case 4:
                 CreateEmptyMap(&(towerofhanoi).mapGame);
                 CreateEmptySet(&(towerofhanoi).setGame);
                 break;
             case 5:
-                //snake
+                // snake
                 break;
             default:
                 break;
             }
             printf("\nScoreboard berhasil di-reset.\n");
-        } else
+        }
+        else
         {
             printf("\nScoreboard tidak jadi di-reset.\n");
         }
@@ -391,7 +397,9 @@ void resetHistory(ArrayDin *arrHistory)
         if (stringEQWord(currentWord, "YA") || stringEQWord(currentWord, "TIDAK"))
         {
             valid = true;
-        } else {
+        }
+        else
+        {
             printf("\nMasukan tidak valid coba lagi.\n");
         }
     }
@@ -400,11 +408,10 @@ void resetHistory(ArrayDin *arrHistory)
     {
         *arrHistory = MakeArrayDin();
         printf("\nHistory berhasil di-reset.\n");
-    } else
+    }
+    else
     {
         printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan\n");
         PrintArrayDin(*arrHistory, (*arrHistory).Neff);
     }
-    
-    
 }

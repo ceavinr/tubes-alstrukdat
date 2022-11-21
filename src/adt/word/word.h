@@ -11,6 +11,9 @@ typedef struct
     int Length;
 } Word;
 
+/* Membuat sebuah word kosong. Ciri word kosong: w.Length = 0 */
+Word CreateWord();
+
 /*
  I.S word terdefinisi
  F.S dirubah ke integer dan dimasukkan ke dalan integer
@@ -41,5 +44,8 @@ boolean IsEQWord(Word w1, Word w2);
 
 /* Mengkonversi tipe Word menjadi tipe string */
 string wordToString(Word w);
+
+/* Mereturn kata ke- pada w */
+Word ambilKataKe(Word w, int kataKe);
 
 #endif

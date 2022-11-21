@@ -1,24 +1,35 @@
 #include "masakan.h"
+#include "../mesin/mesinkata.h"
 #include <stdio.h>
 
 int main()
 {
     Masakan m, m1;
 
+    printf("Masukan nama masakan 1: ");
+    startInputWord();
     CreateMasakanRandom(&m, 0);
-    printf("Harusnya sih nomor 0\n");
-    printf("%d\n", NOMOR(m));
+    NAMA(m) = wordToString(currentWord);
 
-    CreateMasakanRandom(&m1, 2);
-    printf("Harusnya sih nomor 2\n");
-    printf("%d\n", NOMOR(m1));
+    printf("Harusnya sih nomor 0\n");
+    printf("Nomor masakan: %d\n", NOMOR(m));
+
+    m1 = CreateMasakan();
+    printf("Masukan nama masakan 2: ");
+    startInputWord();
+    NAMA(m1) = wordToString(currentWord);
+
+    printf("\nSebelum dicopy:\n");
+    DisplayMasakan(m);
+    printf("\n");
+    DisplayMasakan(m1);
 
     copyMasakan(&m1, m);
-    printf("Habis dicopy m ke m1 harusnya mereka jadi sama\n");
-    if (NOMOR(m1) == NOMOR(m))
-    {
-        printf("Tuh kan sama\n");
-    }
+    printf("\nSetelah dicopy:\n");
+    DisplayMasakan(m);
+    printf("\n");
+    DisplayMasakan(m1);
+    printf("\n");
 
     return 0;
 }

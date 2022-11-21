@@ -12,7 +12,7 @@ tictactoe:
 towerofhanoi:
 	gcc ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/stack/stack.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/towerofhanoi/mtowerofhanoi.c -o towerofhanoi
 amogusfight:
-	gcc ../src/adt/masakan/masakan.c ../src/games/amogusfight/amogusfight.c ../src/games/amogusfight/mamogusfight.c -o amogusfight
+	gcc ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/array/array.c ../src/games/amogusfight/amogusfight.c ../src/games/amogusfight/mamogusfight.c -o amogusfight
 
 # Mesin kata & Mesin karakter
 mesin:
@@ -28,13 +28,13 @@ order:
 stack:
 	gcc ../src/adt/stack/driverstack.c ../src/adt/stack/stack.c -o stack_test
 bintree:
-	gcc ../src/modules/bintree/driverbintree.c ../src/modules/bintree/bintree.c ../src/modules/mesin/mesinkata.c ../src/modules/mesin/mesinkarakter.c ../src/modules/word/word.c ../src/modules/string/string.c -o bintree_test
+	gcc ../src/adt/bintree/driverbintree.c ../src/adt/arraydin/arraydin.c ../src/adt/bintree/bintree.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c -o bintree_test
 array:
 	gcc ../src/adt/array/driverarray.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c -o array_test
 matrix:
 	gcc ../src/adt/matrix/drivermatrix.c ../src/adt/matrix/matrix.c -o matrix_test
 masakan:
-	gcc ../src/adt/masakan/drivermasakan.c ../src/adt/masakan/masakan.c -o masakan_test
+	gcc ../src/adt/masakan/drivermasakan.c ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c -o masakan_test
 arraydin:
 	gcc ../src/adt/arraydin/driverarraydin.c ../src/adt/arraydin/arraydin.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/word/word.c -o arraydin_test
 queue:

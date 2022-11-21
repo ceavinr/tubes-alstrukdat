@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "tictactoe.h"
 
+/* Mengembalikan true jika semua elemen pada salah satu diagonal papan berisi mark */
 boolean isDiagonalWin(Matrix papan, char mark)
 {
     int i = 0;
@@ -33,6 +34,7 @@ boolean isDiagonalWin(Matrix papan, char mark)
     return win;
 }
 
+/* Mengembalikan true jika semua elemen pada salah satu vertikal papan berisi mark */
 boolean isVerticalWin(Matrix papan, char mark)
 {
     int i = 0;
@@ -53,6 +55,7 @@ boolean isVerticalWin(Matrix papan, char mark)
     return win;
 }
 
+/* Mengembalikan true jika semua elemen pada salah satu horizontal papan berisi mark */
 boolean isHorizontalWin(Matrix papan, char mark)
 {
     int i = 0;
@@ -73,6 +76,7 @@ boolean isHorizontalWin(Matrix papan, char mark)
     return win;
 }
 
+/* Mengembalikan true jika seluruh elemen papan berisi X atau O */
 boolean isBoardFull(Matrix papan)
 {
     boolean full = true;
@@ -88,6 +92,8 @@ boolean isBoardFull(Matrix papan)
     return full;
 }
 
+/* I.S. papan terdefinisi */
+/* F.S. Menampilkan tampilan papan */
 void board(Matrix papan)
 {
     printf("\nTic Tac Toe\n");
