@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-boolean IsEmpty(List L)
+boolean IsListEmpty(List L)
 {
     return First(L) == NULL;
 }
@@ -113,7 +113,7 @@ void InsertAfter(List *L, address P, address Prec)
 void InsertLast(List *L, address P)
 {
 
-    if (IsEmpty(*L))
+    if (IsListEmpty(*L))
     {
         InsertFirst(L, P);
     }
@@ -220,7 +220,7 @@ void PrintInfo(List L)
 {
     address P = First(L);
 
-    if (IsEmpty(L))
+    if (IsListEmpty(L))
     {
         printf("[]");
     }

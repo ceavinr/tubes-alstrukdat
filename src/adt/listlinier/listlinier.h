@@ -33,7 +33,7 @@ typedef struct
 /****************** TEST LIST KOSONG ******************/
 
 /* Mengirim true jika list kosong */
-boolean IsEmpty(List L);
+boolean IsListEmpty(List L);
 
 /****************** PEMBUATAN LIST KOSONG ******************/
 
