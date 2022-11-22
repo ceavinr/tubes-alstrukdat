@@ -98,7 +98,7 @@ void InsertFirst(ArrayDin *array, ElType el)
 void DeleteAt(ArrayDin *array, IdxType i)
 {
     IdxType idx;
-    for (idx = i; idx < Length(*array); idx++)
+    for (idx = i; idx < Length(*array)-1; idx++)
     {
         CopyWord(&BUFFER(*array)[idx], BUFFER(*array)[idx + 1]);
     }

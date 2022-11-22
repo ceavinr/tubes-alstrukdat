@@ -50,7 +50,7 @@ void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, scoreboard *
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory);
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som);
 
 /**
  * Konstruktor

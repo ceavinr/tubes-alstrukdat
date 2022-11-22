@@ -95,8 +95,12 @@ int main()
         printf("5. QUEUE GAME\n");
         printf("6. PLAY GAME\n");
         printf("7. SKIP GAME <n>\n");
-        printf("8. QUIT\n");
-        printf("9. HELP\n");
+        printf("8. SCOREBOARD\n");
+        printf("9. RESET SCOREBOARD\n");
+        printf("10. HISTORY <n>\n");
+        printf("11. RESET HISTORY\n");
+        printf("12. QUIT\n");
+        printf("13. HELP\n");
 
         printf("\nENTER COMMAND: ");
         startInputWord();
@@ -109,7 +113,7 @@ int main()
         if (stringEQWord(cek, "SAVE"))
         {
             akuisisiCommandWord(&namaFile, currentWord, 2);
-            save(wordToString(namaFile), arrGame, arrHistory);
+            save(wordToString(namaFile), arrGame, arrHistory, scoreRNG, scoreHangman, scoreDinerDash, scoreTowerOfHanoi, scoreSnakeOnMeteor);
         }
         else if (stringEQWord(command, "CREATE GAME"))
         {

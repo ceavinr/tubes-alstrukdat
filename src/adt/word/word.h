@@ -48,4 +48,7 @@ string wordToString(Word w);
 /* Mereturn kata ke- pada w */
 Word ambilKataKe(Word w, int kataKe);
 
+/* Mereturn integer ke word untuk bilangan positid*/
+Word intToWord(int i);
+
 #endif

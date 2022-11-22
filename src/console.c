@@ -54,7 +54,67 @@ void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, scoreboard *
     loadToscoreboard(som);
 }
 
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
+void saveArray(ArrayDin arr, FILE *pita)
+{
+    int i, j;
+    Word count;
+    count = intToWord(arr.Neff);
+    for (i=0; i<count.Length; i++)
+    {
+        fprintf(pita, "%c", count.TabWord[i]);
+    }
+    if (arr.Neff != 0)
+    {
+        fprintf(pita, "\n");
+    }
+
+    for (i = 0; i < arr.Neff; i++)
+    {
+        for (j = 0; j < arr.A[i].Length; j++)
+        {
+            fprintf(pita, "%c", arr.A[i].TabWord[j]);
+        }
+        if (i < arr.Neff-1) {
+            fprintf(pita, "\n");
+        }
+    }
+}
+
+void saveScoreboard(scoreboard scoreboard, FILE *pita)
+{
+    int i, j;
+    Word count, val;
+    count = intToWord(scoreboard.setGame.Count);
+    for (i=0; i<count.Length; i++)
+    {
+        fprintf(pita, "%c", count.TabWord[i]);
+    }
+    if (scoreboard.setGame.Count != 0)
+    {
+        fprintf(pita, "\n");
+    }
+    
+    for (i = 0; i < scoreboard.setGame.Count; i++)
+    {
+        for (j = 0; j < scoreboard.setGame.Elements[i].Length; j++)
+        {
+            fprintf(pita, "%c", scoreboard.setGame.Elements[i].TabWord[j]);
+        }
+        fprintf(pita, " ");
+
+        val = intToWord(ValueInMap(scoreboard.mapGame, ToKey(scoreboard.setGame.Elements[i])));
+        for (j=0; j<val.Length; j++)
+        {
+            fprintf(pita, "%c", val.TabWord[j]);
+        }
+        if (i < scoreboard.setGame.Count - 1)
+        {
+            fprintf(pita, "\n");
+        }
+    }
+}
+
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som)
 {
     if (stringLength(namaFile) == 0)
     {
@@ -63,36 +123,25 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
     else
     {
         FILE *pita;
-        pita = fopen(concat("", namaFile), "w");
+        pita = fopen(concat("../data/", namaFile), "w");
 
-        fprintf(pita, "%c\n", (char)(arrGame.Neff + 48));
+        /* Daftar Game dan History*/
+        saveArray(arrGame, pita);
+        fprintf(pita, "\n");
+        saveArray(arrHistory, pita);
+        fprintf(pita, "\n");
+        
+        /* SCOREBOARD */
+        saveScoreboard(rng, pita);
+        fprintf(pita, "\n");
+        saveScoreboard(hangman, pita);
+        fprintf(pita, "\n");
+        saveScoreboard(dinerdash, pita);
+        fprintf(pita, "\n");
+        saveScoreboard(toh, pita);
+        fprintf(pita, "\n");
+        saveScoreboard(som, pita);        
 
-        for (int i = 0; i < arrGame.Neff; i++)
-        {
-            for (int j = 0; j < arrGame.A[i].Length - 1; j++)
-            {
-                fprintf(pita, "%c", arrGame.A[i].TabWord[j]);
-            }
-            if (i < arrGame.Neff - 1)
-            {
-                fprintf(pita, "%c\n", arrGame.A[i].TabWord[arrGame.A[i].Length - 1]);
-            }
-            else
-            {
-                fprintf(pita, "%c", arrGame.A[i].TabWord[arrGame.A[i].Length - 1]);
-            }
-        }
-
-        // Tadinya buat nampilin history
-        /*fprintf(pita, "%c\n", (char)(arrHistory.Neff + 48));
-
-        for (int j = 0; j < arrHistory.Neff - 1; j++)
-        {
-            fprintf(pita, "%s\n", arrHistory.A[j].TabWord);
-        }
-
-        fprintf(pita, "%s", arrHistory.A[arrHistory.Neff - 1].TabWord);
-        */
         fclose(pita);
         printf("Save file berhasil disimpan..\n\n");
     }
@@ -282,9 +331,13 @@ void help()
     printf("6. DELETE GAME      : Menghapus daftar game\n");
     printf("7. QUEUE GAME       : Menambahkan game ke daftar antrian yang akan dimainkan\n");
     printf("8. PLAY GAME        : Memainkan game pada daftar antrian paling atas\n");
-    printf("9. SKIP GAME <n>     : Memainkan game dengan mendahului beberapa game di atasnya\n");
-    printf("10. QUIT            : Keluar dari program\n");
-    printf("11. HELP            : Panduan penggunaan\n");
+    printf("9. SKIP GAME <n>    : Memainkan game dengan mendahului beberapa game di atasnya\n");
+    printf("10. SCOREBOARD       : Menampilkan scoreboard masing-masing game\n");
+    printf("11. RESET SCOREBOARD : Melakukan reset scoreboard pada suatu game yang dipilih\n");
+    printf("12. HISTORY <n>      : Menampilkan n history game terbaru yang pernah dimainkan\n");
+    printf("13. RESET HISTORY    : Melakukan reset history game yang pernah dimainkan\n");
+    printf("14. QUIT            : Keluar dari program\n");
+    printf("15. HELP            : Panduan penggunaan\n");
 }
 
 void scoreBoard(scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som)
