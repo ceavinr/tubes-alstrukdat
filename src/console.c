@@ -2,37 +2,56 @@
 
 void start(ArrayDin *arrGame, ArrayDin *arrHistory)
 {
-    load("default.txt", arrGame, arrHistory);
+    scoreboard rng;
+    scoreboard hangman;
+    scoreboard dinerdash;
+    scoreboard toh;
+    scoreboard som;
+    load("default.txt", arrGame, arrHistory, &rng, &hangman, &dinerdash, &toh, &som);
 }
 
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory)
-{
-    *arrGame = MakeArrayDin();
-    *arrHistory = MakeArrayDin();
-    STARTWORD(concat("data/", namaFile));
-
+void loadToarray(ArrayDin *arr) {
+    int count, i;
     if (!EOP)
     {
-        int count = wordToInt(currentWord);
-        int i;
+        count = wordToInt(currentWord);
         for (i = 0; i < count; i++)
         {
             ADVWORD();
-            InsertAt(arrGame, currentWord, i);
+            InsertAt(arr, currentWord, i);
         }
         ADVWORD();
     }
+}
 
+void loadToscoreboard(scoreboard *scoreboard) {
+    int count, i;
+    Word name, score;
     if (!EOP)
     {
-        int count = wordToInt(currentWord);
-        int j;
-        for (j = 0; j < count; j++)
+        count = wordToInt(currentWord);
+        for (i = 0; i < count; i++)
         {
             ADVWORD();
-            InsertAt(arrHistory, currentWord, j);
+            akuisisiCommandWord(&name, currentWord, 1);
+            akuisisiCommandWord(&score, currentWord, 2);
+            InsertScoreboard(scoreboard, name, wordToInt(score));
         }
+        ADVWORD();
     }
+}
+
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, scoreboard *rng, scoreboard *hangman, scoreboard *dinerdash, scoreboard *toh, scoreboard *som)
+{
+    STARTWORD(concat("../data/", namaFile));
+
+    loadToarray(arrGame);
+    loadToarray(arrHistory);
+    loadToscoreboard(rng);
+    loadToscoreboard(hangman);
+    loadToscoreboard(dinerdash);
+    loadToscoreboard(toh);
+    loadToscoreboard(som);
 }
 
 void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory)
@@ -268,17 +287,21 @@ void help()
     printf("11. HELP            : Panduan penggunaan\n");
 }
 
-void scoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng)
+void scoreBoard(scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som)
 {
-    printf("**** SCOREBOARD GAME TOWER OF HANOI ****\n");
-    PrintScoreboard(towerofhanoi);
-    printf("**** SCOREBOARD GAME TOWER OF HANOI ****\n");
+    printf("**** SCOREBOARD GAME RNG ****\n");
+    PrintScoreboard(rng);
+    printf("**** SCOREBOARD GAME HANGMAN ****\n");
+    PrintScoreboard(hangman);
+    printf("**** SCOREBOARD GAME DINER DASH ****\n");
     PrintScoreboard(dinerdash);
     printf("**** SCOREBOARD GAME TOWER OF HANOI ****\n");
-    PrintScoreboard(rng);
+    PrintScoreboard(toh);
+    printf("**** SCOREBOARD GAME SNAKE ON METEOR ****\n");
+    PrintScoreboard(som);
 }
 
-void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng)
+void resetScoreBoard(scoreboard *rng, scoreboard *hangman, scoreboard *dinerdash, scoreboard *toh, scoreboard *som)
 {
     int num_reset;
 
@@ -320,33 +343,26 @@ void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard r
             switch (num_reset)
             {
             case 0:
-                CreateEmptyMap(&(towerofhanoi).mapGame);
-                CreateEmptySet(&(towerofhanoi).setGame);
-
-                CreateEmptyMap(&(dinerdash).mapGame);
-                CreateEmptySet(&(dinerdash).setGame);
-
-                CreateEmptyMap(&(rng).mapGame);
-                CreateEmptySet(&(rng).setGame);
+                CreateScoreboard(rng);
+                CreateScoreboard(dinerdash);
+                CreateScoreboard(hangman);
+                CreateScoreboard(toh);
+                CreateScoreboard(som);
                 break;
             case 1:
-
-                CreateEmptyMap(&(rng).mapGame);
-                CreateEmptySet(&(rng).setGame);
+                CreateScoreboard(rng);
                 break;
             case 2:
-                CreateEmptyMap(&(dinerdash).mapGame);
-                CreateEmptySet(&(dinerdash).setGame);
+                CreateScoreboard(dinerdash);
                 break;
             case 3:
-                // hangman
+                CreateScoreboard(hangman);
                 break;
             case 4:
-                CreateEmptyMap(&(towerofhanoi).mapGame);
-                CreateEmptySet(&(towerofhanoi).setGame);
+                CreateScoreboard(toh);
                 break;
             case 5:
-                // snake
+                CreateScoreboard(som);
                 break;
             default:
                 break;
@@ -371,7 +387,7 @@ void showHistory(Word command, ArrayDin arrHistory)
     if (banyakHistory.Length > 0)
     {
         int banyakHistory_int = wordToInt(banyakHistory);
-        if (banyakHistory_int >= 0)
+        if (banyakHistory_int > 0)
         {
             printf("Berikut adalah daftar Game yang telah dimainkan\n");
             PrintArrayDin(arrHistory, banyakHistory_int);

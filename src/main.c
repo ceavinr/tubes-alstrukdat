@@ -12,14 +12,20 @@ int main()
     Queue arrQueue = MakeQueue();
 
     /* SCOREBOARD */
+    scoreboard scoreRNG;
+    CreateScoreboard(&scoreRNG);
+    
+    scoreboard scoreHangman;
+    CreateScoreboard(&scoreHangman);
+
     scoreboard scoreDinerDash;
     CreateScoreboard(&scoreDinerDash);
 
-    scoreboard scoreRNG;
-    CreateScoreboard(&scoreRNG);
-
     scoreboard scoreTowerOfHanoi;
     CreateScoreboard(&scoreTowerOfHanoi);
+    
+    scoreboard scoreSnakeOnMeteor;
+    CreateScoreboard(&scoreSnakeOnMeteor);
 
     while (!inputValid)
     {
@@ -45,14 +51,13 @@ int main()
             {
                 printf("Gagal membaca file.\n");
             }
-            inputValid = true;
         }
         else if (stringEQWord(command, "LOAD"))
         {
             akuisisiCommandWord(&namaFile, currentWord, 2);
             if (namaFile.Length > 0)
             {
-                load(wordToString(namaFile), &arrGame, &arrHistory);
+                load(wordToString(namaFile), &arrGame, &arrHistory, &scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
                 if (!IsEmpty(arrGame))
                 {
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
@@ -140,17 +145,17 @@ int main()
         }
         else if (stringEQWord(command, "SCOREBOARD"))
         {
-            scoreBoard(scoreTowerOfHanoi, scoreDinerDash, scoreRNG);
+            scoreBoard(scoreRNG, scoreHangman, scoreDinerDash, scoreTowerOfHanoi, scoreSnakeOnMeteor);
         }
         else if (stringEQWord(command, "RESET SCOREBOARD"))
         {
-            resetScoreBoard(scoreTowerOfHanoi, scoreDinerDash, scoreRNG);
+            resetScoreBoard(&scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
         }
         else if (stringEQWord(cek, "HISTORY"))
         {
             showHistory(command, arrHistory);
         }
-        else if (stringEQWord(cek, "RESET HISTORY"))
+        else if (stringEQWord(command, "RESET HISTORY"))
         {
             resetHistory(&arrHistory);
         }

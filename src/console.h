@@ -26,10 +26,24 @@ void start(ArrayDin *arrGame, ArrayDin *arrHistory);
 
 /**
  * Konstruktor
+ * I.S. program berjalan, array terdefinisi
+ * F.S. Melakukan pembacaan file dan menyimpan ke array game dan history
+ */
+void loadToarray(ArrayDin *arr);
+
+/**
+ * Konstruktor
+ * I.S. program berjalan, scoreboard terdefinisi
+ * F.S. Melakukan Load dari file dan menyimpan ke scoreboard
+ */
+void loadToscoreboard(scoreboard *scoreboard);
+
+/**
+ * Konstruktor
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory);
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, scoreboard *rng, scoreboard *hangman, scoreboard *dinerdash, scoreboard *toh, scoreboard *som);
 
 /**
  * Konstruktor
@@ -106,14 +120,14 @@ void help();
  * I.S. Program berjalan scoreboard terdefinisi masing-masing game
  * F.S. Menampilkan scoreboard dari beberapa game yang bisa dimainkan
  */
-void scoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng);
+void scoreBoard(scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som);
 
 /**
  * Konstruktor
  * I.S. Program berjalan scoreboard terdefinisi masing-masing game
  * F.S. scoreboard berhasil direset sesuai keiinginan user
  */
-void resetScoreBoard(scoreboard towerofhanoi, scoreboard dinerdash, scoreboard rng);
+void resetScoreBoard(scoreboard *rng, scoreboard *hangman, scoreboard *dinerdash, scoreboard *toh, scoreboard *som);
 
 /**
  * Konstruktor
