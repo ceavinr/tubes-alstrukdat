@@ -75,7 +75,7 @@ int play()
     char tebakan[11];
     char* kata;
     int i, j;
-    int panjang_kata, found, win;
+    int panjang_kata, found, score, win;
 
     kata = kata_random();
     panjang_kata = stringLength(kata);
@@ -102,7 +102,7 @@ int play()
     tebakan[1] = '\0';
 
     found = check(kata, *input);
-    if (found)
+    if (found == 1)
     {
         for (i = 0; i < panjang_kata; i++)
         {
@@ -133,7 +133,7 @@ int play()
 
         found = check(kata, *input);
 
-        if (found)
+        if (found == 1)
         {
             for (i = 0; i < panjang_kata; i++)
             {
@@ -150,9 +150,9 @@ int play()
         {
             break;
         }
-        
-        
     }
+
+    printf("%d\n", j);
 
     if (win == 1)
     {
@@ -166,6 +166,8 @@ int play()
     return 0;
 
 }
+
+
 
 
 

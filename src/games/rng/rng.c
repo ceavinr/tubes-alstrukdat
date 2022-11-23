@@ -42,7 +42,7 @@ int rng()
         count++;
     }
 
-    int score = 20 - count;
+    int score = 100 - count;
 
     printf("\nYa, X adalah %d.\n", x);
     return score;
