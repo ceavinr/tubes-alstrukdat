@@ -70,98 +70,129 @@ int isWin(char* kata)
     return 1;
 }
 
+int isLower(char huruf)
+{
+    char lower[26] = "abcdefghijklmnopqrstuvwxyz";
+    int i;
+
+    for (i = 0; i < 26; i++)
+    {
+        if (lower[i] == huruf)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 int play()
 {
     char tebakan[11];
     char* kata;
-    int i, j;
-    int panjang_kata, found, score, win;
+    int i, j, count;
+    int panjang_kata, score, win;
+    int found, found_input, lower;
 
-    kata = kata_random();
-    panjang_kata = stringLength(kata);
-    char word[panjang_kata+1];
-    printf("%d %s\n", panjang_kata, kata);
+    score = 0;
+    count = 0;
 
-    for (i = 0; i < panjang_kata; i++)
+    while (count <= 10)
     {
-        word[i] = '_';
-    }
-    word[panjang_kata] = '\0';
-    printf("Tebakan sebelumnya: -\n");
-    printf("Kata: %s\n", word);
-    printf("Kesempatan: %d\n", 10);
+        printf("%d\n\n", count);
+        count++;
+        kata = kata_random();
+        panjang_kata = stringLength(kata);
 
-    Word temp;
-    char* input;
-    printf("Masukkan tebakan (DALAM HURUF KAPITAL): ");
-    startInputWord();
-    akuisisiCommandWord(&temp, currentWord, 1);
-    input = wordToString(temp);
+        char word[panjang_kata+1];
+        printf("%d %s\n", panjang_kata, kata);
 
-    tebakan[0] = *input;
-    tebakan[1] = '\0';
-
-    found = check(kata, *input);
-    if (found == 1)
-    {
         for (i = 0; i < panjang_kata; i++)
         {
-            if (kata[i] == *input)
-            {
-                word[i] = *input;
-            }
+            word[i] = '_';
         }
-    }
-    printf("\n");
+        word[panjang_kata] = '\0';
 
-    for (j = 1; j < 10; j++)
-    {
-        printf("Tebakan sebelumnya: %s\n", tebakan);
-
-        printf("Kata: %s\n", word);
-
-        printf("Kesempatan: %d\n", 10-j);
-
-        printf("Masukkan tebakan (DALAM HURUF KAPITAL): ");
+        tebakan[0] = '\0';
         
-        startInputWord();
-        akuisisiCommandWord(&temp, currentWord, 1);
-        input = wordToString(temp);
+        Word temp;
+        char* input;
 
-        tebakan[j] = *input;
-        tebakan[j+1] = '\0';
+        win = 0;
+        j = 0;
 
-        found = check(kata, *input);
-
-        if (found == 1)
+        while (win == 0)
         {
-            for (i = 0; i < panjang_kata; i++)
+            
+            if (tebakan[0] =='\0')
             {
-                if (kata[i] == *input)
+                printf("Tebakan sebelumnya: -\n");
+            }
+            else
+            {
+                printf("Tebakan sebelumnya: %s\n", tebakan);
+            }
+            
+
+            printf("Kata: %s\n", word);
+
+            printf("Kesempatan: %d\n", 10-count+1);
+
+            
+            
+            do 
+            {
+                printf("Masukkan tebakan (DALAM HURUF KAPITAL): ");
+                startInputWord();
+                akuisisiCommandWord(&temp, currentWord, 1);
+                input = wordToString(temp);
+                printf("\n");
+                found_input = check(tebakan, *input);
+                lower = isLower(*input);
+            }
+            while (found_input == 1 || lower == 1);
+
+            tebakan[j] = *input;
+            tebakan[j+1] = '\0';
+
+            found = check(kata, *input);
+
+            if (found == 1)
+            {
+                for (i = 0; i < panjang_kata; i++)
                 {
-                    word[i] = *input;
+                    if (kata[i] == *input)
+                    {
+                        word[i] = *input;
+                    }
                 }
             }
-        }
 
-        win = isWin(word);
-        printf("\n");
-        if (win == 1)
+            win = isWin(word);
+            printf("\n");
+            if (win == 1)
+            {
+                printf("Berhasil menebak kata %s! Kamu mendapatkan %d poin!\n\n", word, panjang_kata);
+                score = score + panjang_kata;
+                win = 0;
+                break;
+            }
+            if (count == 10)
+            {
+                break;
+            }
+            count++;
+            j++;
+        }
+        
+        if (count == 10)
         {
             break;
         }
+        
     }
 
-    printf("%d\n", j);
-
-    if (win == 1)
-    {
-        printf("Berhasil menebak kata %s! Kamu mendapatkan poin!\n\n", word);
-    }
-    else
-    {
-        printf("Jangan menyerah, silahkan coba bermain lagi!\n\n");
-    }
+    printf("Kesempatan kamu untuk menebak sudah habis. Selamat kamu berhasil mengumpulkan %d poin!\n\n", score);
 
     return 0;
 
