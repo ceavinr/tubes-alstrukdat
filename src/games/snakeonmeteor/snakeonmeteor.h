@@ -49,4 +49,6 @@ boolean isMeteorHitHead(List L);
 
 int lengthSnake(List L);
 
+boolean isInputValid(List L,char input);
+
 #endif

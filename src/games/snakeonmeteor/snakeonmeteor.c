@@ -359,7 +359,7 @@ void snakeOnMeteor(int * skor){
 
         startInputWord();
         input = currentWord.TabWord[0];
-        if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd')){
+        if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd') && isInputValid(L,input)){
             newtail=*(Last(L));
             Move(&L,input);
             if (isEat(&L,food)){
@@ -448,4 +448,19 @@ void addObstacle(List L, POINT* obstacle){
 
 int lengthSnake(List L){
     return (Info(Last(L)));
+}
+
+boolean isInputValid(List L,char input){
+    address P=First(L);
+    if (input=='w' && Next(P)->Pos.Y==(P->Pos.Y-1)%5){
+        return false;
+    }else if(input=='s' && Next(P)->Pos.Y==(P->Pos.Y+1)%5){
+        return false;
+    }else if(input=='a' && Next(P)->Pos.X==(P->Pos.X-1)%5){
+        return false;
+    }else if(input=='d' && Next(P)->Pos.Y==(P->Pos.Y-1)%5){
+        return false;
+    }else{
+        return true;
+    }
 }
