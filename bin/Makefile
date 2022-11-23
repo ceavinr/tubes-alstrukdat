@@ -45,3 +45,5 @@ set:
 	gcc ../src/adt/set/driverset.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/set/set.c -o set_test
 scoreboard:
 	gcc ../src/adt/scoreboard/driverscoreboard.c ../src/adt/scoreboard/scoreboard.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/map/map.c ../src/adt/set/set.c -o scoreboard_test
+snakeonmeteor:
+	gcc ../src/adt/listdp/listdp.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/snakeonmeteor/driversnakeonmeteor.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c -o snakeonmeteor

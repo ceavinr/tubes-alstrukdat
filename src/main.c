@@ -11,7 +11,7 @@ int main()
     ArrayDin arrHistory = MakeArrayDin();
     Queue arrQueue = MakeQueue();
 
-    /* SCOREBOARD */
+    /* Scoreboard */
     Scoreboard scoreRNG;
     CreateScoreboard(&scoreRNG);
 
@@ -95,8 +95,8 @@ int main()
         printf("5. QUEUE GAME\n");
         printf("6. PLAY GAME\n");
         printf("7. SKIP GAME <n>\n");
-        printf("8. SCOREBOARD\n");
-        printf("9. RESET SCOREBOARD\n");
+        printf("8. Scoreboard\n");
+        printf("9. RESET Scoreboard\n");
         printf("10. HISTORY <n>\n");
         printf("11. RESET HISTORY\n");
         printf("12. QUIT\n");
@@ -133,11 +133,11 @@ int main()
         }
         else if (stringEQWord(command, "PLAY GAME"))
         {
-            playGame(&arrQueue, &arrHistory);
+            playGame(&arrQueue, &arrHistory, &scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
         }
         else if (stringEQWord(cek, "SKIP") && stringEQWord(cek2, "GAME"))
         {
-            skipGame(command, &arrQueue, &arrHistory);
+            skipGame(command, &arrQueue, &arrHistory, &scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
         }
         else if (stringEQWord(command, "QUIT"))
         {
@@ -147,13 +147,13 @@ int main()
         {
             help();
         }
-        else if (stringEQWord(command, "SCOREBOARD"))
+        else if (stringEQWord(command, "Scoreboard"))
         {
-            scoreBoard(scoreRNG, scoreHangman, scoreDinerDash, scoreTowerOfHanoi, scoreSnakeOnMeteor);
+            scoreboard(scoreRNG, scoreHangman, scoreDinerDash, scoreTowerOfHanoi, scoreSnakeOnMeteor);
         }
-        else if (stringEQWord(command, "RESET SCOREBOARD"))
+        else if (stringEQWord(command, "RESET Scoreboard"))
         {
-            resetScoreBoard(&scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
+            resetScoreboard(&scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
         }
         else if (stringEQWord(cek, "HISTORY"))
         {

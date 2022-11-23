@@ -21,6 +21,7 @@
     "amogusfight.h": "c",
     "time.h": "c",
     "bintree.h": "c",
-    "interface.h": "c"
+    "interface.h": "c",
+    "listdp.h": "c"
   }
 }

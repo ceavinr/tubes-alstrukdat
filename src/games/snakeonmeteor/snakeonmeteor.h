@@ -1,7 +1,11 @@
 #ifndef __Snake__
 #define __Snake__
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "../../adt/listdp/listdp.h"
+#include "../../adt/mesin/mesinkata.h"
 #include "../../boolean.h"
 
 

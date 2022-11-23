@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "snakeonmeteor.h"
 
 void Move (List *L, char input){
@@ -346,7 +343,6 @@ void snakeOnMeteor(int * skor){
     POINT meteor;
     meteor.X=-999;
     meteor.Y=-999;
-    int i=1;
     printf("Selamat datang di snake on meteor!\n");
     printf("Mengenerate peta, snake dan makanan . . . \n");
     printf("Berhasil digenerate\n");
@@ -355,36 +351,15 @@ void snakeOnMeteor(int * skor){
     addObstacle(L,&obstacle);
     addFood(&food,L,obstacle);
     printMap(L,food,meteor,obstacle);
-    printf("TURN %d:\n",i);
-    printf("Silahkan masukkan command anda:");
-    scanf("%c",&input);
-    if (input!='\n'){
-        newtail=*(Last(L));
-        Move(&L,input); 
-        if (isEat(&L,food)){
-                addTail(&L,newtail);
-                addFood(&food,L,obstacle);     
-                
-        }
-        addMeteor(&meteor,food);
-        //printPoint(meteor);
-        printMap(L,food,meteor,obstacle);
-        i++;
-        MeteorHitBody(&L,food,meteor);
-        if(isLose(L,meteor,obstacle)){
-            *skor=lengthSnake(L)*2;
-            printf("skor anda %d\n",*skor);
-            exit(0);
-        }
-    }
-    //printf("-------------------------\n");
-    printf("TURN %d:\n",i);
-    printf("Silahkan masukkan command anda:");
-    //addFood(&food,L,meteor);
-    while(scanf("%c",&input)){
-        //input=getchar();
-        if (input!='\n'){
-           
+    int i=1;
+    boolean hit = false;
+    while(!hit){
+        printf("TURN %d:\n",i);
+        printf("Silahkan masukkan command anda:");
+
+        startInputWord();
+        input = currentWord.TabWord[0];
+        if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd')){
             newtail=*(Last(L));
             Move(&L,input);
             if (isEat(&L,food)){
@@ -398,14 +373,15 @@ void snakeOnMeteor(int * skor){
             if(isLose(L,meteor,obstacle)){
                 *skor=lengthSnake(L)*2;
                 printf("skor anda %d\n",*skor);
-                exit(0);
+                hit = true;
             }else{
-                //printf("-------------------------\n");
                 i++;
-                printf("TURN %d:\n",i);
-                printf("Silahkan masukkan command anda:");
             }
+        } else
+        {
+            printf("Perintah tidak valid.\n");
         }
+        
         
     }
 }
