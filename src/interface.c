@@ -1,5 +1,15 @@
 #include <stdio.h>
-#include "gambar.h"
+#include "interface.h"
+#include <time.h>
+
+void sleep(int detik)
+{
+    clock_t start_time = clock();
+
+    while (clock() < start_time + 1000 * detik)
+    {
+    }
+}
 
 void gambarBNMO()
 {

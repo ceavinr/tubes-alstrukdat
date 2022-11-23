@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "dinerdash.h"
-#include "../../gambar.h"
+#include "../../interface.h"
 
 /* Menampilkan daftar masakan yang terdapat pada antrian pesanan */
 void displayOrder(Order o)

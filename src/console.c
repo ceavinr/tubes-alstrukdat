@@ -2,15 +2,16 @@
 
 void start(ArrayDin *arrGame, ArrayDin *arrHistory)
 {
-    scoreboard rng;
-    scoreboard hangman;
-    scoreboard dinerdash;
-    scoreboard toh;
-    scoreboard som;
+    Scoreboard rng;
+    Scoreboard hangman;
+    Scoreboard dinerdash;
+    Scoreboard toh;
+    Scoreboard som;
     load("default.txt", arrGame, arrHistory, &rng, &hangman, &dinerdash, &toh, &som);
 }
 
-void loadToarray(ArrayDin *arr) {
+void loadToarray(ArrayDin *arr)
+{
     int count, i;
     if (!EOP)
     {
@@ -24,7 +25,8 @@ void loadToarray(ArrayDin *arr) {
     }
 }
 
-void loadToscoreboard(scoreboard *scoreboard) {
+void loadToscoreboard(Scoreboard *scoreboard)
+{
     int count, i;
     Word name, score;
     if (!EOP)
@@ -41,7 +43,7 @@ void loadToscoreboard(scoreboard *scoreboard) {
     }
 }
 
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, scoreboard *rng, scoreboard *hangman, scoreboard *dinerdash, scoreboard *toh, scoreboard *som)
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som)
 {
     STARTWORD(concat("../data/", namaFile));
 
@@ -59,7 +61,7 @@ void saveArray(ArrayDin arr, FILE *pita)
     int i, j;
     Word count;
     count = intToWord(arr.Neff);
-    for (i=0; i<count.Length; i++)
+    for (i = 0; i < count.Length; i++)
     {
         fprintf(pita, "%c", count.TabWord[i]);
     }
@@ -74,18 +76,19 @@ void saveArray(ArrayDin arr, FILE *pita)
         {
             fprintf(pita, "%c", arr.A[i].TabWord[j]);
         }
-        if (i < arr.Neff-1) {
+        if (i < arr.Neff - 1)
+        {
             fprintf(pita, "\n");
         }
     }
 }
 
-void saveScoreboard(scoreboard scoreboard, FILE *pita)
+void saveScoreboard(Scoreboard scoreboard, FILE *pita)
 {
     int i, j;
     Word count, val;
     count = intToWord(scoreboard.setGame.Count);
-    for (i=0; i<count.Length; i++)
+    for (i = 0; i < count.Length; i++)
     {
         fprintf(pita, "%c", count.TabWord[i]);
     }
@@ -93,7 +96,7 @@ void saveScoreboard(scoreboard scoreboard, FILE *pita)
     {
         fprintf(pita, "\n");
     }
-    
+
     for (i = 0; i < scoreboard.setGame.Count; i++)
     {
         for (j = 0; j < scoreboard.setGame.Elements[i].Length; j++)
@@ -103,7 +106,7 @@ void saveScoreboard(scoreboard scoreboard, FILE *pita)
         fprintf(pita, " ");
 
         val = intToWord(ValueInMap(scoreboard.mapGame, ToKey(scoreboard.setGame.Elements[i])));
-        for (j=0; j<val.Length; j++)
+        for (j = 0; j < val.Length; j++)
         {
             fprintf(pita, "%c", val.TabWord[j]);
         }
@@ -114,7 +117,7 @@ void saveScoreboard(scoreboard scoreboard, FILE *pita)
     }
 }
 
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som)
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, Scoreboard rng, Scoreboard hangman, Scoreboard dinerdash, Scoreboard toh, Scoreboard som)
 {
     if (stringLength(namaFile) == 0)
     {
@@ -130,7 +133,7 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, scoreboard rng
         fprintf(pita, "\n");
         saveArray(arrHistory, pita);
         fprintf(pita, "\n");
-        
+
         /* SCOREBOARD */
         saveScoreboard(rng, pita);
         fprintf(pita, "\n");
@@ -140,7 +143,7 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, scoreboard rng
         fprintf(pita, "\n");
         saveScoreboard(toh, pita);
         fprintf(pita, "\n");
-        saveScoreboard(som, pita);        
+        saveScoreboard(som, pita);
 
         fclose(pita);
         printf("Save file berhasil disimpan..\n\n");
@@ -340,7 +343,7 @@ void help()
     printf("15. HELP            : Panduan penggunaan\n");
 }
 
-void scoreBoard(scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreboard toh, scoreboard som)
+void scoreBoard(Scoreboard rng, Scoreboard hangman, Scoreboard dinerdash, Scoreboard toh, Scoreboard som)
 {
     printf("**** SCOREBOARD GAME RNG ****\n");
     PrintScoreboard(rng);
@@ -354,7 +357,7 @@ void scoreBoard(scoreboard rng, scoreboard hangman, scoreboard dinerdash, scoreb
     PrintScoreboard(som);
 }
 
-void resetScoreBoard(scoreboard *rng, scoreboard *hangman, scoreboard *dinerdash, scoreboard *toh, scoreboard *som)
+void resetScoreBoard(Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som)
 {
     int num_reset;
 

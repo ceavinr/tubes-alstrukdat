@@ -1,5 +1,5 @@
 #include "console.h"
-#include "gambar.h"
+#include "interface.h"
 
 int main()
 {
@@ -12,19 +12,19 @@ int main()
     Queue arrQueue = MakeQueue();
 
     /* SCOREBOARD */
-    scoreboard scoreRNG;
+    Scoreboard scoreRNG;
     CreateScoreboard(&scoreRNG);
-    
-    scoreboard scoreHangman;
+
+    Scoreboard scoreHangman;
     CreateScoreboard(&scoreHangman);
 
-    scoreboard scoreDinerDash;
+    Scoreboard scoreDinerDash;
     CreateScoreboard(&scoreDinerDash);
 
-    scoreboard scoreTowerOfHanoi;
+    Scoreboard scoreTowerOfHanoi;
     CreateScoreboard(&scoreTowerOfHanoi);
-    
-    scoreboard scoreSnakeOnMeteor;
+
+    Scoreboard scoreSnakeOnMeteor;
     CreateScoreboard(&scoreSnakeOnMeteor);
 
     while (!inputValid)

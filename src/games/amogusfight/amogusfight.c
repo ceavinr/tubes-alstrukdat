@@ -2,26 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "amogusfight.h"
-
-// To do:
-// - Potion effect
-// - Reject input
-// - Help
-// - Easter egg
-
-void sleep(int detik)
-{
-    // Waktu start
-    clock_t start_time = clock();
-
-    while (clock() < start_time + 1000 * detik)
-    {
-    }
-}
+#include "../../interface.h"
 
 void PrintHPBar(int HP)
 {
-    printf("       [");
+    printf("[");
     if (HP < 4 && HP > 0)
     {
         HP = 4;
@@ -45,8 +30,9 @@ void PrintHPBar(int HP)
 
 void PrintState(int MaxHP1, int HP1, int MaxHP2, int HP2)
 {
+    printf("\t");
     PrintHPBar((HP1 * 100) / MaxHP1);
-    printf("\t\t\t\t");
+    printf("\t\t\t\t      ");
     PrintHPBar((HP2 * 100) / MaxHP2);
     printf("\n\n");
     printf("\t           .@@@@@@@.             \t\t\t          (\\ .@@@@@@@.   /)      \n");
@@ -61,6 +47,8 @@ void PrintState(int MaxHP1, int HP1, int MaxHP2, int HP2)
     printf("\t @@///@////(........//@          \t\t\t          @//........(////@///@@ \n");
     printf("\t      @@/////@  @////@@          \t\t\t          @@////@  @/////@@      \n");
     printf("\t       @@@@@@@  @@@@@@           \t\t\t           @@@@@@  @@@@@@@       \n");
+    printf("\t\n");
+    printf("\t            AMOGUS               \t\t\t              IMPOSTOR           \n");
 }
 
 int max2num(int num1, int num2)
@@ -68,10 +56,55 @@ int max2num(int num1, int num2)
     return (num1 > num2) ? num1 : num2;
 }
 
+void help()
+{
+    printf("\n=============================== COMMAND LIST =============================== \n");
+    printf("RESEP\t\t\t\t : Melihat resep untuk membuat potion\n");
+    printf("BUY\t\t\t\t : Membeli bahan/potion\n");
+    printf("BREW <ID potion 1> <ID potion 2> : Membuat potion\n");
+    printf("USE <ID potion>\t\t\t : Menggunakan potion\n");
+    printf("SKIP\t\t\t\t : Melewatkan 1 turn tanpa melakukan action\n");
+    printf("USED\t\t\t\t : Melihat potion yang sedang digunakan\n");
+    printf("STATUS\t\t\t\t : Melihat status dari Amogus dan Impostor\n");
+    printf("INGFO\t\t\t\t : Melihat info dari potions\n");
+    printf("HELP\t\t\t\t : TOLONNGGGGGGGG\n");
+
+    printf("\nEnter to continue...");
+    startInput();
+}
+
+void DisplayInfo()
+{
+    printf("\n=================================== INFO RAMUAN ===================================\n");
+    STARTWORD("data/amogusdata/ingfo.txt");
+    int countPotion = wordToInt(currentWord);
+    for (int i = 0; i < countPotion; i++)
+    {
+        ADVWORD();
+        int id = wordToInt(currentWord);
+        if (id >= 10 && id <= 29 && id != 19 && id != 20)
+        {
+            ADVWORD();
+
+            printf(" %s\t:", wordToString(currentWord));
+
+            ADVWORD();
+            printf(" %s\t \n", wordToString(currentWord));
+        }
+        else
+        {
+            ADVWORD();
+            ADVWORD();
+        }
+    }
+    printf("\nEnter to continue...");
+    startInput();
+}
+
 void DisplayPotions(Array potions)
 {
     printf("\n============================== DAFTAR RAMUAN ==============================\n");
-    printf("ID\t| Nama\t\t\t| Ketahanan\t| Harga\t\n");
+    printf("ID\t| Nama\t\t\t| Durasi | Harga\t\n");
     printf("---------------------------------------------------------------------------\n");
     for (int i = 0; i <= COUNT(potions) - 1; i++)
     {
@@ -85,18 +118,18 @@ void DisplayPotions(Array potions)
             printf("| %s\t", NAMA(ARRELMT(potions, i)));
         }
 
-        printf("| %d\t\t| %d\t\n", KETAHANAN(ARRELMT(potions, i)), HARGA(ARRELMT(potions, i)));
+        printf("| %d\t | %d\t\n", DURASI(ARRELMT(potions, i)), HARGA(ARRELMT(potions, i)));
     }
 }
 
 void DisplayInventory(Array potions)
 {
-    printf("\n========================= INVENTORY =========================\n");
-    printf("ID\t| Nama\t\t\t| Ketahanan\t\n");
-    printf("-------------------------------------------------------------\n");
+    printf("\n================== INVENTORY ==================\n");
+    printf("ID\t| Nama\t\t\t| Durasi\n");
+    printf("-----------------------------------------------\n");
     if (IsArrayEmpty(potions))
     {
-        printf("\t| \t\t\t| \t\t\n");
+        printf("\t| \t\t\t| \t\n");
     }
     else
     {
@@ -112,7 +145,7 @@ void DisplayInventory(Array potions)
                 printf("| %s\t", NAMA(ARRELMT(potions, i)));
             }
 
-            printf("| %d\t\t\n", KETAHANAN(ARRELMT(potions, i)));
+            printf("| %d\t\t\n", DURASI(ARRELMT(potions, i)));
         }
     }
 }
@@ -140,7 +173,7 @@ void DisplayRecipes(List recipes, Array potions)
 
 void ReadPotions(Array *potions)
 {
-    STARTWORD("data/potion.txt");
+    STARTWORD("data/amogusdata/potion.txt");
     int countPotion = wordToInt(currentWord);
     for (int i = 0; i < countPotion; i++)
     {
@@ -152,7 +185,7 @@ void ReadPotions(Array *potions)
         NAMA(potion) = wordToString(currentWord);
 
         ADVWORD();
-        KETAHANAN(potion) = wordToInt(ambilKataKe(currentWord, 1));
+        DURASI(potion) = wordToInt(ambilKataKe(currentWord, 1));
         HARGA(potion) = wordToInt(ambilKataKe(currentWord, 2));
         Insert(potions, potion);
     }
@@ -160,7 +193,7 @@ void ReadPotions(Array *potions)
 
 void ReadRecipes(List *recipes)
 {
-    STARTWORD("data/recipe.txt");
+    STARTWORD("data/amogusdata/recipe.txt");
     int countRecipe = wordToInt(currentWord);
     for (int i = 0; i < countRecipe; i++)
     {
@@ -194,8 +227,10 @@ addrNode Brew(List recipes, Masakan potion1, Masakan potion2)
 int amogusfight()
 {
     int potionID;
-    int MaxHP1 = 100, HP1 = 100, MaxHP2 = 40, HP2 = 40;
-    int damage1 = 20, damage2 = 4;
+    int MaxHP1 = 200, MaxHP2 = 40;
+    int HP1 = MaxHP1, HP2 = MaxHP2;
+    int baseDamage1 = 20, baseDamage2 = 4;
+    int damage1 = baseDamage1, damage2 = baseDamage2;
     int score = 0, elixir = 0;
     boolean gameOn = true;
     Array potions, inventory, using;
@@ -209,11 +244,14 @@ int amogusfight()
     ReadRecipes(&recipes);
 
     Insert(&inventory, find(potions, 1));
+    Insert(&inventory, find(potions, 2));
+    Insert(&inventory, find(potions, 9));
 
     while (gameOn)
     {
         Masakan m_del = CreateMasakan();
         boolean finished = false;
+        int i;
 
         // Action pemain
         while (!finished)
@@ -227,7 +265,7 @@ int amogusfight()
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
             DisplayInventory(inventory);
 
-            printf("\nMasukkan perintah! (RESEP/BUY/BREW/USE/SKIP/USED)");
+            printf("\nMasukkan perintah!");
             printf("\n>> ");
             startInputWord();
             akuisisiCommandWord(&command, currentWord, 1);
@@ -240,123 +278,250 @@ int amogusfight()
             if (stringEQWord(currentWord, "RESEP"))
             {
                 DisplayRecipes(recipes, potions);
-                sleep(5);
+                printf("\nEnter to continue...");
+                startInput();
             }
             else if (stringEQWord(command, "USED"))
             {
                 DisplayInventory(using);
-                sleep(5);
+                printf("\nEnter to continue...");
+                startInput();
+            }
+            else if (stringEQWord(command, "STATUS"))
+            {
+                printf("\n======== AMOGUS ========\n");
+                printf("Damage: %d\n", damage1);
+                printf("HP: %d\n", HP1);
+                printf("Max HP: %d\n", MaxHP1);
+
+                printf("\n======= OPPONENT =======\n");
+                printf("Damage: %d\n", damage2);
+                printf("HP: %d\n", HP2);
+                printf("Max HP: %d\n", MaxHP2);
+
+                printf("\nEnter to continue...");
+                startInput();
             }
             else if (stringEQWord(command, "USE"))
             {
+                DisplayInventory(inventory);
                 akuisisiCommandWord(&command, currentWord, 2);
                 potionID = wordToInt(command);
-                DeleteArrayAt(&inventory, &m_del, indexOf(inventory, potionID));
-                Insert(&using, m_del);
-                finished = true;
-            }
-            else if (stringEQWord(currentWord, "BUY"))
-            {
-                DisplayPotions(potions);
-                printf("Enter potion ID (Enter 0 to cancel buy): ");
 
-                while (!inputValid)
+                if (isMember(potions, potionID))
                 {
-                    startInputWord();
-                    if (wordToInt(currentWord) >= 0 && wordToInt(currentWord) <= 18)
+                    if (isMember(inventory, potionID))
                     {
-                        inputValid = true;
-                    }
-                }
+                        switch (potionID)
+                        {
+                        case 10:
+                        case 21:
+                            damage1 -= baseDamage1 * 0.1;
+                            break;
+                        case 11:
+                        case 23:
+                            damage1 += baseDamage1 * 0.5;
+                            break;
+                        case 12:
+                        case 25:
+                            damage2 -= baseDamage2 * 0.5;
+                            break;
+                        }
 
-                if (!stringEQWord(currentWord, "0"))
-                {
-                    if (elixir >= HARGA(find(potions, wordToInt(currentWord))))
-                    {
-                        Insert(&inventory, find(potions, wordToInt(currentWord)));
-                        elixir -= HARGA(find(potions, wordToInt(currentWord)));
+                        DeleteArrayAt(&inventory, &m_del, indexOf(inventory, potionID));
+                        Insert(&using, m_del);
                         finished = true;
                     }
                     else
                     {
+                        printf("\n%s tidak ada dalam inventory!", NAMA(find(potions, potionID)));
+                        sleep(1);
                     }
                 }
-            }
-            else if (stringEQWord(currentWord, "BREW"))
-            {
-                Masakan potion1, potion2;
-
-                DisplayInventory(inventory);
-                printf("\nPotion 1: ");
-                startInputWord();
-                if (isMember(inventory, wordToInt(currentWord)))
+                else
                 {
-                    DeleteArrayAt(&inventory, &potion1, indexOf(inventory, wordToInt(currentWord)));
-                    printf("Potion 2: ");
-                    startInputWord();
-                    if (isMember(inventory, wordToInt(currentWord)))
+                    printf("\nInput tidak valid!");
+                    sleep(1);
+                }
+            }
+            else if (stringEQWord(currentWord, "BUY"))
+            {
+                if (COUNT(inventory) < 12)
+                {
+                    while (!inputValid)
                     {
-                        DeleteArrayAt(&inventory, &potion2, indexOf(inventory, wordToInt(currentWord)));
-                        if (Brew(recipes, potion1, potion2) != NULL)
+                        DisplayPotions(potions);
+                        printf("\nEnter potion ID (Enter 0 to cancel buy): ");
+                        startInputWord();
+                        if (wordToInt(currentWord) >= 0 && wordToInt(currentWord) <= 20)
                         {
-                            printf("Brewing...\n");
-                            sleep(1);
-                            int potion3 = Akar(Brew(recipes, potion1, potion2));
-                            Insert(&inventory, find(potions, potion3));
-                            finished = true;
+                            if (!stringEQWord(currentWord, "0"))
+                            {
+                                if (elixir >= HARGA(find(potions, wordToInt(currentWord))))
+                                {
+                                    Insert(&inventory, find(potions, wordToInt(currentWord)));
+                                    elixir -= HARGA(find(potions, wordToInt(currentWord)));
+                                    finished = true;
+                                    inputValid = true;
+                                }
+                                else
+                                {
+                                    printf("Elixir tidak mencukupi!");
+                                    sleep(1);
+                                }
+                            }
+                            else
+                            {
+                                inputValid = true;
+                            }
                         }
                         else
                         {
-                            printf("Tidak bisa mencampur %s dengan %s!", NAMA(potion1), NAMA(potion2));
-                            sleep(2);
-                            Insert(&inventory, potion1);
-                            Insert(&inventory, potion2);
+                            printf("Input tidak valid!\n");
+                            sleep(1);
+                            system("cls");
+                        }
+                    }
+                }
+                else
+                {
+                    printf("Inventory penuh!");
+                }
+            }
+            else if (stringEQWord(command, "BREW"))
+            {
+                Masakan potion1, potion2;
+                DisplayInventory(inventory);
+
+                if (ambilKataKe(currentWord, 2).Length > 0 && ambilKataKe(currentWord, 3).Length > 0)
+                {
+                    akuisisiCommandWord(&command, currentWord, 2);
+                    if (isMember(inventory, wordToInt(command)))
+                    {
+                        DeleteArrayAt(&inventory, &potion1, indexOf(inventory, wordToInt(command)));
+
+                        akuisisiCommandWord(&command, currentWord, 3);
+                        if (isMember(inventory, wordToInt(command)))
+                        {
+                            DeleteArrayAt(&inventory, &potion2, indexOf(inventory, wordToInt(command)));
+
+                            if (Brew(recipes, potion1, potion2) != NULL)
+                            {
+                                printf("\nBrewing...\n");
+                                sleep(1);
+                                int potion3 = Akar(Brew(recipes, potion1, potion2));
+                                Insert(&inventory, find(potions, potion3));
+                                finished = true;
+                            }
+                            else
+                            {
+                                printf("\nTidak bisa mencampur %s dengan %s!", NAMA(potion1), NAMA(potion2));
+                                sleep(1);
+                                Insert(&inventory, potion1);
+                                Insert(&inventory, potion2);
+                            }
+                        }
+                        else
+                        {
+                            if (wordToInt(command) >= 1 && wordToInt(command) <= 20)
+                            {
+                                printf("\nTidak ada %s dalam inventory!", NAMA(find(potions, wordToInt(command))));
+                                Insert(&inventory, potion1);
+                                sleep(1);
+                            }
+                            else
+                            {
+                                printf("\nInput tidak valid!");
+                                sleep(1);
+                            }
                         }
                     }
                     else
                     {
-                        Insert(&inventory, potion1);
+                        if (wordToInt(command) >= 1 && wordToInt(command) <= 20)
+                        {
+                            printf("\nTidak ada %s dalam inventory!", NAMA(find(potions, wordToInt(command))));
+                            sleep(1);
+                        }
+                        else
+                        {
+                            printf("\nInput tidak valid!");
+                            sleep(1);
+                        }
                     }
+                }
+                else
+                {
+                    printf("\nInput tidak valid!");
+                    sleep(1);
                 }
             }
             else if (stringEQWord(currentWord, "SKIP"))
             {
                 finished = true;
             }
+            else if (stringEQWord(currentWord, "HELP"))
+            {
+                help();
+            }
+            else if (stringEQWord(currentWord, "INGFO"))
+            {
+                DisplayInfo();
+            }
+            else
+            {
+                printf("\nInput tidak valid!");
+                sleep(1);
+            }
         }
 
-        int i = 0;
+        // Potion effect
+        i = 0;
         while (i < COUNT(using))
         {
             switch (NOMOR(ARRELMT(using, i)))
             {
-            case 11:
-                damage1 *= 2;
-                break;
-            case 12:
-                damage2 = damage2 * 3 / 4;
-                break;
             case 13:
-                HP1 -= MaxHP1 / 10;
+            case 27:
+                HP1 -= MaxHP1 * 0.1;
                 break;
             case 14:
-                HP1 -= MaxHP1 / 2;
+            case 29:
+                HP1 += MaxHP1 * 0.1;
                 break;
             case 15:
-                HP1 += MaxHP1 / 10;
+                HP1 -= MaxHP1 * 0.5;
                 break;
             case 16:
-                MaxHP1 = MaxHP1 * 5 / 4;
+                MaxHP1 = MaxHP1 * 1.25;
                 break;
             case 17:
-                damage1 = damage1 * 5 / 4;
+                damage1 = damage1 * 1.25;
+                break;
+            case 18:
+                HP1 = MaxHP1;
                 break;
             }
 
-            KETAHANAN(ARRELMT(using, i)) -= 1;
-            if (KETAHANAN(ARRELMT(using, i)) == 0)
+            DURASI(ARRELMT(using, i)) -= 1;
+            if (DURASI(ARRELMT(using, i)) == 0)
             {
                 DeleteArrayAt(&using, &m_del, i);
+                switch (NOMOR(m_del))
+                {
+                case 10:
+                case 21:
+                    damage1 += baseDamage1 * 0.1;
+                    break;
+                case 11:
+                case 23:
+                    damage1 -= baseDamage1 * 0.5;
+                    break;
+                case 12:
+                case 25:
+                    damage2 += baseDamage2 * 0.5;
+                    break;
+                }
             }
             else
             {
@@ -364,8 +529,8 @@ int amogusfight()
             }
         }
 
+        // Animasi HP bar
         i = 0;
-
         while (i < max2num(damage1, damage2) && (HP1 > 0 || HP2 > 0))
         {
             if (i < damage2)
@@ -385,9 +550,9 @@ int amogusfight()
             }
 
             i += 4;
-            sleep(0.99);
         }
 
+        // Ganti musuh
         if (HP2 <= 0)
         {
             score += MaxHP2;
@@ -396,6 +561,8 @@ int amogusfight()
             damage2 += 4;
             HP2 = MaxHP2;
         }
+
+        // End game
         if (HP1 <= 0)
         {
             gameOn = false;
@@ -404,9 +571,19 @@ int amogusfight()
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
         }
-        srand(time(NULL));
-        int x = rand() % 9 + 1;
-        Insert(&inventory, find(potions, x));
+
+        // Add random ingredients
+        if (COUNT(inventory) < 12)
+        {
+            srand(time(NULL));
+            int x = rand() % 15 + 1;
+            if (x > 9) // Biar lebih sering keluar Water Bottle atau Nether Wart
+            {
+                x = x % 2 + 1;
+            }
+
+            Insert(&inventory, find(potions, x));
+        }
     }
 
     return score;

@@ -225,7 +225,7 @@ addrNode SearchByChild(BinTree T, nodeinfotype left, nodeinfotype right)
     {
         return NULL;
     }
-    else if ((Akar(Left(T)) == left && Akar(Right(T)) == right) || (Akar(Left(T)) == left && Akar(Right(T)) == right))
+    else if ((Akar(Left(T)) == left && Akar(Right(T)) == right) || (Akar(Left(T)) == right && Akar(Right(T)) == left))
     {
         return T;
     }

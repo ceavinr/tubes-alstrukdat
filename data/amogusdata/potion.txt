@@ -1,0 +1,76 @@
+25
+1
+Water Bottle
+1 50
+2
+Nether Wart
+1 50
+3
+Fermented Spider Eye
+1 50
+4
+Glistering Melon
+1 50
+5
+Ghost Tear
+1 50
+6
+Blaze Powder
+1 50
+7
+Magma Cream
+1 50
+8
+Spider Eye
+1 50
+9
+Awkward Potion
+1 100
+10
+Potion of Weakness
+5 100
+11
+Potion of Strength
+3 1000
+12
+Potion of Defense
+3 1000
+13
+Potion of Poison
+3 1000
+14
+Potion of Regen
+5 2000
+15
+Potion of Harming
+1 1000
+16
+Potion of Healing
+1 3000
+17
+Potion of Power
+1 3000
+18
+Potion of Curing
+1 5000
+19
+Redstone
+1 500
+20
+Glowstone
+1 500
+21
+Potion of Weakness II
+10 200
+23
+Potion of Strength II
+6 3000
+25
+Potion of Defense II
+6 3000
+27
+Potion of Poison II
+6 3000
+29
+Potion of Regen II
+10 5000
