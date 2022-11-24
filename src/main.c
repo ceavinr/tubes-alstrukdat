@@ -28,7 +28,7 @@ int main()
         if (stringEQWord(command, "START"))
         {
             start(&arrGame, &arrHistory, &scoreboard);
-            if (!IsEmpty(arrGame))
+            if (!IsEmptyArrayDin(arrGame))
             {
                 printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
                 inputValid = true;
@@ -44,7 +44,7 @@ int main()
             if (namaFile.Length > 0)
             {
                 load(wordToString(namaFile), &arrGame, &arrHistory, &scoreboard);
-                if (!IsEmpty(arrGame))
+                if (!IsEmptyArrayDin(arrGame))
                 {
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
                     inputValid = true;

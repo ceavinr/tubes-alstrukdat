@@ -3,32 +3,32 @@
 int main() {
     printf("\nMake Arraydin\n");
     ArrayDin array = MakeArrayDin();
-    PrintArrayDin(array);
+    PrintArrayDin(array, array.Neff);
 
     printf("\nInsert First elemen Word = \"AKU\" \n");
     Word satu = stringToWord("AKU");
-    InsertFirst(&array, satu);
-    PrintArrayDin(array);
+    InsertFirstArrayDin(&array, satu);
+    PrintArrayDin(array, array.Neff);
 
     printf("\nInsert Last elemen Word = \"BAIK\" \n");
     Word dua = stringToWord("BAIK");
-    InsertLast(&array, dua);
-    PrintArrayDin(array);
+    InsertLastArrayDin(&array, dua);
+    PrintArrayDin(array, array.Neff);
 
     printf("\nInsert At elemen indeks ke-1 Word = \"ANAK\" \n");
     Word tiga = stringToWord("ANAK");
-    InsertAt(&array, tiga, 1);
-    PrintArrayDin(array);
+    InsertAtArrayDin(&array, tiga, 1);
+    PrintArrayDin(array, array.Neff);
 
     printf("\nCek IsEmpty dan Length\n");
-    if (IsEmpty(array)) {
+    if (IsEmptyArrayDin(array)) {
         printf("aku KOSONG\n");
     } else {
-        printf("aku TIDAK KOSONG panjangku %d elemen\n", Length(array));
+        printf("aku TIDAK KOSONG panjangku %d elemen\n", LengthArrayDin(array));
     }
 
     printf("\nCek IsMember\n");
-    if (IsMember(array, satu))
+    if (IsMemberArrayDin(array, satu))
     {
         printf("benar dia adalah bagianku\n");
     } else {
@@ -36,28 +36,28 @@ int main() {
     }
     
     Word empat = stringToWord("DI SAYANG");
-    InsertLast(&array, empat);
+    InsertLastArrayDin(&array, empat);
 
     Word lima = stringToWord("MAMA PAPA");
-    InsertLast(&array, lima);
+    InsertLastArrayDin(&array, lima);
 
     printf("\nDelete First elemen\n");
-    PrintArrayDin(array);
+    PrintArrayDin(array, array.Neff);
     printf("jadi ini nih...\n");
-    DeleteFirst(&array);
-    PrintArrayDin(array);
+    DeleteFirstArrayDin(&array);
+    PrintArrayDin(array, array.Neff);
     
     printf("\nDelete At elemen indeks ke-1\n");
-    PrintArrayDin(array);
+    PrintArrayDin(array, array.Neff);
     printf("jadi ini nih...\n");
-    DeleteAt(&array, 1);
-    PrintArrayDin(array);
+    DeleteAtArrayDin(&array, 1);
+    PrintArrayDin(array, array.Neff);
 
     printf("\nDelete Last elemen\n");
-    PrintArrayDin(array);
+    PrintArrayDin(array, array.Neff);
     printf("jadi ini nih...\n");
-    DeleteLast(&array);
-    PrintArrayDin(array);
+    DeleteLastArrayDin(&array);
+    PrintArrayDin(array, array.Neff);
 
     return 0;
 }

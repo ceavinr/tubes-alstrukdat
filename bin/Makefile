@@ -13,6 +13,8 @@ towerofhanoi:
 	gcc ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/stack/stack.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/towerofhanoi/mtowerofhanoi.c -o towerofhanoi
 amogusfight:
 	gcc ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkata.c ../src/adt/bintree/bintree.c ../src/adt/listlinier/listlinier.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/array/array.c ../src/games/amogusfight/amogusfight.c ../src/games/amogusfight/mamogusfight.c -o amogusfight
+snakeonmeteor:
+	gcc ../src/adt/listdp/listdp.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/snakeonmeteor/driversnakeonmeteor.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c -o snakeonmeteor
 
 # Mesin kata & Mesin karakter
 mesin:
@@ -39,5 +41,5 @@ arraydin:
 	gcc ../src/adt/arraydin/driverarraydin.c ../src/adt/arraydin/arraydin.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/word/word.c -o arraydin_test
 queue:
 	gcc ../src/adt/queue/driverqueue.c ../src/adt/queue/queue.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/word/word.c -o queue_test
-snakeonmeteor:
-	gcc ../src/adt/listdp/listdp.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/snakeonmeteor/driversnakeonmeteor.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c -o snakeonmeteor
+map:
+	gcc ../src/adt/map/drivermap.c ../src/adt/map/map.c ../src/adt/word/word.c ../src/adt/string/string.c -o map_test

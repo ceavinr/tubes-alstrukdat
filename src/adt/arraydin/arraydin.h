@@ -43,62 +43,62 @@ void DeallocateArrayDin(ArrayDin *array);
  * Prekondisi: array terdefinisi
  * mengembalikan true jika array kosong
  */
-boolean IsEmpty(ArrayDin array);
+boolean IsEmptyArrayDin(ArrayDin array);
 
 /**
  * Fungsi untuk mengetahui apakah suatu elemen terdapat pada array.
  * Prekondisi: array terdefinisi
  * mengembalikan true jika elemen ada di dalam array
  */
-boolean IsMember(ArrayDin array, ElType el);
+boolean IsMemberArrayDin(ArrayDin array, ElType el);
 
 /**
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.
  * Prekondisi: array terdefinisi
  */
-int Length(ArrayDin array);
+int LengthArrayDin(ArrayDin array);
 
 /**
  * menambahkan elemen baru di index ke-i
  * I.S. array terdefinisi, i di antara 0..Length(array).
  * F.S. array telah ditambahkan pada elemen ke-i
  */
-void InsertAt(ArrayDin *array, ElType el, IdxType i);
+void InsertAtArrayDin(ArrayDin *array, ElType el, IdxType i);
 
 /**
  * menambahkan elemen baru di akhir array.
  * I.S. array terdefinisi
  * F.S. array telah ditambahkan pada elemen terakhir
  */
-void InsertLast(ArrayDin *array, ElType el);
+void InsertLastArrayDin(ArrayDin *array, ElType el);
 
 /**
  * menambahkan elemen baru di awal array.
  * I.S. array terdefinisi
  * F.S. array telah ditambahkan pada elemen pertama
  */
-void InsertFirst(ArrayDin *array, ElType el);
+void InsertFirstArrayDin(ArrayDin *array, ElType el);
 
 /**
  * menghapus elemen di index ke-i ArrayDin
  * I.S. array terdefinisi, i di antara 0..Length(array).
  * F.S. array telah dihapus pada elemen ke-i
  */
-void DeleteAt(ArrayDin *array, IdxType i);
+void DeleteAtArrayDin(ArrayDin *array, IdxType i);
 
 /**
  * menghapus elemen terakhir ArrayDin
  * I.S. array terdefinisi
  * F.S. array telah dihapus pada elemen terakhir
  */
-void DeleteLast(ArrayDin *array);
+void DeleteLastArrayDin(ArrayDin *array);
 
 /**
  * menghapus elemen pertama ArrayDin
  * I.S. array terdefinisi
  * F.S. array telah dihapus pada elemen pertama
  */
-void DeleteFirst(ArrayDin *array);
+void DeleteFirstArrayDin(ArrayDin *array);
 
 /**
  * melakukan print suatu ArrayDin. 

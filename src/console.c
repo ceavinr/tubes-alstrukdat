@@ -14,7 +14,7 @@ void loadToarray(ArrayDin *arr, ListScore *scoreboard)
         for (i = 0; i < count; i++)
         {
             ADVWORD();
-            InsertAt(arr, currentWord, i);
+            InsertAtArrayDin(arr, currentWord, i);
             InsertLastScoreboard(scoreboard, currentWord);
         }
         ADVWORD();
@@ -155,9 +155,9 @@ void createGame(ArrayDin *arrGame)
     printf("Masukkan nama game yang akan ditambahkan: ");
     startInputWord();
     newGame = currentWord;
-    if (!IsMember(*arrGame, newGame))
+    if (!IsMemberArrayDin(*arrGame, newGame))
     {
-        InsertLast(arrGame, newGame);
+        InsertLastArrayDin(arrGame, newGame);
         printf("Game berhasil ditambahkan\n");
     }
     else
@@ -177,7 +177,7 @@ void deleteGame(ArrayDin *arrGame)
 
     if (numGame > 5 && numGame <= (*arrGame).Neff)
     {
-        DeleteAt(arrGame, numGame - 1);
+        DeleteAtArrayDin(arrGame, numGame - 1);
         printf("\nGame berhasil dihapus\n");
     }
     else
@@ -188,33 +188,65 @@ void deleteGame(ArrayDin *arrGame)
 
 void launchGame(Word game, ListScore *scoreboard)
 {
+    int score, index;
+    boolean cek;
+
     printf("\n\nLoading ");
     printWord(game);
     printf(" ...\n\n");
     printf("==============================================\n\n");
 
-    if (stringEQWord(game, "Diner DASH"))
-    {
-        dinerdash();
-    }
-    else if (stringEQWord(game, "RNG"))
+    if (stringEQWord(game, "RNG"))
     {
         rng();
     }
-    else if (stringEQWord(game, "Tictactoe"))
+    else if (stringEQWord(game, "Diner DASH"))
     {
-        tictactoe();
+        dinerdash();
+    }
+    else if (stringEQWord(game, "HANGMAN"))
+    {
+        //HANGMAN
     }
     else if (stringEQWord(game, "TOWER OF HANOI"))
     {
         towerofhanoi();
     }
+    else if (stringEQWord(game, "SNAKE ON METEOR"))
+    {
+        // snakeOnMeteor(&score);
+    }
+    else if (stringEQWord(game, "TICTACTOE"))
+    {
+        tictactoe();
+    }
+    else if (stringEQWord(game, "AMOGUS"))
+    {
+        //AMOGUS
+    }
     else
     {
-        printf("Game ");
-        printWord(game);
-        printf(" masih dalam maintenance, belum dapat dimainkan.\nSilahkan pilih game lain.\n\n");
+        printf("============= Game Over =============\n");
+        score = rand()%101;
+        printf("Skor akhir: %d\n", score);
     }
+    index = SearchScoreboard(scoreboard, game);
+    while (!cek)
+    {
+        printf("Masukan Nama: ");
+        startInputWord();
+        if (!IsMemberInMap((*scoreboard).A[index].MapScoreboard, currentWord))
+        {
+            InsertInMap(&(*scoreboard).A[index].MapScoreboard, currentWord, score);
+            cek = true;
+        } else
+        {
+            printf("\nNama pemain pada game ");
+            printWord(game);
+            printf(" sudah tersedia.\n");
+        }
+    }
+    
 }
 
 void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
@@ -231,7 +263,7 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
 
         launchGame(firstGame, scoreboard);
 
-        InsertAt(arrHistory, firstGame, Length(*arrHistory));
+        InsertAtArrayDin(arrHistory, firstGame, LengthArrayDin(*arrHistory));
     }
     else
     {
@@ -268,7 +300,7 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, ListScore *sc
 
             launchGame(firstGame, scoreboard);
 
-            InsertAt(arrHistory, firstGame, Length(*arrHistory));
+            InsertAtArrayDin(arrHistory, firstGame, LengthArrayDin(*arrHistory));
         }
         else if (numQueue >= queueLength(*arrQueue) || isQueueEmpty(*arrQueue))
         {

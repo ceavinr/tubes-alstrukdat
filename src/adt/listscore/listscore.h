@@ -35,7 +35,7 @@ boolean IsEmptyScoreboard(ListScore L);
 
 /* Prekondisi : X sembarang */
 /* Mengirimkan index jika terdapat elemen X di dalam list */
-int SearchScoreboard(ListScore L, Word title);
+int SearchScoreboard(ListScore *L, Word title);
 
 /* I.S. L terdefinisi, mungkin kosong. */
 /* F.S. v menjadi elemen terakhir L. */

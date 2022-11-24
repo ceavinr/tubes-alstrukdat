@@ -18,16 +18,16 @@ void DeallocateArrayDin(ArrayDin *array)
     free(BUFFER(*array));
 }
 
-boolean IsEmpty(ArrayDin array)
+boolean IsEmptyArrayDin(ArrayDin array)
 {
     return NEFF(array) == 0;
 }
 
-boolean IsMember(ArrayDin array, ElType el)
+boolean IsMemberArrayDin(ArrayDin array, ElType el)
 {
     boolean member = false;
     int i = 0;
-    while (!member && i<Length(array))
+    while (!member && i<LengthArrayDin(array))
     {
         if (IsEQWord(array.A[i], el))
         {
@@ -43,21 +43,21 @@ boolean IsMember(ArrayDin array, ElType el)
     return member;
 }
 
-int Length(ArrayDin array)
+int LengthArrayDin(ArrayDin array)
 {
     return NEFF(array);
 }
 
-void InsertAt(ArrayDin *array, ElType el, IdxType i)
+void InsertAtArrayDin(ArrayDin *array, ElType el, IdxType i)
 {
     IdxType j;
     int k;
-    if (Length(*array) == CAPACITY(*array))
+    if (LengthArrayDin(*array) == CAPACITY(*array))
     {
         ArrayDin temp;
 
         BUFFER(temp) = (ElType *)malloc(sizeof(ElType) * CAPACITY(*array));
-        for (j = 0; j < Length(*array); j++)
+        for (j = 0; j < LengthArrayDin(*array); j++)
         {
             CopyWord(&BUFFER(temp)[j], BUFFER(*array)[j]);
         }
@@ -68,7 +68,7 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
         CAPACITY(*array) *= 2;
         BUFFER(*array) = (ElType *)malloc(sizeof(ElType) * CAPACITY(*array));
 
-        for (j = 0; j < Length(*array); j++)
+        for (j = 0; j < LengthArrayDin(*array); j++)
         {
             CopyWord(&BUFFER(*array)[j], (temp.A[j]));
         }
@@ -85,40 +85,40 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
     NEFF(*array) += 1;
 }
 
-void InsertLast(ArrayDin *array, ElType el)
+void InsertLastArrayDin(ArrayDin *array, ElType el)
 {
-    InsertAt(array, el, NEFF(*array));
+    InsertAtArrayDin(array, el, NEFF(*array));
 }
 
-void InsertFirst(ArrayDin *array, ElType el)
+void InsertFirstArrayDin(ArrayDin *array, ElType el)
 {
-    InsertAt(array, el, 0);
+    InsertAtArrayDin(array, el, 0);
 }
 
-void DeleteAt(ArrayDin *array, IdxType i)
+void DeleteAtArrayDin(ArrayDin *array, IdxType i)
 {
     IdxType idx;
-    for (idx = i; idx < Length(*array)-1; idx++)
+    for (idx = i; idx < LengthArrayDin(*array)-1; idx++)
     {
         CopyWord(&BUFFER(*array)[idx], BUFFER(*array)[idx + 1]);
     }
     NEFF(*array) -= 1;
 }
 
-void DeleteLast(ArrayDin *array)
+void DeleteLastArrayDin(ArrayDin *array)
 {
     NEFF(*array) -= 1;
 }
 
-void DeleteFirst(ArrayDin *array)
+void DeleteFirstArrayDin(ArrayDin *array)
 {
-    DeleteAt(array, 0);
+    DeleteAtArrayDin(array, 0);
 }
 
 void PrintArrayDin(ArrayDin array, int banyak)
 {
     int i, j;
-    if (IsEmpty(array) || banyak==0)
+    if (IsEmptyArrayDin(array) || banyak==0)
     {
         printf("\n=========== Daftar Kosong ===========\n");
     }

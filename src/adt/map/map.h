@@ -44,7 +44,7 @@ boolean IsEmptyMap(Map M);
 boolean IsFullMap(Map M);
 
 /* Mengembalikan nilai value dengan key k dari M */
-valuetype ValueMap(Map M, keytype k);
+valuetype ValueInMap(Map M, keytype k);
 
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
@@ -64,8 +64,19 @@ boolean IsMemberInMap(Map M, keytype k);
 /* Mengembalikan true jika m1 == m2 */
 boolean IsEQMap(Map m1, Map m2);
 
+/* Melakukan copy Elmt dari Map m2 ke m1. */
+/* I.S. m1 dan m2 terdefinisi
+/* F.S. elemen dari m2 dicopy ke m2 */
 void CopyMap(Map *m1, Map m2);
 
+/* Melakukan sorting berdasarkan value */
+/* I.S. m terdefinisi
+/* F.S. elemen dari m berhasil disorting secara discending*/
+void SortMap(Map *m);
+
+/* Melakukan print isi map sesuai format scoreboard. */
+/* I.S. m1 terdefinisi
+/* F.S. menampilkan si map sesuai scoreboard */
 void PrintMap(Map m);
 
 #endif

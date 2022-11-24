@@ -28,14 +28,10 @@ int main() {
         printf("Masukan skor: ");
         scanf("%d", &skor);
 
-        key = ToKey(nameWord);
-        hashing = Hash(key);
-
-        printf("Key : %d\n", key);
-        printf("Hashing : %d\n", hashing);
-
-        InsertInMap(&map, key, skor);
+        InsertInMap(&map, nameWord, skor);
     }
+
+    PrintMap(map);
 
     for (i=0; i<jumlah; i++)
     {
@@ -43,25 +39,20 @@ int main() {
         scanf("%s", playername);
         nameWord = stringToWord(playername);
 
-        int key = ToKey(nameWord);
-
-        printf("Hasil value %d : %d\n", i+1, ValueInMap(map, key));
+        printf("Hasil value %d : %d\n", i+1, ValueInMap(map, nameWord));
     }
 
     printf("\nMasukan player name yang mau didelete: ");
     scanf("%s", playername);
     nameWord = stringToWord(playername);
-    DeleteInMap(&map, ToKey(nameWord));
+    DeleteInMap(&map, nameWord);
 
-    printf("Ini indexnya : %d\n", IndexInMap(map, ToKey(nameWord)));
-
-    printf("\nHarusnya valuenya -9999 (undefined)\n");
-    printf("Ini valuenya: %d\n", ValueInMap(map, ToKey(nameWord)));
+    PrintMap(map);
 
     printf("\nCek value IsMemberInmap masukan playername: ");
     scanf("%s", playername);
     nameWord = stringToWord(playername);
-    if (IsMemberInMap(map, ToKey(nameWord)))
+    if (IsMemberInMap(map, nameWord))
     {
         printf("Ada kok\n");
     } else {

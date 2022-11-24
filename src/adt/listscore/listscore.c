@@ -9,14 +9,14 @@ boolean IsEmptyScoreboard(ListScore L) {
 	return L.Neff == 0;
 }
 
-int SearchScoreboard(ListScore L, Word title) {
+int SearchScoreboard(ListScore *L, Word title) {
 /* Prekondisi : X sembarang */
 /* Mengirimkan true jika terdapat elemen X di dalam list */
 /* yaitu antara FirstIdx(L)..LastIdx(L) */
 	boolean cek = false;
 	IdxType i = 0;
-	while (!cek && i <= L.Neff-1) {
-		if (IsEQWord(title, L.A[i].GameTitle)) {
+	while (!cek && i <= (*L).Neff-1) {
+		if (IsEQWord(title, (*L).A[i].GameTitle)) {
 			cek = true;
 		} else {
 			i += 1;

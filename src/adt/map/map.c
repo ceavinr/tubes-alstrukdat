@@ -39,6 +39,7 @@ void InsertInMap(Map *M, keytype k, valuetype v)
         (*M).Elements[(*M).Count].Value = v;
         (*M).Count++;
     }
+    SortMap(M);
 }
 
 void DeleteInMap(Map *M, keytype k)
@@ -115,6 +116,33 @@ void CopyMap(Map *m1, Map m2)
         (*m1).Elements[i].Value = m2.Elements[i].Value;
     }
     
+}
+
+void SortMap(Map *m)
+{
+    int j, tempVal;
+    Word tempKey;
+
+    boolean flag = true;
+    while (flag)
+    {
+        flag = false;
+        for (j = 0; j < (*m).Count - 1; j++)
+        {
+            if ((*m).Elements[j].Value < (*m).Elements[j+1].Value)
+            {
+                CopyWord(&tempKey, (*m).Elements[j].Key);
+                tempVal = (*m).Elements[j].Value;
+
+                CopyWord(&(*m).Elements[j].Key, (*m).Elements[j+1].Key);
+                (*m).Elements[j].Value = (*m).Elements[j+1].Value;
+
+                CopyWord(&(*m).Elements[j+1].Key, tempKey);
+                (*m).Elements[j+1].Value = tempVal;
+                flag = true;
+            }
+        }
+    }
 }
 
 void PrintMap(Map m)
