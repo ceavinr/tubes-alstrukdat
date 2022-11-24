@@ -32,18 +32,6 @@ BinTree BetterBuildBST(int n, int diff)
         return Tree(n, L, R);
     }
 }
-BinTree BuildBST(int n)
-{
-    if (n == 0)
-    {
-        return NULL;
-    }
-    else
-    {
-        n = pow(2, n) / 2;
-        BetterBuildBST(n, n / 2);
-    }
-}
 
 addrNode AlokNode(nodeinfotype X)
 {

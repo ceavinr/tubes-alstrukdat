@@ -3,6 +3,7 @@
 
 int main()
 {
-    towerofhanoi();
+    int skor = 0;
+    towerofhanoi(&skor);
     return 0;
 }

@@ -82,14 +82,14 @@ void DisplayState(Stack S1, Stack S2, Stack S3, int height)
     printf("\n\n");
 }
 
-void towerofhanoi()
+void towerofhanoi(int *skor)
 {
     Word banyak, from, to;
     Stack tower1, tower2, tower3;
     boolean succeed = false;
     boolean gameOn = true;
     boolean inputValid = false;
-    int moves = 0, minimumMoves = 0;
+    int moves = 0, minimumMoves = 0, maximumMoves = 0;
 
     CreateStack(&tower1);
     CreateStack(&tower2);
@@ -115,17 +115,27 @@ void towerofhanoi()
     {
         int diskDel = 0;
         minimumMoves = pow(2, wordToInt(banyak)) - 1;
+        maximumMoves = 2 * minimumMoves;
 
         inputValid = false;
         printf("\nMoves: %d\n", moves);
         printf("Minimum moves to solve: %d\n", minimumMoves);
+        printf("Maximum moves to solve: %d\n", maximumMoves);
         DisplayState(tower1, tower2, tower3, wordToInt(banyak));
 
-        if (Top(tower3) + 1 == wordToInt(banyak))
+        if (moves == maximumMoves + 1)
+        {
+            gameOn = false;
+            printf("Kamu gagal karena tidak dapat menyelesaikannya dalam %d langkah.\n", maximumMoves);
+            *skor = 2 * wordToInt(banyak) - (moves - minimumMoves);
+            printf("Skor: %d\n", *skor);
+        }
+        else if (Top(tower3) + 1 == wordToInt(banyak))
         {
             gameOn = false;
             printf("Berhasil! Kamu menyelesaikan dalam %d langkah.\n", moves);
-            printf("Skor: %.1f\n", (float)minimumMoves * 10 / moves - 0.5 * (9 - wordToInt(banyak)));
+            *skor = 2 * wordToInt(banyak) - (moves - minimumMoves);
+            printf("Skor: %d\n", *skor);
         }
 
         if (gameOn)

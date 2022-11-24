@@ -40,8 +40,6 @@ BinTree Tree(nodeinfotype Akar, BinTree L, BinTree R);
 /* F.S. Membentuk pohon P dengan Akar(P)=Akar, Left(P)=L, dan Right(P)=R
         jika alokasi berhasil. P = NULL jika alokasi gagal. */
 void MakeTree(nodeinfotype Akar, BinTree L, BinTree R, BinTree *P);
-/* Menghasilkan sebuah balanced BST dengan n level, nilai setiap node diassign secara otomatis */
-BinTree BuildBST(int n);
 
 /* Manajemen Memory */
 
