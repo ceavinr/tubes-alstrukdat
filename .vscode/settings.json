@@ -22,6 +22,8 @@
     "time.h": "c",
     "bintree.h": "c",
     "interface.h": "c",
-    "listdp.h": "c"
+    "listdp.h": "c",
+    "listlinier.h": "c",
+    "rng.h": "c"
   }
 }

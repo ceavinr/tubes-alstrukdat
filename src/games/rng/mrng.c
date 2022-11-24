@@ -2,5 +2,6 @@
 
 int main()
 {
-    rng();
+    int score;
+    rng(&score);
 }

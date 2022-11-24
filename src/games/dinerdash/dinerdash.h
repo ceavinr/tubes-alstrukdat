@@ -9,6 +9,6 @@
 /* Menjalankan game */
 /* I.S. Sembarang */
 /* F.S. Antrian melebihi 7 (kalah) atau sudah melayani 15 pelanggan (menang) */
-int dinerdash();
+void dinerdash(int *skor);
 
 #endif

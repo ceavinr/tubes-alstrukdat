@@ -3,8 +3,9 @@
 #include <time.h>
 #include "rng.h"
 
-/*Fungsi untuk memulai game rng*/
-int rng()
+/*I.S. Sembarang*/
+/*F.S. RNG dijalankan dan menerima parameter output score*/
+void rng(int *score)
 {
     int x, tebakan, count;
     Word input;
@@ -42,8 +43,9 @@ int rng()
         count++;
     }
 
-    int score = 100 - count;
+    *score = 100 - count;
 
     printf("\nYa, X adalah %d.\n", x);
-    return score;
+    printf("\nScore anda : %d.\n", *score);
+
 }

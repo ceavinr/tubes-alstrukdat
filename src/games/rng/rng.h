@@ -4,7 +4,7 @@
 #include "../../adt/mesin/mesinkata.h"
 #include "../../adt/word/word.h"
 
-/*Fungsi untuk memulai game rng*/
-int rng();
+/*Fungsi menjalankan RNG*/
+void rng(int *score);
 
 #endif

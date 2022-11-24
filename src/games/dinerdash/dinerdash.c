@@ -96,7 +96,7 @@ int kodeToInt(Word kode)
     }
 }
 
-int dinerdash()
+void dinerdash(int *skor)
 {
     Order orderList;
     Array orderTaken;
@@ -281,5 +281,5 @@ int dinerdash()
         }
     }
 
-    return saldo;
+    *skor = saldo;
 }

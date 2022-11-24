@@ -204,11 +204,11 @@ void launchGame(Word game, ListScore *scoreboard)
 
     if (stringEQWord(game, "RNG"))
     {
-        rng();
+        rng(&score);
     }
     else if (stringEQWord(game, "Diner DASH"))
     {
-        dinerdash();
+        dinerdash(&score);
     }
     else if (stringEQWord(game, "HANGMAN"))
     {
@@ -216,7 +216,7 @@ void launchGame(Word game, ListScore *scoreboard)
     }
     else if (stringEQWord(game, "TOWER OF HANOI"))
     {
-        towerofhanoi();
+        towerofhanoi(&score);
     }
     else if (stringEQWord(game, "SNAKE ON METEOR"))
     {
@@ -228,7 +228,7 @@ void launchGame(Word game, ListScore *scoreboard)
     }
     else if (stringEQWord(game, "AMOGUS"))
     {
-        //AMOGUS
+        //amogus
     }
     else
     {

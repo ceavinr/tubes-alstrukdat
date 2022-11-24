@@ -8,6 +8,6 @@
 /* Proses: Menjalankan game */
 /* I.S. Sembarang */
 /* F.S. Tower ke tiga terisi terurut membesar dari TOP */
-void towerofhanoi();
+void towerofhanoi(int *skor);
 
 #endif

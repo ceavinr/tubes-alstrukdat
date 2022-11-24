@@ -4,7 +4,8 @@
 
 int main()
 {
-    dinerdash();
+    int skor;
+    dinerdash(&skor);
 
     // NOMOR(m) = 0;
     // DURASI(m) = 1;
