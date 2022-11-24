@@ -10,9 +10,6 @@ boolean IsEmptyScoreboard(ListScore L) {
 }
 
 int SearchScoreboard(ListScore *L, Word title) {
-/* Prekondisi : X sembarang */
-/* Mengirimkan true jika terdapat elemen X di dalam list */
-/* yaitu antara FirstIdx(L)..LastIdx(L) */
 	boolean cek = false;
 	IdxType i = 0;
 	while (!cek && i <= (*L).Neff-1) {

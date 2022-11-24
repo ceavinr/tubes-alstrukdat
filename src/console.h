@@ -16,7 +16,7 @@
 #include "./games/rng/rng.h"
 #include "./games/tictactoe/tictactoe.h"
 #include "./games/towerofhanoi/towerofhanoi.h"
-// #include "./games/snakeonmeteor/snakeonmeteor.h"
+#include "./games/snakeonmeteor/snakeonmeteor.h"
 
 /**
  * Konstruktor

@@ -1,41 +1,41 @@
 #include "snakeonmeteor.h"
 
-void Move (List *L, char input){
-    address P=Last(*L);
+void Move (ListDP *L, char input){
+    addressDP P=Last(*L);
     POINT temp;
             if (input=='w'){
                 temp=(*Prev(P)).Pos;
-                while (Prev(P)!=Nil){
+                while (Prev(P)!=NilDP){
                     (*P).Pos=temp;
                     P=Prev(P);
-                    if (Prev(P)!=Nil){
+                    if (Prev(P)!=NilDP){
                         temp=(*Prev(P)).Pos;
                     }
                 }
             }else if(input=='s'){
                 temp=(*Prev(P)).Pos;
-                while (Prev(P)!=Nil){
+                while (Prev(P)!=NilDP){
                     (*P).Pos=temp;
                     P=Prev(P);
-                    if (Prev(P)!=Nil){
+                    if (Prev(P)!=NilDP){
                         temp=(*Prev(P)).Pos;
                     }
                 }
             }else if(input=='d'){
                 temp=(*Prev(P)).Pos;
-                while (Prev(P)!=Nil){
+                while (Prev(P)!=NilDP){
                     (*P).Pos=temp;
                     P=Prev(P);
-                    if (Prev(P)!=Nil){
+                    if (Prev(P)!=NilDP){
                         temp=(*Prev(P)).Pos;
                     }
                 }
             }else if(input=='a'){
                 temp=(*Prev(P)).Pos;
-                while (Prev(P)!=Nil){
+                while (Prev(P)!=NilDP){
                     (*P).Pos=temp;
                     P=Prev(P);
-                    if (Prev(P)!=Nil){
+                    if (Prev(P)!=NilDP){
                         temp=(*Prev(P)).Pos;
                     }
                 }
@@ -44,11 +44,11 @@ void Move (List *L, char input){
 }  
 
 
-void createSnake(List *L){
-    CreateEmpty(L);
-    address P1=Alokasi(72);
-    address P2=Alokasi(1);
-    address P3=Alokasi(2);
+void createSnake(ListDP *L){
+    CreateEmptyDP(L);
+    addressDP P1=AlokasiDP(72);
+    addressDP P2=AlokasiDP(1);
+    addressDP P3=AlokasiDP(2);
     srand(time(NULL));
     (*P1).Pos.X=rand()%5;
     (*P1).Pos.Y=rand()%5;
@@ -94,9 +94,9 @@ void createSnake(List *L){
             }
         }
     }
-    InsertLast(L,P1);
-    InsertLast(L,P2);
-    InsertLast(L,P3);
+    InsertLastDP(L,P1);
+    InsertLastDP(L,P2);
+    InsertLastDP(L,P3);
 }
 
 void printPoint(POINT P){
@@ -104,7 +104,7 @@ void printPoint(POINT P){
     printf("<%d,%d>\n",P.X,P.Y);
 }
 
-void printMap(List L,POINT food, POINT meteor,POINT obstacle){
+void printMap(ListDP L,POINT food, POINT meteor,POINT obstacle){
     
     int i ;
     int j;
@@ -142,10 +142,10 @@ void printMap(List L,POINT food, POINT meteor,POINT obstacle){
     }
 }
 
-address isPoinMember(List L,int i,int j){
-    address P=First(L);
+addressDP isPoinMember(ListDP L,int i,int j){
+    addressDP P=First(L);
     boolean found=false;
-    while(!found && (P)!=Nil){
+    while(!found && (P)!=NilDP){
         if ((*P).Pos.X==i && (*P).Pos.Y==j){
             found=true;
         }else{
@@ -155,12 +155,12 @@ address isPoinMember(List L,int i,int j){
     if (found){
         return P; 
     }else{
-        return Nil;
+        return NilDP;
     }
 }
 
-boolean isNotWall(List L,char input){
-    address P=First(L);
+boolean isNotWall(ListDP L,char input){
+    addressDP P=First(L);
     if ((*P).Pos.X==0 && input=='a'){
         return false;
     }else if((*P).Pos.X==5 && input=='d'){
@@ -174,8 +174,8 @@ boolean isNotWall(List L,char input){
     }
 }
 
-void moveHead(List *L,char input){
-    address P=First(*L);
+void moveHead(ListDP *L,char input){
+    addressDP P=First(*L);
     if (input=='a' ){
         if ((*P).Pos.X==0){   
             (*P).Pos.X=4;
@@ -235,7 +235,7 @@ void addMeteor(POINT *meteor,POINT food){
  
 }
 
-boolean isEat(List *L, POINT P){
+boolean isEat(ListDP *L, POINT P){
     boolean found=((*First(*L)).Pos.X==P.X && (*First(*L)).Pos.Y==P.Y );
     //if (found){
         
@@ -243,10 +243,10 @@ boolean isEat(List *L, POINT P){
     return found;
 }
 
-boolean isAvail(List L,int X,int Y){
-    address Q=First(L);
+boolean isAvail(ListDP L,int X,int Y){
+    addressDP Q=First(L);
     boolean found=true;
-    while (found && Q!=Nil){
+    while (found && Q!=NilDP){
         if ((*Q).Pos.X==X && (*Q).Pos.Y==Y){
             found=false;
         }
@@ -255,14 +255,14 @@ boolean isAvail(List L,int X,int Y){
     return found;
 }
 
-void addTail(List *L,ElmtList newtail){
-    address P=Alokasi(((int)Info(Last(*L)))+1);
+void addTail(ListDP *L,ElmtList newtail){
+    addressDP P=AlokasiDP(((int)Info(Last(*L)))+1);
     P->Pos.X=newtail.Pos.X;
     P->Pos.Y=newtail.Pos.Y;
-    InsertLast(L,P);
+    InsertLastDP(L,P);
 }
 
-void addFood(POINT *food,List L, POINT obstacle){
+void addFood(POINT *food,ListDP L, POINT obstacle){
     srand(time(NULL));
     int X = rand() % 5;
     int Y = rand() % 5;
@@ -293,12 +293,12 @@ void addFood(POINT *food,List L, POINT obstacle){
     }
 }
 
-void MeteorHitBody(List *L,POINT food,POINT meteor){
+void MeteorHitBody(ListDP *L,POINT food,POINT meteor){
     
-    address P=First(*L);
-    address Q=Last(*L);
+    addressDP P=First(*L);
+    addressDP Q=Last(*L);
     boolean found=false;
-    while(!found && P!=Nil){
+    while(!found && P!=NilDP){
         if (P->Pos.X==meteor.X && P->Pos.Y==meteor.Y){
             found=true;    
         }
@@ -306,10 +306,10 @@ void MeteorHitBody(List *L,POINT food,POINT meteor){
     }
     if (found){
          if (P==Next(First(*L))){
-            DelFirst(L,&Q);
+            DelFirstDP(L,&Q);
             printf("Meteor mengenai bagian Head snake. Permainan berakhir\n");
-         }else if(P==Nil){
-            DelLast(L,&Q);
+         }else if(P==NilDP){
+            DelLastDP(L,&Q);
         }else{
             while (Q!=Prev(P)){
                 Q->info=Prev(Q)->info;
@@ -319,20 +319,20 @@ void MeteorHitBody(List *L,POINT food,POINT meteor){
         //     Q=Prev(Q);
                 Q=Prev(Q);
             }
-            DelBefore(L,&Q,P);
+            DelBeforeDP(L,&Q,P);
         }
     }
 
 }
 
-boolean isMeteorHitHead(List L){
-    address P=First(L);
+boolean isMeteorHitHead(ListDP L){
+    addressDP P=First(L);
     return (P->info!='H');
 }
 
 void snakeOnMeteor(int * skor){
     srand(time(NULL));
-    List L;
+    ListDP L;
     ElmtList newtail;
     createSnake(&L);
     char input;
@@ -386,15 +386,15 @@ void snakeOnMeteor(int * skor){
     }
 }
 
-boolean isHeadHitObstacle(List L,POINT obstacle){
+boolean isHeadHitObstacle(ListDP L,POINT obstacle){
     return (First(L)->Pos.X==obstacle.X && First(L)->Pos.Y==obstacle.Y);
 }
 
-boolean isLose(List L,POINT meteor, POINT obstacle){
-    address P=First(L);
+boolean isLose(ListDP L,POINT meteor, POINT obstacle){
+    addressDP P=First(L);
     P=Next(P);
     boolean found=false;
-    while (P!=Nil && !found){
+    while (P!=NilDP && !found){
         if (P->Pos.X==First(L)->Pos.X && P->Pos.Y==First(L)->Pos.Y){
             found=true;
         }
@@ -415,7 +415,7 @@ boolean isLose(List L,POINT meteor, POINT obstacle){
     }
 }
 
-void addObstacle(List L, POINT* obstacle){
+void addObstacle(ListDP L, POINT* obstacle){
     srand(time(NULL));
     int X = rand() % 5;
     int Y = rand() % 5;
@@ -446,12 +446,12 @@ void addObstacle(List L, POINT* obstacle){
     }
 }
 
-int lengthSnake(List L){
+int lengthSnake(ListDP L){
     return (Info(Last(L)));
 }
 
-boolean isInputValid(List L,char input){
-    address P=First(L);
+boolean isInputValid(ListDP L,char input){
+    addressDP P=First(L);
     if (input=='w' && Next(P)->Pos.Y==(P->Pos.Y-1)%5){
         return false;
     }else if(input=='s' && Next(P)->Pos.Y==(P->Pos.Y+1)%5){

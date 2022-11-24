@@ -15,7 +15,6 @@ void loadToarray(ArrayDin *arr, ListScore *scoreboard)
         {
             ADVWORD();
             InsertAtArrayDin(arr, currentWord, i);
-            InsertLastScoreboard(scoreboard, currentWord);
         }
         ADVWORD();
     }
@@ -41,12 +40,19 @@ void loadToScoreboard(Map *game)
 
 void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard)
 {
+    int i;
+
     STARTWORD(concat("../data/", namaFile));
 
     loadToarray(arrGame, scoreboard);
+    for (i=0; i<(*arrGame).Neff; i++)
+    {
+        InsertLastScoreboard(scoreboard, (*arrGame).A[i]);
+    }
+    
+
     loadToarray(arrHistory, scoreboard);
     
-    int i;
     for (i=0; i<(*scoreboard).Neff; i++)
     {
         loadToScoreboard(&(*scoreboard).A[i].MapScoreboard);
@@ -214,7 +220,7 @@ void launchGame(Word game, ListScore *scoreboard)
     }
     else if (stringEQWord(game, "SNAKE ON METEOR"))
     {
-        // snakeOnMeteor(&score);
+        snakeOnMeteor(&score);
     }
     else if (stringEQWord(game, "TICTACTOE"))
     {

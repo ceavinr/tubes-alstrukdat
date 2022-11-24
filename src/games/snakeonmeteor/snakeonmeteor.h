@@ -4,51 +4,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../../adt/listdp/listdp.h"
+#include "../../adt/Listdp/Listdp.h"
 #include "../../adt/mesin/mesinkata.h"
 #include "../../boolean.h"
 
 
-void Move(List *L,char input);
+void Move(ListDP *L,char input);
 
-void createSnake(List*L);
+void createSnake(ListDP*L);
 
 void printPoint(POINT P);
 
-address isPoinMember(List L,int i,int j);
+addressDP isPoinMember(ListDP L,int i,int j);
 
-void printMap(List L,POINT food,POINT meteor, POINT obstacle);
+void printMap(ListDP L,POINT food,POINT meteor, POINT obstacle);
 
-boolean isNotWall(List L,char input);
+boolean isNotWall(ListDP L,char input);
 
-boolean isBody(List L,char input);
+boolean isBody(ListDP L,char input);
 
-void moveHead(List *L,char input);
+void moveHead(ListDP *L,char input);
 
-boolean isEat(List *L,POINT P);
+boolean isEat(ListDP *L,POINT P);
 
-void addFood(POINT *food,List L, POINT obstacle);
+void addFood(POINT *food,ListDP L, POINT obstacle);
 
 void addMeteor(POINT *meteor,POINT food);
 
-void addObstacle(List L,POINT* obstacle);
+void addObstacle(ListDP L,POINT* obstacle);
 
-boolean isAvail(List L,int X,int Y);
+boolean isAvail(ListDP L,int X,int Y);
 
-void addTail(List *L,ElmtList newtail);
+void addTail(ListDP *L,ElmtList newtail);
 
-void MeteorHitBody(List *L,POINT food, POINT meteor);
+void MeteorHitBody(ListDP *L,POINT food, POINT meteor);
 
 void snakeOnMeteor(int * skor);
 
-boolean isLose(List L,POINT meteor, POINT obstacle);
+boolean isLose(ListDP L,POINT meteor, POINT obstacle);
 
-boolean isHeadHitObstacle(List L,POINT obstacle);
+boolean isHeadHitObstacle(ListDP L,POINT obstacle);
 
-boolean isMeteorHitHead(List L);
+boolean isMeteorHitHead(ListDP L);
 
-int lengthSnake(List L);
+int lengthSnake(ListDP L);
 
-boolean isInputValid(List L,char input);
+boolean isInputValid(ListDP L,char input);
 
 #endif
