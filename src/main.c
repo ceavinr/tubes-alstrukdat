@@ -5,27 +5,13 @@ int main()
 {
     /*INISIALISASI*/
     Word command, namaFile;
-    string namaFileStr;
     boolean quit = false, inputValid = false;
     ArrayDin arrGame = MakeArrayDin();
     ArrayDin arrHistory = MakeArrayDin();
     Queue arrQueue = MakeQueue();
-
     /* Scoreboard */
-    Scoreboard scoreRNG;
-    CreateScoreboard(&scoreRNG);
-
-    Scoreboard scoreHangman;
-    CreateScoreboard(&scoreHangman);
-
-    Scoreboard scoreDinerDash;
-    CreateScoreboard(&scoreDinerDash);
-
-    Scoreboard scoreTowerOfHanoi;
-    CreateScoreboard(&scoreTowerOfHanoi);
-
-    Scoreboard scoreSnakeOnMeteor;
-    CreateScoreboard(&scoreSnakeOnMeteor);
+    ListScore scoreboard;
+    MakeListScore(&scoreboard);
 
     while (!inputValid)
     {
@@ -41,7 +27,7 @@ int main()
 
         if (stringEQWord(command, "START"))
         {
-            start(&arrGame, &arrHistory);
+            start(&arrGame, &arrHistory, &scoreboard);
             if (!IsEmpty(arrGame))
             {
                 printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
@@ -57,7 +43,7 @@ int main()
             akuisisiCommandWord(&namaFile, currentWord, 2);
             if (namaFile.Length > 0)
             {
-                load(wordToString(namaFile), &arrGame, &arrHistory, &scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
+                load(wordToString(namaFile), &arrGame, &arrHistory, &scoreboard);
                 if (!IsEmpty(arrGame))
                 {
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
@@ -95,8 +81,8 @@ int main()
         printf("5. QUEUE GAME\n");
         printf("6. PLAY GAME\n");
         printf("7. SKIP GAME <n>\n");
-        printf("8. Scoreboard\n");
-        printf("9. RESET Scoreboard\n");
+        printf("8. SCOREBOARD\n");
+        printf("9. RESET SCOREBOARD\n");
         printf("10. HISTORY <n>\n");
         printf("11. RESET HISTORY\n");
         printf("12. QUIT\n");
@@ -113,7 +99,7 @@ int main()
         if (stringEQWord(cek, "SAVE"))
         {
             akuisisiCommandWord(&namaFile, currentWord, 2);
-            save(wordToString(namaFile), arrGame, arrHistory, scoreRNG, scoreHangman, scoreDinerDash, scoreTowerOfHanoi, scoreSnakeOnMeteor);
+            save(wordToString(namaFile), arrGame, arrHistory, &scoreboard);
         }
         else if (stringEQWord(command, "CREATE GAME"))
         {
@@ -133,11 +119,11 @@ int main()
         }
         else if (stringEQWord(command, "PLAY GAME"))
         {
-            playGame(&arrQueue, &arrHistory, &scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
+            playGame(&arrQueue, &arrHistory, &scoreboard);
         }
         else if (stringEQWord(cek, "SKIP") && stringEQWord(cek2, "GAME"))
         {
-            skipGame(command, &arrQueue, &arrHistory, &scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
+            skipGame(command, &arrQueue, &arrHistory, &scoreboard);
         }
         else if (stringEQWord(command, "QUIT"))
         {
@@ -147,13 +133,13 @@ int main()
         {
             help();
         }
-        else if (stringEQWord(command, "Scoreboard"))
+        else if (stringEQWord(command, "SCOREBOARD"))
         {
-            scoreboard(scoreRNG, scoreHangman, scoreDinerDash, scoreTowerOfHanoi, scoreSnakeOnMeteor);
+            showScoreboard(&scoreboard);
         }
-        else if (stringEQWord(command, "RESET Scoreboard"))
+        else if (stringEQWord(command, "RESET SCOREBOARD"))
         {
-            resetScoreboard(&scoreRNG, &scoreHangman, &scoreDinerDash, &scoreTowerOfHanoi, &scoreSnakeOnMeteor);
+            resetScoreboard(&scoreboard);
         }
         else if (stringEQWord(cek, "HISTORY"))
         {

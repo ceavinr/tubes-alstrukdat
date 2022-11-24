@@ -10,7 +10,7 @@
 #include "./adt/word/word.h"
 #include "./adt/mesin/mesinkata.h"
 #include "./adt/mesin/mesinkarakter.h"
-#include "./adt/Scoreboard/Scoreboard.h"
+#include "./adt/listscore/listscore.h"
 
 #include "./games/dinerdash/dinerdash.h"
 #include "./games/rng/rng.h"
@@ -22,35 +22,35 @@
  * I.S. sembarang
  * F.S. Membaca file default dan menyimpan ke dalam array, history bisa kosong namun terdefinisi
  */
-void start(ArrayDin *arrGame, ArrayDin *arrHistory);
+void start(ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. program berjalan, array terdefinisi
  * F.S. Melakukan pembacaan file dan menyimpan ke array game dan history
  */
-void loadToarray(ArrayDin *arr);
+void loadToarray(ArrayDin *arr, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. program berjalan, Scoreboard terdefinisi
  * F.S. Melakukan Load dari file dan menyimpan ke Scoreboard
  */
-void loadToScoreboard(Scoreboard *Scoreboard);
+void loadToScoreboard(Map *game);
 
 /**
  * Konstruktor
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som);
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, Scoreboard rng, Scoreboard hangman, Scoreboard dinerdash, Scoreboard toh, Scoreboard som);
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
@@ -71,21 +71,21 @@ void deleteGame(ArrayDin *arrGame);
  * I.S. program berjalan
  * F.S. masuk ke dalam game dan menjalankan game yang terdapat dalam queue
  */
-void launchGame(Word game, Scoreboard *srng, Scoreboard *shangman, Scoreboard *sdinerdash, Scoreboard *stoh, Scoreboard *ssom);
+void launchGame(Word game, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game antrian pertama dimainkan, setelah diamainkan dimasukan ke history
  */
-void playGame(Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som);
+void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game dalam antrian diskip sebanyak input pengguna
  */
-void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som);
+void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
@@ -120,14 +120,14 @@ void help();
  * I.S. Program berjalan Scoreboard terdefinisi masing-masing game
  * F.S. Menampilkan Scoreboard dari beberapa game yang bisa dimainkan
  */
-void scoreboard(Scoreboard rng, Scoreboard hangman, Scoreboard dinerdash, Scoreboard toh, Scoreboard som);
+void showScoreboard(ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. Program berjalan Scoreboard terdefinisi masing-masing game
  * F.S. Scoreboard berhasil direset sesuai keiinginan user
  */
-void resetScoreboard(Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som);
+void resetScoreboard(ListScore *scoreboard);
 
 /**
  * Konstruktor

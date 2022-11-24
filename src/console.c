@@ -1,16 +1,11 @@
 #include "console.h"
 
-void start(ArrayDin *arrGame, ArrayDin *arrHistory)
+void start(ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard)
 {
-    Scoreboard rng;
-    Scoreboard hangman;
-    Scoreboard dinerdash;
-    Scoreboard toh;
-    Scoreboard som;
-    load("default.txt", arrGame, arrHistory, &rng, &hangman, &dinerdash, &toh, &som);
+    load("default.txt", arrGame, arrHistory, scoreboard);
 }
 
-void loadToarray(ArrayDin *arr)
+void loadToarray(ArrayDin *arr, ListScore *scoreboard)
 {
     int count, i;
     if (!EOP)
@@ -20,12 +15,13 @@ void loadToarray(ArrayDin *arr)
         {
             ADVWORD();
             InsertAt(arr, currentWord, i);
+            InsertLastScoreboard(scoreboard, currentWord);
         }
         ADVWORD();
     }
 }
 
-void loadToScoreboard(Scoreboard *Scoreboard)
+void loadToScoreboard(Map *game)
 {
     int count, i;
     Word name, score;
@@ -37,23 +33,25 @@ void loadToScoreboard(Scoreboard *Scoreboard)
             ADVWORD();
             akuisisiCommandWord(&name, currentWord, 1);
             akuisisiCommandWord(&score, currentWord, 2);
-            InsertScoreboard(Scoreboard, name, wordToInt(score));
+            InsertInMap(game, name, wordToInt(score));
         }
         ADVWORD();
     }
 }
 
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som)
+void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard)
 {
     STARTWORD(concat("../data/", namaFile));
 
-    loadToarray(arrGame);
-    loadToarray(arrHistory);
-    loadToScoreboard(rng);
-    loadToScoreboard(hangman);
-    loadToScoreboard(dinerdash);
-    loadToScoreboard(toh);
-    loadToScoreboard(som);
+    loadToarray(arrGame, scoreboard);
+    loadToarray(arrHistory, scoreboard);
+    
+    int i;
+    for (i=0; i<(*scoreboard).Neff; i++)
+    {
+        loadToScoreboard(&(*scoreboard).A[i].MapScoreboard);
+    }
+    
 }
 
 void saveArray(ArrayDin arr, FILE *pita)
@@ -83,42 +81,43 @@ void saveArray(ArrayDin arr, FILE *pita)
     }
 }
 
-void saveScoreboard(Scoreboard Scoreboard, FILE *pita)
+void saveScoreboard(Map game, FILE *pita)
 {
     int i, j;
     Word count, val;
-    count = intToWord(Scoreboard.setGame.Count);
+    count = intToWord(game.Count);
     for (i = 0; i < count.Length; i++)
     {
         fprintf(pita, "%c", count.TabWord[i]);
     }
-    if (Scoreboard.setGame.Count != 0)
+    if (game.Count != 0)
     {
         fprintf(pita, "\n");
     }
 
-    for (i = 0; i < Scoreboard.setGame.Count; i++)
+    for (i = 0; i < game.Count; i++)
     {
-        for (j = 0; j < Scoreboard.setGame.Elements[i].Length; j++)
+        for (j = 0; j < game.Elements[i].Key.Length; j++)
         {
-            fprintf(pita, "%c", Scoreboard.setGame.Elements[i].TabWord[j]);
+            fprintf(pita, "%c", game.Elements[i].Key.TabWord[j]);
         }
         fprintf(pita, " ");
 
-        val = intToWord(ValueInMap(Scoreboard.mapGame, ToKey(Scoreboard.setGame.Elements[i])));
+        val = intToWord(game.Elements[i].Value);
         for (j = 0; j < val.Length; j++)
         {
             fprintf(pita, "%c", val.TabWord[j]);
         }
-        if (i < Scoreboard.setGame.Count - 1)
+        if (i < game.Count - 1)
         {
             fprintf(pita, "\n");
         }
     }
 }
 
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, Scoreboard rng, Scoreboard hangman, Scoreboard dinerdash, Scoreboard toh, Scoreboard som)
+void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, ListScore *scoreboard)
 {
+    int i;
     if (stringLength(namaFile) == 0)
     {
         printf("Nama file tidak boleh kosong!\n");
@@ -135,15 +134,14 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, Scoreboard rng
         fprintf(pita, "\n");
 
         /* Scoreboard */
-        saveScoreboard(rng, pita);
-        fprintf(pita, "\n");
-        saveScoreboard(hangman, pita);
-        fprintf(pita, "\n");
-        saveScoreboard(dinerdash, pita);
-        fprintf(pita, "\n");
-        saveScoreboard(toh, pita);
-        fprintf(pita, "\n");
-        saveScoreboard(som, pita);
+        for (i=0; i<(*scoreboard).Neff; i++)
+        {
+            saveScoreboard((*scoreboard).A[i].MapScoreboard, pita);
+            if (i < (*scoreboard).Neff-1) {
+                fprintf(pita, "\n");
+            }
+        }
+        
 
         fclose(pita);
         printf("Save file berhasil disimpan..\n\n");
@@ -188,7 +186,7 @@ void deleteGame(ArrayDin *arrGame)
     }
 }
 
-void launchGame(Word game, Scoreboard *srng, Scoreboard *shangman, Scoreboard *sdinerdash, Scoreboard *stoh, Scoreboard *ssom)
+void launchGame(Word game, ListScore *scoreboard)
 {
     printf("\n\nLoading ");
     printWord(game);
@@ -219,7 +217,7 @@ void launchGame(Word game, Scoreboard *srng, Scoreboard *shangman, Scoreboard *s
     }
 }
 
-void playGame(Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som)
+void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
 {
     if (!isQueueEmpty(*arrQueue))
     {
@@ -231,7 +229,7 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard
 
         dequeue(arrQueue, &firstGame);
 
-        launchGame(firstGame, rng, hangman, dinerdash, toh, som);
+        launchGame(firstGame, scoreboard);
 
         InsertAt(arrHistory, firstGame, Length(*arrHistory));
     }
@@ -241,7 +239,7 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard
     }
 }
 
-void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som)
+void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
 {
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
@@ -268,7 +266,7 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, Scoreboard *r
                 dequeue(arrQueue, &firstGame);
             }
 
-            launchGame(firstGame, rng, hangman, dinerdash, toh, som);
+            launchGame(firstGame, scoreboard);
 
             InsertAt(arrHistory, firstGame, Length(*arrHistory));
         }
@@ -343,33 +341,32 @@ void help()
     printf("15. HELP            : Panduan penggunaan\n");
 }
 
-void scoreboard(Scoreboard rng, Scoreboard hangman, Scoreboard dinerdash, Scoreboard toh, Scoreboard som)
+void showScoreboard(ListScore *scoreboard)
 {
-    printf("**** Scoreboard GAME RNG ****\n");
-    PrintScoreboard(rng);
-    printf("**** Scoreboard GAME HANGMAN ****\n");
-    PrintScoreboard(hangman);
-    printf("**** Scoreboard GAME DINER DASH ****\n");
-    PrintScoreboard(dinerdash);
-    printf("**** Scoreboard GAME TOWER OF HANOI ****\n");
-    PrintScoreboard(toh);
-    printf("**** Scoreboard GAME SNAKE ON METEOR ****\n");
-    PrintScoreboard(som);
+	int i;
+	for (i=0; i<(*scoreboard).Neff; i++)
+	{
+		printf("**** SCOREBOARD GAME ");
+		printWord((*scoreboard).A[i].GameTitle);
+		printf(" ****\n");
+		PrintMap((*scoreboard).A[i].MapScoreboard);
+    }
 }
 
-void resetScoreboard(Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash, Scoreboard *toh, Scoreboard *som)
+void resetScoreboard(ListScore *scoreboard)
 {
-    int num_reset;
+    int num_reset, i;
 
-    printf("\nDAFTAR Scoreboard:\n");
+    printf("\nDAFTAR SCOREBOARD:\n");
     printf("0. ALL\n");
-    printf("1. RNG\n");
-    printf("2. Diner Dash\n");
-    printf("3. HANGMAN\n");
-    printf("4. TOWER OF HANOI\n");
-    printf("5. SNAKE ON METEOR\n");
+    for (i=0; i<(*scoreboard).Neff; i++)
+    {
+        printf("%d. ", i+1);
+        printWord((*scoreboard).A[i].GameTitle);
+        printf("\n");
+    }
 
-    printf("\nScoreboard YANG INGIN DIHAPUS: ");
+    printf("\nSCOREBOARD YANG INGIN DIHAPUS: ");
     startInputWord();
     num_reset = wordToInt(currentWord);
 
@@ -378,11 +375,17 @@ void resetScoreboard(Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash
         boolean valid = false;
         while (!valid)
         {
-            printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET Scoreboard %s (YA/TIDAK)? ", num_reset == 1 ? "RNG" : num_reset == 2 ? "DINER DASH"
-                                                                                                                : num_reset == 3   ? "HANGMAN"
-                                                                                                                : num_reset == 4   ? "TOWER OF HANOI"
-                                                                                                                : num_reset == 5   ? "SNAKE"
-                                                                                                                                   : "ALL");
+            printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ");
+            if (num_reset == 0)
+            {
+                printf("ALL");
+            }
+            else
+            {
+                printWord((*scoreboard).A[num_reset-1].GameTitle);
+            }
+            
+            printf(" (YA/TIDAK)? ");
             startInputWord();
             if (stringEQWord(currentWord, "YA") || stringEQWord(currentWord, "TIDAK"))
             {
@@ -396,32 +399,13 @@ void resetScoreboard(Scoreboard *rng, Scoreboard *hangman, Scoreboard *dinerdash
 
         if (stringEQWord(currentWord, "YA"))
         {
-            switch (num_reset)
-            {
-            case 0:
-                CreateScoreboard(rng);
-                CreateScoreboard(dinerdash);
-                CreateScoreboard(hangman);
-                CreateScoreboard(toh);
-                CreateScoreboard(som);
-                break;
-            case 1:
-                CreateScoreboard(rng);
-                break;
-            case 2:
-                CreateScoreboard(dinerdash);
-                break;
-            case 3:
-                CreateScoreboard(hangman);
-                break;
-            case 4:
-                CreateScoreboard(toh);
-                break;
-            case 5:
-                CreateScoreboard(som);
-                break;
-            default:
-                break;
+            if (num_reset == 0) {
+                for (i = 0; i<(*scoreboard).Neff; i++)
+                {
+                    CreateEmptyMap(&(*scoreboard).A[i].MapScoreboard);
+                }
+            } else {
+                CreateEmptyMap(&(*scoreboard).A[num_reset-1].MapScoreboard);
             }
             printf("\nScoreboard berhasil di-reset.\n");
         }

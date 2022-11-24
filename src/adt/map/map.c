@@ -3,11 +3,6 @@
 void CreateEmptyMap(Map *M)
 {
     (*M).Count = NilMap;
-    int i;
-    for (i=0; i<MaxElMap; i++) {
-        (*M).Elements[i].Key = Undefined;
-        (*M).Elements[i].Value = Undefined;
-    }
 }
 
 boolean IsEmptyMap(Map M)
@@ -22,68 +17,11 @@ boolean IsFullMap(Map M)
 
 valuetype ValueInMap(Map M, keytype k)
 {
-    address idx = IndexInMap(M, k);
-    return M.Elements[idx].Value;
-}
-
-void InsertInMap(Map *M, keytype k, valuetype v)
-{
-    if (!IsFullMap(*M))
-    {
-        address idx = IndexInMap(*M, k);
-        if (IsMemberInMap(*M, k))
-        {
-            (*M).Elements[idx].Value = v;
-        } else {
-            (*M).Elements[idx].Value = v;
-            (*M).Elements[idx].Key = k;
-            (*M).Count++;
-        }
-    }
-}
-
-void DeleteInMap(Map *M, keytype k)
-{
-    if (IsMemberInMap(*M, k))
-    {
-        address idx = IndexInMap(*M, k);
-        (*M).Elements[idx].Key = Undefined;
-        (*M).Elements[idx].Value = Undefined;
-        (*M).Count--;
-    }
-    
-}
-
-boolean IsMemberInMap(Map M, keytype k)
-{
-    address idx = IndexInMap(M, k);
-    return M.Elements[idx].Key != Undefined;
-}
-
-address Hash(keytype k)
-{
-    return k%MaxElMap;
-}
-
-keytype ToKey(Word w)
-{
-    int key = 0;
-    int i;
-    for (i=0;  i<w.Length; i++)
-    {
-        key += w.TabWord[i];
-    }
-    return key;
-}
-
-address IndexInMap(Map M, keytype k)
-{
     boolean found = false;
-    address hashed = Hash(k);
-    address idx = 0;
+    address idx = 0, iterator;
 
-    while (!found && M.Elements[Hash(hashed+idx)].Key != Undefined) {
-        if (M.Elements[Hash(hashed+idx)].Key == k) {
+    while (!found && idx < M.Count) {
+        if (IsEQWord(M.Elements[idx].Key, k)) {
             found = true;
         }
         else {
@@ -91,5 +29,133 @@ address IndexInMap(Map M, keytype k)
         }
     }
 
-    return Hash(hashed+idx);
+    return M.Elements[idx].Value;
+}
+
+void InsertInMap(Map *M, keytype k, valuetype v)
+{
+    if (!IsMemberInMap(*M, k)) {
+        CopyWord(&(*M).Elements[(*M).Count].Key, k);
+        (*M).Elements[(*M).Count].Value = v;
+        (*M).Count++;
+    }
+}
+
+void DeleteInMap(Map *M, keytype k)
+{
+    boolean found = false;
+    address idx = 0, iterator;
+
+    if (!IsMemberInMap(*M, k)) {
+        return;
+    }
+
+    while (!found && (idx < (*M).Count)) {
+        if (IsEQWord((*M).Elements[idx].Key, k)) {
+            found = true;
+        }
+        else {
+            idx++;
+        }
+    }
+
+    for (iterator = (idx + 1); iterator < (*M).Count; iterator++) {
+        (*M).Elements[iterator - 1].Key = (*M).Elements[iterator].Key;
+        (*M).Elements[iterator - 1].Value = (*M).Elements[iterator].Value;
+    }
+
+    (*M).Count--;
+}
+
+boolean IsMemberInMap(Map M, keytype k)
+/* Mengembalikan true jika k adalah member dari M */
+{
+    boolean found = false;
+    address idx = 0, iterator;
+
+    while (!found && idx < M.Count) {
+        if (IsEQWord(M.Elements[idx].Key, k)) {
+            found = true;
+        }
+        else {
+            idx++;
+        }
+    }
+
+    return found;
+}
+
+boolean IsEQMap(Map m1, Map m2)
+{
+    if (m1.Count != m2.Count)
+    {
+        return false;
+    } else
+    {
+        boolean cek = true;
+        int i=0;
+        while (cek && i<m1.Count)
+        {
+            if (!IsEQWord(m1.Elements[i].Key, m2.Elements[i].Key) || m1.Elements[i].Value != m2.Elements[i].Value)
+            {
+                cek = false;
+            }
+            
+        }
+        return cek;
+    }
+    
+}
+
+void CopyMap(Map *m1, Map m2)
+{
+    for (int i = 0; i < (*m1).Count; i++)
+    {
+        CopyWord(&(*m1).Elements[i].Key, m2.Elements[i].Key);
+        (*m1).Elements[i].Value = m2.Elements[i].Value;
+    }
+    
+}
+
+void PrintMap(Map m)
+{
+    int i, j, spacing, skor;
+    printf("| NAMA          | SKOR          |\n");
+    printf("|-------------------------------|\n");
+
+    if (IsEmptyMap(m))
+    {
+        printf("------- SCOREBOARD KOSONG -------\n");
+    }
+    else
+    {
+        for (i = 0; i < m.Count; i++)
+        {
+            printf("| ");
+            printWord(m.Elements[i].Key);
+
+            spacing = 14 - m.Elements[i].Key.Length;
+            for (j = 0; j < spacing; j++)
+            {
+                printf(" ");
+            }
+
+            skor = m.Elements[i].Value;
+            printf("| %d", skor);
+
+            spacing = 14;
+            while (skor != 0)
+            {
+                skor = skor / 10;
+                spacing--;
+            }
+
+            for (j = 0; j < spacing; j++)
+            {
+                printf(" ");
+            }
+            printf("|\n");
+        }
+    }
+    printf("\n");
 }
