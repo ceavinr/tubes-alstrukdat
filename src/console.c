@@ -63,18 +63,17 @@ void load(string namaFile, ArrayDin *arrGame, StackHistory *stackHistory, ListSc
     STARTWORD(concat("../data/", namaFile));
 
     loadToArray(arrGame, scoreboard);
-    for (i=0; i<(*arrGame).Neff; i++)
+    for (i = 0; i < (*arrGame).Neff; i++)
     {
         InsertLastScoreboard(scoreboard, (*arrGame).A[i]);
     }
-    
+
     loadToStack(stackHistory, scoreboard);
-    
-    for (i=0; i<(*scoreboard).Neff; i++)
+
+    for (i = 0; i < (*scoreboard).Neff; i++)
     {
         loadToScoreboard(&(*scoreboard).A[i].MapScoreboard);
     }
-    
 }
 
 void saveArray(ArrayDin arr, FILE *pita)
@@ -108,7 +107,7 @@ void saveStack(StackHistory S, FILE *pita)
 {
     int i, j, neff;
     Word count, val;
-    neff = Top(S)+1;
+    neff = Top(S) + 1;
     count = intToWord(neff);
     for (i = 0; i < count.Length; i++)
     {
@@ -186,14 +185,14 @@ void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScor
         fprintf(pita, "\n");
 
         /* Scoreboard */
-        for (i=0; i<(*scoreboard).Neff; i++)
+        for (i = 0; i < (*scoreboard).Neff; i++)
         {
             saveScoreboard((*scoreboard).A[i].MapScoreboard, pita);
-            if (i < (*scoreboard).Neff-1) {
+            if (i < (*scoreboard).Neff - 1)
+            {
                 fprintf(pita, "\n");
             }
         }
-        
 
         fclose(pita);
         printf("Save file berhasil disimpan..\n\n");
@@ -258,7 +257,7 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
     }
     else if (stringEQWord(game, "HANGMAN"))
     {
-        //HANGMAN
+        // HANGMAN
     }
     else if (stringEQWord(game, "TOWER OF HANOI"))
     {
@@ -274,12 +273,12 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
     }
     else if (stringEQWord(game, "AMOGUS FIGHT"))
     {
-        score = amogusfight();
+        amogusfight(&score);
     }
     else
     {
         printf("============= Game Over =============\n");
-        score = rand()%101;
+        score = rand() % 101;
         printf("Skor akhir: %d\n", score);
     }
     PushHistory(stackHistory, game);
@@ -293,14 +292,14 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
         {
             InsertInMap(&(*scoreboard).A[index].MapScoreboard, currentWord, score);
             cek = true;
-        } else
+        }
+        else
         {
             printf("\nNama pemain pada game ");
             printWord(game);
             printf(" sudah tersedia.\n");
         }
     }
-    
 }
 
 void playGame(Queue *arrQueue, StackHistory *stackHistory, ListScore *scoreboard)
@@ -425,13 +424,13 @@ void help()
 
 void showScoreboard(ListScore *scoreboard)
 {
-	int i;
-	for (i=0; i<(*scoreboard).Neff; i++)
-	{
-		printf("**** SCOREBOARD GAME ");
-		printWord((*scoreboard).A[i].GameTitle);
-		printf(" ****\n");
-		PrintMap((*scoreboard).A[i].MapScoreboard);
+    int i;
+    for (i = 0; i < (*scoreboard).Neff; i++)
+    {
+        printf("**** SCOREBOARD GAME ");
+        printWord((*scoreboard).A[i].GameTitle);
+        printf(" ****\n");
+        PrintMap((*scoreboard).A[i].MapScoreboard);
     }
 }
 
@@ -441,9 +440,9 @@ void resetScoreboard(ListScore *scoreboard)
 
     printf("\nDAFTAR SCOREBOARD:\n");
     printf("0. ALL\n");
-    for (i=0; i<(*scoreboard).Neff; i++)
+    for (i = 0; i < (*scoreboard).Neff; i++)
     {
-        printf("%d. ", i+1);
+        printf("%d. ", i + 1);
         printWord((*scoreboard).A[i].GameTitle);
         printf("\n");
     }
@@ -464,9 +463,9 @@ void resetScoreboard(ListScore *scoreboard)
             }
             else
             {
-                printWord((*scoreboard).A[num_reset-1].GameTitle);
+                printWord((*scoreboard).A[num_reset - 1].GameTitle);
             }
-            
+
             printf(" (YA/TIDAK)? ");
             startInputWord();
             if (stringEQWord(currentWord, "YA") || stringEQWord(currentWord, "TIDAK"))
@@ -481,13 +480,16 @@ void resetScoreboard(ListScore *scoreboard)
 
         if (stringEQWord(currentWord, "YA"))
         {
-            if (num_reset == 0) {
-                for (i = 0; i<(*scoreboard).Neff; i++)
+            if (num_reset == 0)
+            {
+                for (i = 0; i < (*scoreboard).Neff; i++)
                 {
                     CreateEmptyMap(&(*scoreboard).A[i].MapScoreboard);
                 }
-            } else {
-                CreateEmptyMap(&(*scoreboard).A[num_reset-1].MapScoreboard);
+            }
+            else
+            {
+                CreateEmptyMap(&(*scoreboard).A[num_reset - 1].MapScoreboard);
             }
             printf("\nScoreboard berhasil di-reset.\n");
         }
@@ -550,6 +552,6 @@ void resetHistory(StackHistory *stackHistory)
     else
     {
         printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan\n");
-        PrintStackHistory(*stackHistory, Top(*stackHistory)+1);
+        PrintStackHistory(*stackHistory, Top(*stackHistory) + 1);
     }
 }

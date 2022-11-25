@@ -224,14 +224,14 @@ addrNode Brew(List recipes, Masakan potion1, Masakan potion2)
     return result;
 }
 
-int amogusfight()
+void amogusfight(int *score)
 {
     int potionID;
     int MaxHP1 = 200, MaxHP2 = 40;
     int HP1 = MaxHP1, HP2 = MaxHP2;
     int baseDamage1 = 20, baseDamage2 = 4;
     int damage1 = baseDamage1, damage2 = baseDamage2;
-    int score = 0, elixir = 0;
+    int elixir = 0;
     boolean gameOn = true;
     Array potions, inventory, using;
     List recipes;
@@ -260,7 +260,7 @@ int amogusfight()
             Word command;
 
             system("cls");
-            printf("Score: %d\n", score);
+            printf("Score: %d\n", *score);
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
             DisplayInventory(inventory);
@@ -271,7 +271,7 @@ int amogusfight()
             akuisisiCommandWord(&command, currentWord, 1);
 
             system("cls");
-            printf("Score: %d\n", score);
+            printf("Score: %d\n", *score);
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
 
@@ -544,7 +544,7 @@ int amogusfight()
             system("cls");
             if (HP1 > 0 || HP2 > 0)
             {
-                printf("Score: %d\n", score);
+                printf("Score: %d\n", *score);
                 printf("Elixir: %d\n", elixir);
                 PrintState(MaxHP1, HP1, MaxHP2, HP2);
             }
@@ -555,7 +555,7 @@ int amogusfight()
         // Ganti musuh
         if (HP2 <= 0)
         {
-            score += MaxHP2;
+            *score += MaxHP2;
             elixir += MaxHP2;
             MaxHP2 += 20;
             damage2 += 4;
@@ -567,7 +567,7 @@ int amogusfight()
         {
             gameOn = false;
             system("cls");
-            printf("Score: %d\n", score);
+            printf("Score: %d\n", *score);
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
         }
@@ -585,6 +585,4 @@ int amogusfight()
             Insert(&inventory, find(potions, x));
         }
     }
-
-    return score;
 }
