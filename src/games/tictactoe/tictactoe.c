@@ -111,9 +111,9 @@ void board(Matrix papan)
     printf("     |     |     \n\n");
 }
 
-void tictactoe()
+int tictactoe()
 {
-    int tebakan;
+    int tebakan, score[2];
     char mark;
     boolean gameOn = true;
     Word input;
@@ -171,6 +171,16 @@ void tictactoe()
         if (isHorizontalWin(papan, mark) || isVerticalWin(papan, mark) || isDiagonalWin(papan, mark))
         {
             printf("==> \aPlayer %d menang \n", player + 1);
+            if ((player + 1) == 1)
+            {
+                score[0] = 3;
+                score[1] = 0;
+            }
+            else if ((player + 1) == 2)
+            {
+                score[0] = 0;
+                score[1] = 3;
+            }
             gameOn = false;
         }
         else
@@ -178,8 +188,12 @@ void tictactoe()
             if (isBoardFull(papan))
             {
                 printf("==> \aDraw");
+                score[0] = 1;
+                score[1] = 1;
                 gameOn = false;
             }
         }
     } while (gameOn);
+
+    return score;
 }

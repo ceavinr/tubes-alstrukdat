@@ -8,6 +8,6 @@
 /* Prosedur untuk menjalankan game Tic Tac Toe*/
 /* I.S. Sembarang */
 /* F.S. Salah satu user menang atau keduanya seri */
-void tictactoe();
+int tictactoe();
 
 #endif
