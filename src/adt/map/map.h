@@ -12,7 +12,7 @@
 // typedef int bool;
 typedef Word keytype;
 typedef int valuetype;
-typedef int address;
+typedef int addressMap;
 
 typedef struct
 {
@@ -23,7 +23,7 @@ typedef struct
 typedef struct
 {
 	infotypeMap Elements[MaxElMap];
-	address Count;
+	addressMap Count;
 } Map;
 
 /* Definisi Map M kosong : M.Count = Nil */

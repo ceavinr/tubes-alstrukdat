@@ -35,7 +35,7 @@ void addObstacle(ListDP L,POINT* obstacle);
 
 boolean isAvail(ListDP L,int X,int Y);
 
-void addTail(ListDP *L,ElmtList newtail);
+void addTail(ListDP *L,ElmtListDP newtail);
 
 void MeteorHitBody(ListDP *L,POINT food, POINT meteor);
 

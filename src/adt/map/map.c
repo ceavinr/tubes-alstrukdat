@@ -18,7 +18,7 @@ boolean IsFullMap(Map M)
 valuetype ValueInMap(Map M, keytype k)
 {
     boolean found = false;
-    address idx = 0, iterator;
+    addressMap idx = 0, iterator;
 
     while (!found && idx < M.Count) {
         if (IsEQWord(M.Elements[idx].Key, k)) {
@@ -45,7 +45,7 @@ void InsertInMap(Map *M, keytype k, valuetype v)
 void DeleteInMap(Map *M, keytype k)
 {
     boolean found = false;
-    address idx = 0, iterator;
+    addressMap idx = 0, iterator;
 
     if (!IsMemberInMap(*M, k)) {
         return;
@@ -72,7 +72,7 @@ boolean IsMemberInMap(Map M, keytype k)
 /* Mengembalikan true jika k adalah member dari M */
 {
     boolean found = false;
-    address idx = 0, iterator;
+    addressMap idx = 0, iterator;
 
     while (!found && idx < M.Count) {
         if (IsEQWord(M.Elements[idx].Key, k)) {

@@ -15,7 +15,7 @@ boolean IsStackFull(Stack S)
     return Top(S) == MaxEl - 1;
 }
 
-void Push(Stack *S, infotype X, boolean *succeed)
+void Push(Stack *S, infotypeStack X, boolean *succeed)
 {
     if (IsStackEmpty(*S))
     {
@@ -38,7 +38,7 @@ void Push(Stack *S, infotype X, boolean *succeed)
     }
 }
 
-void Pop(Stack *S, infotype *X, boolean *succeed)
+void Pop(Stack *S, infotypeStack *X, boolean *succeed)
 {
     if (!IsStackEmpty(*S))
     {

@@ -16,13 +16,13 @@ typedef struct{
 	int Y;
 } POINT;
 
-typedef struct tElmtlist *addressDP;
-typedef struct tElmtlist { 
+typedef struct tElmtlistDP *addressDP;
+typedef struct tElmtlistDP { 
 	int info;
 	addressDP next;
 	addressDP prev;
 	POINT Pos;
-} ElmtList;
+} ElmtListDP;
 
 typedef struct {
 	addressDP First;

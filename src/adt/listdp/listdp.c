@@ -24,8 +24,8 @@ addressDP AlokasiDP(char X)
 /* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=NilDP, Prev(P)=NilDP */
 /* Jika alokasi gagal, mengirimkan NilDP. */
 {
-    ElmtList *P = NilDP;
-    P = (ElmtList *)malloc(sizeof(ElmtList));
+    ElmtListDP *P = NilDP;
+    P = (ElmtListDP *)malloc(sizeof(ElmtListDP));
     if (P != NilDP)
     {
         Info(P) = X;
@@ -110,7 +110,7 @@ void DelVFirstDP(ListDP *L, char *X)
     DealokasiDP(P);
 }
 
-void DelVLast(ListDP *L, char *X)
+void DelVLastDP(ListDP *L, char *X)
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -230,7 +230,7 @@ void DelLastDP(ListDP *L, addressDP *P)
         Last(*L) = Prev(q);
     }
 }
-void DelP(ListDP *L, char X)
+void DelPDP(ListDP *L, char X)
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddressDP P, dengan Info(P)=X  */
 /* maka P dihapus dari list dan didealokasi */

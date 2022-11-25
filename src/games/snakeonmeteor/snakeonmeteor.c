@@ -255,7 +255,7 @@ boolean isAvail(ListDP L,int X,int Y){
     return found;
 }
 
-void addTail(ListDP *L,ElmtList newtail){
+void addTail(ListDP *L,ElmtListDP newtail){
     addressDP P=AlokasiDP(((int)Info(Last(*L)))+1);
     P->Pos.X=newtail.Pos.X;
     P->Pos.Y=newtail.Pos.Y;
@@ -333,7 +333,7 @@ boolean isMeteorHitHead(ListDP L){
 void snakeOnMeteor(int * skor){
     srand(time(NULL));
     ListDP L;
-    ElmtList newtail;
+    ElmtListDP newtail;
     createSnake(&L);
     char input;
     POINT obstacle;

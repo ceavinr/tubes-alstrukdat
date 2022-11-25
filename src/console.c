@@ -274,7 +274,7 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
     }
     else if (stringEQWord(game, "AMOGUS FIGHT"))
     {
-        // score = amogusfight();
+        score = amogusfight();
     }
     else
     {
