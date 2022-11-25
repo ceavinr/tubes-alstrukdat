@@ -2,5 +2,6 @@
 
 int main()
 {
-    amogusfight();
+    int score = 0;
+    amogusfight(&score);
 }
