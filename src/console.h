@@ -11,47 +11,35 @@
 #include "./adt/mesin/mesinkata.h"
 #include "./adt/mesin/mesinkarakter.h"
 #include "./adt/listscore/listscore.h"
+#include "./adt/stackhistory/stackhistory.h"
 
 #include "./games/dinerdash/dinerdash.h"
 #include "./games/rng/rng.h"
 #include "./games/tictactoe/tictactoe.h"
 #include "./games/towerofhanoi/towerofhanoi.h"
 #include "./games/snakeonmeteor/snakeonmeteor.h"
+// #include "./games/amogusfight/amogusfight.h"
 
 /**
  * Konstruktor
  * I.S. sembarang
  * F.S. Membaca file default dan menyimpan ke dalam array, history bisa kosong namun terdefinisi
  */
-void start(ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard);
-
-/**
- * Konstruktor
- * I.S. program berjalan, array terdefinisi
- * F.S. Melakukan pembacaan file dan menyimpan ke array game dan history
- */
-void loadToarray(ArrayDin *arr, ListScore *scoreboard);
-
-/**
- * Konstruktor
- * I.S. program berjalan, Scoreboard terdefinisi
- * F.S. Melakukan Load dari file dan menyimpan ke Scoreboard
- */
-void loadToScoreboard(Map *game);
+void start(ArrayDin *arrGame, StackHistory *stackHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. program berjalan
  * F.S. Melakukan Load dari savefile dan menyimpan ke dalam array game dan history
  */
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard);
+void load(string namaFile, ArrayDin *arrGame, StackHistory *stackHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. program berjalan
  * F.S. menyimpan arraygame dan arrayhistory ke dalam file
  */
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, ListScore *scoreboard);
+void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
@@ -72,21 +60,21 @@ void deleteGame(ArrayDin *arrGame);
  * I.S. program berjalan
  * F.S. masuk ke dalam game dan menjalankan game yang terdapat dalam queue
  */
-void launchGame(Word game, ListScore *scoreboard);
+void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game antrian pertama dimainkan, setelah diamainkan dimasukan ke history
  */
-void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard);
+void playGame(Queue *arrQueue, StackHistory *stackHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. Program berjalan, array Queue dan array history terdefinisi
  * F.S. Game dalam antrian diskip sebanyak input pengguna
  */
-void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard);
+void skipGame(Word command, Queue *arrQueue, StackHistory *stackHistory, ListScore *scoreboard);
 
 /**
  * Konstruktor
@@ -135,13 +123,13 @@ void resetScoreboard(ListScore *scoreboard);
  * I.S. Program berjalan arrHistory terdefinisi
  * F.S. history game ditampilkan berdasarkan parameter banyak dari input pengguna
  */
-void showHistory(Word command, ArrayDin arrHistory);
+void showHistory(Word command, StackHistory stackHistory);
 
 /**
  * Konstruktor
  * I.S. Program berjalan arrHistory terdefinisi
  * F.S. history game diriset (jika Ya) atau tidak jadi direset dan ditampilkan history game (jika Tidak)
  */
-void resetHistory(ArrayDin *arrHistory);
+void resetHistory(StackHistory *stackHistory);
 
 #endif

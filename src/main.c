@@ -7,7 +7,8 @@ int main()
     Word command, namaFile;
     boolean quit = false, inputValid = false;
     ArrayDin arrGame = MakeArrayDin();
-    ArrayDin arrHistory = MakeArrayDin();
+    StackHistory stackHistory;
+    CreateStackHistory(&stackHistory);
     Queue arrQueue = MakeQueue();
     /* Scoreboard */
     ListScore scoreboard;
@@ -27,7 +28,7 @@ int main()
 
         if (stringEQWord(command, "START"))
         {
-            start(&arrGame, &arrHistory, &scoreboard);
+            start(&arrGame, &stackHistory, &scoreboard);
             if (!IsEmptyArrayDin(arrGame))
             {
                 printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
@@ -43,7 +44,7 @@ int main()
             akuisisiCommandWord(&namaFile, currentWord, 2);
             if (namaFile.Length > 0)
             {
-                load(wordToString(namaFile), &arrGame, &arrHistory, &scoreboard);
+                load(wordToString(namaFile), &arrGame, &stackHistory, &scoreboard);
                 if (!IsEmptyArrayDin(arrGame))
                 {
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
@@ -99,7 +100,7 @@ int main()
         if (stringEQWord(cek, "SAVE"))
         {
             akuisisiCommandWord(&namaFile, currentWord, 2);
-            save(wordToString(namaFile), arrGame, arrHistory, &scoreboard);
+            save(wordToString(namaFile), arrGame, stackHistory, &scoreboard);
         }
         else if (stringEQWord(command, "CREATE GAME"))
         {
@@ -119,11 +120,11 @@ int main()
         }
         else if (stringEQWord(command, "PLAY GAME"))
         {
-            playGame(&arrQueue, &arrHistory, &scoreboard);
+            playGame(&arrQueue, &stackHistory, &scoreboard);
         }
         else if (stringEQWord(cek, "SKIP") && stringEQWord(cek2, "GAME"))
         {
-            skipGame(command, &arrQueue, &arrHistory, &scoreboard);
+            skipGame(command, &arrQueue, &stackHistory, &scoreboard);
         }
         else if (stringEQWord(command, "QUIT"))
         {
@@ -143,11 +144,11 @@ int main()
         }
         else if (stringEQWord(cek, "HISTORY"))
         {
-            showHistory(command, arrHistory);
+            showHistory(command, stackHistory);
         }
         else if (stringEQWord(command, "RESET HISTORY"))
         {
-            resetHistory(&arrHistory);
+            resetHistory(&stackHistory);
         }
         else
         {

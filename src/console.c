@@ -1,11 +1,11 @@
 #include "console.h"
 
-void start(ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard)
+void start(ArrayDin *arrGame, StackHistory *stackHistory, ListScore *scoreboard)
 {
-    load("default.txt", arrGame, arrHistory, scoreboard);
+    load("default.txt", arrGame, stackHistory, scoreboard);
 }
 
-void loadToarray(ArrayDin *arr, ListScore *scoreboard)
+void loadToArray(ArrayDin *arr, ListScore *scoreboard)
 {
     int count, i;
     if (!EOP)
@@ -18,6 +18,24 @@ void loadToarray(ArrayDin *arr, ListScore *scoreboard)
         }
         ADVWORD();
     }
+}
+
+void loadToStack(StackHistory *S, ListScore *scoreboard)
+{
+    int count, i;
+    if (!EOP)
+    {
+        count = wordToInt(currentWord);
+        for (i = 0; i < count; i++)
+        {
+            ADVWORD();
+            PushHistory(S, currentWord);
+        }
+        ADVWORD();
+    }
+
+    // INVERSE
+    InverseStackHistory(S);
 }
 
 void loadToScoreboard(Map *game)
@@ -38,20 +56,19 @@ void loadToScoreboard(Map *game)
     }
 }
 
-void load(string namaFile, ArrayDin *arrGame, ArrayDin *arrHistory, ListScore *scoreboard)
+void load(string namaFile, ArrayDin *arrGame, StackHistory *stackHistory, ListScore *scoreboard)
 {
     int i;
 
     STARTWORD(concat("../data/", namaFile));
 
-    loadToarray(arrGame, scoreboard);
+    loadToArray(arrGame, scoreboard);
     for (i=0; i<(*arrGame).Neff; i++)
     {
         InsertLastScoreboard(scoreboard, (*arrGame).A[i]);
     }
     
-
-    loadToarray(arrHistory, scoreboard);
+    loadToStack(stackHistory, scoreboard);
     
     for (i=0; i<(*scoreboard).Neff; i++)
     {
@@ -81,6 +98,35 @@ void saveArray(ArrayDin arr, FILE *pita)
             fprintf(pita, "%c", arr.A[i].TabWord[j]);
         }
         if (i < arr.Neff - 1)
+        {
+            fprintf(pita, "\n");
+        }
+    }
+}
+
+void saveStack(StackHistory S, FILE *pita)
+{
+    int i, j, neff;
+    Word count, val;
+    neff = Top(S)+1;
+    count = intToWord(neff);
+    for (i = 0; i < count.Length; i++)
+    {
+        fprintf(pita, "%c", count.TabWord[i]);
+    }
+    if (neff != 0)
+    {
+        fprintf(pita, "\n");
+    }
+
+    for (i = 0; i < neff; i++)
+    {
+        PopHistory(&S, &val);
+        for (j = 0; j < val.Length; j++)
+        {
+            fprintf(pita, "%c", val.TabWord[j]);
+        }
+        if (i < neff - 1)
         {
             fprintf(pita, "\n");
         }
@@ -121,7 +167,7 @@ void saveScoreboard(Map game, FILE *pita)
     }
 }
 
-void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, ListScore *scoreboard)
+void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScore *scoreboard)
 {
     int i;
     if (stringLength(namaFile) == 0)
@@ -136,7 +182,7 @@ void save(string namaFile, ArrayDin arrGame, ArrayDin arrHistory, ListScore *sco
         /* Daftar Game dan History*/
         saveArray(arrGame, pita);
         fprintf(pita, "\n");
-        saveArray(arrHistory, pita);
+        saveStack(stackHistory, pita);
         fprintf(pita, "\n");
 
         /* Scoreboard */
@@ -192,7 +238,7 @@ void deleteGame(ArrayDin *arrGame)
     }
 }
 
-void launchGame(Word game, ListScore *scoreboard)
+void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
 {
     int score, index;
     boolean cek;
@@ -226,9 +272,9 @@ void launchGame(Word game, ListScore *scoreboard)
     {
         tictactoe();
     }
-    else if (stringEQWord(game, "AMOGUS"))
+    else if (stringEQWord(game, "AMOGUS FIGHT"))
     {
-        //amogus
+        // score = amogusfight();
     }
     else
     {
@@ -236,6 +282,8 @@ void launchGame(Word game, ListScore *scoreboard)
         score = rand()%101;
         printf("Skor akhir: %d\n", score);
     }
+    PushHistory(stackHistory, game);
+
     index = SearchScoreboard(scoreboard, game);
     while (!cek)
     {
@@ -255,7 +303,7 @@ void launchGame(Word game, ListScore *scoreboard)
     
 }
 
-void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
+void playGame(Queue *arrQueue, StackHistory *stackHistory, ListScore *scoreboard)
 {
     if (!isQueueEmpty(*arrQueue))
     {
@@ -267,9 +315,7 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
 
         dequeue(arrQueue, &firstGame);
 
-        launchGame(firstGame, scoreboard);
-
-        InsertAtArrayDin(arrHistory, firstGame, LengthArrayDin(*arrHistory));
+        launchGame(firstGame, scoreboard, stackHistory);
     }
     else
     {
@@ -277,7 +323,7 @@ void playGame(Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
     }
 }
 
-void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, ListScore *scoreboard)
+void skipGame(Word command, Queue *arrQueue, StackHistory *stackHistory, ListScore *scoreboard)
 {
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
@@ -304,9 +350,7 @@ void skipGame(Word command, Queue *arrQueue, ArrayDin *arrHistory, ListScore *sc
                 dequeue(arrQueue, &firstGame);
             }
 
-            launchGame(firstGame, scoreboard);
-
-            InsertAtArrayDin(arrHistory, firstGame, LengthArrayDin(*arrHistory));
+            launchGame(firstGame, scoreboard, stackHistory);
         }
         else if (numQueue >= queueLength(*arrQueue) || isQueueEmpty(*arrQueue))
         {
@@ -458,7 +502,7 @@ void resetScoreboard(ListScore *scoreboard)
     }
 }
 
-void showHistory(Word command, ArrayDin arrHistory)
+void showHistory(Word command, StackHistory stackHistory)
 {
     Word banyakHistory;
     akuisisiCommandWord(&banyakHistory, command, 2);
@@ -468,7 +512,7 @@ void showHistory(Word command, ArrayDin arrHistory)
         if (banyakHistory_int > 0)
         {
             printf("Berikut adalah daftar Game yang telah dimainkan\n");
-            PrintArrayDin(arrHistory, banyakHistory_int);
+            PrintStackHistory(stackHistory, banyakHistory_int);
         }
         else
         {
@@ -481,7 +525,7 @@ void showHistory(Word command, ArrayDin arrHistory)
     }
 }
 
-void resetHistory(ArrayDin *arrHistory)
+void resetHistory(StackHistory *stackHistory)
 {
     boolean valid = false;
     while (!valid)
@@ -500,12 +544,12 @@ void resetHistory(ArrayDin *arrHistory)
 
     if (stringEQWord(currentWord, "YA"))
     {
-        *arrHistory = MakeArrayDin();
+        CreateStackHistory(stackHistory);
         printf("\nHistory berhasil di-reset.\n");
     }
     else
     {
         printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan\n");
-        PrintArrayDin(*arrHistory, (*arrHistory).Neff);
+        PrintStackHistory(*stackHistory, Top(*stackHistory)+1);
     }
 }

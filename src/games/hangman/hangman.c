@@ -277,19 +277,34 @@ void tambahKata()
 
 }
 
-void hangman(int *score, char* input)
+void hangman(int *score)
 {
-    if(input == 'PLAY')
+    printf("======= SELAMAT DATANG DI HANGMAN =======\n");
+    printf("=========================================\n");
+    printf("\n***************** MENU ******************\n");
+    printf("   PLAY        : Bermain game\n");
+    printf("   TAMBAH KATA : Menambah kata dalam game\n");
+    printf("Masukan opsi Anda :");
+    boolean valid = false;
+    while (!valid)
+    {
+        startInputWord();
+        if (stringEQWord(currentWord, "PLAY") || stringEQWord(currentWord, "TAMBAH KATA"))
+        {
+            valid = true;
+        } else
+        {
+            printf("Input anda salah. Silahkan masukan command yang benar.\n");
+        }
+    }
+    
+    if(stringEQWord(currentWord, "PLAY"))
     {
         play();
     }
-    else if(input == 'TAMBAH KATA')
+    else if(stringEQWord(currentWord, "TAMBAH KATA"))
     {
         tambahKata();
-    }
-    else
-    {
-        printf("Input anda salah. Silahkan masukan command yang benar.\n");
     }
 }
 
