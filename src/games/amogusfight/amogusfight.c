@@ -56,7 +56,7 @@ int max2num(int num1, int num2)
     return (num1 > num2) ? num1 : num2;
 }
 
-void help()
+void CommandList()
 {
     printf("\n=============================== COMMAND LIST =============================== \n");
     printf("RESEP\t\t\t\t : Melihat resep untuk membuat potion\n");
@@ -462,7 +462,7 @@ int amogusfight()
             }
             else if (stringEQWord(currentWord, "HELP"))
             {
-                help();
+                CommandList();
             }
             else if (stringEQWord(currentWord, "INGFO"))
             {
