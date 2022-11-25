@@ -5,4 +5,4 @@
 #include "../../adt/bintree/bintree.h"
 #include "../../adt/listlinier/listlinier.h"
 
-int amogusfight();
+void amogusfight(int *score);

@@ -60,7 +60,7 @@ void load(string namaFile, ArrayDin *arrGame, StackHistory *stackHistory, ListSc
 {
     int i;
 
-    STARTWORD(concat("../data/", namaFile));
+    STARTWORD(concat("data/", namaFile));
 
     loadToArray(arrGame, scoreboard);
     for (i = 0; i < (*arrGame).Neff; i++)
@@ -176,7 +176,7 @@ void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScor
     else
     {
         FILE *pita;
-        pita = fopen(concat("../data/", namaFile), "w");
+        pita = fopen(concat("data/", namaFile), "w");
 
         /* Daftar Game dan History*/
         saveArray(arrGame, pita);
@@ -371,7 +371,7 @@ void queueGame(Queue *arrQueue, ArrayDin arrGame)
 
     printf("\nBerikut adalah daftar game yang tersedia\n");
     PrintArrayDin(arrGame, arrGame.Neff);
-    printf("\nNomor Game yang mau ditambahkan ke antrian:  ");
+    printf("\nNomor Game yang mau ditambahkan ke antrian: ");
     startInputWord();
 
     int numGame = wordToInt(currentWord);
