@@ -18,7 +18,7 @@ char* kata_random()
         for (i = 0; i < count; i++)
         {
             ADVWORD();
-            InsertAt(&arrKata, currentWord, i);
+            InsertAtArrayDin(&arrKata, currentWord, i);
         }
         ADVWORD();
     }
@@ -260,12 +260,12 @@ void tambahKata()
         for (i = 0; i < count; i++)
         {
             ADVWORD();
-            InsertAt(&arrKata, currentWord, i);
+            InsertAtArrayDin(&arrKata, currentWord, i);
         }
         ADVWORD();
     }
 
-    InsertAt(&arrKata, temp, count);
+    InsertAtArrayDin(&arrKata, temp, count);
     
     FILE *pita;
     pita = fopen("kata.txt", "w");
