@@ -112,7 +112,7 @@ int main()
         }
         else if (stringEQWord(command, "CREATE GAME"))
         {
-            createGame(&arrGame);
+            createGame(&arrGame, &scoreboard);
         }
         else if (stringEQWord(command, "LIST GAME"))
         {
@@ -120,7 +120,7 @@ int main()
         }
         else if (stringEQWord(command, "DELETE GAME"))
         {
-            deleteGame(&arrGame);
+            deleteGame(&arrGame, &scoreboard);
         }
         else if (stringEQWord(command, "QUEUE GAME"))
         {

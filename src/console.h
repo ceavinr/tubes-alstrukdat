@@ -47,14 +47,14 @@ void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScor
  * I.S. Array game terdefinisi
  * F.S. Game berdasarkan input pengguna tersimpan ke dalam array game
  */
-void createGame(ArrayDin *arrGame);
+void createGame(ArrayDin *arrGame, ListScore *scoreboard);
 
 /**
  * Konstruktor
  * I.S. Array game terdefinisi
  * F.S. Game yang dipilih terhapus dari program, default game tidak diizinkan dihapus
  */
-void deleteGame(ArrayDin *arrGame);
+void deleteGame(ArrayDin *arrGame, ListScore *scoreboard);
 
 /*
  * Konstruktor

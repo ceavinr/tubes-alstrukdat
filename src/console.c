@@ -2,7 +2,7 @@
 
 void start(ArrayDin *arrGame, StackHistory *stackHistory, ListScore *scoreboard)
 {
-    load("default.txt", arrGame, stackHistory, scoreboard);
+    load("../data/default.txt", arrGame, stackHistory, scoreboard);
 }
 
 void loadToArray(ArrayDin *arr, ListScore *scoreboard)
@@ -60,7 +60,7 @@ void load(string namaFile, ArrayDin *arrGame, StackHistory *stackHistory, ListSc
 {
     int i;
 
-    STARTWORD(concat("data/", namaFile));
+    STARTWORD(concat("../data/", namaFile));
 
     loadToArray(arrGame, scoreboard);
     for (i = 0; i < (*arrGame).Neff; i++)
@@ -199,7 +199,7 @@ void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScor
     }
 }
 
-void createGame(ArrayDin *arrGame)
+void createGame(ArrayDin *arrGame, ListScore *scoreboard)
 {
     Word newGame;
 
@@ -209,6 +209,7 @@ void createGame(ArrayDin *arrGame)
     if (!IsMemberArrayDin(*arrGame, newGame))
     {
         InsertLastArrayDin(arrGame, newGame);
+        InsertLastScoreboard(scoreboard, newGame);
         printf("Game berhasil ditambahkan\n");
     }
     else
@@ -217,7 +218,7 @@ void createGame(ArrayDin *arrGame)
     }
 }
 
-void deleteGame(ArrayDin *arrGame)
+void deleteGame(ArrayDin *arrGame, ListScore *scoreboard)
 {
     printf("Berikut adalah daftar game yang tersedia\n\n");
     PrintArrayDin(*arrGame, (*arrGame).Neff);
@@ -229,6 +230,7 @@ void deleteGame(ArrayDin *arrGame)
     if (numGame > 5 && numGame <= (*arrGame).Neff)
     {
         DeleteAtArrayDin(arrGame, numGame - 1);
+        DeleteAtScoreboard(scoreboard, numGame - 1);
         printf("\nGame berhasil dihapus\n");
     }
     else
