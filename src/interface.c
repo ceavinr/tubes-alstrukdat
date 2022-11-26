@@ -1,14 +1,66 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "interface.h"
 #include <time.h>
 
-void sleep(int detik)
+void sleep(int milidetik)
 {
     clock_t start_time = clock();
 
-    while (clock() < start_time + 1000 * detik)
+    while (clock() < start_time + milidetik)
     {
     }
+}
+
+void clear()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void loading()
+{
+    int i = 0;
+    while (i < 50)
+    {
+        printf("[");
+        for (int j = 0; j < i; j++)
+        {
+            printf("=");
+        }
+        for (int j = 0; j < 50 - i; j++)
+        {
+            printf(" ");
+        }
+
+        printf("]");
+        printf(" %d%%", i * 2);
+        sleep(10);
+        i++;
+        clear();
+    }
+}
+
+void loadingGame(Word gameName)
+{
+    for (int i = 0; i < 2; i++)
+    {
+        clear();
+        printf("Loading ");
+        printWord(gameName);
+        for (int i = 0; i < 3; i++)
+        {
+            printf(".");
+            sleep(100);
+        }
+        sleep(1000);
+    }
+    printf("\n");
+    printf("==============================================\n\n");
+    clear();
 }
 
 void gambarBNMO()

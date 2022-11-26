@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "interface.h"
 #include "./adt/string/string.h"
 #include "./adt/arraydin/arraydin.h"
 #include "./adt/queue/queue.h"

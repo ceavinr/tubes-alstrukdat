@@ -195,7 +195,7 @@ void save(string namaFile, ArrayDin arrGame, StackHistory stackHistory, ListScor
         }
 
         fclose(pita);
-        printf("Save file berhasil disimpan..\n\n");
+        printf("Save file berhasil disimpan..\n");
     }
 }
 
@@ -242,10 +242,7 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
     int score, index;
     boolean cek;
 
-    printf("\n\nLoading ");
-    printWord(game);
-    printf(" ...\n\n");
-    printf("==============================================\n\n");
+    loadingGame(game);
 
     if (stringEQWord(game, "RNG"))
     {
@@ -269,7 +266,7 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
     }
     else if (stringEQWord(game, "TICTACTOE"))
     {
-        tictactoe();
+        tictactoe(&score);
     }
     else if (stringEQWord(game, "AMOGUS FIGHT"))
     {
@@ -318,7 +315,7 @@ void playGame(Queue *arrQueue, StackHistory *stackHistory, ListScore *scoreboard
     }
     else
     {
-        printf("Tidak ada permainan lagi dalam daftar game-mu.\n\n");
+        printf("Tidak ada permainan lagi dalam daftar game-mu.\n");
     }
 }
 

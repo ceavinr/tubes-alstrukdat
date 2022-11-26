@@ -25,13 +25,14 @@ int main()
         printf("\nENTER COMMAND: ");
         startInputWord();
         akuisisiCommandWord(&command, currentWord, 1);
-
+        clear();
         if (stringEQWord(command, "START"))
         {
             start(&arrGame, &stackHistory, &scoreboard);
             if (!IsEmptyArrayDin(arrGame))
             {
-                printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+                loading();
+                printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
                 inputValid = true;
             }
             else
@@ -47,7 +48,8 @@ int main()
                 load(wordToString(namaFile), &arrGame, &stackHistory, &scoreboard);
                 if (!IsEmptyArrayDin(arrGame))
                 {
-                    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n\n");
+                    loading();
+                    printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
                     inputValid = true;
                 }
                 else
@@ -57,13 +59,17 @@ int main()
             }
             else
             {
-                printf("Gagal membaca file.\n\n");
+                printf("Gagal membaca file.\n");
             }
         }
         else
         {
-            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n\n");
+            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
         }
+
+        printf("\nEnter to continue...");
+        startInput();
+        clear();
     }
 
     /*LOOPING PROGRAM*/
@@ -96,6 +102,8 @@ int main()
 
         /*Handle "SKIP GAME"*/
         akuisisiCommandWord(&cek2, command, 2);
+
+        clear();
 
         if (stringEQWord(cek, "SAVE"))
         {
@@ -152,7 +160,19 @@ int main()
         }
         else
         {
-            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n\n");
+            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
+        }
+
+        if (!quit)
+        {
+            printf("\nEnter to back to main menu...");
+            startInput();
+            clear();
+        }
+        else
+        {
+            sleep(500);
+            clear();
         }
     }
 

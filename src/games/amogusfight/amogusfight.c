@@ -259,7 +259,7 @@ void amogusfight(int *score)
             boolean inputValid = false;
             Word command;
 
-            system("cls");
+            clear();
             printf("Score: %d\n", *score);
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
@@ -270,7 +270,7 @@ void amogusfight(int *score)
             startInputWord();
             akuisisiCommandWord(&command, currentWord, 1);
 
-            system("cls");
+            clear();
             printf("Score: %d\n", *score);
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
@@ -379,7 +379,7 @@ void amogusfight(int *score)
                         {
                             printf("Input tidak valid!\n");
                             sleep(1);
-                            system("cls");
+                            clear();
                         }
                     }
                 }
@@ -541,7 +541,7 @@ void amogusfight(int *score)
             {
                 HP2 -= 4;
             }
-            system("cls");
+            clear();
             if (HP1 > 0 || HP2 > 0)
             {
                 printf("Score: %d\n", *score);
@@ -566,7 +566,7 @@ void amogusfight(int *score)
         if (HP1 <= 0)
         {
             gameOn = false;
-            system("cls");
+            clear();
             printf("Score: %d\n", *score);
             printf("Elixir: %d\n", elixir);
             PrintState(MaxHP1, HP1, MaxHP2, HP2);
