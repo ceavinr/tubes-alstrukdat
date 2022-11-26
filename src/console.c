@@ -2,7 +2,7 @@
 
 void start(ArrayDin *arrGame, StackHistory *stackHistory, ListScore *scoreboard)
 {
-    load("../data/default.txt", arrGame, stackHistory, scoreboard);
+    load("default.txt", arrGame, stackHistory, scoreboard);
 }
 
 void loadToArray(ArrayDin *arr, ListScore *scoreboard)
@@ -60,7 +60,7 @@ void load(string namaFile, ArrayDin *arrGame, StackHistory *stackHistory, ListSc
 {
     int i;
 
-    STARTWORD(concat("../data/", namaFile));
+    STARTWORD(concat("data/", namaFile));
 
     loadToArray(arrGame, scoreboard);
     for (i = 0; i < (*arrGame).Neff; i++)
