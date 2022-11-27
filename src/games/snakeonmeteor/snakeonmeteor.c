@@ -1,4 +1,5 @@
 #include "snakeonmeteor.h"
+#include "../../interface.h"
 
 void Move(ListDP *L, char input)
 {
@@ -462,28 +463,30 @@ boolean isMeteorHitHead(ListDP L)
 
 void snakeOnMeteor(int *skor)
 {
-    srand(time(NULL));
+    POINT obstacle, food, meteor;
     ListDP L;
     ElmtListDP newtail;
-    createSnake(&L);
+    int i = 1;
     char input;
-    POINT obstacle;
-    POINT food;
-    food.X = -999;
-    food.Y = -999;
-    POINT meteor;
-    meteor.X = -999;
-    meteor.Y = -999;
+    boolean hit = false;
+
     printf("Selamat datang di snake on meteor!\n");
-    printf("Mengenerate peta, snake dan makanan . . . \n");
-    printf("Berhasil digenerate\n");
-    printf("------------------------------\n");
-    printf("Berikut merupakan peta permainan\n");
+    printf("Mengenerate peta, snake dan makanan ...\n");
+    srand(time(NULL));
+    createSnake(&L);
+    food.X = -999, food.Y = -999;
+    meteor.X = -999, meteor.Y = -999;
     addObstacle(L, &obstacle);
     addFood(&food, L, obstacle);
+    printf("Berhasil digenerate\n");
+
+    printf("\nEnter to continue...");
+    startInput();
+    clear();
+
+    printf("Berikut merupakan peta permainan\n");
     printMap(L, food, meteor, obstacle);
-    int i = 1;
-    boolean hit = false;
+
     while (!hit)
     {
         printf("TURN %d:\n", i);
@@ -491,7 +494,7 @@ void snakeOnMeteor(int *skor)
 
         startInputWord();
         input = currentWord.TabWord[0];
-        if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd') && isInputValid(L, input))
+        if (currentWord.Length == 1 && isInputValid(L, input))
         {
             newtail = *(Last(L));
             Move(&L, input);
@@ -502,6 +505,8 @@ void snakeOnMeteor(int *skor)
             }
             addMeteor(&meteor, food);
             // printPoint(meteor);
+            clear();
+            printf("Berikut merupakan peta permainan\n");
             printMap(L, food, meteor, obstacle);
             MeteorHitBody(&L, food, meteor);
             if (isLose(L, meteor, obstacle))
@@ -613,24 +618,31 @@ int lengthSnake(ListDP L)
 boolean isInputValid(ListDP L, char input)
 {
     addressDP P = First(L);
-    if (input == 'w' && Next(P)->Pos.Y == (P->Pos.Y - 1) % 5)
+    if (input == 'w' || input == 'a' || input == 's' || input == 'd')
     {
-        return false;
-    }
-    else if (input == 's' && Next(P)->Pos.Y == (P->Pos.Y + 1) % 5)
-    {
-        return false;
-    }
-    else if (input == 'a' && Next(P)->Pos.X == (P->Pos.X - 1) % 5)
-    {
-        return false;
-    }
-    else if (input == 'd' && Next(P)->Pos.Y == (P->Pos.Y - 1) % 5)
-    {
-        return false;
+        if (input == 'w' && Next(P)->Pos.Y == (P->Pos.Y - 1) % 5)
+        {
+            return false;
+        }
+        else if (input == 's' && Next(P)->Pos.Y == (P->Pos.Y + 1) % 5)
+        {
+            return false;
+        }
+        else if (input == 'a' && Next(P)->Pos.X == (P->Pos.X - 1) % 5)
+        {
+            return false;
+        }
+        else if (input == 'd' && Next(P)->Pos.X == (P->Pos.X + 1) % 5)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     else
     {
-        return true;
+        return false;
     }
 }
