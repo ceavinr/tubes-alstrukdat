@@ -21,46 +21,43 @@ void clear()
 #endif
 }
 
-void loading()
+void loadingGame(Word gameName)
 {
+    clear();
     int i = 0;
-    while (i < 50)
+    while (i < 25)
     {
+        printf("Loading ");
+        printWord(gameName);
+        printf("...\n");
         printf("[");
         for (int j = 0; j < i; j++)
         {
             printf("=");
         }
-        for (int j = 0; j < 50 - i; j++)
+        for (int j = 0; j < 25 - i; j++)
         {
             printf(" ");
         }
 
         printf("]");
-        printf(" %d%%", i * 2);
-        sleep(10);
+        printf(" %d%%", i * 4);
         i++;
         clear();
     }
 }
 
-void loadingGame(Word gameName)
+void skippingGame(Word gameName)
 {
-    for (int i = 0; i < 2; i++)
+    printf("Skipping ");
+    printWord(gameName);
+    for (int i = 0; i < 3; i++)
     {
-        clear();
-        printf("Loading ");
-        printWord(gameName);
-        for (int i = 0; i < 3; i++)
-        {
-            printf(".");
-            sleep(100);
-        }
-        sleep(1000);
+        printf(".");
+        sleep(100);
     }
+    sleep(1000);
     printf("\n");
-    printf("==============================================\n\n");
-    clear();
 }
 
 void gambarBNMO()

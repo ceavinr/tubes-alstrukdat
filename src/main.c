@@ -31,7 +31,6 @@ int main()
             start(&arrGame, &stackHistory, &scoreboard);
             if (!IsEmptyArrayDin(arrGame))
             {
-                loading();
                 printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
                 inputValid = true;
             }
@@ -48,7 +47,6 @@ int main()
                 load(wordToString(namaFile), &arrGame, &stackHistory, &scoreboard);
                 if (!IsEmptyArrayDin(arrGame))
                 {
-                    loading();
                     printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
                     inputValid = true;
                 }

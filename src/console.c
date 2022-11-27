@@ -340,14 +340,17 @@ void skipGame(Word command, Queue *arrQueue, StackHistory *stackHistory, ListSco
             Word firstGame;
             printf("Berikut adalah daftar Game-mu\n");
             displayQueue(*arrQueue);
+            printf("\n");
 
             /*DELETE BERDASARKAN SKIP SEKALIGUS INISIALISASI GAME PERTAMA YANG SIAP DIMAINKAN*/
             int i;
-            for (i = 0; i <= numQueue; i++)
+            for (i = 0; i < numQueue; i++)
             {
                 dequeue(arrQueue, &firstGame);
+                skippingGame(firstGame);
             }
 
+            dequeue(arrQueue, &firstGame);
             launchGame(firstGame, scoreboard, stackHistory);
         }
         else if (numQueue >= queueLength(*arrQueue) || isQueueEmpty(*arrQueue))

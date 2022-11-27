@@ -5,8 +5,8 @@
 
 void sleep(int detik);
 void clear();
-void loading();
 void loadingGame(Word gameName);
+void skippingGame(Word gameName);
 void gambarBNMO();
 void gambarKarakterBNMO();
 void gambarDinerDash();
