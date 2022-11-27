@@ -8,11 +8,11 @@ void Move(ListDP *L, char input)
     if (input == 'w')
     {
         temp = (*Prev(P)).Pos;
-        while (Prev(P) != NilDP)
+        while (Prev(P) != NULL)
         {
             (*P).Pos = temp;
             P = Prev(P);
-            if (Prev(P) != NilDP)
+            if (Prev(P) != NULL)
             {
                 temp = (*Prev(P)).Pos;
             }
@@ -21,11 +21,11 @@ void Move(ListDP *L, char input)
     else if (input == 's')
     {
         temp = (*Prev(P)).Pos;
-        while (Prev(P) != NilDP)
+        while (Prev(P) != NULL)
         {
             (*P).Pos = temp;
             P = Prev(P);
-            if (Prev(P) != NilDP)
+            if (Prev(P) != NULL)
             {
                 temp = (*Prev(P)).Pos;
             }
@@ -34,11 +34,11 @@ void Move(ListDP *L, char input)
     else if (input == 'd')
     {
         temp = (*Prev(P)).Pos;
-        while (Prev(P) != NilDP)
+        while (Prev(P) != NULL)
         {
             (*P).Pos = temp;
             P = Prev(P);
-            if (Prev(P) != NilDP)
+            if (Prev(P) != NULL)
             {
                 temp = (*Prev(P)).Pos;
             }
@@ -47,11 +47,11 @@ void Move(ListDP *L, char input)
     else if (input == 'a')
     {
         temp = (*Prev(P)).Pos;
-        while (Prev(P) != NilDP)
+        while (Prev(P) != NULL)
         {
             (*P).Pos = temp;
             P = Prev(P);
-            if (Prev(P) != NilDP)
+            if (Prev(P) != NULL)
             {
                 temp = (*Prev(P)).Pos;
             }
@@ -67,65 +67,65 @@ void createSnake(ListDP *L)
     addressDP P2 = AlokasiDP(1);
     addressDP P3 = AlokasiDP(2);
     srand(time(NULL));
-    (*P1).Pos.X = rand() % 5;
-    (*P1).Pos.Y = rand() % 5;
-    if (P1->Pos.X == 0)
+    Absis(P1->Pos) = rand() % 5;
+    Ordinat(P1->Pos) = rand() % 5;
+    if (Absis(P1->Pos) == 0)
     {
-        if (P1->Pos.Y == 0)
+        if (Ordinat(P1->Pos) == 0)
         {
-            P2->Pos.X = P1->Pos.X;
-            P3->Pos.X = P1->Pos.X;
-            P2->Pos.Y = P1->Pos.Y + 1;
-            P3->Pos.Y = P1->Pos.Y + 2;
+            Absis(P2->Pos) = Absis(P1->Pos);
+            Absis(P3->Pos) = Absis(P1->Pos);
+            Ordinat(P2->Pos) = Ordinat(P1->Pos) + 1;
+            Ordinat(P3->Pos) = Ordinat(P1->Pos) + 2;
         }
         else
         {
-            P2->Pos.X = P1->Pos.X;
-            P3->Pos.X = P1->Pos.X;
-            if (P1->Pos.Y == 1)
+            Absis(P2->Pos) = Absis(P1->Pos);
+            Absis(P3->Pos) = Absis(P1->Pos);
+            if (Ordinat(P1->Pos) == 1)
             {
-                P2->Pos.Y = P1->Pos.Y + 1;
-                P3->Pos.Y = P1->Pos.Y + 2;
+                Ordinat(P2->Pos) = Ordinat(P1->Pos) + 1;
+                Ordinat(P3->Pos) = Ordinat(P1->Pos) + 2;
             }
             else
             {
-                P2->Pos.Y = P1->Pos.Y - 1;
-                P3->Pos.Y = P1->Pos.Y - 2;
+                Ordinat(P2->Pos) = Ordinat(P1->Pos) - 1;
+                Ordinat(P3->Pos) = Ordinat(P1->Pos) - 2;
             }
         }
     }
     else
     {
-        if (P1->Pos.Y == 0)
+        if (Ordinat(P1->Pos) == 0)
         {
-            if (P1->Pos.X == 1)
+            if (Absis(P1->Pos) == 1)
             {
-                P2->Pos.X = P1->Pos.X - 1;
-                P3->Pos.X = P1->Pos.X - 1;
-                P2->Pos.Y = P1->Pos.Y;
-                P3->Pos.Y = P1->Pos.Y + 1;
+                Absis(P2->Pos) = Absis(P1->Pos) - 1;
+                Absis(P3->Pos) = Absis(P1->Pos) - 1;
+                Ordinat(P2->Pos) = Ordinat(P1->Pos);
+                Ordinat(P3->Pos) = Ordinat(P1->Pos) + 1;
             }
             else
             {
-                P2->Pos.X = P1->Pos.X - 1;
-                P3->Pos.X = P1->Pos.X - 2;
-                P2->Pos.Y = P1->Pos.Y;
-                P3->Pos.Y = P1->Pos.Y;
+                Absis(P2->Pos) = Absis(P1->Pos) - 1;
+                Absis(P3->Pos) = Absis(P1->Pos) - 2;
+                Ordinat(P2->Pos) = Ordinat(P1->Pos);
+                Ordinat(P3->Pos) = Ordinat(P1->Pos);
             }
         }
         else
         {
-            P2->Pos.X = P1->Pos.X - 1;
-            P2->Pos.Y = P1->Pos.Y;
-            if (P2->Pos.X == 0)
+            Absis(P2->Pos) = Absis(P1->Pos) - 1;
+            Ordinat(P2->Pos) = Ordinat(P1->Pos);
+            if (Absis(P2->Pos) == 0)
             {
-                P3->Pos.X = P2->Pos.X;
-                P3->Pos.Y = P2->Pos.Y - 1;
+                Absis(P3->Pos) = Absis(P2->Pos);
+                Ordinat(P3->Pos) = Ordinat(P2->Pos) - 1;
             }
             else
             {
-                P3->Pos.X = P2->Pos.X - 1;
-                P3->Pos.Y = P2->Pos.Y;
+                Absis(P3->Pos) = Absis(P2->Pos) - 1;
+                Ordinat(P3->Pos) = Ordinat(P2->Pos);
             }
         }
     }
@@ -137,7 +137,7 @@ void createSnake(ListDP *L)
 void printPoint(POINT P)
 {
 
-    printf("<%d,%d>\n", P.X, P.Y);
+    printf("<%d,%d>\n", Absis(P), Ordinat(P));
 }
 
 void printMap(ListDP L, POINT food, POINT meteor, POINT obstacle)
@@ -162,11 +162,11 @@ void printMap(ListDP L, POINT food, POINT meteor, POINT obstacle)
             {
                 printf("|");
             }
-            else if (meteor.X == ((j + 1) / 2) - 1 && meteor.Y == ((i + 1) / 2) - 1)
+            else if (Absis(meteor) == ((j + 1) / 2) - 1 && Ordinat(meteor) == ((i + 1) / 2) - 1)
             {
                 printf(" M ");
             }
-            else if (obstacle.X == ((j + 1) / 2) - 1 && obstacle.Y == ((i + 1) / 2) - 1)
+            else if (Absis(obstacle) == ((j + 1) / 2) - 1 && Ordinat(obstacle) == ((i + 1) / 2) - 1)
             {
                 printf(" # ");
             }
@@ -188,7 +188,7 @@ void printMap(ListDP L, POINT food, POINT meteor, POINT obstacle)
                     }
                 }
             }
-            else if (food.X == ((j + 1) / 2) - 1 && food.Y == ((i + 1) / 2) - 1)
+            else if (Absis(food) == ((j + 1) / 2) - 1 && Ordinat(food) == ((i + 1) / 2) - 1)
             {
                 printf(" O ");
             }
@@ -205,9 +205,9 @@ addressDP isPoinMember(ListDP L, int i, int j)
 {
     addressDP P = First(L);
     boolean found = false;
-    while (!found && (P) != NilDP)
+    while (!found && (P) != NULL)
     {
-        if ((*P).Pos.X == i && (*P).Pos.Y == j)
+        if (Absis(P->Pos) == i && Ordinat(P->Pos) == j)
         {
             found = true;
         }
@@ -222,26 +222,26 @@ addressDP isPoinMember(ListDP L, int i, int j)
     }
     else
     {
-        return NilDP;
+        return NULL;
     }
 }
 
 boolean isNotWall(ListDP L, char input)
 {
     addressDP P = First(L);
-    if ((*P).Pos.X == 0 && input == 'a')
+    if (Absis(P->Pos) == 0 && input == 'a')
     {
         return false;
     }
-    else if ((*P).Pos.X == 5 && input == 'd')
+    else if (Absis(P->Pos) == 5 && input == 'd')
     {
         return false;
     }
-    else if ((*P).Pos.Y == 0 && input == 'w')
+    else if (Ordinat(P->Pos) == 0 && input == 'w')
     {
         return false;
     }
-    else if ((*P).Pos.Y == 5 && input == 's')
+    else if (Ordinat(P->Pos) == 5 && input == 's')
     {
         return false;
     }
@@ -256,46 +256,46 @@ void moveHead(ListDP *L, char input)
     addressDP P = First(*L);
     if (input == 'a')
     {
-        if ((*P).Pos.X == 0)
+        if (Absis(P->Pos) == 0)
         {
-            (*P).Pos.X = 4;
+            Absis(P->Pos) = 4;
         }
         else
         {
-            (*P).Pos.X -= 1;
+            Absis(P->Pos) -= 1;
         }
     }
     else if (input == 'd')
     {
-        if ((*P).Pos.X == 4)
+        if (Absis(P->Pos) == 4)
         {
-            (*P).Pos.X = 0;
+            Absis(P->Pos) = 0;
         }
         else
         {
-            (*P).Pos.X += 1;
+            Absis(P->Pos) += 1;
         }
     }
     else if (input == 'w')
     {
-        if ((*P).Pos.Y == 0)
+        if (Ordinat(P->Pos) == 0)
         {
-            (*P).Pos.Y = 4;
+            Ordinat(P->Pos) = 4;
         }
         else
         {
-            (*P).Pos.Y -= 1;
+            Ordinat(P->Pos) -= 1;
         }
     }
     else if (input == 's')
     {
-        if ((*P).Pos.Y == 4)
+        if (Ordinat(P->Pos) == 4)
         {
-            (*P).Pos.Y = 0;
+            Ordinat(P->Pos) = 0;
         }
         else
         {
-            (*P).Pos.Y += 1;
+            Ordinat(P->Pos) += 1;
         }
     }
 }
@@ -309,11 +309,11 @@ void addMeteor(POINT *meteor, POINT food)
     int i = 0;
     while (!found)
     {
-        if (X != food.X && Y != food.Y)
+        if (X != Absis(food) && Y != Ordinat(food))
         {
             found = true;
-            meteor->X = X;
-            meteor->Y = Y;
+            Absis(*meteor) = X;
+            Ordinat(*meteor) = Y;
         }
         else
         {
@@ -344,18 +344,16 @@ void addMeteor(POINT *meteor, POINT food)
 
 boolean isEat(ListDP *L, POINT P)
 {
-    boolean found = ((*First(*L)).Pos.X == P.X && (*First(*L)).Pos.Y == P.Y);
-
-    return found;
+    return (Absis((*First(*L)).Pos) == Absis(P) && Ordinat((*First(*L)).Pos) == Ordinat(P));
 }
 
 boolean isAvail(ListDP L, int X, int Y)
 {
     addressDP Q = First(L);
     boolean found = true;
-    while (found && Q != NilDP)
+    while (found && Q != NULL)
     {
-        if ((*Q).Pos.X == X && (*Q).Pos.Y == Y)
+        if (Absis((*Q).Pos) == X && Ordinat((*Q).Pos) == Y)
         {
             found = false;
         }
@@ -367,8 +365,8 @@ boolean isAvail(ListDP L, int X, int Y)
 void addTail(ListDP *L, ElmtListDP newtail)
 {
     addressDP P = AlokasiDP(((int)Info(Last(*L))) + 1);
-    P->Pos.X = newtail.Pos.X;
-    P->Pos.Y = newtail.Pos.Y;
+    Absis(P->Pos) = Absis(newtail.Pos);
+    Ordinat(P->Pos) = Ordinat(newtail.Pos);
     InsertLastDP(L, P);
 }
 
@@ -381,11 +379,11 @@ void addFood(POINT *food, ListDP L, POINT obstacle)
     int i = 0;
     while (!found)
     {
-        if (isAvail(L, X, Y) && X != obstacle.X && Y != obstacle.Y)
+        if (isAvail(L, X, Y) && X != Absis(obstacle) && Y != Ordinat(obstacle))
         {
             found = true;
-            food->X = X;
-            food->Y = Y;
+            Absis(*food) = X;
+            Ordinat(*food) = Y;
         }
         else
         {
@@ -416,13 +414,12 @@ void addFood(POINT *food, ListDP L, POINT obstacle)
 
 void MeteorHitBody(ListDP *L, POINT food, POINT meteor)
 {
-
     addressDP P = First(*L);
     addressDP Q = Last(*L);
     boolean found = false;
-    while (!found && P != NilDP)
+    while (!found && P != NULL)
     {
-        if (P->Pos.X == meteor.X && P->Pos.Y == meteor.Y)
+        if (Absis(P->Pos) == Absis(meteor) && Ordinat(P->Pos) == Ordinat(meteor))
         {
             found = true;
         }
@@ -435,7 +432,7 @@ void MeteorHitBody(ListDP *L, POINT food, POINT meteor)
             DelFirstDP(L, &Q);
             printf("Meteor mengenai bagian Head snake. Permainan berakhir\n");
         }
-        else if (P == NilDP)
+        else if (P == NULL)
         {
             DelLastDP(L, &Q);
         }
@@ -444,10 +441,6 @@ void MeteorHitBody(ListDP *L, POINT food, POINT meteor)
             while (Q != Prev(P))
             {
                 Q->info = Prev(Q)->info;
-                //     Q->Pos.X=Prev(Q)->Pos.X;
-                //     Q->Pos.Y=Prev(Q)->Pos.Y;
-                //     printf("%d %d\n",Q->Pos.X,Q->Pos.Y);
-                //     Q=Prev(Q);
                 Q = Prev(Q);
             }
             DelBeforeDP(L, &Q, P);
@@ -461,75 +454,9 @@ boolean isMeteorHitHead(ListDP L)
     return (P->info != 'H');
 }
 
-void snakeOnMeteor(int *skor)
-{
-    POINT obstacle, food, meteor;
-    ListDP L;
-    ElmtListDP newtail;
-    int i = 1;
-    char input;
-    boolean hit = false;
-
-    printf("Selamat datang di snake on meteor!\n");
-    printf("Mengenerate peta, snake dan makanan ...\n");
-    srand(time(NULL));
-    createSnake(&L);
-    food.X = -999, food.Y = -999;
-    meteor.X = -999, meteor.Y = -999;
-    addObstacle(L, &obstacle);
-    addFood(&food, L, obstacle);
-    printf("Berhasil digenerate\n");
-
-    printf("\nEnter to continue...");
-    startInput();
-    clear();
-
-    printf("Berikut merupakan peta permainan\n");
-    printMap(L, food, meteor, obstacle);
-
-    while (!hit)
-    {
-        printf("TURN %d:\n", i);
-        printf("Silahkan masukkan command anda: ");
-
-        startInputWord();
-        input = currentWord.TabWord[0];
-        if (currentWord.Length == 1 && isInputValid(L, input))
-        {
-            newtail = *(Last(L));
-            Move(&L, input);
-            if (isEat(&L, food))
-            {
-                addTail(&L, newtail);
-                addFood(&food, L, obstacle);
-            }
-            addMeteor(&meteor, food);
-            // printPoint(meteor);
-            clear();
-            printf("Berikut merupakan peta permainan\n");
-            printMap(L, food, meteor, obstacle);
-            MeteorHitBody(&L, food, meteor);
-            if (isLose(L, meteor, obstacle))
-            {
-                *skor = lengthSnake(L) * 2;
-                printf("skor anda %d\n", *skor);
-                hit = true;
-            }
-            else
-            {
-                i++;
-            }
-        }
-        else
-        {
-            printf("Perintah tidak valid.\n");
-        }
-    }
-}
-
 boolean isHeadHitObstacle(ListDP L, POINT obstacle)
 {
-    return (First(L)->Pos.X == obstacle.X && First(L)->Pos.Y == obstacle.Y);
+    return (Absis(First(L)->Pos) == Absis(obstacle) && Ordinat(First(L)->Pos) == Ordinat(obstacle));
 }
 
 boolean isLose(ListDP L, POINT meteor, POINT obstacle)
@@ -537,9 +464,9 @@ boolean isLose(ListDP L, POINT meteor, POINT obstacle)
     addressDP P = First(L);
     P = Next(P);
     boolean found = false;
-    while (P != NilDP && !found)
+    while (P != NULL && !found)
     {
-        if (P->Pos.X == First(L)->Pos.X && P->Pos.Y == First(L)->Pos.Y)
+        if (Absis(P->Pos) == Absis(First(L)->Pos) && Ordinat(P->Pos) == Ordinat(First(L)->Pos))
         {
             found = true;
         }
@@ -578,10 +505,10 @@ void addObstacle(ListDP L, POINT *obstacle)
     while (!found)
     {
         if (isAvail(L, X, Y))
-        { //&& X!=meteor.X && Y!=meteor.Y && X!=obstacle.X && Y!=obstacle.Y){
+        {
             found = true;
-            obstacle->X = X;
-            obstacle->Y = Y;
+            Absis(*obstacle) = X;
+            Ordinat(*obstacle) = Y;
         }
         else
         {
@@ -620,19 +547,19 @@ boolean isInputValid(ListDP L, char input)
     addressDP P = First(L);
     if (input == 'w' || input == 'a' || input == 's' || input == 'd')
     {
-        if (input == 'w' && Next(P)->Pos.Y == (P->Pos.Y - 1) % 5)
+        if (input == 'w' && Ordinat(Next(P)->Pos) == (Ordinat(P->Pos) - 1) % 5)
         {
             return false;
         }
-        else if (input == 's' && Next(P)->Pos.Y == (P->Pos.Y + 1) % 5)
+        else if (input == 's' && Ordinat(Next(P)->Pos) == (Ordinat(P->Pos) + 1) % 5)
         {
             return false;
         }
-        else if (input == 'a' && Next(P)->Pos.X == (P->Pos.X - 1) % 5)
+        else if (input == 'a' && Absis(Next(P)->Pos) == (Absis(P->Pos) - 1) % 5)
         {
             return false;
         }
-        else if (input == 'd' && Next(P)->Pos.X == (P->Pos.X + 1) % 5)
+        else if (input == 'd' && Absis(Next(P)->Pos) == (Absis(P->Pos) + 1) % 5)
         {
             return false;
         }
@@ -644,5 +571,69 @@ boolean isInputValid(ListDP L, char input)
     else
     {
         return false;
+    }
+}
+
+void snakeOnMeteor(int *skor)
+{
+    POINT obstacle, food = MakePOINT(-999, -999), meteor = MakePOINT(-999, -999);
+    ListDP L;
+    ElmtListDP newtail;
+    char input;
+    boolean hit = false;
+
+    printf("Selamat datang di snake on meteor!\n");
+    printf("Mengenerate peta, snake dan makanan ...\n");
+    addObstacle(L, &obstacle);
+    createSnake(&L);
+    addFood(&food, L, obstacle);
+    printf("Berhasil digenerate\n");
+
+    printf("\nEnter to continue...");
+    startInput();
+    clear();
+
+    printf("Berikut merupakan peta permainan\n");
+    printMap(L, food, meteor, obstacle);
+
+    int i = 1;
+    while (!hit)
+    {
+        printf("TURN %d:\n", i);
+        printf("Silahkan masukkan command anda: ");
+
+        startInputWord();
+        input = currentWord.TabWord[0];
+        if (currentWord.Length == 1 && isInputValid(L, input))
+        {
+            newtail = *(Last(L));
+            Move(&L, input);
+            if (isEat(&L, food))
+            {
+                addTail(&L, newtail);
+                addFood(&food, L, obstacle);
+            }
+            addMeteor(&meteor, food);
+
+            clear();
+            printf("Berikut merupakan peta permainan\n");
+            printMap(L, food, meteor, obstacle);
+
+            MeteorHitBody(&L, food, meteor);
+            if (isLose(L, meteor, obstacle))
+            {
+                *skor = lengthSnake(L) * 2;
+                printf("Skor anda %d\n", *skor);
+                hit = true;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        else
+        {
+            printf("Perintah tidak valid.\n");
+        }
     }
 }

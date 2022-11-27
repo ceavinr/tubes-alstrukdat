@@ -1,6 +1,6 @@
 # Main program
 main: 
-	gcc ../src/adt/stackhistory/stackhistory.c ../src/adt/listdp/listdp.c ../src/adt/map/map.c ../src/adt/listscore/listscore.c ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/listlinier/listlinier.c ../src/adt/bintree/bintree.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/amogusfight/amogusfight.c ../src/console.c ../src/main.c ../src/interface.c -o main
+	gcc ../src/adt/stackhistory/stackhistory.c ../src/adt/listdp/listdp.c ../src/adt/map/map.c ../src/adt/listscore/listscore.c ../src/adt/queue/queue.c ../src/adt/matrix/matrix.c ../src/adt/listlinier/listlinier.c ../src/adt/point/point.c ../src/adt/bintree/bintree.c ../src/adt/stack/stack.c ../src/adt/arraydin/arraydin.c ../src/adt/array/array.c ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/order/order.c ../src/games/dinerdash/dinerdash.c ../src/games/tictactoe/tictactoe.c ../src/games/towerofhanoi/towerofhanoi.c ../src/games/rng/rng.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/amogusfight/amogusfight.c ../src/console.c ../src/main.c ../src/interface.c -o main
 
 # Game
 dinerdash:
@@ -14,7 +14,7 @@ towerofhanoi:
 amogusfight:
 	gcc ../src/adt/masakan/masakan.c ../src/adt/mesin/mesinkata.c ../src/adt/bintree/bintree.c ../src/adt/listlinier/listlinier.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/array/array.c ../src/games/amogusfight/amogusfight.c ../src/games/amogusfight/mamogusfight.c ../src/interface.c -o amogusfight
 snakeonmeteor:
-	gcc ../src/adt/listdp/listdp.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/snakeonmeteor/driversnakeonmeteor.c ../src/interface.c -o snakeonmeteor
+	gcc ../src/adt/listdp/listdp.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/adt/point/point.c ../src/adt/mesin/mesinkarakter.c ../src/adt/mesin/mesinkata.c ../src/games/snakeonmeteor/snakeonmeteor.c ../src/games/snakeonmeteor/driversnakeonmeteor.c ../src/interface.c -o snakeonmeteor
 
 # Mesin kata & Mesin karakter
 mesin:
