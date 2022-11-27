@@ -3,9 +3,8 @@
 #include "towerofhanoi.h"
 #include "../../adt/mesin/mesinkata.h"
 #include "../../adt/word/word.h"
+#include "../../interface.h"
 
-/* I.S. S, i, dan maxWidth terdefinisi */
-/* F.S. Menampilkan gambar disk ke i dari tower S */
 void PrintDisk(Stack S, int i, int maxWidth)
 {
     if (i <= Top(S))
@@ -43,11 +42,9 @@ void PrintDisk(Stack S, int i, int maxWidth)
     }
 }
 
-/* I.S. S1, S2, S3, dan height terdefinisi */
-/* F.S. Menampilkan state dari ketiga tower */
 void DisplayState(Stack S1, Stack S2, Stack S3, int height)
 {
-    int disk, pjgDisk, tebal = 1;
+    int tebal = 1;
 
     for (int i = height; i >= 0; i--)
     {
@@ -97,7 +94,7 @@ void towerofhanoi(int *skor)
 
     while (!inputValid)
     {
-        printf("Banyak disk (3-9): ");
+        printf("Banyak piringan (3-9): ");
         startInputWord();
         akuisisiCommandWord(&banyak, currentWord, 1);
         if (wordToInt(banyak) >= 3 && wordToInt(banyak) <= 9)
@@ -115,26 +112,23 @@ void towerofhanoi(int *skor)
     {
         int diskDel = 0;
         minimumMoves = pow(2, wordToInt(banyak)) - 1;
-        maximumMoves = 2 * minimumMoves;
-
+        maximumMoves = 2 * wordToInt(banyak) + minimumMoves - 1;
         inputValid = false;
-        printf("\nMoves: %d\n", moves);
-        printf("Minimum moves to solve: %d\n", minimumMoves);
-        printf("Maximum moves to solve: %d\n", maximumMoves);
+
+        clear();
+        printf("Moves: %d\n", moves);
+        printf("Minimum moves to solve: %d\n\n", minimumMoves);
         DisplayState(tower1, tower2, tower3, wordToInt(banyak));
 
-        if (moves == maximumMoves + 1)
-        {
-            gameOn = false;
-            printf("Kamu gagal karena tidak dapat menyelesaikannya dalam %d langkah.\n", maximumMoves);
-            *skor = 2 * wordToInt(banyak) - (moves - minimumMoves);
-            printf("Skor: %d\n", *skor);
-        }
-        else if (Top(tower3) + 1 == wordToInt(banyak))
+        if (Top(tower3) + 1 == wordToInt(banyak))
         {
             gameOn = false;
             printf("Berhasil! Kamu menyelesaikan dalam %d langkah.\n", moves);
             *skor = 2 * wordToInt(banyak) - (moves - minimumMoves);
+            if (*skor < 0)
+            {
+                *skor = 0;
+            }
             printf("Skor: %d\n", *skor);
         }
 
@@ -191,7 +185,7 @@ void towerofhanoi(int *skor)
 
                     if (!succeed)
                     {
-                        printf("Gagal memindahkan! Ukuran disk harus lebih kecil daripada disk di bawahnya.\n");
+                        printf("Gagal memindahkan! Ukuran piringan harus lebih kecil daripada piringan di bawahnya.\n");
                         Push(&tower1, diskDel, &succeed);
                     }
                     else
@@ -222,7 +216,7 @@ void towerofhanoi(int *skor)
 
                     if (!succeed)
                     {
-                        printf("Gagal memindahkan! Ukuran disk harus lebih kecil daripada disk di bawahnya.\n");
+                        printf("Gagal memindahkan! Ukuran piringan harus lebih kecil daripada piringan di bawahnya.\n");
                         Push(&tower2, diskDel, &succeed);
                     }
                     else
@@ -253,7 +247,7 @@ void towerofhanoi(int *skor)
 
                     if (!succeed)
                     {
-                        printf("Gagal memindahkan! Ukuran disk harus lebih kecil daripada disk di bawahnya.\n");
+                        printf("Gagal memindahkan! Ukuran piringan harus lebih kecil daripada piringan di bawahnya.\n");
                         Push(&tower3, diskDel, &succeed);
                     }
                     else
