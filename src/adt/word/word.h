@@ -51,4 +51,10 @@ Word ambilKataKe(Word w, int kataKe);
 /* Mereturn integer ke word untuk bilangan positid*/
 Word intToWord(int i);
 
+/* Mereturn word dengan setiap karakter bersifat lowercase */
+Word lowerWord(Word w);
+
+/* Mereturn word dengan setiap karakter bersifat uppercase */
+Word upperWord(Word w);
+
 #endif

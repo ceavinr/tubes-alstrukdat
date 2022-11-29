@@ -183,16 +183,54 @@ Word intToWord(int i)
     Word w;
     int len = 0;
     int num = i;
-    do {
+    do
+    {
         num /= 10;
         len += 1;
     } while (num != 0);
 
     w.Length = len;
-    for (int j=len-1; j>=0; j--) {
-        w.TabWord[j] = i%10+48;
+    for (int j = len - 1; j >= 0; j--)
+    {
+        w.TabWord[j] = i % 10 + 48;
         i /= 10;
     }
 
     return w;
+}
+
+Word lowerWord(Word w)
+{
+    Word w1 = CreateWord();
+    for (int i = 0; i < w.Length; i++)
+    {
+        if (w.TabWord[i] >= 'A' && w.TabWord[i] <= 'Z')
+        {
+            w1.TabWord[i] = 'a' + (w.TabWord[i] - 'A');
+        }
+        else
+        {
+            w1.TabWord[i] = w.TabWord[i];
+        }
+    }
+    w1.Length = w.Length;
+    return w1;
+}
+
+Word upperWord(Word w)
+{
+    Word w1 = CreateWord();
+    for (int i = 0; i < w.Length; i++)
+    {
+        if (w.TabWord[i] >= 'a' && w.TabWord[i] <= 'z')
+        {
+            w1.TabWord[i] = 'A' + (w.TabWord[i] - 'a');
+        }
+        else
+        {
+            w1.TabWord[i] = w.TabWord[i];
+        }
+    }
+    w1.Length = w.Length;
+    return w1;
 }

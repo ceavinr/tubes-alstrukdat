@@ -20,11 +20,14 @@ valuetype ValueInMap(Map M, keytype k)
     boolean found = false;
     addressMap idx = 0, iterator;
 
-    while (!found && idx < M.Count) {
-        if (IsEQWord(M.Elements[idx].Key, k)) {
+    while (!found && idx < M.Count)
+    {
+        if (IsEQWord(M.Elements[idx].Key, k))
+        {
             found = true;
         }
-        else {
+        else
+        {
             idx++;
         }
     }
@@ -34,7 +37,8 @@ valuetype ValueInMap(Map M, keytype k)
 
 void InsertInMap(Map *M, keytype k, valuetype v)
 {
-    if (!IsMemberInMap(*M, k)) {
+    if (!IsMemberInMap(*M, k))
+    {
         CopyWord(&(*M).Elements[(*M).Count].Key, k);
         (*M).Elements[(*M).Count].Value = v;
         (*M).Count++;
@@ -47,20 +51,25 @@ void DeleteInMap(Map *M, keytype k)
     boolean found = false;
     addressMap idx = 0, iterator;
 
-    if (!IsMemberInMap(*M, k)) {
+    if (!IsMemberInMap(*M, k))
+    {
         return;
     }
 
-    while (!found && (idx < (*M).Count)) {
-        if (IsEQWord((*M).Elements[idx].Key, k)) {
+    while (!found && (idx < (*M).Count))
+    {
+        if (IsEQWord((*M).Elements[idx].Key, k))
+        {
             found = true;
         }
-        else {
+        else
+        {
             idx++;
         }
     }
 
-    for (iterator = (idx + 1); iterator < (*M).Count; iterator++) {
+    for (iterator = (idx + 1); iterator < (*M).Count; iterator++)
+    {
         (*M).Elements[iterator - 1].Key = (*M).Elements[iterator].Key;
         (*M).Elements[iterator - 1].Value = (*M).Elements[iterator].Value;
     }
@@ -69,16 +78,19 @@ void DeleteInMap(Map *M, keytype k)
 }
 
 boolean IsMemberInMap(Map M, keytype k)
-/* Mengembalikan true jika k adalah member dari M */
+/* Mengembalikan true jika k adalah member dari M. Pengecekan member dilakukan dengan case insensitive */
 {
     boolean found = false;
     addressMap idx = 0, iterator;
 
-    while (!found && idx < M.Count) {
-        if (IsEQWord(M.Elements[idx].Key, k)) {
+    while (!found && idx < M.Count)
+    {
+        if (IsEQWord(lowerWord(M.Elements[idx].Key), lowerWord(k)))
+        {
             found = true;
         }
-        else {
+        else
+        {
             idx++;
         }
     }
@@ -91,21 +103,20 @@ boolean IsEQMap(Map m1, Map m2)
     if (m1.Count != m2.Count)
     {
         return false;
-    } else
+    }
+    else
     {
         boolean cek = true;
-        int i=0;
-        while (cek && i<m1.Count)
+        int i = 0;
+        while (cek && i < m1.Count)
         {
             if (!IsEQWord(m1.Elements[i].Key, m2.Elements[i].Key) || m1.Elements[i].Value != m2.Elements[i].Value)
             {
                 cek = false;
             }
-            
         }
         return cek;
     }
-    
 }
 
 void CopyMap(Map *m1, Map m2)
@@ -115,7 +126,6 @@ void CopyMap(Map *m1, Map m2)
         CopyWord(&(*m1).Elements[i].Key, m2.Elements[i].Key);
         (*m1).Elements[i].Value = m2.Elements[i].Value;
     }
-    
 }
 
 void SortMap(Map *m)
@@ -129,16 +139,16 @@ void SortMap(Map *m)
         flag = false;
         for (j = 0; j < (*m).Count - 1; j++)
         {
-            if ((*m).Elements[j].Value < (*m).Elements[j+1].Value)
+            if ((*m).Elements[j].Value < (*m).Elements[j + 1].Value)
             {
                 CopyWord(&tempKey, (*m).Elements[j].Key);
                 tempVal = (*m).Elements[j].Value;
 
-                CopyWord(&(*m).Elements[j].Key, (*m).Elements[j+1].Key);
-                (*m).Elements[j].Value = (*m).Elements[j+1].Value;
+                CopyWord(&(*m).Elements[j].Key, (*m).Elements[j + 1].Key);
+                (*m).Elements[j].Value = (*m).Elements[j + 1].Value;
 
-                CopyWord(&(*m).Elements[j+1].Key, tempKey);
-                (*m).Elements[j+1].Value = tempVal;
+                CopyWord(&(*m).Elements[j + 1].Key, tempKey);
+                (*m).Elements[j + 1].Value = tempVal;
                 flag = true;
             }
         }

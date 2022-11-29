@@ -49,5 +49,16 @@ int main()
         printf("Yahh kita berbeda...\n");
     }
 
+    printf("\nCEK lowerWord");
+    printf("\nMasukan kata: ");
+    startInputWord();
+    printf("Sebelum lower: ");
+    printWord(currentWord);
+    printf("\nSetelah lower: ");
+    printWord(lowerWord(currentWord));
+    printf("\nSetelah upper: ");
+    printWord(upperWord(currentWord));
+    printf("\n");
+
     return 0;
 }
