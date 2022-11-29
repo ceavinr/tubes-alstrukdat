@@ -9,7 +9,7 @@ char* kata_random()
     ArrayDin arrKata;
 
     arrKata = MakeArrayDin();
-    STARTWORD("kata.txt");
+    STARTWORD("data/kata.txt");
 
     if (!EOP)
     {
@@ -105,7 +105,6 @@ int play()
         panjang_kata = stringLength(kata);
 
         char word[panjang_kata+1];
-        printf("%d %s\n", panjang_kata, kata);
 
         for (i = 0; i < panjang_kata; i++)
         {
@@ -251,7 +250,7 @@ void tambahKata()
     ArrayDin arrKata;
 
     arrKata = MakeArrayDin();
-    STARTWORD("kata.txt");
+    STARTWORD("data/kata.txt");
 
     if (!EOP)
     {
@@ -268,7 +267,7 @@ void tambahKata()
     InsertAtArrayDin(&arrKata, temp, count);
     
     FILE *pita;
-    pita = fopen("kata.txt", "w");
+    pita = fopen("data/kata.txt", "w");
 
     saveDict(arrKata,pita);
 
