@@ -7,6 +7,7 @@
 #include "../../adt/Listdp/Listdp.h"
 #include "../../adt/mesin/mesinkata.h"
 #include "../../boolean.h"
+#include "../../interface.h"
 
 
 void Move(ListDP *L,char input);
@@ -15,7 +16,7 @@ void createSnake(ListDP*L);
 
 void printPoint(POINT P);
 
-addressDP isPoinMember(ListDP L,int i,int j);
+addressDP addressMemberPoint(ListDP L,int i,int j);
 
 void printMap(ListDP L,POINT food,POINT meteor, POINT obstacle);
 
@@ -41,9 +42,11 @@ boolean isBodyExceptHead(ListDP L, char input);
 
 void addTail(ListDP *L,boolean *hit,POINT obstacle) ;//ElmtListDP newtail);
 
-void MeteorHitBody(ListDP *L,POINT food, POINT meteor);
+void MeteorHitBody(ListDP *L,POINT food, POINT meteor,POINT obstacle);
 
 void snakeOnMeteor(int * skor);
+
+boolean isMeteorPanas(ListDP L, POINT meteor, char input);
 
 boolean isHeadHitObstacle(ListDP L,POINT obstacle);
 
