@@ -9,6 +9,7 @@
 #include "../../boolean.h"
 #include "../point/point.h"
 
+#define NilDP NULL
 /* Definisi Type Data */
 
 typedef struct tElmtlistDP *addressDP;

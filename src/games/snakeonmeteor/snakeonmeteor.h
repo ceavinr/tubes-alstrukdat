@@ -33,19 +33,39 @@ void addMeteor(POINT *meteor,POINT food);
 
 void addObstacle(ListDP L,POINT* obstacle);
 
-boolean isAvail(ListDP L,int X,int Y);
+boolean isAvail(ListDP L,int X,int Y,POINT obstacle);
 
-void addTail(ListDP *L,ElmtListDP newtail);
+boolean isBody(ListDP L,char input);
+
+boolean isBodyExceptHead(ListDP L, char input);
+
+void addTail(ListDP *L,boolean *hit,POINT obstacle) ;//ElmtListDP newtail);
 
 void MeteorHitBody(ListDP *L,POINT food, POINT meteor);
 
 void snakeOnMeteor(int * skor);
 
-boolean isLose(ListDP L,POINT meteor, POINT obstacle);
-
 boolean isHeadHitObstacle(ListDP L,POINT obstacle);
 
 boolean isMeteorHitHead(ListDP L);
+
+boolean isBotHeadEmpty(ListDP L);
+
+boolean isRightHeadEmpty(ListDP L);
+
+boolean isLefttHeadEmpty(ListDP L);
+
+boolean isTopHeadEmpty(ListDP L);
+
+boolean isBotTailEmpty(ListDP L);
+
+boolean isRightTailEmpty(ListDP L);
+
+boolean isLeftTailEmpty(ListDP L);
+
+boolean isTopTailEmpty(ListDP L);
+
+boolean isNoMoreHeadSpace(ListDP L);
 
 int lengthSnake(ListDP L);
 
