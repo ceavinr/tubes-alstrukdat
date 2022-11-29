@@ -66,8 +66,8 @@ void CommandList()
     printf("SKIP\t\t\t\t : Melewatkan 1 turn tanpa melakukan action\n");
     printf("USED\t\t\t\t : Melihat potion yang sedang digunakan\n");
     printf("STATUS\t\t\t\t : Melihat status dari Amogus dan Impostor\n");
-    printf("INGFO\t\t\t\t : Melihat info dari potions\n");
-    printf("HELP\t\t\t\t : TOLONNGGGGGGGG\n");
+    printf("INGFO\t\t\t\t : Melihat info dari potion-potion pada game\n");
+    printf("HELP\t\t\t\t : Melihat list command yang dapat digunakan\n");
 
     printf("\nEnter to continue...");
     startInput();
@@ -247,6 +247,8 @@ void amogusfight(int *score)
     Insert(&inventory, find(potions, 2));
     Insert(&inventory, find(potions, 9));
 
+    CommandList();
+
     while (gameOn)
     {
         Masakan m_del = CreateMasakan();
@@ -335,13 +337,13 @@ void amogusfight(int *score)
                     else
                     {
                         printf("\n%s tidak ada dalam inventory!", NAMA(find(potions, potionID)));
-                        sleep(1);
+                        sleep(500);
                     }
                 }
                 else
                 {
                     printf("\nInput tidak valid!");
-                    sleep(1);
+                    sleep(500);
                 }
             }
             else if (stringEQWord(currentWord, "BUY"))
@@ -367,7 +369,7 @@ void amogusfight(int *score)
                                 else
                                 {
                                     printf("Elixir tidak mencukupi!");
-                                    sleep(1);
+                                    sleep(500);
                                 }
                             }
                             else
@@ -378,7 +380,7 @@ void amogusfight(int *score)
                         else
                         {
                             printf("Input tidak valid!\n");
-                            sleep(1);
+                            sleep(500);
                             clear();
                         }
                     }
@@ -408,7 +410,7 @@ void amogusfight(int *score)
                             if (Brew(recipes, potion1, potion2) != NULL)
                             {
                                 printf("\nBrewing...\n");
-                                sleep(1);
+                                sleep(500);
                                 int potion3 = Akar(Brew(recipes, potion1, potion2));
                                 Insert(&inventory, find(potions, potion3));
                                 finished = true;
@@ -416,7 +418,7 @@ void amogusfight(int *score)
                             else
                             {
                                 printf("\nTidak bisa mencampur %s dengan %s!", NAMA(potion1), NAMA(potion2));
-                                sleep(1);
+                                sleep(500);
                                 Insert(&inventory, potion1);
                                 Insert(&inventory, potion2);
                             }
@@ -427,12 +429,12 @@ void amogusfight(int *score)
                             {
                                 printf("\nTidak ada %s dalam inventory!", NAMA(find(potions, wordToInt(command))));
                                 Insert(&inventory, potion1);
-                                sleep(1);
+                                sleep(500);
                             }
                             else
                             {
                                 printf("\nInput tidak valid!");
-                                sleep(1);
+                                sleep(500);
                             }
                         }
                     }
@@ -441,19 +443,19 @@ void amogusfight(int *score)
                         if (wordToInt(command) >= 1 && wordToInt(command) <= 20)
                         {
                             printf("\nTidak ada %s dalam inventory!", NAMA(find(potions, wordToInt(command))));
-                            sleep(1);
+                            sleep(500);
                         }
                         else
                         {
                             printf("\nInput tidak valid!");
-                            sleep(1);
+                            sleep(500);
                         }
                     }
                 }
                 else
                 {
                     printf("\nInput tidak valid!");
-                    sleep(1);
+                    sleep(500);
                 }
             }
             else if (stringEQWord(currentWord, "SKIP"))
@@ -471,7 +473,7 @@ void amogusfight(int *score)
             else
             {
                 printf("\nInput tidak valid!");
-                sleep(1);
+                sleep(500);
             }
         }
 

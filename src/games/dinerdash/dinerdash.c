@@ -120,17 +120,8 @@ void dinerdash(int *skor)
 
     gambarDinerDash();
 
-    printf("Press (y) to start...\n");
-    startInputWord();
-
-    if (stringEQWord(currentWord, "y"))
-    {
-        gameOn = true;
-    }
-    else
-    {
-        gameOn = false;
-    }
+    printf("\nEnter to continue...");
+    startInput();
 
     while (gameOn)
     {
