@@ -284,10 +284,10 @@ void hangman(int *score)
     printf("\n***************** MENU ******************\n");
     printf("   PLAY        : Bermain game\n");
     printf("   TAMBAH KATA : Menambah kata dalam game\n");
-    printf("Masukan opsi Anda :");
     boolean valid = false;
     while (!valid)
     {
+        printf("Masukan opsi Anda :");
         startInputWord();
         if (stringEQWord(currentWord, "PLAY") || stringEQWord(currentWord, "TAMBAH KATA"))
         {
@@ -300,11 +300,12 @@ void hangman(int *score)
     
     if(stringEQWord(currentWord, "PLAY"))
     {
-        play();
+        *score = play();
     }
     else if(stringEQWord(currentWord, "TAMBAH KATA"))
     {
         tambahKata();
+        hangman(score);
     }
 }
 

@@ -17,4 +17,10 @@ int isLower(char huruf);
 
 int play();
 
+void saveDict(ArrayDin arr, FILE *pita);
+
+void tambahKata();
+
+void hangman(int *score);
+
 #endif

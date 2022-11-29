@@ -20,6 +20,7 @@
 #include "./games/towerofhanoi/towerofhanoi.h"
 #include "./games/snakeonmeteor/snakeonmeteor.h"
 #include "./games/amogusfight/amogusfight.h"
+#include "./games/hangman/hangman.h"
 
 /**
  * Konstruktor

@@ -256,7 +256,7 @@ void launchGame(Word game, ListScore *scoreboard, StackHistory *stackHistory)
     }
     else if (stringEQWord(game, "HANGMAN"))
     {
-        // HANGMAN
+        hangman(&score);
     }
     else if (stringEQWord(game, "TOWER OF HANOI"))
     {
