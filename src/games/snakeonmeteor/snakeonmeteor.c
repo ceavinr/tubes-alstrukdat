@@ -25,9 +25,7 @@ void createSnake(ListDP *L)
     // (*P1).Pos.Y = rand() % 5;
     P1->Pos.X=rand()%5;
     P1->Pos.Y=rand()%5;
-    POINT obstacle;
-    obstacle.Y=-999;
-    obstacle.X=-999;
+    POINT obstacle=MakePOINT(-999,-999);
     addTail(L,&temp,obstacle);
     addTail(L,&temp,obstacle);
     // if (P1->Pos.X == 0)
@@ -95,11 +93,6 @@ void createSnake(ListDP *L)
     // InsertLastDP(L, P3);
 }
 
-void printPoint(POINT P)
-{
-
-    printf("<%d,%d>\n", P.X, P.Y);
-}
 
 void printMap(ListDP L, POINT food, POINT meteor, POINT obstacle)
 {
@@ -131,21 +124,21 @@ void printMap(ListDP L, POINT food, POINT meteor, POINT obstacle)
             {
                 printf(" # ");
             }
-            else if (isPoinMember(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1))
+            else if (addressMemberPoint(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1))
             {
-                if (Info(isPoinMember(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)) == 72)
+                if (Info(addressMemberPoint(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)) == 72)
                 {
-                    printf(" %c ", (char)Info(isPoinMember(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)));
+                    printf(" %c ", (char)Info(addressMemberPoint(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)));
                 }
                 else
                 {
-                    if (Info(isPoinMember(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)) <= 9)
+                    if (Info(addressMemberPoint(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)) <= 9)
                     {
-                        printf(" %d ", Info(isPoinMember(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)));
+                        printf(" %d ", Info(addressMemberPoint(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)));
                     }
                     else
                     {
-                        printf("%d ", Info(isPoinMember(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)));
+                        printf("%d ", Info(addressMemberPoint(L, ((j + 1) / 2) - 1, ((i + 1) / 2) - 1)));
                     }
                 }
             }
@@ -162,7 +155,7 @@ void printMap(ListDP L, POINT food, POINT meteor, POINT obstacle)
     }
 }
 
-addressDP isPoinMember(ListDP L, int i, int j)
+addressDP addressMemberPoint(ListDP L, int i, int j)
 {
     addressDP P = First(L);
     boolean found = false;
@@ -184,31 +177,6 @@ addressDP isPoinMember(ListDP L, int i, int j)
     else
     {
         return NilDP;
-    }
-}
-
-boolean isNotWall(ListDP L, char input)
-{
-    addressDP P = First(L);
-    if ((*P).Pos.X == 0 && input == 'a')
-    {
-        return false;
-    }
-    else if ((*P).Pos.X == 5 && input == 'd')
-    {
-        return false;
-    }
-    else if ((*P).Pos.Y == 0 && input == 'w')
-    {
-        return false;
-    }
-    else if ((*P).Pos.Y == 5 && input == 's')
-    {
-        return false;
-    }
-    else
-    {
-        return true;
     }
 }
 
@@ -307,8 +275,7 @@ void addMeteor(POINT *meteor, POINT food)
 
 boolean isEat(ListDP *L, POINT P)
 {
-    boolean found = ((*First(*L)).Pos.X == P.X && (*First(*L)).Pos.Y == P.Y);
-
+    boolean found = EQ(First(*L)->Pos,P);
     return found;
 }
 
@@ -500,7 +467,22 @@ void addFood(POINT *food, ListDP L, POINT obstacle)
     }
 }
 
-void MeteorHitBody(ListDP *L, POINT food, POINT meteor)
+boolean isMeteorPanas(ListDP L, POINT meteor, char input){
+    addressDP P=First(L);
+    int X=P->Pos.X;
+    int Y=P->Pos.Y;
+    if (input=='w'){
+        return (meteor.Y==(Y-1)%5 && X==meteor.X);
+    }else if(input=='a'){
+        return (meteor.X==(X-1)%5 && Y==meteor.Y);
+    }else if(input=='s'){
+        return (meteor.Y==(Y+1)%5 && X==meteor.X);
+    }else if(input=='d'){
+        return (meteor.X==(X+1)%5 && Y==meteor.Y);
+    }
+}
+
+void MeteorHitBody(ListDP *L, POINT food, POINT meteor, POINT obstacle)
 {
 
     addressDP P = First(*L);
@@ -516,10 +498,11 @@ void MeteorHitBody(ListDP *L, POINT food, POINT meteor)
     }
     if (found)
     {
+        printf("Berikut merupakan peta permainan:\n");
+        printf("Anda terkena meteor!\n");
         if (P == Next(First(*L)))
         {
             DelFirstDP(L, &Q);
-            printf("Meteor mengenai bagian Head snake. Permainan berakhir\n");
         }
         else if (P == NilDP)
         {
@@ -538,7 +521,13 @@ void MeteorHitBody(ListDP *L, POINT food, POINT meteor)
             }
             DelBeforeDP(L, &Q, P);
         }
+        printMap(*L,food,meteor,obstacle);
+    }else{
+        printf("Berikut merupakan peta permainan:\n");
+        printMap(*L,food,meteor,obstacle);
+        printf("Anda beruntung tidak terkena meteor! ");
     }
+    
 }
 
 boolean isMeteorHitHead(ListDP L)
@@ -554,22 +543,17 @@ void snakeOnMeteor(int *skor)
     ElmtListDP newtail;
     createSnake(&L);
     char input;
-    POINT obstacle;
-    POINT food;
-    food.X = -999;
-    food.Y = -999;
-    POINT meteor;
-    meteor.X = -999;
-    meteor.Y = -999;
+    POINT obstacle=MakePOINT(-999,-999);
+    POINT food=MakePOINT(-999,-999);
+    POINT meteor=MakePOINT(-999,-999);
     printf("Selamat datang di snake on meteor!\n");
     printf("Mengenerate peta, snake dan makanan . . . \n");
     printf("Berhasil digenerate\n");
     printf("------------------------------\n");
-    printf("Berikut merupakan peta permainan\n");
+    printf("Berikut merupakan peta permainan:\n");
     addObstacle(L, &obstacle);
     addFood(&food, L, obstacle);
     printMap(L, food, meteor, obstacle);
-    
     int i = 1;
     boolean hit = false;
     while (!hit)
@@ -579,30 +563,35 @@ void snakeOnMeteor(int *skor)
 
         startInputWord();
         input = currentWord.TabWord[0];
+        if (!isMeteorPanas(L,meteor,input)){
         if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd') && !isBodyExceptHead(L,input))//isInputValid(L, input))// && !isBody(L,input))
         {
             //newtail = *(Last(L));
             Move(&L, input);
+            printf("\nBerhasil bergerak!\n");
             if (isEat(&L, food))
             {
                 addTail(&L,&hit,obstacle);//, newtail);
                 addFood(&food, L, obstacle);
             }
             addMeteor(&meteor, food);
-            MeteorHitBody(&L, food, meteor);
-            printMap(L, food, meteor, obstacle);
+            MeteorHitBody(&L, food, meteor,obstacle);
+            //printMap(L, food, meteor, obstacle);
             if (isMeteorHitHead(L))
             {
+                printf("Kepala snake terkena meteor.\n");
                 *skor = lengthSnake(L) * 2;
-                printf("skor anda %d\n", *skor);
+                printf("Game berakhir. skor : %d\n", *skor);
                 hit = true;
             }else if(isHeadHitObstacle(L,obstacle)){
+                printf("Head Snake mengenai obstacle.\n");
                 *skor = lengthSnake(L) * 2;
-                printf("skor anda %d\n", *skor);
+                printf("Game berakhir. skor : %d\n", *skor);
                 hit = true;
             }else if(isNoMoreHeadSpace(L)){
+                printf("Tidak ada tempat tersedia untuk bergerak.\n");
                 *skor = (lengthSnake(L)+1) * 2;
-                printf("skor anda %d\n", *skor);
+                printf("Game berakhir. skor : %d\n", *skor);
                 hit=true;
             }else if(lengthSnake(L)==23){
                 *skor = 46;
@@ -611,19 +600,31 @@ void snakeOnMeteor(int *skor)
             }
             else
             {
-                i++;
+                if(hit==true){
+                    *skor=(lengthSnake(L)+1)*2;
+                    printf("skor anda %d\n",*skor);
+
+                }else{
+                    printf("Silahkan lanjutkan permainan\n");
+                    i++;
+                }
+                
             }
         }
         else
         {
-            printf("Perintah tidak valid.\n");
+            printf("Command tidak valid! Silahkan input command menggunakan huruf w/a/s/d.\n");
         }
     }
+    else{
+        printf("Meteor masih panas! Silahkan input ulang command\n");
+    }
+}
 }
 
 boolean isHeadHitObstacle(ListDP L, POINT obstacle)
 {
-    return (First(L)->Pos.X == obstacle.X && First(L)->Pos.Y == obstacle.Y);
+    return (EQ(First(L)->Pos,obstacle));
 }
 
 void addObstacle(ListDP L, POINT *obstacle)
@@ -781,27 +782,27 @@ boolean isNoMoreHeadSpace(ListDP L){
     return ((!isBotHeadEmpty(L) && !isLeftHeadEmpty(L) && !isRightHeadEmpty(L) && !isTopHeadEmpty(L)));
 }
 
-boolean isInputValid(ListDP L, char input)
-{
-    addressDP P = First(L);
-    if (input == 'w' && Next(P)->Pos.Y == (P->Pos.Y - 1) % 5 && P->Pos.X==Next(P)->Pos.X)
-    {
-        return false;
-    }
-    else if (input == 's' && Next(P)->Pos.Y == (P->Pos.Y + 1) % 5 && P->Pos.X==Next(P)->Pos.X)
-    {
-        return false;
-    }
-    else if (input == 'a' && Next(P)->Pos.X == (P->Pos.X - 1) % 5 && P->Pos.Y==Next(P)->Pos.Y)
-    {
-        return false;
-    }
-    else if (input == 'd' && Next(P)->Pos.X == (P->Pos.X + 1) % 5 && P->Pos.Y==Next(P)->Pos.Y)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
+// boolean isInputValid(ListDP L, char input)
+// {
+//     addressDP P = First(L);
+//     if (input == 'w' && Next(P)->Pos.Y == (P->Pos.Y - 1) % 5 && P->Pos.X==Next(P)->Pos.X)
+//     {
+//         return false;
+//     }
+//     else if (input == 's' && Next(P)->Pos.Y == (P->Pos.Y + 1) % 5 && P->Pos.X==Next(P)->Pos.X)
+//     {
+//         return false;
+//     }
+//     else if (input == 'a' && Next(P)->Pos.X == (P->Pos.X - 1) % 5 && P->Pos.Y==Next(P)->Pos.Y)
+//     {
+//         return false;
+//     }
+//     else if (input == 'd' && Next(P)->Pos.X == (P->Pos.X + 1) % 5 && P->Pos.Y==Next(P)->Pos.Y)
+//     {
+//         return false;
+//     }
+//     else
+//     {
+//         return true;
+//     }
+// }
