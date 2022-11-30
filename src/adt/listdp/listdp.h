@@ -70,7 +70,7 @@ void DealokasiDP(addressDP P);
 /* Mencari apakah ada elemen list dengan Info(P)=X */
 /* Jika ada, mengirimkan addressDP elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
-addressDP SearchDP(ListDP L, char X);
+addressDP SearchPointDP(ListDP L, int X,  int Y);
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/

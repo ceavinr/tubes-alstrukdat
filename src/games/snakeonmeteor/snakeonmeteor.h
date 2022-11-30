@@ -30,7 +30,7 @@ boolean isEat(ListDP *L,POINT P);
 
 void addFood(POINT *food,ListDP L, POINT obstacle);
 
-void addMeteor(POINT *meteor,POINT food);
+void addMeteor(POINT *meteor,POINT food,POINT obstacle);
 
 void addObstacle(ListDP L,POINT* obstacle);
 

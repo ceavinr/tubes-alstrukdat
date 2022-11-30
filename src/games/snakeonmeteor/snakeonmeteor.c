@@ -231,7 +231,7 @@ void moveHead(ListDP *L, char input)
 }
 //}
 
-void addMeteor(POINT *meteor, POINT food)
+void addMeteor(POINT *meteor, POINT food,POINT obstacle)
 {
     srand(time(NULL));
     int X = rand() % 5;
@@ -240,7 +240,7 @@ void addMeteor(POINT *meteor, POINT food)
     int i = 0;
     while (!found)
     {
-        if (X != food.X && Y != food.Y)
+        if (X != food.X && Y != food.Y && X!=obstacle.X && Y!=obstacle.Y)
         {
             found = true;
             meteor->X = X;
@@ -655,7 +655,7 @@ void snakeOnMeteor(int *skor)
                         addTail(&L,&hit,obstacle);//, newtail);
                         addFood(&food, L, obstacle);
                     }
-                    addMeteor(&meteor, food);
+                    addMeteor(&meteor, food, obstacle);
                     MeteorHitBody(&L, food, meteor,obstacle);
                     //printMap(L, food, meteor, obstacle);
                     if (isMeteorHitHead(L))

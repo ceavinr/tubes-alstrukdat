@@ -6,7 +6,7 @@
 
 boolean IsEmptyDP(ListDP L)
 {
-    return (First(L) == NULL && Last(L) == NULL);
+    return (First(L)==NilDP && Last(L)==NilDP);
 }
 
 /****************** PEMBUATAN LIST KOSONG ******************/
@@ -35,14 +35,10 @@ addressDP AlokasiDP(char X)
         return NULL;
     }
 }
-void DealokasiDP(addressDP P)
-{
-    free(P);
-}
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 
-addressDP SearchDP(ListDP L, char X)
+addressDP SearchPointDP(ListDP L, int X,int Y)
 {
     addressDP P = First(L);
     boolean found = false;
@@ -69,60 +65,14 @@ addressDP SearchDP(ListDP L, char X)
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 
-void InsVFirstDP(ListDP *L, char X)
-{
-    addressDP P = AlokasiDP(X);
-    if (P != NULL)
-    {
-        InsertFirstDP(L, P);
-    }
-}
-void InsVLastDP(ListDP *L, char X)
-{
-    addressDP P = AlokasiDP(X);
-    if (P != NULL)
-    {
-        InsertLastDP(L, P);
-    }
-}
 
 /*** PENGHAPUSAN ELEMEN ***/
 
-void DelVFirstDP(ListDP *L, char *X)
-{
-    addressDP P;
-    DelFirstDP(L, &P);
-    *X = Info(P);
-    DealokasiDP(P);
-}
 
-void DelVLastDP(ListDP *L, char *X)
-{
-    addressDP P;
-    DelLastDP(L, &P);
-    *X = Info(P);
-    DealokasiDP(P);
-}
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
 
-void InsertFirstDP(ListDP *L, addressDP P)
-{
-    Prev(P) = NULL;
-    if (IsEmptyDP(*L))
-    {
-        Next(P) = NULL;
-        First(*L) = P;
-        Last(*L) = P;
-    }
-    else
-    {
-        Next(P) = First(*L);
-        Prev(First(*L)) = P;
-        First(*L) = P;
-    }
-}
 
 void InsertLastDP(ListDP *L, addressDP P)
 {
@@ -141,35 +91,6 @@ void InsertLastDP(ListDP *L, addressDP P)
     }
 }
 
-void InsertAfterDP(ListDP *L, addressDP P, addressDP Prec)
-{
-    Next(P) = Next(Prec);
-    Next(Prec) = P;
-    Prev(P) = Prec;
-    if (Next(P) == NULL)
-    {
-        Last(*L) = P;
-    }
-    else
-    {
-        Prev(Next(Prec)) = P;
-    }
-}
-
-void InsertBeforeDP(ListDP *L, addressDP P, addressDP Succ)
-{
-    Next(P) = Succ;
-    Prev(P) = Prev(Succ);
-    Prev(Succ) = P;
-    if (Prev(P) != NULL)
-    {
-        Next(Prev(P)) = P;
-    }
-    else
-    {
-        First(*L) = P;
-    }
-}
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
 
@@ -203,47 +124,7 @@ void DelLastDP(ListDP *L, addressDP *P)
     }
 }
 
-void DelPDP(ListDP *L, char X)
-{
-    addressDP P = SearchDP(*L, X);
-    addressDP Q = Last(*L);
-    if (P == First(*L))
-    {
-        DelFirstDP(L, &P);
-    }
-    else if (P == Last(*L))
-    {
-        DelLastDP(L, &P);
-    }
-    else
-    {
-        while (Q != P)
-        {
-            Q->Pos.X = Prev(Q)->Pos.X;
-            Q->Pos.Y = Prev(Q)->Pos.Y;
-        }
-        Next(Prev(P)) = Next(P);
-        Prev(Next(P)) = Prev(P);
-    }
-    DealokasiDP(P);
-}
 
-void DelAfterDP(ListDP *L, addressDP *Pdel, addressDP Prec)
-{
-    *Pdel = Next(Prec);
-    if (Next(Prec) != NULL)
-    {
-        Next(Prec) = Next(Next(Prec));
-        if (Next(Prec) == NULL)
-        {
-            Last(*L) = Prec;
-        }
-        else
-        {
-            Prev(Next(Prec)) = Prec;
-        }
-    }
-}
 void DelBeforeDP(ListDP *L, addressDP *Pdel, addressDP Succ)
 {
     *Pdel = Prev(Succ);
@@ -264,36 +145,3 @@ void DelBeforeDP(ListDP *L, addressDP *Pdel, addressDP Succ)
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 
-void PrintForwardDP(ListDP L)
-{
-    printf("[");
-    if (!IsEmptyDP(L))
-    {
-        addressDP P = First(L);
-        printf("%c", Info(P));
-        P = Next(P);
-        while ((P) != NULL)
-        {
-            printf(",%c", Info(P));
-            P = Next(P);
-        }
-    }
-    printf("]");
-}
-
-void PrintBackwardDP(ListDP L)
-{
-    printf("[");
-    if (!IsEmptyDP(L))
-    {
-        addressDP P = Last(L);
-        printf("%d", Info(P));
-        P = Prev(P);
-        while ((P) != NULL)
-        {
-            printf(",%d", Info(P));
-            P = Prev(P);
-        }
-    }
-    printf("]");
-}
