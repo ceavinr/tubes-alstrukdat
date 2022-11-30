@@ -3,7 +3,7 @@
 #include <time.h>
 #include "hangman.h"
 
-char *kata_random()
+string kata_random()
 {
     int x, total, count;
     ArrayDin arrKata;
@@ -29,7 +29,7 @@ char *kata_random()
 
     int j, num;
     num = 0;
-    char *kata = malloc(sizeof(char) * BUFFER(arrKata)[x].Length + 1);
+    string kata = malloc(sizeof(char) * BUFFER(arrKata)[x].Length + 1);
     for (j = 0; j < BUFFER(arrKata)[x].Length; j++)
     {
         kata[j] = BUFFER(arrKata)[x].TabWord[j];
@@ -40,7 +40,7 @@ char *kata_random()
     return kata;
 }
 
-boolean isWin(char *kata)
+boolean isWin(string kata)
 {
     int i = 0, length = stringLength(kata);
     boolean full = true;
