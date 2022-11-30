@@ -7,6 +7,7 @@
 /*F.S. RNG dijalankan dan menerima parameter output score*/
 void rng(int *score)
 {
+    *score = 0;
     int x, tebakan, count;
     Word input;
     boolean check;
@@ -47,5 +48,4 @@ void rng(int *score)
 
     printf("\nYa, X adalah %d.\n", x);
     printf("\nScore anda : %d.\n", *score);
-
 }

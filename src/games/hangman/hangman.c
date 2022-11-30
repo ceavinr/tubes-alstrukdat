@@ -40,34 +40,36 @@ char *kata_random()
     return kata;
 }
 
-int isWin(char *kata)
+boolean isWin(char *kata)
 {
-    int i, length;
-    length = stringLength(kata);
+    int i = 0, length = stringLength(kata);
+    boolean full = true;
 
-    for (i = 0; i < length; i++)
+    while (i < length && full)
     {
         if (kata[i] == '_')
         {
-            return 0;
+            full = false;
+        }
+        else
+        {
+            i++;
         }
     }
-    return 1;
+    return full;
 }
 
-int play()
+void play(int *score)
 {
-    char history[11];
+    char history[26];
     string kata;
     int i, j, count;
-    int panjang_kata, score, win;
+    int panjang_kata;
 
-    score = 0;
     count = 0;
 
-    while (count <= 10)
+    while (count < 10)
     {
-        count++;
         kata = kata_random();
         panjang_kata = stringLength(kata);
 
@@ -83,12 +85,12 @@ int play()
 
         char tebakan;
 
-        win = 0;
+        boolean gameOn = true;
         j = 0;
 
-        while (win == 0)
+        while (gameOn && count < 10)
         {
-
+            clear();
             if (history[0] == '\0')
             {
                 printf("Tebakan sebelumnya: -\n");
@@ -99,8 +101,7 @@ int play()
             }
 
             printf("Kata: %s\n", word);
-
-            printf("Kesempatan: %d\n", 10 - count + 1);
+            printf("Kesempatan: %d\n", 10 - count);
 
             do
             {
@@ -122,33 +123,28 @@ int play()
                     }
                 }
             }
+            else
+            {
+                count++;
+            }
 
-            win = isWin(word);
             printf("\n");
-            if (win == 1)
+            if (isWin(word))
             {
-                printf("Berhasil menebak kata %s! Kamu mendapatkan %d poin!\n\n", word, panjang_kata);
-                score = score + panjang_kata;
-                win = 0;
-                break;
+                printf("Berhasil menebak kata %s! Kamu mendapatkan %d poin!\n", word, panjang_kata);
+                *score += panjang_kata;
+                gameOn = false;
+                printf("\nEnter to continue...");
+                startInput();
             }
-            if (count == 10)
+            else
             {
-                break;
+                j++;
             }
-            count++;
-            j++;
-        }
-
-        if (count == 10)
-        {
-            break;
         }
     }
 
-    printf("Kesempatan kamu untuk menebak sudah habis. Selamat kamu berhasil mengumpulkan %d poin!\n\n", score);
-
-    return score;
+    printf("Kesempatan kamu untuk menebak sudah habis. Selamat kamu berhasil mengumpulkan %d poin!\n\n", *score);
 }
 
 void saveDict(ArrayDin arr, FILE *pita)
@@ -187,7 +183,9 @@ void tambahKata()
     {
         int i = 0;
         found = false;
-        printf("\nMasukkan kata baru (DALAM HURUF BESAR): ");
+
+        clear();
+        printf("Masukkan kata baru (DALAM HURUF BESAR): ");
         startInputWord();
         akuisisiCommandWord(&wordBaru, currentWord, 1);
         kataBaru = wordToString(wordBaru);
@@ -231,20 +229,26 @@ void tambahKata()
     saveDict(arrKata, pita);
 
     fclose(pita);
-    printf("\nKata berhasil ditambahkan.\n");
+    printf("\nKata berhasil ditambahkan.");
+    printf("\nEnter to continue...");
+    startInput();
+    clear();
 }
 
 void hangman(int *score)
 {
-    printf("======= SELAMAT DATANG DI HANGMAN =======\n");
-    printf("=========================================\n");
-    printf("\n***************** MENU ******************\n");
-    printf("   PLAY        : Bermain game\n");
-    printf("   TAMBAH KATA : Menambah kata dalam game\n");
+    *score = 0;
     boolean valid = false;
     while (!valid)
     {
-        printf("Masukan opsi Anda :");
+        clear();
+
+        printf("======= SELAMAT DATANG DI HANGMAN =======\n");
+        printf("=========================================\n");
+        printf("\n***************** MENU ******************\n");
+        printf(" PLAY        : Bermain game\n");
+        printf(" TAMBAH KATA : Menambah kata dalam game\n");
+        printf("\nMasukkan pilihan menu: ");
         startInputWord();
         if (stringEQWord(currentWord, "PLAY") || stringEQWord(currentWord, "TAMBAH KATA"))
         {
@@ -253,12 +257,13 @@ void hangman(int *score)
         else
         {
             printf("Input anda salah. Silahkan masukan command yang benar.\n");
+            sleep(500);
         }
     }
 
     if (stringEQWord(currentWord, "PLAY"))
     {
-        *score = play();
+        play(score);
     }
     else if (stringEQWord(currentWord, "TAMBAH KATA"))
     {

@@ -226,6 +226,7 @@ addrNode Brew(List recipes, Masakan potion1, Masakan potion2)
 
 void amogusfight(int *score)
 {
+    *score = 0;
     int potionID;
     int MaxHP1 = 200, MaxHP2 = 40;
     int HP1 = MaxHP1, HP2 = MaxHP2;

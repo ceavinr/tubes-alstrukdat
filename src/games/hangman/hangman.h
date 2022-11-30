@@ -6,16 +6,7 @@
 #include "../../adt/arraydin/arraydin.h"
 #include "../../adt/word/word.h"
 #include "../../adt/string/string.h"
-
-char *kata_random();
-
-int isWin(char *kata);
-
-int play();
-
-void saveDict(ArrayDin arr, FILE *pita);
-
-void tambahKata();
+#include "../../interface.h"
 
 void hangman(int *score);
 

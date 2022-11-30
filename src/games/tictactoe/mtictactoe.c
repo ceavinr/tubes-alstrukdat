@@ -3,7 +3,7 @@
 
 int main()
 {
-    int score = 0;
+    int score;
     tictactoe(&score);
     return 0;
 }

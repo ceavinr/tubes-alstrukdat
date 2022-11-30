@@ -113,6 +113,7 @@ void board(Matrix papan)
 
 void tictactoe(int *score)
 {
+    *score = 0;
     int tebakan, langkah;
     char mark;
     boolean gameOn = true;

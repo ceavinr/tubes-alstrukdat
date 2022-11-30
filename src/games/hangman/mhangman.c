@@ -4,4 +4,5 @@ int main()
 {
     int score;
     hangman(&score);
+    return 0;
 }

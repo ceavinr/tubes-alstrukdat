@@ -81,6 +81,7 @@ void DisplayState(Stack S1, Stack S2, Stack S3, int height)
 
 void towerofhanoi(int *skor)
 {
+    *skor = 0;
     Word banyak, from, to;
     Stack tower1, tower2, tower3;
     boolean succeed = false;

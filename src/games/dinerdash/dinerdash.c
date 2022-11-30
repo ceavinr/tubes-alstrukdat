@@ -98,6 +98,7 @@ int kodeToInt(Word kode)
 
 void dinerdash(int *skor)
 {
+    *skor = 0;
     Order orderList;
     Array orderTaken;
     Masakan m, m_add, m_del;

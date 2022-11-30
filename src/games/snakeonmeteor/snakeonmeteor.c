@@ -607,6 +607,7 @@ boolean isMeteorHitHead(ListDP L)
 
 void snakeOnMeteor(int *skor)
 {
+    *skor = 0;
     srand(time(NULL));
     ListDP L;
     ElmtListDP newtail;

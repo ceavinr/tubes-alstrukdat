@@ -2,6 +2,7 @@
 
 int main()
 {
-    int score = 0;
+    int score;
     amogusfight(&score);
+    return 0;
 }
