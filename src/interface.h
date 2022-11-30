@@ -10,5 +10,6 @@ void skippingGame(Word gameName);
 void gambarBNMO();
 void gambarKarakterBNMO();
 void gambarDinerDash();
+void gambarHangman(int count);
 
 #endif

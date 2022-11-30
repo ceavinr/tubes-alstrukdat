@@ -102,6 +102,7 @@ void play(int *score)
 
             printf("Kata: %s\n", word);
             printf("Kesempatan: %d\n", 10 - count);
+            gambarHangman(10 - count);
 
             do
             {

@@ -138,4 +138,98 @@ void gambarDinerDash()
 
 void gambarHangman(int kesempatan)
 {
+    int count = 10 - kesempatan + 1;
+    switch (count)
+    {
+    case 1:
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        break;
+    case 2:
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("         \n");
+        printf("=========\n");
+        break;
+    case 3:
+        printf("         \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 4:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 5:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("  o   |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 6:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("  o   |  \n");
+        printf("  |   |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 7:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("  o   |  \n");
+        printf(" /|   |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 8:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("  o   |  \n");
+        printf(" /|\\  |  \n");
+        printf("      |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 9:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("  o   |  \n");
+        printf(" /|\\  |  \n");
+        printf(" /    |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    case 10:
+        printf("  +---+  \n");
+        printf("  |   |  \n");
+        printf("  o   |  \n");
+        printf(" /|\\  |  \n");
+        printf(" / \\  |  \n");
+        printf("      |  \n");
+        printf("=========\n");
+        break;
+    }
 }
