@@ -15,4 +15,7 @@ int stringLength(string s);
 /*Mengembalikan string berupa gabungan dari s1 dan s2*/
 string concat(string s1, string s2);
 
+/* Mengembalikan sebuah string hasil salinan dari s2 */
+string copyString(string s2);
+
 #endif

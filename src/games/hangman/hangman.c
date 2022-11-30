@@ -3,7 +3,7 @@
 #include <time.h>
 #include "hangman.h"
 
-char* kata_random()
+char *kata_random()
 {
     int x, total, count;
     ArrayDin arrKata;
@@ -27,22 +27,22 @@ char* kata_random()
     srand(time(NULL));
     x = rand() % total;
 
-    int j,num;
+    int j, num;
     num = 0;
-    char* kata = malloc (sizeof (char) * BUFFER(arrKata)[x].Length+1);
+    char *kata = malloc(sizeof(char) * BUFFER(arrKata)[x].Length + 1);
     for (j = 0; j < BUFFER(arrKata)[x].Length; j++)
     {
         kata[j] = BUFFER(arrKata)[x].TabWord[j];
         num++;
     }
     kata[BUFFER(arrKata)[x].Length] = '\0';
-    
+
     return kata;
 }
 
-int check(char* kata, char huruf)
+int check(char *kata, char huruf)
 {
-    int i,length;
+    int i, length;
     length = stringLength(kata);
 
     for (i = 0; i < length; i++)
@@ -55,9 +55,9 @@ int check(char* kata, char huruf)
     return 0;
 }
 
-int isWin(char* kata)
+int isWin(char *kata)
 {
-    int i,length;
+    int i, length;
     length = stringLength(kata);
 
     for (i = 0; i < length; i++)
@@ -89,7 +89,7 @@ int isLower(char huruf)
 int play()
 {
     char tebakan[11];
-    char* kata;
+    string kata;
     int i, j, count;
     int panjang_kata, score, win;
     int found, found_input, lower;
@@ -99,12 +99,11 @@ int play()
 
     while (count <= 10)
     {
-        printf("%d\n\n", count);
         count++;
         kata = kata_random();
         panjang_kata = stringLength(kata);
 
-        char word[panjang_kata+1];
+        string word = copyString(kata);
 
         for (i = 0; i < panjang_kata; i++)
         {
@@ -113,17 +112,17 @@ int play()
         word[panjang_kata] = '\0';
 
         tebakan[0] = '\0';
-        
+
         Word temp;
-        char* input;
+        char *input;
 
         win = 0;
         j = 0;
 
         while (win == 0)
         {
-            
-            if (tebakan[0] =='\0')
+
+            if (tebakan[0] == '\0')
             {
                 printf("Tebakan sebelumnya: -\n");
             }
@@ -131,15 +130,12 @@ int play()
             {
                 printf("Tebakan sebelumnya: %s\n", tebakan);
             }
-            
 
             printf("Kata: %s\n", word);
 
-            printf("Kesempatan: %d\n", 10-count+1);
+            printf("Kesempatan: %d\n", 10 - count + 1);
 
-            
-            
-            do 
+            do
             {
                 printf("Masukkan tebakan (DALAM HURUF KAPITAL): ");
                 startInputWord();
@@ -148,11 +144,10 @@ int play()
                 printf("\n");
                 found_input = check(tebakan, *input);
                 lower = isLower(*input);
-            }
-            while (found_input == 1 || lower == 1);
+            } while (found_input == 1 || lower == 1);
 
             tebakan[j] = *input;
-            tebakan[j+1] = '\0';
+            tebakan[j + 1] = '\0';
 
             found = check(kata, *input);
 
@@ -183,18 +178,16 @@ int play()
             count++;
             j++;
         }
-        
+
         if (count == 10)
         {
             break;
         }
-        
     }
 
     printf("Kesempatan kamu untuk menebak sudah habis. Selamat kamu berhasil mengumpulkan %d poin!\n\n", score);
 
     return score;
-
 }
 
 void saveDict(ArrayDin arr, FILE *pita)
@@ -227,14 +220,14 @@ void saveDict(ArrayDin arr, FILE *pita)
 void tambahKata()
 {
     Word temp, eop, total;
-    char* input;
+    char *input;
     int i, lower;
     do
     {
         printf("\nMasukkan kata baru (DALAM HURUF BESAR): ");
         startInputWord();
         akuisisiCommandWord(&temp, currentWord, 1);
-        input = wordToString(temp);\
+        input = wordToString(temp);
         lower = 0;
         for (i = 0; i < stringLength(input); i++)
         {
@@ -245,8 +238,8 @@ void tambahKata()
             }
         }
     } while (lower == 1);
-    
-    int count; 
+
+    int count;
     ArrayDin arrKata;
 
     arrKata = MakeArrayDin();
@@ -265,15 +258,14 @@ void tambahKata()
     }
 
     InsertAtArrayDin(&arrKata, temp, count);
-    
+
     FILE *pita;
     pita = fopen("data/kata.txt", "w");
 
-    saveDict(arrKata,pita);
+    saveDict(arrKata, pita);
 
     fclose(pita);
     printf("\nKata berhasil ditambahkan.\n");
-
 }
 
 void hangman(int *score)
@@ -291,27 +283,20 @@ void hangman(int *score)
         if (stringEQWord(currentWord, "PLAY") || stringEQWord(currentWord, "TAMBAH KATA"))
         {
             valid = true;
-        } else
+        }
+        else
         {
             printf("Input anda salah. Silahkan masukan command yang benar.\n");
         }
     }
-    
-    if(stringEQWord(currentWord, "PLAY"))
+
+    if (stringEQWord(currentWord, "PLAY"))
     {
         *score = play();
     }
-    else if(stringEQWord(currentWord, "TAMBAH KATA"))
+    else if (stringEQWord(currentWord, "TAMBAH KATA"))
     {
         tambahKata();
         hangman(score);
     }
 }
-
-
-
-
-
-
-
-

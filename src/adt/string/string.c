@@ -26,3 +26,16 @@ string concat(string s1, string s2)
     *p = '\0';
     return ret;
 }
+
+string copyString(string s2)
+{
+    string s1 = malloc((stringLength(s2) + 1) * sizeof(char));
+    string p = s1;
+    while (*s2 != '\0')
+    {
+        *p++ = *s2++;
+    }
+    *p = '\0';
+
+    return s1;
+}

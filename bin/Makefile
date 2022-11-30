@@ -7,6 +7,8 @@ dinerdash:
 	gcc ../src/games/dinerdash/mdinerdash.c ../src/adt/array/array.c ../src/games/dinerdash/dinerdash.c ../src/adt/order/order.c ../src/adt/masakan/masakan.c ../src/adt/string/string.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/interface.c -o dinerdash
 rng:
 	gcc ../src/games/rng/mrng.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/games/rng/rng.c -o rng
+hangman:
+	gcc ../src/games/hangman/mhangman.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/arraydin/arraydin.c ../src/adt/word/word.c ../src/adt/string/string.c ../src/games/hangman/hangman.c -o hangman
 tictactoe:
 	gcc ../src/adt/matrix/matrix.c ../src/adt/mesin/mesinkarakter.c ../src/adt/string/string.c ../src/adt/mesin/mesinkata.c ../src/adt/word/word.c ../src/games/tictactoe/mtictactoe.c ../src/games/tictactoe/tictactoe.c -o tictactoe
 towerofhanoi:
