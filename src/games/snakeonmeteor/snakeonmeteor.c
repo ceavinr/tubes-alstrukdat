@@ -640,73 +640,75 @@ void snakeOnMeteor(int *skor)
 
         startInputWord();
         input = currentWord.TabWord[0];
-        if (!isMeteorPanas(L, meteor, input))
+        
+        if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd'))
         {
-            if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd') && !isBodyExceptHead(L, input)) // isInputValid(L, input))// && !isBody(L,input))
+            if (!isBodyExceptHead(L,input))//isInputValid(L, input))// && !isBody(L,input))
             {
-                // newtail = *(Last(L));
-                Move(&L, input);
-                printf("\nBerhasil bergerak!\n");
-                if (isEat(&L, food))
+                if (!isMeteorPanas(L,meteor,input))
                 {
-                    addTail(&L, &hit, obstacle); //, newtail);
-                    addFood(&food, L, obstacle);
-                }
-                addMeteor(&meteor, food);
-                MeteorHitBody(&L, food, meteor, obstacle);
-                // printMap(L, food, meteor, obstacle);
-                if (isMeteorHitHead(L))
-                {
-                    printf("Kepala snake terkena meteor.\n");
-                    *skor = lengthSnake(L) * 2;
-                    printf("Game berakhir. skor : %d\n", *skor);
-                    hit = true;
-                }
-                else if (isHeadHitObstacle(L, obstacle))
-                {
-                    printf("Head Snake mengenai obstacle.\n");
-                    *skor = lengthSnake(L) * 2;
-                    printf("Game berakhir. skor : %d\n", *skor);
-                    hit = true;
-                }
-                else if (isNoMoreHeadSpace(L))
-                {
-                    printf("Tidak ada tempat tersedia untuk bergerak.\n");
-                    *skor = (lengthSnake(L) + 1) * 2;
-                    printf("Game berakhir. skor : %d\n", *skor);
-                    hit = true;
-                }
-                else if (lengthSnake(L) == 23)
-                {
-                    *skor = 46;
-                    printf("skor anda %d\n", *skor);
-                    hit = true;
-                }
-                else
-                {
-                    if (hit == true)
+                    //newtail = *(Last(L));
+                    Move(&L, input);
+                    printf("\nBerhasil bergerak!\n");
+                    if (isEat(&L, food))
                     {
-                        *skor = (lengthSnake(L) + 1) * 2;
+                        addTail(&L,&hit,obstacle);//, newtail);
+                        addFood(&food, L, obstacle);
+                    }
+                    addMeteor(&meteor, food);
+                    MeteorHitBody(&L, food, meteor,obstacle);
+                    //printMap(L, food, meteor, obstacle);
+                    if (isMeteorHitHead(L))
+                    {
+                        printf("Kepala snake terkena meteor.\n");
+                        *skor = lengthSnake(L) * 2;
+                        printf("Game berakhir. skor : %d\n", *skor);
+                        hit = true;
+                    }else if(isHeadHitObstacle(L,obstacle)){
+                        printf("Head Snake mengenai obstacle.\n");
+                        *skor = lengthSnake(L) * 2;
+                        printf("Game berakhir. skor : %d\n", *skor);
+                        hit = true;
+                    }else if(isNoMoreHeadSpace(L)){
+                        printf("Tidak ada tempat tersedia untuk bergerak.\n");
+                        *skor = (lengthSnake(L)+1) * 2;
+                        printf("Game berakhir. skor : %d\n", *skor);
+                        hit=true;
+                    }else if(lengthSnake(L)==23){
+                        *skor = 46;
                         printf("skor anda %d\n", *skor);
+                        hit=true;
                     }
                     else
                     {
-                        printf("Silahkan lanjutkan permainan\n");
-                        i++;
+                        if(hit==true){
+                            *skor=(lengthSnake(L)+1)*2;
+                            printf("skor anda %d\n",*skor);
+
+                        }else{
+                            printf("Silahkan lanjutkan permainan\n");
+                            i++;
+                        }
+                        
                     }
+                }else 
+                {
+                    printf("Meteor masih panas! Silahkan input ulang command\n");
+                   
                 }
             }
             else
             {
-                printf("Command tidak valid! Silahkan input command menggunakan huruf w/a/s/d.\n");
+                 printf("Anda tidak dapat bergerak ke tubuh sendiri\n");
             }
-        }
+        }    
         else
         {
             printf("Meteor masih panas! Silahkan input ulang command\n");
         }
-    }
+    }  
 }
+
 
 boolean isHeadHitObstacle(ListDP L, POINT obstacle)
 {
