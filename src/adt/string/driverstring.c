@@ -20,9 +20,18 @@ int main()
     printf("%s\n", kata3);
 
     printf("\nMenunjukkan bahwa kata2 dan kata3 bukan entitas yang sama:\n");
-    kata2[1] = 'a';
+    kata2[0] = 'a';
     printf("Kata2: %s\n", kata2);
     printf("Kata3: %s\n", kata3);
 
+    char dumChar = 'a';
+    if (isCharInString(kata3, dumChar))
+    {
+        printf("ada");
+    }
+    else
+    {
+        printf("gaada");
+    }
     return 0;
 }

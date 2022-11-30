@@ -39,3 +39,20 @@ string copyString(string s2)
 
     return s1;
 }
+
+boolean isCharInString(string s, char c)
+{
+    int i = 0, length;
+    boolean found = false;
+    length = stringLength(s);
+
+    while (i < length && !found)
+    {
+        if (s[i] == c)
+        {
+            found = true;
+        }
+        i++;
+    }
+    return found;
+}

@@ -135,3 +135,7 @@ void gambarDinerDash()
     printf("             @%%@@@@(.                                                       \n");
     printf("                                                                            \n");
 }
+
+void gambarHangman(int kesempatan)
+{
+}

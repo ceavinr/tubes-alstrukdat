@@ -7,13 +7,9 @@
 #include "../../adt/word/word.h"
 #include "../../adt/string/string.h"
 
-char* kata_random();
+char *kata_random();
 
-int check(char* kata, char huruf);
-
-int isWin(char* kata);
-
-int isLower(char huruf);
+int isWin(char *kata);
 
 int play();
 

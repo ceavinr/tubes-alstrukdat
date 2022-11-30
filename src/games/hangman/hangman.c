@@ -40,21 +40,6 @@ char *kata_random()
     return kata;
 }
 
-int check(char *kata, char huruf)
-{
-    int i, length;
-    length = stringLength(kata);
-
-    for (i = 0; i < length; i++)
-    {
-        if (kata[i] == huruf)
-        {
-            return 1;
-        }
-    }
-    return 0;
-}
-
 int isWin(char *kata)
 {
     int i, length;
@@ -70,29 +55,12 @@ int isWin(char *kata)
     return 1;
 }
 
-int isLower(char huruf)
-{
-    char lower[26] = "abcdefghijklmnopqrstuvwxyz";
-    int i;
-
-    for (i = 0; i < 26; i++)
-    {
-        if (lower[i] == huruf)
-        {
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
 int play()
 {
-    char tebakan[11];
+    char history[11];
     string kata;
     int i, j, count;
     int panjang_kata, score, win;
-    int found, found_input, lower;
 
     score = 0;
     count = 0;
@@ -111,10 +79,9 @@ int play()
         }
         word[panjang_kata] = '\0';
 
-        tebakan[0] = '\0';
+        history[0] = '\0';
 
-        Word temp;
-        char *input;
+        char tebakan;
 
         win = 0;
         j = 0;
@@ -122,13 +89,13 @@ int play()
         while (win == 0)
         {
 
-            if (tebakan[0] == '\0')
+            if (history[0] == '\0')
             {
                 printf("Tebakan sebelumnya: -\n");
             }
             else
             {
-                printf("Tebakan sebelumnya: %s\n", tebakan);
+                printf("Tebakan sebelumnya: %s\n", history);
             }
 
             printf("Kata: %s\n", word);
@@ -139,25 +106,19 @@ int play()
             {
                 printf("Masukkan tebakan (DALAM HURUF KAPITAL): ");
                 startInputWord();
-                akuisisiCommandWord(&temp, currentWord, 1);
-                input = wordToString(temp);
-                printf("\n");
-                found_input = check(tebakan, *input);
-                lower = isLower(*input);
-            } while (found_input == 1 || lower == 1);
+                tebakan = ambilKataKe(currentWord, 1).TabWord[0];
+            } while (isCharInString(history, tebakan) || (tebakan >= 'a' && tebakan <= 'z'));
 
-            tebakan[j] = *input;
-            tebakan[j + 1] = '\0';
+            history[j] = tebakan;
+            history[j + 1] = '\0';
 
-            found = check(kata, *input);
-
-            if (found == 1)
+            if (isCharInString(kata, tebakan))
             {
                 for (i = 0; i < panjang_kata; i++)
                 {
-                    if (kata[i] == *input)
+                    if (kata[i] == tebakan)
                     {
-                        word[i] = *input;
+                        word[i] = tebakan;
                     }
                 }
             }
@@ -219,25 +180,30 @@ void saveDict(ArrayDin arr, FILE *pita)
 
 void tambahKata()
 {
-    Word temp, eop, total;
-    char *input;
-    int i, lower;
+    Word wordBaru, eop, total;
+    string kataBaru;
+    boolean found = true;
     do
     {
+        int i = 0;
+        found = false;
         printf("\nMasukkan kata baru (DALAM HURUF BESAR): ");
         startInputWord();
-        akuisisiCommandWord(&temp, currentWord, 1);
-        input = wordToString(temp);
-        lower = 0;
-        for (i = 0; i < stringLength(input); i++)
+        akuisisiCommandWord(&wordBaru, currentWord, 1);
+        kataBaru = wordToString(wordBaru);
+
+        while (i < stringLength(kataBaru) && !found)
         {
-            lower = isLower(input[i]);
-            if (lower == 1)
+            if ((kataBaru[i] >= 'a' && kataBaru[i] <= 'z'))
             {
-                break;
+                found = true;
+            }
+            else
+            {
+                i++;
             }
         }
-    } while (lower == 1);
+    } while (found);
 
     int count;
     ArrayDin arrKata;
@@ -257,7 +223,7 @@ void tambahKata()
         ADVWORD();
     }
 
-    InsertAtArrayDin(&arrKata, temp, count);
+    InsertAtArrayDin(&arrKata, wordBaru, count);
 
     FILE *pita;
     pita = fopen("data/kata.txt", "w");

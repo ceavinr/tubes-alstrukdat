@@ -18,4 +18,7 @@ string concat(string s1, string s2);
 /* Mengembalikan sebuah string hasil salinan dari s2 */
 string copyString(string s2);
 
+/* Mereturn apakah c terdapat di dalam s */
+boolean isCharInString(string s, char c);
+
 #endif

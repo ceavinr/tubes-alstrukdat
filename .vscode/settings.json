@@ -26,6 +26,7 @@
     "listlinier.h": "c",
     "rng.h": "c",
     "point.h": "c",
-    "hangman.h": "c"
+    "hangman.h": "c",
+    "stdlib.h": "c"
   }
 }
