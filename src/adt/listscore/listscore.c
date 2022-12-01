@@ -5,8 +5,8 @@ void MakeListScore(ListScore *L) {
 	(*L).Neff = 0;
 }
 
-boolean IsEmptyScoreboard(ListScore L) {
-	return L.Neff == 0;
+boolean IsEmptyScoreboard(ListScore *L) {
+	return (*L).Neff == 0;
 }
 
 int SearchScoreboard(ListScore *L, Word title) {

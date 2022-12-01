@@ -227,7 +227,7 @@ void deleteGame(ArrayDin *arrGame, ListScore *scoreboard)
 
     int numGame = wordToInt(currentWord);
 
-    if (numGame > 5 && numGame <= (*arrGame).Neff)
+    if (numGame > 7 && numGame <= (*arrGame).Neff)
     {
         DeleteAtArrayDin(arrGame, numGame - 1);
         DeleteAtScoreboard(scoreboard, numGame - 1);
@@ -326,15 +326,14 @@ void skipGame(Word command, Queue *arrQueue, StackHistory *stackHistory, ListSco
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
     akuisisiCommandWord(&numQueueString, command, 3);
+    int numQueue = wordToInt(numQueueString);
 
-    if (numQueueString.Length == 0)
-    { /*jika masukan kosong*/
+    if (numQueueString.Length == 0 || !isWordInt(numQueueString))
+    { /*jika masukan kosong/tidak integer*/
         printf("Masukan banyak skip tidak valid\n");
     }
     else
     {
-        int numQueue = wordToInt(numQueueString);
-
         if (numQueue >= 0 && numQueue < queueLength(*arrQueue) && !isQueueEmpty(*arrQueue))
         {
             Word firstGame;
@@ -453,7 +452,7 @@ void resetScoreboard(ListScore *scoreboard)
     startInputWord();
     num_reset = wordToInt(currentWord);
 
-    if (num_reset >= 0 && num_reset <= 5)
+    if (num_reset >= 0 && num_reset <= (*scoreboard).Neff)
     {
         boolean valid = false;
         while (!valid)
@@ -513,7 +512,7 @@ void showHistory(Word command, StackHistory stackHistory)
     if (banyakHistory.Length > 0)
     {
         int banyakHistory_int = wordToInt(banyakHistory);
-        if (banyakHistory_int > 0)
+        if (banyakHistory_int > 0 && isWordInt(banyakHistory))
         {
             printf("Berikut adalah daftar Game yang telah dimainkan\n");
             PrintStackHistory(stackHistory, banyakHistory_int);

@@ -36,11 +36,4 @@ void TulisPOINT(POINT P);
 /* Mengirimkan true jika P1 = P2 : absis dan ordinatnya sama */
 boolean EQ(POINT P1, POINT P2);
 
-/* *** Kelompok menentukan di mana P berada *** */
-
-/* *** KELOMPOK OPERASI LAIN TERHADAP TYPE *** */
-
-/* Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */
-POINT PlusDelta(POINT P, int deltaX, int deltaY);
-
 #endif

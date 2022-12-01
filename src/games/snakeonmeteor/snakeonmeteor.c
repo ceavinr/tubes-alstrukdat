@@ -5,7 +5,7 @@ void Move(ListDP *L, char input)
     addressDP P = Last(*L);
     if (!isBodyExceptHead(*L, input))
     {
-        while (Prev(P) != NilDP)
+        while (Prev(P) != NULL)
         {
             (P)->Pos.X = Prev(P)->Pos.X;
             (P)->Pos.Y = Prev(P)->Pos.Y;
@@ -159,7 +159,7 @@ addressDP addressMemberPoint(ListDP L, int i, int j)
 {
     addressDP P = First(L);
     boolean found = false;
-    while (!found && (P) != NilDP)
+    while (!found && (P) != NULL)
     {
         if ((*P).Pos.X == i && (*P).Pos.Y == j)
         {
@@ -176,7 +176,7 @@ addressDP addressMemberPoint(ListDP L, int i, int j)
     }
     else
     {
-        return NilDP;
+        return NULL;
     }
 }
 
@@ -231,7 +231,7 @@ void moveHead(ListDP *L, char input)
 }
 //}
 
-void addMeteor(POINT *meteor, POINT food,POINT obstacle)
+void addMeteor(POINT *meteor, POINT food, POINT obstacle)
 {
     srand(time(NULL));
     int X = rand() % 5;
@@ -240,7 +240,7 @@ void addMeteor(POINT *meteor, POINT food,POINT obstacle)
     int i = 0;
     while (!found)
     {
-        if (X != food.X && Y != food.Y && X!=obstacle.X && Y!=obstacle.Y)
+        if (X != food.X && Y != food.Y && X != obstacle.X && Y != obstacle.Y)
         {
             found = true;
             meteor->X = X;
@@ -299,7 +299,7 @@ boolean isAvail(ListDP L, int X, int Y, POINT obstacle)
     {
         Y = 0;
     }
-    while (found && Q != NilDP)
+    while (found && Q != NULL)
     {
         if (((*Q).Pos.X == (X % 5) && (*Q).Pos.Y == (Y % 5)) || (obstacle.X == (X % 5) && obstacle.Y == (Y % 5)))
         {
@@ -350,7 +350,7 @@ boolean isBody(ListDP L, char input)
         }
     }
     boolean found = false;
-    while (!found && Q != NilDP)
+    while (!found && Q != NULL)
     {
         if (X == Q->Pos.X && Y == Q->Pos.Y)
         {
@@ -400,7 +400,7 @@ boolean isBodyExceptHead(ListDP L, char input)
         }
     }
     boolean found = false;
-    while (!found && Next(Q) != NilDP)
+    while (!found && Next(Q) != NULL)
     {
         if (X == Q->Pos.X && Y == Q->Pos.Y)
         {
@@ -555,7 +555,7 @@ void MeteorHitBody(ListDP *L, POINT food, POINT meteor, POINT obstacle)
     addressDP P = First(*L);
     addressDP Q = Last(*L);
     boolean found = false;
-    while (!found && P != NilDP)
+    while (!found && P != NULL)
     {
         if (P->Pos.X == meteor.X && P->Pos.Y == meteor.Y)
         {
@@ -572,7 +572,7 @@ void MeteorHitBody(ListDP *L, POINT food, POINT meteor, POINT obstacle)
         {
             DelFirstDP(L, &Q);
         }
-        else if (P == NilDP)
+        else if (P == NULL)
         {
             DelLastDP(L, &Q);
         }
@@ -640,14 +640,14 @@ void snakeOnMeteor(int *skor)
 
         startInputWord();
         input = currentWord.TabWord[0];
-        
+
         if (currentWord.Length == 1 && (input == 'w' || input == 'a' || input == 's' || input == 'd'))
         {
-            if (!isBodyExceptHead(L,input))//isInputValid(L, input))// && !isBody(L,input))
+            if (!isBodyExceptHead(L, input)) // isInputValid(L, input))// && !isBody(L,input))
             {
-                if (!isMeteorPanas(L,meteor,input))
+                if (!isMeteorPanas(L, meteor, input))
                 {
-                    //newtail = *(Last(L));
+                    // newtail = *(Last(L));
                     Move(&L, input);
                     printf("\nBerhasil bergerak!\n");
                     if (isEat(&L, food))
@@ -656,59 +656,63 @@ void snakeOnMeteor(int *skor)
                         addFood(&food, L, obstacle);
                     }
                     addMeteor(&meteor, food, obstacle);
-                    MeteorHitBody(&L, food, meteor,obstacle);
-                    //printMap(L, food, meteor, obstacle);
+                    MeteorHitBody(&L, food, meteor, obstacle);
+                    // printMap(L, food, meteor, obstacle);
                     if (isMeteorHitHead(L))
                     {
                         printf("Kepala snake terkena meteor.\n");
                         *skor = lengthSnake(L) * 2;
                         printf("Game berakhir. skor : %d\n", *skor);
                         hit = true;
-                    }else if(isHeadHitObstacle(L,obstacle)){
+                    }
+                    else if (isHeadHitObstacle(L, obstacle))
+                    {
                         printf("Head Snake mengenai obstacle.\n");
                         *skor = lengthSnake(L) * 2;
                         printf("Game berakhir. skor : %d\n", *skor);
                         hit = true;
                     }else if(isNoMoreHeadSpace(L,meteor)){
                         printf("Tidak ada tempat tersedia untuk bergerak.\n");
-                        *skor = (lengthSnake(L)+1) * 2;
+                        *skor = (lengthSnake(L) + 1) * 2;
                         printf("Game berakhir. skor : %d\n", *skor);
-                        hit=true;
-                    }else if(lengthSnake(L)==23){
+                        hit = true;
+                    }
+                    else if (lengthSnake(L) == 23)
+                    {
                         *skor = 46;
                         printf("skor anda %d\n", *skor);
-                        hit=true;
+                        hit = true;
                     }
                     else
                     {
-                        if(hit==true){
-                            *skor=(lengthSnake(L)+1)*2;
-                            printf("skor anda %d\n",*skor);
-
-                        }else{
+                        if (hit == true)
+                        {
+                            *skor = (lengthSnake(L) + 1) * 2;
+                            printf("skor anda %d\n", *skor);
+                        }
+                        else
+                        {
                             printf("Silahkan lanjutkan permainan\n");
                             i++;
                         }
-                        
                     }
-                }else 
+                }
+                else
                 {
                     printf("Meteor masih panas! Silahkan input ulang command\n");
-                   
                 }
             }
             else
             {
-                 printf("Anda tidak dapat bergerak ke tubuh sendiri\n");
+                printf("Anda tidak dapat bergerak ke tubuh sendiri\n");
             }
-        }    
+        }
         else
         {
             printf("Command tidak sesuai! Silahkan input command menggunakan w/a/s/d\n");
         }
-    }  
+    }
 }
-
 
 boolean isHeadHitObstacle(ListDP L, POINT obstacle)
 {
@@ -774,7 +778,7 @@ boolean isLeftHeadEmpty(ListDP L, POINT meteor)
     addressDP P = First(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Next(Q) != NilDP)
+    while (found && Next(Q) != NULL)
     {
         if ((P->Pos.X - 1) % 5 == Q->Pos.X && P->Pos.Y == Q->Pos.Y)
         {
@@ -793,7 +797,7 @@ boolean isTopHeadEmpty(ListDP L,POINT meteor)
     addressDP P = First(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Next(Q) != NilDP)
+    while (found && Next(Q) != NULL)
     {
         if ((P->Pos.Y - 1) % 5 == Q->Pos.Y && P->Pos.X == Q->Pos.X)
         {
@@ -812,7 +816,7 @@ boolean isRightHeadEmpty(ListDP L,POINT meteor)
     addressDP P = First(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Next(Q) != NilDP)
+    while (found && Next(Q) != NULL)
     {
         if ((P->Pos.X + 1) % 5 == Q->Pos.X && P->Pos.Y == Q->Pos.Y)
         {
@@ -831,7 +835,7 @@ boolean isBotHeadEmpty(ListDP L, POINT meteor)
     addressDP P = First(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Next(Q) != NilDP)
+    while (found && Next(Q) != NULL)
     {
         if ((P->Pos.Y + 1) % 5 == Q->Pos.Y && P->Pos.X == Q->Pos.X)
         {
@@ -850,7 +854,7 @@ boolean isLeftTailEmpty(ListDP L)
     addressDP P = Last(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Q != NilDP)
+    while (found && Q != NULL)
     {
         if ((P->Pos.X - 1) % 5 == Q->Pos.X && P->Pos.Y == Q->Pos.Y)
         {
@@ -866,7 +870,7 @@ boolean isTopTailEmpty(ListDP L)
     addressDP P = Last(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Q != NilDP)
+    while (found && Q != NULL)
     {
         if ((P->Pos.Y - 1) % 5 == Q->Pos.Y && P->Pos.X == Q->Pos.X)
         {
@@ -882,7 +886,7 @@ boolean isRightTailEmpty(ListDP L)
     addressDP P = Last(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Q != NilDP)
+    while (found && Q != NULL)
     {
         if ((P->Pos.X + 1) % 5 == Q->Pos.X && P->Pos.Y == Q->Pos.Y)
         {
@@ -898,7 +902,7 @@ boolean isBotTailEmpty(ListDP L)
     addressDP P = Last(L);
     addressDP Q = Next(P);
     boolean found = true;
-    while (found && Q != NilDP)
+    while (found && Q != NULL)
     {
         if ((P->Pos.Y + 1) % 5 == Q->Pos.Y && P->Pos.X == Q->Pos.X)
         {

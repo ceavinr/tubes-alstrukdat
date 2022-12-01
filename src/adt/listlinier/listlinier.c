@@ -202,16 +202,3 @@ int NbElmt(List L)
     }
     return banyak;
 }
-
-infotype getElmt(List L, int idx)
-{
-    int ctr = 0;
-    address p = First(L);
-
-    while (ctr < idx)
-    {
-        p = Next(p);
-        ctr++;
-    }
-    return Info(p);
-}

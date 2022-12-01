@@ -57,4 +57,7 @@ Word lowerWord(Word w);
 /* Mereturn word dengan setiap karakter bersifat uppercase */
 Word upperWord(Word w);
 
+/* Mereturn false jika bukan semua elemen tabword integer, true jika semua integer*/
+boolean isWordInt(Word w);
+
 #endif

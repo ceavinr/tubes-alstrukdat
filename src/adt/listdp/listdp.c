@@ -2,14 +2,10 @@
 #include <stdlib.h>
 #include "listdp.h"
 
-/****************** TEST LIST KOSONG ******************/
-
 boolean IsEmptyDP(ListDP L)
 {
-    return (First(L)==NilDP && Last(L)==NilDP);
+    return (First(L) == NULL && Last(L) == NULL);
 }
-
-/****************** PEMBUATAN LIST KOSONG ******************/
 
 void CreateEmptyDP(ListDP *L)
 {
@@ -17,8 +13,11 @@ void CreateEmptyDP(ListDP *L)
     Last(*L) = NULL;
 }
 
+<<<<<<< HEAD
 /****************** Manajemen Memori ******************/
 
+=======
+>>>>>>> 4e1eb9fc3a4e4dc5268ac9bb26569dd5656e2ba0
 addressDP AlokasiDP(int X)
 {
     ElmtListDP *P = NULL;
@@ -36,15 +35,18 @@ addressDP AlokasiDP(int X)
     }
 }
 
-/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
+void DealokasiDP(addressDP *P)
+{
+    free(*P);
+}
 
-addressDP SearchPointDP(ListDP L, int X,int Y)
+addressDP SearchPointDP(ListDP L, POINT X)
 {
     addressDP P = First(L);
     boolean found = false;
     while (P != NULL && !found)
     {
-        if (Info(P) == X)
+        if (EQ(Pos(P), X))
         {
             found = true;
         }
@@ -63,16 +65,19 @@ addressDP SearchPointDP(ListDP L, int X,int Y)
     }
 }
 
-/****************** PRIMITIF BERDASARKAN NILAI ******************/
-
-
-/*** PENGHAPUSAN ELEMEN ***/
-
-
-
-/****************** PRIMITIF BERDASARKAN ALAMAT ******************/
-/*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-
+void InsertFirstDP(ListDP *L, addressDP P)
+{
+    Next(P) = First(*L);
+    if (!IsEmptyDP(*L))
+    {
+        Prev(Next(P)) = P;
+    }
+    else
+    {
+        Last(*L) = P;
+    }
+    First(*L) = P;
+}
 
 void InsertLastDP(ListDP *L, addressDP P)
 {
@@ -91,8 +96,35 @@ void InsertLastDP(ListDP *L, addressDP P)
     }
 }
 
+void InsertAfterDP(ListDP *L, addressDP P, addressDP Prec)
+{
+    if (Prec == Last(*L))
+    {
+        InsertLastDP(L, P);
+    }
+    else
+    {
+        Next(P) = Next(Prec);
+        Prev(Next(P)) = P;
+        Next(Prec) = P;
+        Prev(P) = Prec;
+    }
+}
 
-/*** PENGHAPUSAN SEBUAH ELEMEN ***/
+void InsertBeforeDP(ListDP *L, addressDP P, addressDP Succ)
+{
+    if (Succ == First(*L))
+    {
+        InsertFirstDP(L, P);
+    }
+    else
+    {
+        Prev(P) = Prev(Succ);
+        Next(Prev(Succ)) = P;
+        Prev(Succ) = P;
+        Next(P) = Succ;
+    }
+}
 
 void DelFirstDP(ListDP *L, addressDP *P)
 {
@@ -124,6 +156,47 @@ void DelLastDP(ListDP *L, addressDP *P)
     }
 }
 
+void DelPDP(ListDP *L, POINT X)
+{
+    addressDP P = SearchPointDP(*L, X);
+
+    if (P != NULL)
+    {
+        if (P == First(*L))
+        {
+            DelFirstDP(L, &P);
+        }
+        else
+        {
+            addressDP prec = First(*L);
+            while (Next(prec) != P)
+            {
+                prec = Next(prec);
+            }
+            DelAfterDP(L, &P, prec);
+        }
+        DealokasiDP(&P);
+    }
+}
+
+void DelAfterDP(ListDP *L, addressDP *Pdel, addressDP Prec)
+{
+    *Pdel = Next(Prec);
+    if (Next(Prec) != NULL)
+    {
+        if (Next(Next(Prec)) == NULL)
+        {
+            Last(*L) = Prec;
+        }
+        else
+        {
+            Prev(Next(*Pdel)) = Prec;
+        }
+        Next(Prec) = Next(*Pdel);
+        Next(*Pdel) = NULL;
+        Prev(*Pdel) = NULL;
+    }
+}
 
 void DelBeforeDP(ListDP *L, addressDP *Pdel, addressDP Succ)
 {
@@ -142,6 +215,3 @@ void DelBeforeDP(ListDP *L, addressDP *Pdel, addressDP Succ)
         }
     }
 }
-
-/****************** PROSES SEMUA ELEMEN LIST ******************/
-
