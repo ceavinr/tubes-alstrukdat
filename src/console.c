@@ -227,7 +227,7 @@ void deleteGame(ArrayDin *arrGame, ListScore *scoreboard)
 
     int numGame = wordToInt(currentWord);
 
-    if (numGame > 5 && numGame <= (*arrGame).Neff)
+    if (numGame > 7 && numGame <= (*arrGame).Neff)
     {
         DeleteAtArrayDin(arrGame, numGame - 1);
         DeleteAtScoreboard(scoreboard, numGame - 1);
