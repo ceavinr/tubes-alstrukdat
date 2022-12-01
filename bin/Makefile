@@ -49,3 +49,7 @@ map:
 	gcc ../src/adt/map/drivermap.c ../src/adt/map/map.c ../src/adt/word/word.c ../src/adt/string/string.c -o map_test
 listscore:
 	gcc ../src/adt/listscore/driverlistscore.c ../src/adt/listscore/listscore.c ../src/adt/map/map.c ../src/adt/mesin/mesinkata.c ../src/adt/mesin/mesinkarakter.c ../src/adt/word/word.c ../src/adt/string/string.c -o listscore_test
+listlinier:
+	gcc ../src/adt/listlinier/driverlistlinier.c ../src/adt/listlinier/listlinier.c ../src/adt/bintree/bintree.c -o listlinier_test
+listdp:
+	gcc ../src/adt/listdp/driverlistdp.c ../src/adt/listdp/listdp.c ../src/adt/point/point.c -o listdp_test
