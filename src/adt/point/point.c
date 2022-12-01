@@ -15,11 +15,10 @@ void TulisPOINT(POINT P)
 {
     int x, y;
 
-    printf("(%.2f,%.2f)", Absis(P), Ordinat(P));
+    printf("(%d,%d)", Absis(P), Ordinat(P));
 };
 
 boolean EQ(POINT P1, POINT P2)
 {
     return Absis(P1) == Absis(P2) && Ordinat(P1) == Ordinat(P2);
 };
-
