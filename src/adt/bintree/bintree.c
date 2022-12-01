@@ -1,6 +1,7 @@
 #include "bintree.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 BinTree Tree(nodeinfotype Akar, BinTree L, BinTree R)
 {
@@ -16,21 +17,6 @@ BinTree Tree(nodeinfotype Akar, BinTree L, BinTree R)
 void MakeTree(nodeinfotype Akar, BinTree L, BinTree R, BinTree *P)
 {
     *P = Tree(Akar, L, R);
-}
-
-BinTree BetterBuildBST(int n, int diff)
-{
-    BinTree L, R;
-    if (n % 2 == 1)
-    {
-        return Tree(n, NULL, NULL);
-    }
-    else
-    {
-        L = BetterBuildBST(n - diff, diff / 2);
-        R = BetterBuildBST(n + diff, diff / 2);
-        return Tree(n, L, R);
-    }
 }
 
 addrNode AlokNode(nodeinfotype X)
@@ -104,62 +90,6 @@ boolean IsBiner(BinTree P)
     }
 }
 
-void PrintPreorder(BinTree P)
-{
-    printf("(");
-    if (!IsTreeEmpty(P))
-    {
-        printf("%d", Akar(P));
-        PrintPreorder(Left(P));
-        PrintPreorder(Right(P));
-    }
-    printf(")");
-}
-
-void PrintInorder(BinTree P)
-{
-    printf("(");
-    if (!IsTreeEmpty(P))
-    {
-        PrintInorder(Left(P));
-        printf("%d", Akar(P));
-        PrintInorder(Right(P));
-    }
-    printf(")");
-}
-
-void PrintPostorder(BinTree P)
-{
-    printf("(");
-    if (!IsTreeEmpty(P))
-    {
-        PrintPostorder(Left(P));
-        PrintPostorder(Right(P));
-        printf("%d", Akar(P));
-    }
-    printf(")");
-}
-
-void BetterPrintTree(BinTree P, int h, int lv)
-{
-    if (!IsTreeEmpty(P))
-    {
-        int i;
-        for (i = 0; i < h * lv; i++)
-        {
-            printf(" ");
-        }
-        printf("%d\n", Akar(P));
-        BetterPrintTree(Left(P), h, lv + 1);
-        BetterPrintTree(Right(P), h, lv + 1);
-    }
-}
-
-void PrintTree(BinTree P, int h)
-{
-    BetterPrintTree(P, h, 0);
-}
-
 boolean SearchTree(BinTree P, nodeinfotype X)
 {
     if (IsTreeEmpty(P))
@@ -176,57 +106,40 @@ boolean SearchTree(BinTree P, nodeinfotype X)
     }
 }
 
-addrNode SearchDaun(BinTree P, nodeinfotype X)
+addrNode SearchByChild(BinTree P, nodeinfotype left, nodeinfotype right)
 {
-    if (IsTreeEmpty(P))
+    if (IsTreeOneElmt(P))
     {
         return NULL;
     }
-    else if (IsTreeOneElmt(P))
-    {
-        if (Akar(P) == X)
-        {
-            return P;
-        }
-        else
-        {
-            return NULL;
-        }
-    }
     else
     {
-        addrNode ret = SearchDaun(Left(P), X);
-        if (ret != NULL)
+        if (IsUnerLeft(P))
         {
-            return ret;
+            SearchByChild(Left(P), left, right);
+        }
+        else if (IsUnerRight(P))
+        {
+            SearchByChild(Right(P), left, right);
         }
         else
         {
-            return SearchDaun(Right(P), X);
-        }
-    }
-}
-
-addrNode SearchByChild(BinTree T, nodeinfotype left, nodeinfotype right)
-{
-    if (IsTreeOneElmt(T))
-    {
-        return NULL;
-    }
-    else if ((Akar(Left(T)) == left && Akar(Right(T)) == right) || (Akar(Left(T)) == right && Akar(Right(T)) == left))
-    {
-        return T;
-    }
-    else
-    {
-        addrNode ret = SearchByChild(Left(T), left, right);
-        if (ret != NULL)
-        {
-            return ret;
-        }
-        else
-        {
-            return SearchByChild(Right(T), left, right);
+            if ((Akar(Left(P)) == left && Akar(Right(P)) == right) || (Akar(Left(P)) == left && Akar(Right(P)) == right))
+            {
+                return P;
+            }
+            else
+            {
+                addrNode ret = SearchByChild(Left(P), left, right);
+                if (ret != NULL)
+                {
+                    return ret;
+                }
+                else
+                {
+                    return SearchByChild(Right(P), left, right);
+                }
+            }
         }
     }
 }
@@ -310,26 +223,9 @@ void AddDaunTerkiri(BinTree *P, nodeinfotype X)
     {
         *P = AlokNode(X);
     }
-    else if (IsUnerRight(*P))
-    {
-        Left(*P) = AlokNode(X);
-    }
     else
     {
         AddDaunTerkiri(&(Left(*P)), X);
-    }
-}
-
-void AddDaun(BinTree *P, nodeinfotype X, nodeinfotype Y, boolean Kiri)
-{
-    addrNode Q = SearchDaun(*P, X);
-    if (Kiri)
-    {
-        Left(Q) = AlokNode(Y);
-    }
-    else
-    {
-        Right(Q) = AlokNode(Y);
     }
 }
 
@@ -373,73 +269,12 @@ void DelDaun(BinTree *P, nodeinfotype X)
     }
 }
 
-boolean BSearch(BinTree P, nodeinfotype X)
-{
-    if (IsTreeEmpty(P))
-    {
-        return false;
-    }
-    else if (Akar(P) == X)
-    {
-        return true;
-    }
-    else
-    {
-        if (X < Akar(P))
-        {
-            return BSearch(Left(P), X);
-        }
-        else
-        {
-            return BSearch(Right(P), X);
-        }
-    }
-}
-
-void InsSearch(BinTree *P, nodeinfotype X)
-{
-    if (IsTreeEmpty(*P))
-    {
-        MakeTree(X, NULL, NULL, P);
-    }
-    else if (X == Akar(*P))
-    {
-        return;
-    }
-    else if (X < Akar(*P))
-    {
-        InsSearch(&(Left(*P)), X);
-    }
-    else if (X > Akar(*P))
-    {
-        InsSearch(&(Right(*P)), X);
-    }
-}
-
-void DelBtree(BinTree *P, nodeinfotype X)
-{
-    if (Akar(*P) == X)
-    {
-        addrNode Q = *P;
-        *P = NULL;
-        DealokNode(Q);
-    }
-    else if (X < Akar(*P))
-    {
-        DelBtree(&Left(*P), X);
-    }
-    else
-    {
-        DelBtree(&Right(*P), X);
-    }
-}
-
-void BuildTreeFromWord(BinTree *T, Word w, int *idx)
+void BuildTreeFromWord(BinTree *P, Word w, int *idx)
 {
     (*idx)++;
     if (w.TabWord[*idx] == ')')
     {
-        *T = NULL;
+        *P = NULL;
     }
     else
     {
@@ -451,10 +286,30 @@ void BuildTreeFromWord(BinTree *T, Word w, int *idx)
             simpul = 10 * simpul + (int)w.TabWord[*idx] - 48;
         }
 
-        *T = AlokNode(simpul);
+        *P = AlokNode(simpul);
         (*idx)++;
-        BuildTreeFromWord(&(Left(*T)), w, idx);
-        BuildTreeFromWord(&(Right(*T)), w, idx);
+        BuildTreeFromWord(&(Left(*P)), w, idx);
+        BuildTreeFromWord(&(Right(*P)), w, idx);
     }
     (*idx)++;
+}
+
+void BetterPrintTree(BinTree P, int h, int lv)
+{
+    if (!IsTreeEmpty(P))
+    {
+        int i;
+        for (i = 0; i < h * lv; i++)
+        {
+            printf(" ");
+        }
+        printf("%d\n", Akar(P));
+        BetterPrintTree(Left(P), h, lv + 1);
+        BetterPrintTree(Right(P), h, lv + 1);
+    }
+}
+
+void PrintTree(BinTree P, int h)
+{
+    BetterPrintTree(P, h, 0);
 }

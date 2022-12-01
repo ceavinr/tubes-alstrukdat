@@ -13,11 +13,6 @@ void CreateEmptyDP(ListDP *L)
     Last(*L) = NULL;
 }
 
-<<<<<<< HEAD
-/****************** Manajemen Memori ******************/
-
-=======
->>>>>>> 4e1eb9fc3a4e4dc5268ac9bb26569dd5656e2ba0
 addressDP AlokasiDP(int X)
 {
     ElmtListDP *P = NULL;

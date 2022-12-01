@@ -135,4 +135,9 @@ void DelAfter(List *L, address *Pdel, address Prec);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 int NbElmt(List L);
 
+/****************** SELEKTOR ******************/
+
+/* Mengirimkan elemen list yang berada pada idx */
+infotype getElmt(List L, int idx);
+
 #endif

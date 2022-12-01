@@ -9,9 +9,9 @@
 /* Modul lain yang digunakan : */
 #include "../../boolean.h"
 #include "../string/string.h"
+#include "../word/word.h"
 #include "../mesin/mesinkarakter.h"
 #include "../mesin/mesinkata.h"
-#include <math.h>
 
 /* *** Definisi Type Pohon Biner *** */
 typedef int nodeinfotype;
@@ -66,58 +66,12 @@ boolean IsUnerRight(BinTree P);
 /* Mengirimkan true jika pohon biner tidak kosong P adalah pohon biner: mempunyai subpohon kiri dan subpohon kanan*/
 boolean IsBiner(BinTree P);
 
-/* *** Traversal *** */
-
-/* I.S. P terdefinisi */
-/* F.S. Semua simpul P sudah dicetak secara preorder: akar, pohon kiri, dan pohon kanan.
-   Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
-   Pohon kosong ditandai dengan ().
-   Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
-/* Contoh:
-   (A()()) adalah pohon dengan 1 elemen dengan akar A
-   (A(B()())(C()())) adalah pohon dengan akar A dan subpohon kiri (B()()) dan subpohon kanan (C()()) */
-void PrintPreorder(BinTree P);
-/* I.S. P terdefinisi */
-/* F.S. Semua simpul P sudah dicetak secara inorder: pohon kiri, akar, dan pohon kanan.
-   Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
-   Pohon kosong ditandai dengan ().
-   Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
-/* Contoh:
-   (()A()) adalah pohon dengan 1 elemen dengan akar A
-   ((()B())A(()C())) adalah pohon dengan akar A dan subpohon kiri (()B()) dan subpohon kanan (()C()) */
-void PrintInorder(BinTree P);
-/* I.S. P terdefinisi */
-/* F.S. Semua simpul P sudah dicetak secara postorder: pohon kiri, pohon kanan, dan akar.
-   Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
-   Pohon kosong ditandai dengan ().
-   Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
-/* Contoh:
-   (()()A) adalah pohon dengan 1 elemen dengan akar A
-   ((()()B)(()()C)A) adalah pohon dengan akar A dan subpohon kiri (()()B) dan subpohon kanan (()()C) */
-void PrintPostorder(BinTree P);
-/* I.S. P terdefinisi, h adalah jarak indentasi (spasi) */
-/* F.S. Semua simpul P sudah ditulis dengan indentasi (spasi) */
-/* Penulisan akar selalu pada baris baru (diakhiri newline) */
-/* Contoh, jika h = 2:
-1) Pohon preorder: (A()()) akan ditulis sbb:
-A
-2) Pohon preorder: (A(B()())(C()())) akan ditulis sbb:
-A
-  B
-  C
-3) Pohon preorder: (A(B(D()())())(C()(E()()))) akan ditulis sbb:
-A
-  B
-    D
-  C
-    E
-*/
-void PrintTree(BinTree P, int h);
-
 /* *** Searching *** */
 
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 boolean SearchTree(BinTree P, nodeinfotype X);
+/* Mengirimkan alamat node dari P tidak kosong yang memiliki child kiri left dan child kanan right */
+addrNode SearchByChild(BinTree P, nodeinfotype left, nodeinfotype right);
 
 /* *** Fungsi-Fungsi Lain *** */
 
@@ -137,11 +91,6 @@ int Tinggi(BinTree P);
 /* I.S. P boleh kosong */
 /* F.S. P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
 void AddDaunTerkiri(BinTree *P, nodeinfotype X);
-/* I.S. P tidak kosong, X adalah salah satu daun Pohon Biner P */
-/* F.S. P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri = true), atau
-        sebagai anak Kanan X (jika Kiri = false) */
-/*		Jika ada > 1 daun bernilai X, diambil daun yang paling kiri */
-void AddDaun(BinTree *P, nodeinfotype X, nodeinfotype Y, boolean Kiri);
 /* I.S. P tidak kosong */
 /* F.S. P dihapus daun terkirinya, dan didealokasi, dengan X adalah info yang semula
         disimpan pada daun terkiri yang dihapus */
@@ -150,22 +99,30 @@ void DelDaunTerkiri(BinTree *P, nodeinfotype *X);
 /* F.S. Semua daun bernilai X dihapus dari P. */
 void DelDaun(BinTree *P, nodeinfotype X);
 
-/* *** Binary  Search  Tree  *** */
-/* Mengirimkan true jika ada node dari P yang bernilai X */
-boolean BSearch(BinTree P, nodeinfotype X);
-/* Mengirimkan alamat node dari P yang bernilai X */
-addrNode SearchDaun(BinTree P, nodeinfotype X);
-/* Mengirimkan alamat node dari P yang memiliki child kiri left dan child kanan right */
-addrNode SearchByChild(BinTree T, nodeinfotype left, nodeinfotype right);
+/* Proses: Membuat sebuah tree dari word */
+/* I.S. Sembarang. w memiliki format yang valid */
+/* F.S. P terdefinisi */
+void BuildTreeFromWord(BinTree *P, Word w, int *idx);
 
-/* Menghasilkan sebuah pohon Binary Search Tree P dengan tambahan simpul X. Belum ada simpul P yang bernilai X. */
-void InsSearch(BinTree *P, nodeinfotype X);
+/* Print */
 
-/* I.S. Pohon P tidak  kosong */
-/* F.S. Nilai X yang dihapus pasti ada */
-/* Sebuah node dengan nilai X dihapus */
-void DelBtree(BinTree *P, nodeinfotype X);
-
-void BuildTreeFromWord(BinTree *T, Word w, int *idx);
+/* I.S. P terdefinisi, h adalah jarak indentasi (spasi) */
+/* F.S. Semua simpul P sudah ditulis dengan indentasi (spasi) */
+/* Penulisan akar selalu pada baris baru (diakhiri newline) */
+/* Contoh, jika h = 2:
+1) Pohon preorder: (A()()) akan ditulis sbb:
+A
+2) Pohon preorder: (A(B()())(C()())) akan ditulis sbb:
+A
+  B
+  C
+3) Pohon preorder: (A(B(D()())())(C()(E()()))) akan ditulis sbb:
+A
+  B
+    D
+  C
+    E
+*/
+void PrintTree(BinTree P, int h);
 
 #endif
