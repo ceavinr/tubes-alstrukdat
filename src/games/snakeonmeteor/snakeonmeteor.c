@@ -704,7 +704,7 @@ void snakeOnMeteor(int *skor)
         }    
         else
         {
-            printf("Meteor masih panas! Silahkan input ulang command\n");
+            printf("Command tidak sesuai! Silahkan input command menggunakan w/a/s/d\n");
         }
     }  
 }
