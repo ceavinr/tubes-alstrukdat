@@ -215,23 +215,3 @@ infotype getElmt(List L, int idx)
     }
     return Info(p);
 }
-
-void PrintInfo(List L)
-{
-    address P = First(L);
-
-    if (IsListEmpty(L))
-    {
-        printf("[]");
-    }
-    else
-    {
-        printf("[%d", Info(P));
-        while (Next(P) != NULL)
-        {
-            P = Next(P);
-            printf(",%d", Akar(Info(P)));
-        }
-        printf("]");
-    }
-}
