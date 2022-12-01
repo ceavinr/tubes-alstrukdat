@@ -561,7 +561,7 @@ void amogusfight(int *score)
             *score += MaxHP2;
             elixir += MaxHP2;
             MaxHP2 += 20;
-            damage2 += 4;
+            damage2 += 8;
             HP2 = MaxHP2;
         }
 
