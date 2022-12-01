@@ -326,15 +326,14 @@ void skipGame(Word command, Queue *arrQueue, StackHistory *stackHistory, ListSco
     /*AKUISISI JUMLAH SKIP*/
     Word numQueueString;
     akuisisiCommandWord(&numQueueString, command, 3);
+    int numQueue = wordToInt(numQueueString);
 
-    if (numQueueString.Length == 0)
-    { /*jika masukan kosong*/
+    if (numQueueString.Length == 0 || !isWordInt(numQueueString))
+    { /*jika masukan kosong/tidak integer*/
         printf("Masukan banyak skip tidak valid\n");
     }
     else
     {
-        int numQueue = wordToInt(numQueueString);
-
         if (numQueue >= 0 && numQueue < queueLength(*arrQueue) && !isQueueEmpty(*arrQueue))
         {
             Word firstGame;
@@ -513,7 +512,7 @@ void showHistory(Word command, StackHistory stackHistory)
     if (banyakHistory.Length > 0)
     {
         int banyakHistory_int = wordToInt(banyakHistory);
-        if (banyakHistory_int > 0)
+        if (banyakHistory_int > 0 && isWordInt(banyakHistory))
         {
             printf("Berikut adalah daftar Game yang telah dimainkan\n");
             PrintStackHistory(stackHistory, banyakHistory_int);
