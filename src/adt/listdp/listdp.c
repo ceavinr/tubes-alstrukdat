@@ -19,7 +19,7 @@ void CreateEmptyDP(ListDP *L)
 
 /****************** Manajemen Memori ******************/
 
-addressDP AlokasiDP(char X)
+addressDP AlokasiDP(int X)
 {
     ElmtListDP *P = NULL;
     P = (ElmtListDP *)malloc(sizeof(ElmtListDP));

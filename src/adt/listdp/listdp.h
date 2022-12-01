@@ -59,7 +59,7 @@ void CreateEmptyDP(ListDP *L);
 /* Jika alokasi berhasil, maka addressDP tidak nil. */
 /* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=Nil, Prev(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil. */
-addressDP AlokasiDP(char X);
+addressDP AlokasiDP(int X);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addressDP P */
