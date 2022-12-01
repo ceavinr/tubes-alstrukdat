@@ -31,7 +31,7 @@ typedef struct {
 void MakeListScore(ListScore *L);
 
 /* Mengirimkan true jika list L kosong, mengirimkan false jika tidak */
-boolean IsEmptyScoreboard(ListScore L);
+boolean IsEmptyScoreboard(ListScore *L);
 
 /* Prekondisi : X sembarang */
 /* Mengirimkan index jika terdapat elemen X di dalam list */

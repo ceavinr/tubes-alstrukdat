@@ -452,7 +452,7 @@ void resetScoreboard(ListScore *scoreboard)
     startInputWord();
     num_reset = wordToInt(currentWord);
 
-    if (num_reset >= 0 && num_reset <= 5)
+    if (num_reset >= 0 && num_reset <= (*scoreboard).Neff)
     {
         boolean valid = false;
         while (!valid)
