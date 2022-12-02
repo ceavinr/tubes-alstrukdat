@@ -56,15 +56,9 @@ void CreateEmptyDP(ListDP *L);
 /****************** Manajemen Memori ******************/
 
 /* Mengirimkan addressDP hasil alokasi sebuah elemen */
-<<<<<<< HEAD
-/* Jika alokasi berhasil, maka addressDP tidak nil. */
-/* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=Nil, Prev(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil. */
-=======
 /* Jika alokasi berhasil, maka addressDP tidak NULL. */
 /* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=NULL, Prev(P)=NULL */
 /* Jika alokasi gagal, mengirimkan NULL. */
->>>>>>> 4e1eb9fc3a4e4dc5268ac9bb26569dd5656e2ba0
 addressDP AlokasiDP(int X);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */

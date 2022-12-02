@@ -59,8 +59,8 @@ boolean isWin(string kata)
     return full;
 }
 
-char Lower (char huruf)  
-{    
+char Lower(char huruf)
+{
     int i;
     char upper[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char lower[26] = "abcdefghijklmnopqrstuvwxyz";
@@ -72,9 +72,9 @@ char Lower (char huruf)
             return lower[i];
         }
     }
-    
+
     return huruf;
-}  
+}
 
 void play(int *score)
 {
@@ -130,7 +130,6 @@ void play(int *score)
 
             history[j] = Lower(tebakan);
             history[j + 1] = '\0';
-
 
             if (isCharInString(kata, tebakan))
             {
