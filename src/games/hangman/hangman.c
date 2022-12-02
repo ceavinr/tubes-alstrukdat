@@ -61,36 +61,34 @@ boolean isWin(string kata)
 
 char Lower (char huruf)  
 {    
-    int i;
-    char upper[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char lower[26] = "abcdefghijklmnopqrstuvwxyz";
+    char lower;
 
-    for (i = 0; i < 26; i++)
+    if (huruf >= 'A' && huruf <= 'Z')
     {
-        if (upper[i] == huruf)
-        {
-            return lower[i];
-        }
+        lower = 'a' + (huruf - 'A');
     }
-    
-    return huruf;
+    else
+    {
+        lower = huruf;
+    }
+
+    return lower;
 }
 
 char Upper (char huruf)  
 {    
-    int i;
-    char upper[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char lower[26] = "abcdefghijklmnopqrstuvwxyz";
+    char upper;
 
-    for (i = 0; i < 26; i++)
+    if (huruf >= 'a' && huruf <= 'z')
     {
-        if (lower[i] == huruf)
-        {
-            return upper[i];
-        }
+        upper = 'A' + (huruf - 'a');
     }
-    
-    return huruf;
+    else
+    {
+        upper = huruf;
+    }
+
+    return upper;
 }
 
 void play(int *score)
