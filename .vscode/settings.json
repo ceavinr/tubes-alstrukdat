@@ -27,6 +27,7 @@
     "rng.h": "c",
     "point.h": "c",
     "hangman.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "stackhistory.h": "c"
   }
 }

@@ -239,16 +239,16 @@ boolean isWordInt(Word w)
 {
     boolean cek = true;
     int i = 0;
-    while (cek && i<w.Length)
+    while (cek && i < w.Length)
     {
-        if (w.TabWord[i]-48 >= 0 && w.TabWord[i]-48 <= 9)
+        if (w.TabWord[i] - 48 >= 0 && w.TabWord[i] - 48 <= 9)
         {
             i++;
         }
         else
         {
             cek = false;
-        } 
+        }
     }
     return cek;
 }

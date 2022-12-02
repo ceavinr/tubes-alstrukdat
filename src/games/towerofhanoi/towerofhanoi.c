@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 #include "towerofhanoi.h"
 #include "../../adt/mesin/mesinkata.h"
 #include "../../adt/word/word.h"
@@ -112,7 +111,12 @@ void towerofhanoi(int *skor)
     while (gameOn)
     {
         int diskDel = 0;
-        minimumMoves = pow(2, wordToInt(banyak)) - 1;
+        minimumMoves = 1;
+        for (int i = 0; i < wordToInt(banyak); i++)
+        {
+            minimumMoves *= 2;
+        }
+        minimumMoves -= 1;
         maximumMoves = 2 * wordToInt(banyak) + minimumMoves - 1;
         inputValid = false;
 

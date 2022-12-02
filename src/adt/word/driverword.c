@@ -12,6 +12,11 @@ int main()
     printf("AKUISISI kata ke-1\n");
     akuisisiCommandWord(&w, currentWord, 1);
 
+    if (stringEQWord(w, "hehe"))
+    {
+        printf("Sama\n");
+    }
+
     printf("\nConvert to string\n");
     string = wordToString(w);
     printf("Ini bertipe string lo ya : %s\n", string);
