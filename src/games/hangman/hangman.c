@@ -59,8 +59,8 @@ boolean isWin(string kata)
     return full;
 }
 
-char Lower(char huruf)
-{
+char Lower (char huruf)  
+{    
     int i;
     char upper[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char lower[26] = "abcdefghijklmnopqrstuvwxyz";
@@ -72,7 +72,24 @@ char Lower(char huruf)
             return lower[i];
         }
     }
+    
+    return huruf;
+}
 
+char Upper (char huruf)  
+{    
+    int i;
+    char upper[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char lower[26] = "abcdefghijklmnopqrstuvwxyz";
+
+    for (i = 0; i < 26; i++)
+    {
+        if (lower[i] == huruf)
+        {
+            return upper[i];
+        }
+    }
+    
     return huruf;
 }
 
@@ -123,21 +140,22 @@ void play(int *score)
 
             do
             {
-                printf("Masukkan tebakan (DALAM HURUF KAPITAL): ");
+                printf("Masukkan tebakan: ");
                 startInputWord();
                 tebakan = ambilKataKe(currentWord, 1).TabWord[0];
-            } while (isCharInString(history, Lower(tebakan)) || (tebakan >= 'a' && tebakan <= 'z'));
+            } while (isCharInString(history, Lower(tebakan)));
 
             history[j] = Lower(tebakan);
             history[j + 1] = '\0';
 
-            if (isCharInString(kata, tebakan))
+
+            if (isCharInString(kata, Upper(tebakan)))
             {
                 for (i = 0; i < panjang_kata; i++)
                 {
-                    if (kata[i] == tebakan)
+                    if (kata[i] == Upper(tebakan))
                     {
-                        word[i] = tebakan;
+                        word[i] = Upper(tebakan);
                     }
                 }
             }
